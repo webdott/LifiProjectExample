@@ -1,0 +1,95 @@
+import { Fragment, useState } from "react";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import Collapse from "@mui/material/Collapse";
+import { leaguesData } from "./../constants/leftSidebar";
+import { useSideBar } from "../hooks/useSideBar";
+import SportButton from "../components/shared/sportButton";
+
+import styles from "./homelayout.module.scss";
+
+function SideBarButtonList(): JSX.Element {
+  const [sportTab, setSportTab] = useState<number>(1);
+  const [leagueTab, setLeagueTab] = useState<number>(1);
+
+  const {
+    handleFootBall,
+    handleBasketBall,
+    handleMma,
+    handleTennis,
+    handleIceHockey,
+    footBallState,
+    basketBallState,
+    mmaState,
+    tennisState,
+    iceHockeyState,
+  } = useSideBar();
+
+  return (
+    <Fragment>
+      {leaguesData.map((sport, index) => {
+        let fn: any;
+
+        let state;
+
+        if (sport.sport === "Football") {
+          fn = handleFootBall;
+          state = footBallState;
+        } else if (sport.sport === "Basketball") {
+          fn = handleBasketBall;
+          state = basketBallState;
+        } else if (sport.sport === "MMA") {
+          fn = handleMma;
+          state = mmaState;
+        } else if (sport.sport === "Tennis") {
+          fn = handleTennis;
+          state = tennisState;
+        } else if (sport.sport === "Icehockey") {
+          fn = handleIceHockey;
+          state = iceHockeyState;
+        }
+        return (
+          <Fragment>
+            <SportButton
+              state={state}
+              sportTab={sportTab}
+              setSportTab={setSportTab}
+              fn={fn}
+              index={index}
+              sport={sport}
+            />
+
+            <Collapse in={state} timeout="auto" unmountOnExit>
+              {sport?.leagues?.map((league, index) => (
+                <ListItemButton
+                  className={
+                    leagueTab === index + 1
+                      ? `${styles.sidebarButton} ${styles.activeTab}`
+                      : `${styles.sidebarButton}`
+                  }
+                  key={index}
+                  onClick={() => setLeagueTab(index + 1)}
+                >
+                  <ListItemIcon className={styles.leagueIconSection}>
+                    <img
+                      className={styles.leagueIcon}
+                      src={league.leagueFlag}
+                      alt="Premier League"
+                    />
+                  </ListItemIcon>
+                  <ListItemText primary={league.leagueName} />
+                  <span className={styles.leagueNumber}>
+                    {league.leagueNumber}
+                  </span>
+                </ListItemButton>
+              ))}
+            </Collapse>
+          </Fragment>
+        );
+      })}
+    </Fragment>
+  );
+}
+
+export default SideBarButtonList;

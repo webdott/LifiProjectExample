@@ -1,0 +1,40 @@
+form {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color:var(--footer_icons_col) ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .userProfile {
+    object-fit: cover;
+    cursor: pointer;
+  }
+  .userProfilePreview {
+    object-fit: cover;
+    cursor: pointer;
+  }
+  .uploadButton {
+    display: none;
+  }
+
+  .customButton {
+    position: absolute;
+    top: 24px;
+    left: 20px;
+    display: none;
+    background: #000;
+    width: 28px;
+    height: 28px;
+    padding: 2px;
+    border-radius: 50%;
+    .cameraIcon {
+      color: #00faaf;
+      cursor: pointer;
+    }
+  }
+
+  &:hover .customButton {
+    display: block;
+  }
+}

@@ -1,0 +1,128 @@
+.container {
+  width: 95%;
+  margin-bottom: 1.25rem;
+
+  .tabSection {
+    background-color: inherit;
+    column-gap: 20px;
+    display: flex;
+    align-items: center;
+    &_tab {
+      background: var(--footer_icons_col);
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      color: var(--white_900);
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      padding: 15px;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.5s ease-out;
+      display: flex;
+      column-gap: 9px;
+      position: relative;
+      border: 1px solid var(--footer_icons_col);
+      &:hover {
+        border: 1px solid var(--medium_green);
+        color: #00ffb2;
+        .hoverEffect {
+          background: var(--hover_effect);
+          filter: blur(10px);
+        }
+      }
+      .hoverEffect {
+        position: absolute;
+        width: 32px;
+        height: 32px;
+        left: 6px;
+        top: 9px;
+      }
+      .overviewNavIcon {
+        width: 16px;
+        height: 16px;
+      }
+    }
+    &_activeTab {
+      color: var(--medium_green);
+      border: 1px solid var(--medium_green);
+      .hoverEffect {
+        background: var(--hover_effect);
+        filter: blur(10px);
+      }
+    }
+    .tabs {
+      background: var(--gray);
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      padding: 0.15rem 0.75rem;
+      cursor: pointer;
+      font-size: var(--text_s);
+      .links {
+        a {
+          color: var(--matterhorn);
+          text-decoration: none;
+          column-gap: 0.62rem;
+          display: flex;
+          align-items: center;
+        }
+        a:hover {
+          color: #00ffb2;
+        }
+      }
+    }
+  }
+
+  .myBets {
+    display: block;
+    margin-top: 1.2rem;
+    font-size: var(--text_s);
+  }
+
+  .filterSection {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    display: flex;
+    border: 1px solid #8a8686;
+    background: #fff;
+    height: 30vh;
+    padding: 0 1rem;
+
+    .filter {
+      display: flex;
+      column-gap: 0.62rem;
+      width: 90%;
+      height: 3rem;
+      padding: 4px 0px 1px 5px;
+      position: relative;
+      border-bottom: 1px solid #8a8686;
+      &_tab {
+        background: none;
+        border: none;
+        outline: none;
+        color: #8a8686;
+        font-weight: bold;
+        cursor: pointer;
+        display: flex;
+        column-gap: 10px;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.5s ease-out;
+        font-weight: bold;
+        &:hover {
+          color: #00ffb2;
+        }
+      }
+      &_activeTab {
+        color: #00ffb2;
+        position: relative;
+      }
+    }
+    .sort {
+      padding-top: 0.5rem;
+    }
+  }
+}
