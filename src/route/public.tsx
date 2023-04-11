@@ -4,7 +4,6 @@ import Error404 from '../pages/error404';
 import Gxp from '../components/shared/gxpPage';
 import Mint from '../components/shared/mintPage';
 import Upgrade from '../components/shared/upgradePage';
-import Invite from '../components/shared/invitePage';
 import Help from '../components/shared/helpPage';
 import Esports from '../components/shared/esports';
 import Sports from '../components/shared/sports';
