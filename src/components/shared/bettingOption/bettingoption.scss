@@ -1,14 +1,23 @@
 .optionBtn {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: var(--footer_icons_col);
-  border-radius: 50%;
-  cursor: pointer;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background-color: var(--footer_icons_col);
+	cursor: pointer;
+	position: relative;
+	&:hover {
+		color: var(--medium_green);
+		.hoverEffect {
+			background: var(--hover_effect);
+			filter: blur(10px);
+		}
+	}
 }
 
 .optionsTriangle {
-  left: 25px;
+	left: 25px;
 }
