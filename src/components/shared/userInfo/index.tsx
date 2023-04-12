@@ -1,16 +1,17 @@
+import Tooltip from '@mui/material/Tooltip';
 import Upload from '../uploadPhoto/Upload';
 import { WalletProps } from './../../../constants/wallet';
 import walletIcon from '../../../assets/images/buttonWalletIcon.png';
 import copyIcon from '../../../assets/images/copyIcon.png';
 import { useMetaMask } from 'metamask-react';
 import viewIcon from '../../../assets/images/viewIcon.png';
+import useCopyToClipboard from '../../../hooks/useCopyToClipboard';
 
 import styles from './userInfo.module.scss';
-import useCopyToClipboard from '../../../hooks/useCopyToClipboard';
 
 export default function UserInfo(props: WalletProps): JSX.Element {
 	const { account } = useMetaMask();
-	const { copyToClipboard } = useCopyToClipboard();
+	const { copyToClipboard, feedback } = useCopyToClipboard();
 	return (
 		<div className={styles.container}>
 			<div className={styles.userSection}>
@@ -29,11 +30,15 @@ export default function UserInfo(props: WalletProps): JSX.Element {
 										: account
 									: ''}
 							</span>{' '}
-							<img
-								src={copyIcon}
-								alt='copy address'
-								onClick={() => copyToClipboard(account ?? '')}
-							/>
+							<Tooltip
+								title={feedback.length > 0 ? feedback : 'Copy address'}
+								placement='top'>
+								<img
+									src={copyIcon}
+									alt='copy address'
+									onClick={() => copyToClipboard(account ?? '')}
+								/>
+							</Tooltip>
 						</div>
 						<div className={styles.viewBtn}>
 							<img src={viewIcon} />

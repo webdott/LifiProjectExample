@@ -18,7 +18,8 @@ const useCopyToClipboard = () => {
 
 		try {
 			document.execCommand('copy');
-			setFeedback('Copied successfully!!');
+			setFeedback('Copied!');
+			setTimeout(() => setFeedback(''), 1000);
 		} catch (err) {
 			setFeedback('Error copying, try again');
 		}
@@ -33,7 +34,8 @@ const useCopyToClipboard = () => {
 		}
 		navigator.clipboard.writeText(str).then(
 			function () {
-				setFeedback('Copied successfully!!');
+				setFeedback('Copied!');
+				setTimeout(() => setFeedback(''), 1000);
 			},
 			function (err) {
 				setFeedback('Error copying, try again');

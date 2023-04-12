@@ -1,56 +1,59 @@
 .balanceCheckContainer {
-  width: 300px;
-  height: 300px;
-  display: flex;
-  flex-direction: column;
-  row-gap: 15px;
-  margin: 0 auto;
-  .containerText {
-    font-size: 20px;
-    border: 1px solid black;
-    padding: 5px;
-  }
+	width: 300px;
+	height: 300px;
+	display: flex;
+	flex-direction: column;
+	row-gap: 15px;
+	margin: 0 auto;
+	.containerText {
+		font-size: 20px;
+		border: 1px solid black;
+		padding: 5px;
+	}
 }
 .balanceCheckButton {
-  border: 1px solid black;
-  padding: 5px 10px;
-  border-radius: 50px;
+	border: 1px solid black;
+	padding: 5px 10px;
+	border-radius: 50px;
 }
 .balanceCheckBtn {
-  background-size: 24px;
-  border-radius: 10px;
-  transition: 0.3s;
-  background: var(--footer_icons_col);
-  border-radius: 15px;
-  padding: 13px 16px 13px 31px;
-  display: flex;
-  justify-content: space-between;
-  max-width: 163px;
-  width: 100%;
-  cursor: pointer;
-  align-items: center;
-  position: relative;
-  &:hover {
-    .hoverEffect {
-      background: var(--hover_effect);
-      filter: blur(10px);
-    }
-  }
-  img {
-    width: 24px;
-    height: 24px;
-  }
-  span {
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 19px;
-    color: var(--white_900);
-  }
-  .hoverEffect {
-    width: 40px;
-    height: 40px;
-    position: absolute;
-    right: 7px;
-    top: 5px;
-  }
+	background-size: 24px;
+	border-radius: 10px;
+	transition: 0.3s;
+	background: var(--footer_icons_col);
+	border-radius: 15px;
+	padding: 13px 16px 13px 31px;
+	display: flex;
+	justify-content: space-between;
+	max-width: 163px;
+	width: 100%;
+	cursor: pointer;
+	align-items: center;
+	position: relative;
+	&:hover {
+		span {
+			color: var(--medium_green);
+		}
+		.hoverEffect {
+			background: var(--hover_effect);
+			filter: blur(10px);
+		}
+	}
+	img {
+		width: 24px;
+		height: 24px;
+	}
+	span {
+		font-weight: 700;
+		font-size: 16px;
+		line-height: 19px;
+		color: var(--white_900);
+	}
+	.hoverEffect {
+		width: 40px;
+		height: 40px;
+		position: absolute;
+		right: 7px;
+		top: 5px;
+	}
 }
