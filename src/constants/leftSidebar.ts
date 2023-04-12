@@ -1,4 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import { BiTennisBall } from 'react-icons/bi';
+import { GiBoxingGlove } from 'react-icons/gi';
+import { IoMdAmericanFootball } from 'react-icons/io';
+import { FaHockeyPuck } from 'react-icons/fa';
+import { IconType } from 'react-icons/lib';
 
 import { LeftSideIcons } from './../constants/icons';
 import spainFlag from '../public/images/leaguesFlags/spain.png';
@@ -22,10 +27,10 @@ export interface LeftSidebarTypes {
 	sport?: string;
 	sportsGames?: number;
 	leagues?: LeaguesTypes[];
-	icon?: string;
+	icon: string | IconType;
 	sportTypeId?: number;
 	disableIcon?: string;
-	activeIcon?: string;
+	activeIcon: string | IconType;
 }
 
 export interface LeaguesTypes {
@@ -52,7 +57,7 @@ export const navData: NavDataProps[] = [
 export const leaguesData: LeftSidebarTypes[] = [
 	{
 		sport: 'Football',
-		icon: LeftSideIcons.football,
+		icon: LeftSideIcons.disableFootbal,
 		disableIcon: LeftSideIcons.disableFootbal,
 		activeIcon: LeftSideIcons.activeFootball,
 		sportsGames: 10,
@@ -70,7 +75,7 @@ export const leaguesData: LeftSidebarTypes[] = [
 	},
 	{
 		sport: 'Basketball',
-		icon: LeftSideIcons.basketball,
+		icon: LeftSideIcons.disableBasketball,
 		disableIcon: LeftSideIcons.disableBasketball,
 		activeIcon: LeftSideIcons.activeBasketball,
 		sportsGames: 10,
@@ -88,7 +93,7 @@ export const leaguesData: LeftSidebarTypes[] = [
 	},
 	{
 		sport: 'MMA',
-		icon: LeftSideIcons.mma,
+		icon: LeftSideIcons.disableMMA,
 		disableIcon: LeftSideIcons.disableMMA,
 		activeIcon: LeftSideIcons.activeMma,
 		sportsGames: 10,
@@ -104,39 +109,74 @@ export const leaguesData: LeftSidebarTypes[] = [
 			{ leagueName: 'Bundesliga', leagueFlag: germanyFlag, leagueNumber: 10 },
 		],
 	},
-	// {
-	//   sport: "Tennis",
-	//   icon: LeftSideIcons.Basketball,
-
-	//   sportsGames: 10,
-	//   leagues: [
-	//     { leagueName: "La Liga", leagueFlag: spainFlag, leagueNumber: 10 },
-	//     {
-	//       leagueName: "Premier League",
-	//       leagueFlag: englandFlag,
-	//       leagueNumber: 10,
-	//     },
-	//     { leagueName: "Ligue 1", leagueFlag: franceFlag, leagueNumber: 10 },
-	//     { leagueName: "Serie A", leagueFlag: italyFlag, leagueNumber: 10 },
-	//     { leagueName: "Bundesliga", leagueFlag: germanyFlag, leagueNumber: 10 },
-	//   ],
-	// },
-	// {
-	//   sport: "Icehockey",
-	//   icon: LeftSideIcons.Basketball,
-	//   sportsGames: 10,
-	//   leagues: [
-	//     { leagueName: "La Liga", leagueFlag: spainFlag, leagueNumber: 10 },
-	//     {
-	//       leagueName: "Premier League",
-	//       leagueFlag: englandFlag,
-	//       leagueNumber: 10,
-	//     },
-	//     { leagueName: "Ligue 1", leagueFlag: franceFlag, leagueNumber: 10 },
-	//     { leagueName: "Serie A", leagueFlag: italyFlag, leagueNumber: 10 },
-	//     { leagueName: "Bundesliga", leagueFlag: germanyFlag, leagueNumber: 10 },
-	//   ],
-	// },
+	{
+		sport: 'Boxing',
+		icon: GiBoxingGlove,
+		activeIcon: GiBoxingGlove,
+		sportsGames: 10,
+		leagues: [
+			{ leagueName: 'La Liga', leagueFlag: spainFlag, leagueNumber: 10 },
+			{
+				leagueName: 'Premier League',
+				leagueFlag: englandFlag,
+				leagueNumber: 10,
+			},
+			{ leagueName: 'Ligue 1', leagueFlag: franceFlag, leagueNumber: 10 },
+			{ leagueName: 'Serie A', leagueFlag: italyFlag, leagueNumber: 10 },
+			{ leagueName: 'Bundesliga', leagueFlag: germanyFlag, leagueNumber: 10 },
+		],
+	},
+	{
+		sport: 'Tennis',
+		icon: BiTennisBall,
+		activeIcon: BiTennisBall,
+		sportsGames: 10,
+		leagues: [
+			{ leagueName: 'La Liga', leagueFlag: spainFlag, leagueNumber: 10 },
+			{
+				leagueName: 'Premier League',
+				leagueFlag: englandFlag,
+				leagueNumber: 10,
+			},
+			{ leagueName: 'Ligue 1', leagueFlag: franceFlag, leagueNumber: 10 },
+			{ leagueName: 'Serie A', leagueFlag: italyFlag, leagueNumber: 10 },
+			{ leagueName: 'Bundesliga', leagueFlag: germanyFlag, leagueNumber: 10 },
+		],
+	},
+	{
+		sport: 'Icehockey',
+		icon: FaHockeyPuck,
+		activeIcon: FaHockeyPuck,
+		sportsGames: 10,
+		leagues: [
+			{ leagueName: 'La Liga', leagueFlag: spainFlag, leagueNumber: 10 },
+			{
+				leagueName: 'Premier League',
+				leagueFlag: englandFlag,
+				leagueNumber: 10,
+			},
+			{ leagueName: 'Ligue 1', leagueFlag: franceFlag, leagueNumber: 10 },
+			{ leagueName: 'Serie A', leagueFlag: italyFlag, leagueNumber: 10 },
+			{ leagueName: 'Bundesliga', leagueFlag: germanyFlag, leagueNumber: 10 },
+		],
+	},
+	{
+		sport: 'American Football',
+		icon: IoMdAmericanFootball,
+		activeIcon: IoMdAmericanFootball,
+		sportsGames: 10,
+		leagues: [
+			{ leagueName: 'La Liga', leagueFlag: spainFlag, leagueNumber: 10 },
+			{
+				leagueName: 'Premier League',
+				leagueFlag: englandFlag,
+				leagueNumber: 10,
+			},
+			{ leagueName: 'Ligue 1', leagueFlag: franceFlag, leagueNumber: 10 },
+			{ leagueName: 'Serie A', leagueFlag: italyFlag, leagueNumber: 10 },
+			{ leagueName: 'Bundesliga', leagueFlag: germanyFlag, leagueNumber: 10 },
+		],
+	},
 ];
 
 export interface EsportsTypes {

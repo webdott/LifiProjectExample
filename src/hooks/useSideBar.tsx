@@ -77,6 +77,28 @@ export function useSideBar() {
 			americanFootball: false,
 		});
 	};
+	const handleBoxing = () => {
+		setMatches({
+			footBall: false,
+			basketBall: false,
+			mma: false,
+			tennis: false,
+			icehockey: false,
+			boxing: !matches.boxing,
+			americanFootball: false,
+		});
+	};
+	const handleAmericanFootball = () => {
+		setMatches({
+			footBall: false,
+			basketBall: false,
+			mma: false,
+			tennis: false,
+			icehockey: false,
+			boxing: false,
+			americanFootball: !matches.americanFootball,
+		});
+	};
 
 	return {
 		handleFootBall,
@@ -84,10 +106,14 @@ export function useSideBar() {
 		handleMma,
 		handleTennis,
 		handleIceHockey,
+		handleBoxing,
+		handleAmericanFootball,
 		footBallState: matches.footBall,
 		basketBallState: matches.basketBall,
 		mmaState: matches.mma,
 		tennisState: matches.tennis,
 		iceHockeyState: matches.icehockey,
+		boxingState: matches.boxing,
+		americanFootballState: matches.americanFootball,
 	};
 }

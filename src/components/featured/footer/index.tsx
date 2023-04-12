@@ -73,7 +73,9 @@ export default function Footer(): JSX.Element {
 											target='_blank'
 											rel='noreferrer'
 											className={styles.wallet}>
-											<span>{getTruncatedAddress(e.wallets?.gnosis.wallet)}</span>
+											<span>
+												{getTruncatedAddress(e.wallets?.gnosis.wallet)}
+											</span>
 										</a>
 									</div>
 								)
