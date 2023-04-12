@@ -10,6 +10,7 @@ import GamblrXYZLogo from '../../shared/logo';
 import editIcon from '../../../assets/images/editIcon.png';
 
 import styles from './footer.module.scss';
+import { getTruncatedAddress } from '../../../functions';
 
 export default function Footer(): JSX.Element {
 	const [activeIcon, setActiveIcon] = useState<number | null>(null);
@@ -32,6 +33,7 @@ export default function Footer(): JSX.Element {
 										src={activeIcon === index ? e.activeIcon : e.icon}
 										width={20}
 										height={30}
+										alt='social icon'
 									/>
 									<div className={styles.hoverEffect}></div>
 								</a>
@@ -66,9 +68,13 @@ export default function Footer(): JSX.Element {
 										<div className={styles.bet}>
 											<span>{e.bet}:</span>
 										</div>
-										<div className={styles.wallet}>
-											<span>{e.wallet}</span>
-										</div>
+										<a
+											href={e.wallets?.gnosis.link ?? '#'}
+											target='_blank'
+											rel='noreferrer'
+											className={styles.wallet}>
+											<span>{getTruncatedAddress(e.wallets?.gnosis.wallet)}</span>
+										</a>
 									</div>
 								)
 							)}
@@ -76,7 +82,7 @@ export default function Footer(): JSX.Element {
 
 						<div className={styles.privacyLinks}>
 							{privacy?.map((item: PrivacyLinkProps, index: number) => (
-								<a href={item.link}>
+								<a href={item.link} key={index}>
 									<span key={index}>{item.name}</span>
 								</a>
 							))}
