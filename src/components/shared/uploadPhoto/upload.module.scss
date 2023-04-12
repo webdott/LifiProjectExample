@@ -1,40 +1,48 @@
 form {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background-color:var(--footer_icons_col) ;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .userProfile {
-    object-fit: cover;
-    cursor: pointer;
-  }
-  .userProfilePreview {
-    object-fit: cover;
-    cursor: pointer;
-  }
-  .uploadButton {
-    display: none;
-  }
+	position: relative;
+	overflow: hidden;
+	width: 120px;
+	height: 120px;
+	border-radius: 50%;
+	background-color: var(--footer_icons_col);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	.userProfile {
+		object-fit: cover;
+		cursor: pointer;
+	}
+	.userProfilePreview {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		cursor: pointer;
+	}
+	.uploadButton {
+		display: none;
+	}
 
-  .customButton {
-    position: absolute;
-    top: 24px;
-    left: 20px;
-    display: none;
-    background: #000;
-    width: 28px;
-    height: 28px;
-    padding: 2px;
-    border-radius: 50%;
-    .cameraIcon {
-      color: #00faaf;
-      cursor: pointer;
-    }
-  }
+	.customButton {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		display: none;
+		background: rgba(0, 0, 0, 0.45);
+		border-radius: 50%;
+		cursor: pointer;
 
-  &:hover .customButton {
-    display: block;
-  }
+		.cameraIcon {
+			color: #00faaf;
+			cursor: pointer;
+		}
+	}
+
+	&:hover .customButton {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 }
