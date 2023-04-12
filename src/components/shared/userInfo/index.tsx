@@ -40,10 +40,14 @@ export default function UserInfo(props: WalletProps): JSX.Element {
 								/>
 							</Tooltip>
 						</div>
-						<div className={styles.viewBtn}>
+						<a
+							href={`https://gnosisscan.io/address/${account}`}
+							target='_blank'
+							rel='noreferrer'
+							className={styles.viewBtn}>
 							<img src={viewIcon} />
 							<span>View on Explorer</span>
-						</div>
+						</a>
 					</div>
 				</div>
 			</div>
