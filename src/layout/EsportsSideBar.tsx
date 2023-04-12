@@ -7,7 +7,7 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Esports } from './../constants/leftSidebar';
-import { useSideBar } from '../hooks/useSideBar';
+import { useESportsSideBar } from '../hooks/useESportsSidebar';
 
 import styles from './homelayout.module.scss';
 
@@ -15,8 +15,14 @@ function EsportsButtonList(): JSX.Element {
 	const [sportTab, setSportTab] = useState<number>(1);
 	const [leagueTab, setLeagueTab] = useState<number>(1);
 
-	const { handleFootBall, handleBasketBall, footBallState, basketBallState } =
-		useSideBar();
+	const {
+		handleDota2,
+		handleCsGo,
+		handleLeagueOfLegends,
+		dota2State,
+		csGoState,
+		leagueOfLegendsState,
+	} = useESportsSideBar();
 
 	return (
 		<Fragment>
@@ -26,12 +32,16 @@ function EsportsButtonList(): JSX.Element {
 				let state;
 
 				if (sport.sport === 'Dota 2') {
-					fn = handleFootBall;
-					state = footBallState;
+					fn = handleDota2;
+					state = dota2State;
 				} else if (sport.sport === 'CS:GO') {
-					fn = handleBasketBall;
-					state = basketBallState;
+					fn = handleCsGo;
+					state = csGoState;
+				} else if (sport.sport === 'League of Legends') {
+					fn = handleLeagueOfLegends;
+					state = leagueOfLegendsState;
 				}
+
 				return (
 					<Fragment key={index}>
 						<ListItemButton
@@ -69,7 +79,7 @@ function EsportsButtonList(): JSX.Element {
 									}
 									key={index}
 									onClick={() => setLeagueTab(index + 1)}>
-									<ListItemIcon>
+									<ListItemIcon sx={{ minWidth: 0 }}>
 										<img
 											className={styles.leagueIcon}
 											src={tournment.tournamentFlag}
