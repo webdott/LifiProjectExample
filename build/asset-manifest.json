@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/static/css/main.ab7f560b.css",
+    "main.js": "/static/js/main.36d6d33b.js",
+    "static/media/Napoli.png": "/static/media/Napoli.fc0c487702821ff65d70.png",
+    "static/media/MintVideo.mp4": "/static/media/MintVideo.d7374198197cf85e9cd4.mp4",
+    "static/media/mancity.png": "/static/media/mancity.0ce2e81bd3a9ddcf8586.png",
+    "static/media/manu.png": "/static/media/manu.5f327d93d3fa92e6c005.png",
+    "static/media/premier-league.png": "/static/media/premier-league.b087828572badd8ef17f.png",
+    "static/media/avatar.png": "/static/media/avatar.a9a8ae522c41221c0337.png",
+    "static/media/Atletico.png": "/static/media/Atletico.23eae727f7d0c3b9580b.png",
+    "static/media/LeicesterCity.png": "/static/media/LeicesterCity.e4a1da0ee6ec4afb228c.png",
+    "static/media/spain.png": "/static/media/spain.305a8c0f5f8a6b9c3458.png",
+    "static/media/realMadrid.png": "/static/media/realMadrid.6b46e1b9549f9b15a3be.png",
+    "static/media/Skateboarding.gif": "/static/media/Skateboarding.b53f1c752983543a68ff.gif",
+    "static/media/laligaLogo.png": "/static/media/laligaLogo.0012f688eace8bf8900e.png",
+    "static/media/premierLogo.png": "/static/media/premierLogo.95ebef59ee877f29df9e.png",
+    "static/media/italy.jpg": "/static/media/italy.3683612906eb40835a37.jpg",
+    "static/media/betSlipIcon.png": "/static/media/betSlipIcon.46500d3eea77a54222b0.png",
+    "static/media/myBetsIcon.png": "/static/media/myBetsIcon.6da3b723ea7197a044bf.png",
+    "static/media/bet.png": "/static/media/bet.7b6b2ac8858284abdfc0.png",
+    "static/media/england.webp": "/static/media/england.189fa7f12d8c4b914874.webp",
+    "index.html": "/index.html",
+    "static/media/check.svg": "/static/media/check.73d6d239b371344d7fdb4efe662c83b2.svg",
+    "static/media/germany.webp": "/static/media/germany.527cb82c953668cf011b.webp",
+    "main.ab7f560b.css.map": "/static/css/main.ab7f560b.css.map",
+    "main.36d6d33b.js.map": "/static/js/main.36d6d33b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ab7f560b.css",
+    "static/js/main.36d6d33b.js"
+  ]
+}

@@ -20,7 +20,7 @@ export default function Matches({ liveMatches, upcomingMatches }: any) {
 	const { isOpen, toggle } = useModal();
 
 	const handleTabs = (index: number) => {
-		setTabIndex(index);
+		setTabIndex((prevTabIndex) => (prevTabIndex === index ? -1 : index));
 	};
 
 	useEffect(() => {
@@ -138,9 +138,9 @@ export default function Matches({ liveMatches, upcomingMatches }: any) {
 							</div>
 						</div>
 					</div>
-					{match.map((el) => {
+					{match.map((el: any, index: number) => {
 						return (
-							<div className={styles.match}>
+							<div className={styles.match} key={index}>
 								<div className={styles.matchLeftSection}>
 									<p>
 										{/* <img src={el.leagueLogo} alt={el.leagueName} />{" "} */}
@@ -162,6 +162,7 @@ export default function Matches({ liveMatches, upcomingMatches }: any) {
 									{el.matchOdds.map((item: any, index: number) => {
 										return (
 											<li
+												key={index}
 												className={tabIndex === item.id ? styles.activeTab : ''}
 												onClick={() => handleTabs(item.id)}>
 												<span>{item.oddName}</span>
