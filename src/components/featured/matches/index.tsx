@@ -8,26 +8,22 @@ import {
 import BettingOption from '../../shared/bettingOption';
 import useModal from './../../../hooks/useModal';
 import Odds from './odds';
+import Match from './match';
 
 import styles from './matches.module.scss';
 
 export default function Matches({ liveMatches, upcomingMatches }: any) {
-	const [match, setMatch] = useState<MatchesTypes[]>([]);
+	const [matches, setMatches] = useState<MatchesTypes[]>([]);
 	const [matchColumn, setMatchColumn] = useState<MatchesEnum>(MatchesEnum.LIVE);
 	const [activeTabId, setActiveTabId] = useState<number>(0);
-	const [tabIndex, setTabIndex] = useState<number>(1);
 	const [activeNavIcon, setActiveNavIcon] = useState<number>(0);
 	const { isOpen, toggle } = useModal();
 
-	const handleTabs = (index: number) => {
-		setTabIndex((prevTabIndex) => (prevTabIndex === index ? -1 : index));
-	};
-
 	useEffect(() => {
 		if (matchColumn === 'Live') {
-			setMatch(liveMatches);
+			setMatches(liveMatches);
 		} else if (matchColumn === 'Upcoming') {
-			setMatch(upcomingMatches);
+			setMatches(upcomingMatches);
 		}
 	}, [matchColumn]);
 
@@ -133,47 +129,15 @@ export default function Matches({ liveMatches, upcomingMatches }: any) {
 						<div className={styles.titleRightSection}>
 							<BettingOption />
 							<Odds />
-							<div className={styles.rightSectionIcon}>
+							{/* Uche: Layout button changed. Button to be replaced with another later */}
+							{/* <div className={styles.rightSectionIcon}>
 								<div className={styles.smallHoverEffect}></div>
-							</div>
+							</div> */}
 						</div>
 					</div>
-					{match.map((el: any, index: number) => {
-						return (
-							<div className={styles.match} key={index}>
-								<div className={styles.matchLeftSection}>
-									<p>
-										{/* <img src={el.leagueLogo} alt={el.leagueName} />{" "} */}
-										{el.leagueName}
-									</p>
-									<ul>
-										<li className={styles.team1Section}>
-											<span>{el.team1}</span>{' '}
-											<img src={el.team1Logo} alt={el.team1} />
-										</li>
-										<li className={styles.scores}>{el.score}</li>
-										<li className={styles.team2Section}>
-											<span>{el.team2}</span> <img src={el.team2Logo} alt='' />
-										</li>
-										<li className={styles.matchTime}>{el.timeLabel}</li>
-									</ul>
-								</div>
-								<ul className={styles.matchRightSection}>
-									{el.matchOdds.map((item: any, index: number) => {
-										return (
-											<li
-												key={index}
-												className={tabIndex === item.id ? styles.activeTab : ''}
-												onClick={() => handleTabs(item.id)}>
-												<span>{item.oddName}</span>
-												<span>{item.odds}</span>
-											</li>
-										);
-									})}
-								</ul>
-							</div>
-						);
-					})}
+					{matches.map((match: any, index: number) => (
+						<Match key={index} match={match} />
+					))}
 				</div>
 			</div>
 		</Fragment>
