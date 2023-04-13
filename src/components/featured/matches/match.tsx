@@ -1,10 +1,10 @@
 import { FC, useState } from 'react';
 
 import styles from './matches.module.scss';
-import { MatchesTypes } from '../../../constants/matches';
+import { MatchType } from '../../../constants/matches';
 
 interface MatchProps {
-	match: MatchesTypes;
+	match: MatchType;
 }
 
 const Match: FC<MatchProps> = ({ match }) => {
@@ -17,21 +17,21 @@ const Match: FC<MatchProps> = ({ match }) => {
 	return (
 		<div className={styles.match}>
 			<div className={styles.matchLeftSection}>
-				<p>
-					{/* <img src={match.leagueLogo} alt={match.leagueName} />{" "} */}
-					{match.leagueName}
-				</p>
 				<ul>
 					<li className={styles.team1Section}>
 						<span>{match.team1}</span>{' '}
-						<img src={match.team1Logo} alt={match.team1} />
 					</li>
-					<li className={styles.scores}>{match.score}</li>
+					<li>
+						<span>-</span>
+					</li>
 					<li className={styles.team2Section}>
-						<span>{match.team2}</span> <img src={match.team2Logo} alt='' />
+						<span>{match.team2}</span>{' '}
 					</li>
-					<li className={styles.matchTime}>{match.timeLabel}</li>
 				</ul>
+			</div>
+			<div className={styles.matchTime}>
+				<p>{match.timeLabel}</p>
+				<p>{match.time}</p>
 			</div>
 			<ul className={styles.matchRightSection}>
 				{match.matchOdds.map((item: any, index: number) => {
