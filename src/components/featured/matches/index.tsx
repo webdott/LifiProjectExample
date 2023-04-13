@@ -73,11 +73,11 @@ export default function Matches({ liveMatches, upcomingMatches }: any) {
 									onMouseLeave={(e) => hoverDisable(e, el, index)}
 									onClick={() => navClick(el.tab, index)}
 									className={activeNav(index)}>
-									<img
+									{/* <img
 										className={styles.tabIcon}
 										src={activeIcon(el, index)}
 										alt={el.tab}
-									/>
+									/> */}
 									<span>{el.tab}</span>
 									<div className={styles.hoverEffect}></div>
 								</div>
@@ -85,37 +85,34 @@ export default function Matches({ liveMatches, upcomingMatches }: any) {
 						})}
 					</div>
 					{/* <div className={styles.rightNav}>
-            <button
-              className={
-                tabIndex === 1
-                  ? `${styles.tab} ${styles.activeTab}`
-                  : `${styles.tab}`
-              }
-              onClick={() => handleTabs(1)}
-            >
-              All
-            </button>
-            <button
-              className={
-                tabIndex === 2
-                  ? `${styles.tab} ${styles.activeTab}`
-                  : `${styles.tab}`
-              }
-              onClick={() => handleTabs(2)}
-            >
-              Today
-            </button>
-            <button
-              className={
-                tabIndex === 3
-                  ? `${styles.tab} ${styles.activeTab}`
-                  : `${styles.tab}`
-              }
-              onClick={() => handleTabs(3)}
-            >
-              Tomorrow
-            </button>
-          </div> */}
+						<button
+							className={
+								tabIndex === 1
+									? `${styles.tab} ${styles.activeTab}`
+									: `${styles.tab}`
+							}
+							onClick={() => handleTabs(1)}>
+							All
+						</button>
+						<button
+							className={
+								tabIndex === 2
+									? `${styles.tab} ${styles.activeTab}`
+									: `${styles.tab}`
+							}
+							onClick={() => handleTabs(2)}>
+							Today
+						</button>
+						<button
+							className={
+								tabIndex === 3
+									? `${styles.tab} ${styles.activeTab}`
+									: `${styles.tab}`
+							}
+							onClick={() => handleTabs(3)}>
+							Tomorrow
+						</button>
+					</div> */}
 				</div>
 				<div className={styles.matchesBottomSection}>
 					<div className={styles.matchesTopSection}>
