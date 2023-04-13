@@ -7,6 +7,7 @@ import Upgrade from '../components/shared/upgradePage';
 import Help from '../components/shared/helpPage';
 import Esports from '../components/shared/esports';
 import Sports from '../components/shared/sports';
+import Home from '../components/shared/home';
 import { useMetaMask } from 'metamask-react';
 
 const RouterComp = () => {
@@ -14,7 +15,8 @@ const RouterComp = () => {
 
 	return (
 		<Routes>
-			<Route path='/' element={<Sports />} />
+			<Route path='/' element={<Home />} />
+			<Route path='/sports' element={<Sports />} />
 			<Route path='*' element={<Error404 />} />
 			<Route
 				path={'/account'}
