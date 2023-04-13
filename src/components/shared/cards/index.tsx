@@ -3,7 +3,6 @@ import { cardProps } from '../../../constants/games';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation } from 'swiper';
 import { OddsBoxValues } from './../../../constants/featuresGame';
-import YouTubeIcon from '@mui/icons-material/YouTube';
 
 import './styles.css';
 import 'swiper/css';
@@ -26,7 +25,7 @@ function Cards({ games }: cardProps): JSX.Element {
 				<div className={styles.sidebar}>
 					<Swiper
 						spaceBetween={10}
-						slidesPerView={3}
+						slidesPerView={'auto'}
 						centeredSlides={true}
 						loop={true}
 						autoplay={{
@@ -45,9 +44,8 @@ function Cards({ games }: cardProps): JSX.Element {
 								i = 0;
 							}
 							return (
-								<SwiperSlide>
+								<SwiperSlide key={index}>
 									<div
-										key={index}
 										className={`${styles.card} ${
 											i === 1
 												? styles.lightCard

@@ -4,7 +4,7 @@ import WalletModal from './../../shared/walletModal';
 import { HeaderButtonText, navbar } from '../../../constants/navbar';
 import { ButtonType } from '../../shared/button/type';
 import { useNavigate } from 'react-router-dom';
-import CheckBalance from '../../shared/balanceCheck'; 
+import CheckBalance from '../../shared/balanceCheck';
 import GamblrXYZLogo from '../../shared/logo';
 import AccountPage from '../accountPage';
 import { NavLink } from 'react-router-dom';
