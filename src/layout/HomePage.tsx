@@ -53,7 +53,7 @@ export default function Layout({ children }: LayoutProps) {
 			<div className={styles.section}>
 				<div className={styles.leftSidebar}>
 					<div className={styles.container}>
-						{location.pathname !== '/' && <SearchBar />}
+						{location.pathname !== '/sports' && <SearchBar />}
 						<div className={styles.nav}>
 							<ListItemButton
 								onMouseOver={() => {

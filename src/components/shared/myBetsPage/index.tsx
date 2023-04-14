@@ -41,7 +41,7 @@ export default function MyBetsPage() {
 			<div className={styles.bottomSection}>
 				<ul className={styles.sectionTitles}>
 					{titleItems.map((el, index) => {
-						return <li>{el}</li>;
+						return <li key={index}>{el}</li>;
 					})}
 				</ul>
 
