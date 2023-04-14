@@ -1,193 +1,194 @@
 .container {
-  width: 100%;
-  .pageTitle {
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 29px;
-    color: #ffffff;
-    margin-bottom: 32px;
-  }
-  .topSection {
-    width: 100%;
-    border-bottom: 3px solid #e6e6e631;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 35px;
-    .sortButton {
-      font-size: 16px;
-      line-height: 19px;
-      color: #e6e6e6;
-      display: flex;
-      column-gap: 5px;
-      span:nth-child(1) {
-        font-weight: 400;
-        opacity: 0.7;
-      }
-    }
-    .navSection {
-      display: flex;
-      column-gap: 60px;
-      max-height: 25px;
-      .navItem {
-        font-weight: 600;
-        font-size: 16px;
-        line-height: 19px;
-        color: #e6e6e6;
-      }
-      .activeNavItem {
-        color: #00ffb2;
-        padding-bottom: 39px;
-        border-bottom: 3px solid #00ffb2;
-      }
-    }
-  }
+	width: 100%;
+	.pageTitle {
+		font-weight: 600;
+		font-size: 24px;
+		line-height: 29px;
+		color: #ffffff;
+		margin-bottom: 32px;
+	}
+	.topSection {
+		width: 100%;
+		border-bottom: 3px solid #e6e6e631;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 35px;
+		.sortButton {
+			font-size: 16px;
+			line-height: 19px;
+			color: #e6e6e6;
+			display: flex;
+			column-gap: 5px;
+			span:nth-child(1) {
+				font-weight: 400;
+				opacity: 0.7;
+			}
+		}
+		.navSection {
+			display: flex;
+			column-gap: 60px;
+			max-height: 25px;
+			.navItem {
+				cursor: pointer;
+				font-weight: 600;
+				font-size: 16px;
+				line-height: 19px;
+				color: #e6e6e6;
+			}
+			.activeNavItem {
+				color: #00ffb2;
+				padding-bottom: 39px;
+				border-bottom: 3px solid #00ffb2;
+			}
+		}
+	}
 
-  .bottomSection {
-    .sectionTitles {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 18px;
-      li {
-        width: 13%;
-        text-align: center;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 19px;
-        color: #e6e6e6;
-      }
-    }
-    .betsTable {
-      background: #1c1c1e;
-      border-radius: 15px;
-      border-top: 1px solid #8f8f8f;
-      row-gap: 46px;
-      display: flex;
-      flex-direction: column;
-      padding: 18px 0;
-      li {
-        display: flex;
-        justify-content: space-between;
+	.bottomSection {
+		.sectionTitles {
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			margin-bottom: 18px;
+			li {
+				width: 13%;
+				text-align: center;
+				font-weight: 400;
+				font-size: 16px;
+				line-height: 19px;
+				color: #e6e6e6;
+			}
+		}
+		.betsTable {
+			background: #1c1c1e;
+			border-radius: 15px;
+			border-top: 1px solid #8f8f8f;
+			row-gap: 46px;
+			display: flex;
+			flex-direction: column;
+			padding: 18px 0;
+			li {
+				display: flex;
+				justify-content: space-between;
 
-        .betId {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          span {
-            font-weight: 600;
-            font-size: 16px;
-            line-height: 19px;
-            color: #ffffff;
-            text-align: center;
-          }
-          width: 13%;
-        }
-        .betResultSection {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          width: 13%;
-          div {
-            width: 77px;
-            padding: 9px 0 8px;
-            font-weight: 600;
-            font-size: 16px;
-            line-height: 19px;
-            text-align: center;
-            border-radius: 5px;
-            max-height: 36px;
-          }
-          .betResultWin {
-            color: #00ffb2;
-            background: #00966150;
-          }
-          .betResultLose {
-            background: #ff4f4f6b;
-            color: #ff6767;
-          }
-          .betResultActive {
-            color: #87d4ff;
-            background: #005f9665;
-          }
-        }
-        .betAmount {
-          width: 13%;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          row-gap: 3px;
-          div:nth-child(1) {
-            font-weight: 600;
-            font-size: 16px;
-            line-height: 19px;
-            color: #ffffff;
-          }
-          div:nth-child(2) {
-            font-weight: 400;
-            font-size: 12px;
-            line-height: 15px;
-            color: #ffffff;
-          }
-        }
-        .betWLamount {
-          width: 13%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          span {
-            font-weight: 600;
-            font-size: 16px;
-            line-height: 19px;
-            color: #00ffb2;
-            text-align: center;
-          }
-        }
-        .betMatch {
-          width: 13%;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          row-gap: 2px;
-          div {
-            font-weight: 500;
-            font-size: 14px;
-            line-height: 17px;
-            color: #ffffff;
-          }
-        }
-        .betCoef {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          width: 13%;
-          div {
-            padding: 8px 24px;
-            background: #2c2c2e;
-            border-radius: 5px;
-            font-weight: 600;
-            font-size: 16px;
-            line-height: 19px;
-            color: #e6e6e6;
-          }
-        }
-        .betDateTime {
-          width: 13%;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          row-gap: 4px;
-          div {
-            font-weight: 500;
-            font-size: 14px;
-            line-height: 17px;
-            color: #ffffff;
-          }
-        }
-      }
-    }
-  }
+				.betId {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					span {
+						font-weight: 600;
+						font-size: 16px;
+						line-height: 19px;
+						color: #ffffff;
+						text-align: center;
+					}
+					width: 13%;
+				}
+				.betResultSection {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					width: 13%;
+					div {
+						width: 77px;
+						padding: 9px 0 8px;
+						font-weight: 600;
+						font-size: 16px;
+						line-height: 19px;
+						text-align: center;
+						border-radius: 5px;
+						max-height: 36px;
+					}
+					.betResultWin {
+						color: #00ffb2;
+						background: #00966150;
+					}
+					.betResultLose {
+						background: #ff4f4f6b;
+						color: #ff6767;
+					}
+					.betResultActive {
+						color: #87d4ff;
+						background: #005f9665;
+					}
+				}
+				.betAmount {
+					width: 13%;
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+					row-gap: 3px;
+					div:nth-child(1) {
+						font-weight: 600;
+						font-size: 16px;
+						line-height: 19px;
+						color: #ffffff;
+					}
+					div:nth-child(2) {
+						font-weight: 400;
+						font-size: 12px;
+						line-height: 15px;
+						color: #ffffff;
+					}
+				}
+				.betWLamount {
+					width: 13%;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					span {
+						font-weight: 600;
+						font-size: 16px;
+						line-height: 19px;
+						color: #00ffb2;
+						text-align: center;
+					}
+				}
+				.betMatch {
+					width: 13%;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					justify-content: center;
+					row-gap: 2px;
+					div {
+						font-weight: 500;
+						font-size: 14px;
+						line-height: 17px;
+						color: #ffffff;
+					}
+				}
+				.betCoef {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					width: 13%;
+					div {
+						padding: 8px 24px;
+						background: #2c2c2e;
+						border-radius: 5px;
+						font-weight: 600;
+						font-size: 16px;
+						line-height: 19px;
+						color: #e6e6e6;
+					}
+				}
+				.betDateTime {
+					width: 13%;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					justify-content: center;
+					row-gap: 4px;
+					div {
+						font-weight: 500;
+						font-size: 14px;
+						line-height: 17px;
+						color: #ffffff;
+					}
+				}
+			}
+		}
+	}
 }
