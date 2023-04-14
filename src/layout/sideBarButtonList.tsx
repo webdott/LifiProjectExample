@@ -10,7 +10,7 @@ import SportButton from '../components/shared/sportButton';
 import styles from './homelayout.module.scss';
 
 function SideBarButtonList(): JSX.Element {
-	const [sportTab, setSportTab] = useState<number>(1);
+	const [sportTab, setSportTab] = useState<number>(-1);
 	const [leagueTab, setLeagueTab] = useState<number>(1);
 
 	const {

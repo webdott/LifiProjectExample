@@ -1,18 +1,18 @@
 import { Fragment, useEffect, useState } from 'react';
+import { ImFire } from 'react-icons/im';
+import { useNavigate } from 'react-router';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+
 import Header from '../components/featured/header';
 import Footer from '../components/featured/footer';
 import SearchBar from '../components/shared/searchBar';
 import BetInfo from '../components/shared/betInfo';
 import { navData } from '../constants/leftSidebar';
 import { LayoutProps } from '../constants/layout';
-import { useNavigate } from 'react-router';
 import { useLocation } from 'react-router-dom';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import LeftSideBar from './sideBarButtonList';
-import homeDisableIcon from '../assets/images/disableHomeIcon.png';
-import homeActiveIcon from '../assets/images/activeHomeIcon.png';
 import liveActiveIcon from '../assets/images/activeLiveIcon.png';
 import liveDisableIcon from '../assets/images/disableLiveIcon.png';
 
@@ -22,17 +22,14 @@ export default function Layout({ children }: LayoutProps) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const [topNav, setTopNav] = useState<number>(1);
-	const [homeIcon, setHomeIcon] = useState(homeDisableIcon);
 	const [liveIcon, setLiveIcon] = useState(liveDisableIcon);
 	const [homeHoverEffect, setHomeHoverEffect] = useState(false);
 	const [liveHoverEffect, setLiveHoverEffect] = useState(false);
 
 	useEffect(() => {
 		if (topNav === 1) {
-			setHomeIcon(homeActiveIcon);
 			setHomeHoverEffect(true);
 		} else {
-			setHomeIcon(homeDisableIcon);
 			setHomeHoverEffect(false);
 		}
 	}, [topNav]);
@@ -56,15 +53,6 @@ export default function Layout({ children }: LayoutProps) {
 						{location.pathname !== '/sports' && <SearchBar />}
 						<div className={styles.nav}>
 							<ListItemButton
-								onMouseOver={() => {
-									setHomeIcon(homeActiveIcon);
-									setHomeHoverEffect(true);
-								}}
-								onMouseOut={
-									topNav !== 1
-										? () => setHomeIcon(homeDisableIcon)
-										: () => setHomeIcon(homeActiveIcon)
-								}
 								className={
 									topNav === 1
 										? `${styles.homeLiveButton} ${styles.activeTab}`
@@ -74,13 +62,13 @@ export default function Layout({ children }: LayoutProps) {
 									navigate('/');
 									setTopNav(1);
 								}}>
-								<ListItemIcon style={{ minWidth: '24px' }}>
-									<img width={24} height={24} src={homeIcon} />
+								<ListItemIcon className={styles.homeLiveButtonIcon} style={{ minWidth: '24px' }}>
+									<ImFire size={22} />
 									{homeHoverEffect ? (
 										<div className={styles.hoverEffect}></div>
 									) : null}
 								</ListItemIcon>
-								<ListItemText primary='Home' />
+								<ListItemText primary='Top Events' />
 							</ListItemButton>
 							<ListItemButton
 								onMouseOver={() => {

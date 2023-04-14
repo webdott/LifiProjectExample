@@ -1,17 +1,21 @@
 import { Fragment, useState } from 'react';
+import { useNavigate } from 'react-router';
+import { ImFire } from 'react-icons/im';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+
 import { Esports } from './../constants/leftSidebar';
 import { useESportsSideBar } from '../hooks/useESportsSidebar';
 
 import styles from './homelayout.module.scss';
 
 function EsportsButtonList(): JSX.Element {
-	const [sportTab, setSportTab] = useState<number>(1);
+	const navigate = useNavigate();
+	const [sportTab, setSportTab] = useState<number>(0);
 	const [leagueTab, setLeagueTab] = useState<number>(1);
 
 	const {
@@ -25,6 +29,21 @@ function EsportsButtonList(): JSX.Element {
 
 	return (
 		<Fragment>
+			<ListItemButton
+				className={
+					sportTab === 0
+						? `${styles.sidebarButton} ${styles.topEvents} ${styles.activeTab}`
+						: `${styles.sidebarButton} ${styles.topEvents}`
+				}
+				onClick={() => {
+					navigate('/esports');
+				}}>
+				<ListItemIcon className={styles.homeLiveButtonIcon} style={{ minWidth: '24px' }}>
+					<ImFire size={22} />
+				</ListItemIcon>
+				<ListItemText primary='Top Events' />
+			</ListItemButton>
+
 			{Esports.map((sport, index) => {
 				let fn: any;
 
