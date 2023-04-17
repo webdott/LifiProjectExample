@@ -6,10 +6,13 @@
 	background-color: var(--bg_col);
 	margin: 0 auto;
 	min-height: calc(100vh - 90px);
+
 	.leftSidebar {
-		max-width: 270px;
-		width: 100%;
+		width: 320px;
+		height: calc(100vh - 90px);
 		padding: 30px;
+		overflow-y: auto;
+		overflow-x: hidden;
 		font-size: 10px !important;
 		background: #00cc8e;
 		background: -webkit-linear-gradient(0deg, #00cc8e 0%, #000000 100%);
@@ -164,8 +167,10 @@
 	}
 
 	.cards {
-		width: 61.25%;
+		width: 65%;
 		margin: 0 auto;
+		height: calc(100vh - 100px);
+		overflow-y: auto;
 		max-width: 1920px;
 		padding-top: 40px;
 		display: flex;
