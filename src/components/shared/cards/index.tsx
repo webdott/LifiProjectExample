@@ -61,7 +61,7 @@ function Cards({ games }: cardProps): JSX.Element {
                           className={styles.card_content_league_laliga}
                         /> */}
 											</div>
-											<div className={styles.card_content_teams}>
+											{/* <div className={styles.card_content_teams}>
 												<div>
 													<img src={slide.team1Logo} alt='leicester' />
 												</div>
@@ -71,7 +71,7 @@ function Cards({ games }: cardProps): JSX.Element {
 												<div>
 													<img src={slide.team2Logo} alt='napoli' />
 												</div>
-											</div>
+											</div> */}
 											<div className={styles.card_content_time}>
 												{/* {slide.leagueName === "premierLeague" && (
                           <YouTubeIcon style={{ color: "red" }} />
