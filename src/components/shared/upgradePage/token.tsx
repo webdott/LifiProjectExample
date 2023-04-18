@@ -27,7 +27,7 @@ const Token: FC<TokenProps> = ({ token }) => {
 				</span>
 				<Button
 					text={SidebarButtonsText.UPGRADE}
-					btnType={ButtonType.sidebarButton}
+					btnType={ButtonType.membershipButton}
 				/>
 			</div>
 		</div>

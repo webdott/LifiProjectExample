@@ -59,7 +59,7 @@
 	}
 }
 
-.sidebarButton {
+.membershipButton {
 	border-radius: 10px;
 	padding: 0.313rem;
 	max-width: 12.5rem;
@@ -69,12 +69,12 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border: 1px solid var(--white_900);
-	color: var(--white_900);
+	border: 1px solid var(--left_hover_col);
+	color: var(--left_hover_col);
 
 	&:hover {
-		border: 1px solid var(--sidebar_green_hover);
-		color: var(--sidebar_green_hover);
+		background: var(--left_active_col);
+		color: var(--white_900);
 	}
 }
 
