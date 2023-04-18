@@ -25,6 +25,8 @@ export default function Button({ btnType, text, icon, onClick }: ButtonProps) {
 				return styles.betInfoLargeBtn;
 			case ButtonType.walletButton:
 				return styles.walletBtn;
+			case ButtonType.GXP:
+				return styles.GXP;
 		}
 	};
 

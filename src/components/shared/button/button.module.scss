@@ -39,6 +39,24 @@
 	}
 }
 
+.GXP {
+	border-radius: 10px;
+	padding: 0.313rem;
+	max-width: 12.5rem;
+	height: 40px;
+	margin: 0 auto;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid var(--left_hover_col);
+	color: var(--white_900);
+
+	&:hover {
+		color: var(--left_hover_col);
+	}
+}
+
 .mediumButton {
 	background-color: var(--sidebar_green);
 	border-radius: 10px;

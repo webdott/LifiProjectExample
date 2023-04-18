@@ -16,4 +16,5 @@ export enum ButtonType {
 	betInfoButtonActive = 'betInfoButtonActive',
 	betInfoLargeButton = 'betInfoLargeButton',
 	walletButton = 'walletButton',
+	GXP = 'GXP',
 }

@@ -26,7 +26,7 @@ export interface NavBarTypes {
 	path: string;
 }
 
-export interface QuestsTwoTypes {
+export interface QuestsTypes {
 	questName: string;
 	gxpCount: string;
 	rewardsCount: string;
@@ -56,26 +56,35 @@ export const navBarLinks: NavBarTypes[] = [
 	},
 ];
 
-export const gxpValueData: string[] = [
-	'Total GXP earned',
-	'Available GXP',
-	'GXP multiplier',
+export const gxpValueData: { title: string; value: string }[] = [
+	{
+		title: 'Total GXP earned',
+		value: '42069',
+	},
+	{
+		title: 'Available GXP',
+		value: '420',
+	},
+	{
+		title: 'GXP multiplier',
+		value: '2x',
+	},
 ];
 
-export const questsTwoItems: QuestsTwoTypes[] = [
+export const questsItems: QuestsTypes[] = [
 	{
 		gxpCount: '50',
-		questName: 'Quest one',
+		questName: 'Quest One',
 		rewardsCount: '3/3',
 	},
 	{
 		gxpCount: '200',
-		questName: 'Quest two',
+		questName: 'Quest Two',
 		rewardsCount: '1/1',
 	},
 	{
 		gxpCount: '500',
-		questName: 'Quest three',
+		questName: 'Quest Three',
 		rewardsCount: '300/300',
 	},
 ];
