@@ -1,20 +1,12 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+
 import { overview } from '../../../constants/overwiewTab';
 
 import styles from './overviewTab.module.scss';
 
 export default function OverviewTab(): JSX.Element {
-	const [visible, setVisible] = useState<boolean>(false);
 	const [toggleState, setToggleState] = useState<number>(0);
-	const [fillter, setFillter] = useState<number>(1);
-	const showDropdown = (): void => {
-		setVisible(!visible);
-	};
-
-	const handleFillters = (index: number) => {
-		setFillter(index);
-	};
 
 	return (
 		<div className={styles.container}>
@@ -32,7 +24,9 @@ export default function OverviewTab(): JSX.Element {
 						<div className={styles.hoverEffect}></div>
 						<img className={styles.overviewNavIcon} src={el.icon} />
 						<span>{el.name}</span>
-						<div className={styles.soonIcon}>Soon</div>
+						{el.name !== 'My Bets' && (
+							<div className={styles.soonIcon}>Soon</div>
+						)}
 					</Link>
 				))}
 			</div>
