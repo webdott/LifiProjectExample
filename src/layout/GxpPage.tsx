@@ -1,24 +1,21 @@
 import { Fragment } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import { navBarLinks, checkBalanceProps } from '../constants/sidebar';
 import Header from '../components/featured/header';
 import Footer from '../components/featured/footer';
 import { useNavigate } from 'react-router-dom';
-import { useActions } from './../hooks/useActions';
-import { useTypedSelector } from '../hooks/useTypedSelector';
 import BetInfo from '../components/shared/betInfo';
 
 import styles from './gxplayout.module.scss';
 
 export default function Sidebar({ children }: checkBalanceProps): JSX.Element {
-	const { getGpxButtonState } = useActions();
-	const { indexNumber } = useTypedSelector((state) => state.gpxButtons);
+	const location = useLocation();
 
 	const navigate = useNavigate();
 
 	const handleNavigation = (path: string, index: number) => {
 		navigate(`${path}`);
-
-		getGpxButtonState(index);
 	};
 
 	return (
@@ -32,7 +29,7 @@ export default function Sidebar({ children }: checkBalanceProps): JSX.Element {
 								<button
 									key={index}
 									className={
-										indexNumber === index + 1
+										location.pathname === el.path
 											? `${styles.sidebarButton} ${styles.activeTab}`
 											: `${styles.sidebarButton}`
 									}
