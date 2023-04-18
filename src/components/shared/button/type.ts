@@ -3,6 +3,7 @@ export default interface ButtonProps {
 	icon?: string;
 	onClick?: (() => Promise<void>) | (() => void) | undefined;
 	text?: string;
+	className?: string;
 }
 
 export enum ButtonType {

@@ -1,31 +1,25 @@
-import { Modal } from "antd";
 import React, { useState } from "react";
-import Button from "../button";
-import { ButtonType } from "../button/type";
-import { SidebarButtonsText } from "../../../constants/sidebar";
+
 import headerWalletIcon from "../../../assets/images/headerWalletIcon.png";
+import WalletBalance from "../../featured/walletBalances";
 
 import styles from "./balancecheck.module.scss";
 
 const BalanceCheck: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
+	const [showWalletBalance, setShowWalletBalance] = useState<boolean>(false);
 
   return (
-    <>
-      <div onClick={showModal} className={styles.balanceCheckBtn}>
+    <div className={styles.balanceCheckContainer}>
+      <div onClick={() => setShowWalletBalance(showWalletBalance => !showWalletBalance)} className={styles.balanceCheckBtn}>
         <span>$3202</span>
         <img src={headerWalletIcon} />
         <div className={styles.hoverEffect}></div>
       </div>
-      <Modal
+
+      {showWalletBalance && (
+        <WalletBalance closeWalletBalance={() => setShowWalletBalance(false)}/>
+      )}
+      {/* <Modal
         footer={null}
         title="Balance"
         open={isModalOpen}
@@ -38,8 +32,8 @@ const BalanceCheck: React.FC = () => {
           <span className={styles.containerText}>GXP multiplier:000</span>
           <Button btnType={ButtonType.claim} text={SidebarButtonsText.GXP} />
         </div>
-      </Modal>
-    </>
+      </Modal> */}
+    </div>
   );
 };
 

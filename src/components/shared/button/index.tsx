@@ -2,7 +2,7 @@ import ButtonProps, { ButtonType } from './type';
 
 import styles from './button.module.scss';
 
-export default function Button({ btnType, text, icon, onClick }: ButtonProps) {
+export default function Button({ className, btnType, text, icon, onClick }: ButtonProps) {
 	const getStyles = (buttonType?: ButtonType) => {
 		switch (buttonType) {
 			case ButtonType.xsmall:
@@ -31,7 +31,7 @@ export default function Button({ btnType, text, icon, onClick }: ButtonProps) {
 	};
 
 	return (
-		<div className={`${styles.btn} ${getStyles(btnType)}`} onClick={onClick}>
+		<div className={`${styles.btn} ${getStyles(btnType)} ${className}`} onClick={onClick}>
 			<img className={styles.btnIcon} src={icon} alt={icon} />
 			<span className={styles.btnTextLabel}>{text}</span>
 			<div className={styles.hoverEffect}></div>

@@ -1,21 +1,20 @@
 import { useState, useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useMetaMask } from 'metamask-react';
+
 import Button from '../../shared/button';
 import WalletModal from './../../shared/walletModal';
-import { HeaderButtonText, navbar } from '../../../constants/navbar';
 import { ButtonType } from '../../shared/button/type';
-import { useNavigate } from 'react-router-dom';
 import CheckBalance from '../../shared/balanceCheck';
 import GamblrXYZLogo from '../../shared/logo';
 import AccountPage from '../accountPage';
-import { NavLink } from 'react-router-dom';
 import ConnetedUser from './../connectedUser';
-import { useMetaMask } from 'metamask-react';
-import { ToastContainer } from 'react-toastify';
+import { HeaderButtonText, navbar } from '../../../constants/navbar';
 import disableWalletIcon from '../../../assets/images/disableWalletIcon.png';
 import activeWalletIcon from '../../../assets/images/activeWalletIcon.png';
 
 import styles from './header.module.scss';
-import Transactions from '../../shared/transactions';
 
 export default function Header(): JSX.Element {
 	const navigate = useNavigate();
@@ -128,10 +127,8 @@ export default function Header(): JSX.Element {
 									}
 									to={`${navItem.path}`}>
 									{navItem.name}
-									{navItem.name === 'Membership' ? (
+									{navItem.name === 'Membership' && (
 										<div className={styles.soonIcon}>Soon</div>
-									) : (
-										''
 									)}
 									<div className={styles.hoverEffect}></div>
 								</NavLink>
@@ -183,15 +180,6 @@ export default function Header(): JSX.Element {
 									/>
 									<span>{HeaderButtonText.Connect_Wallet}</span>
 								</div>
-							)}
-							{showModal && (
-								<WalletModal
-									hide={close}
-									onChangeNet={setNetState}
-									visible={showModal}
-									close={visible}
-									ConnectWallet={setIsMetamask}
-								/>
 							)}
 						</div>
 					)}
