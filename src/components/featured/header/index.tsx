@@ -15,6 +15,7 @@ import disableWalletIcon from '../../../assets/images/disableWalletIcon.png';
 import activeWalletIcon from '../../../assets/images/activeWalletIcon.png';
 
 import styles from './header.module.scss';
+import Transactions from '../../shared/transactions';
 
 export default function Header(): JSX.Element {
 	const navigate = useNavigate();
