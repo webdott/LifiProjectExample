@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction, useState } from 'react';
+import { FC, useState } from 'react';
 
 import { oddsBoxProps } from '../../../constants/featuresGame';
 
@@ -7,27 +7,19 @@ import styles from './sidebar.module.scss';
 interface CardProps {
 	slide: oddsBoxProps;
 	slideIndex: number;
-	selectedGame: number;
-	setSelectedGame: Dispatch<SetStateAction<number>>;
 }
 
-const Card: FC<CardProps> = ({
-	slide,
-	slideIndex,
-	selectedGame,
-	setSelectedGame,
-}) => {
+const Card: FC<CardProps> = ({ slide, slideIndex }) => {
 	const [boxIndex, setBoxIndex] = useState<number>(-1);
 
 	const handleBoxIndex = (index: number) => {
-		setSelectedGame(slideIndex);
 		setBoxIndex((prevIndex) => (prevIndex === index ? -1 : index));
 	};
 
 	return (
 		<div
 			className={`${styles.card} ${
-				slideIndex === selectedGame
+				boxIndex > -1
 					? styles.greenCard
 					: slideIndex % 2 === 0
 					? styles.lightCard

@@ -13,8 +13,6 @@ import './styles.css';
 import styles from './sidebar.module.scss';
 
 function Cards({ games }: cardProps): JSX.Element {
-	const [selectedGame, setSelectedGame] = useState<number>(-1);
-
 	return (
 		<div className={styles.container}>
 			<p className={styles.matchesTitle}>Featured Games</p>
@@ -40,8 +38,6 @@ function Cards({ games }: cardProps): JSX.Element {
 								<Card
 									slide={slide}
 									slideIndex={slideIndex}
-									selectedGame={selectedGame}
-									setSelectedGame={setSelectedGame}
 								/>
 							</SwiperSlide>
 						))}
