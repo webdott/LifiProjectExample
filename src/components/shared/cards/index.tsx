@@ -21,7 +21,7 @@ function Cards({ games }: cardProps): JSX.Element {
 						spaceBetween={10}
 						slidesPerView={'auto'}
 						centeredSlides={true}
-						loopedSlides={OddsBoxValues.length}
+						loopedSlides={0}
 						loop={true}
 						autoplay={{
 							delay: 3000,

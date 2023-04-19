@@ -1,0 +1,44 @@
+.getXdai {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	row-gap: 1.25rem;
+	margin-bottom: 40px;
+	font-size: 0.85rem;
+
+	.options {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		row-gap: 30px;
+
+		.option {
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+			background: var(--bet_info_bg_col);
+			border-radius: 10px;
+			padding: 16px 24px;
+			row-gap: 16px;
+			border-top: 1px solid #64718d;
+			border-bottom: 1px solid #212b40;
+			font-weight: 600;
+			font-size: 18px;
+			color: var(--white_900);
+
+			p,
+			.buyButton {
+				margin: 0;
+			}
+
+			.title {
+				font-weight: bold;
+			}
+
+			.subText {
+				opacity: 0.7;
+				font-weight: 600;
+			}
+		}
+	}
+}

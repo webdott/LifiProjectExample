@@ -1,4 +1,6 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
+import { useMetaMask } from 'metamask-react';
+
 import UserAccount from '../pages/user/account';
 import Error404 from '../pages/error404';
 import Gxp from '../components/shared/gxpPage';
@@ -8,7 +10,8 @@ import Help from '../components/shared/helpPage';
 import Esports from '../components/shared/esports';
 import Sports from '../components/shared/sports';
 import Home from '../components/shared/home';
-import { useMetaMask } from 'metamask-react';
+import GetUSDCPage from '../components/shared/getUSDCPage';
+import GetXDAIPage from '../components/shared/getXDAIPage';
 
 const RouterComp = () => {
 	const { status } = useMetaMask();
@@ -35,6 +38,8 @@ const RouterComp = () => {
 			{/* <Route path={"/invite"} element={<Invite />} /> */}
 			<Route path={'/help'} element={<Help />} />
 			<Route path={'/esports'} element={<Esports />} />
+			<Route path={'/get-usdc'} element={<GetUSDCPage />} />
+			<Route path={'/get-xdai'} element={<GetXDAIPage />} />
 		</Routes>
 	);
 };

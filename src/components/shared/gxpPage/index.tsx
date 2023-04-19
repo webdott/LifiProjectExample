@@ -1,7 +1,6 @@
 import {
 	gxpValueData,
 	questsItems,
-	SidebarButtonsText,
 } from '../../../constants/sidebar';
 import Button from '../button';
 import { ButtonType } from '../button/type';
