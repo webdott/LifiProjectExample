@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Autoplay, Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -35,10 +34,7 @@ function Cards({ games }: cardProps): JSX.Element {
 						className='mySwiper'>
 						{OddsBoxValues.map((slide, slideIndex: number) => (
 							<SwiperSlide key={slideIndex}>
-								<Card
-									slide={slide}
-									slideIndex={slideIndex}
-								/>
+								<Card slide={slide} slideIndex={slideIndex} />
 							</SwiperSlide>
 						))}
 					</Swiper>
