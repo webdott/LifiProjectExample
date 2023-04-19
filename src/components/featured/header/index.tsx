@@ -181,6 +181,15 @@ export default function Header(): JSX.Element {
 									<span>{HeaderButtonText.Connect_Wallet}</span>
 								</div>
 							)}
+							{showModal && (
+								<WalletModal
+									hide={close}
+									onChangeNet={setNetState}
+									visible={showModal}
+									close={visible}
+									ConnectWallet={setIsMetamask}
+								/>
+							)}
 						</div>
 					)}
 				</div>
