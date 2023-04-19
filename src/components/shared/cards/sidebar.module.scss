@@ -160,8 +160,8 @@
 							}
 
 							&:hover {
-								background: rgba(60, 131, 60, 0.459);
-								border: 1px solid green;
+								background: rgba(51, 255, 204, 0.45);
+								border: 2px solid green;
 							}
 							@media only screen and (max-width: 1024px) {
 								width: 36px;
@@ -169,7 +169,7 @@
 							}
 						}
 						&_activeBox {
-							background: var(--sidebar_green_hover) !important;
+							background: var(--turquoise) !important;
 							border: 1px solid green;
 						}
 					}
@@ -204,7 +204,7 @@
 				}
 			}
 			.greenCard {
-				background-color: var(--turquoise);
+				background-color: var(--green_card_color);
 				span {
 					color: var(--footer_icons_col);
 				}

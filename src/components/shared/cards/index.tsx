@@ -1,22 +1,19 @@
 import { useState } from 'react';
-import { cardProps } from '../../../constants/games';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation } from 'swiper';
-import { OddsBoxValues } from './../../../constants/featuresGame';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-import './styles.css';
+import { cardProps } from '../../../constants/games';
+import { OddsBoxValues } from './../../../constants/featuresGame';
+import Card from './card';
+
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import './styles.css';
 import styles from './sidebar.module.scss';
 
 function Cards({ games }: cardProps): JSX.Element {
-	const [boxIndex, setBoxIndex] = useState<number>(1);
-
-	const handleBoxIndex = (index: number) => {
-		setBoxIndex((prevIndex) => (prevIndex === index ? 1 : index));
-	};
-	let i = 0;
+	const [selectedGame, setSelectedGame] = useState<number>(-1);
 
 	return (
 		<div className={styles.container}>
@@ -27,86 +24,27 @@ function Cards({ games }: cardProps): JSX.Element {
 						spaceBetween={10}
 						slidesPerView={'auto'}
 						centeredSlides={true}
+						loopedSlides={OddsBoxValues.length}
 						loop={true}
 						autoplay={{
-							delay: 2500,
-							disableOnInteraction: true,
+							delay: 3000,
+							disableOnInteraction: false,
+							pauseOnMouseEnter: true,
 						}}
-						pagination={{
-							clickable: true,
-						}}
+						watchSlidesProgress={true}
 						navigation={true}
 						modules={[Autoplay, Navigation]}
 						className='mySwiper'>
-						{OddsBoxValues.map((slide, index: number) => {
-							i++;
-							if (i === 3) {
-								i = 0;
-							}
-							return (
-								<SwiperSlide key={index}>
-									<div
-										className={`${styles.card} ${
-											i === 1
-												? styles.lightCard
-												: i === 0
-												? styles.greenCard
-												: styles.darkCard
-										}`}>
-										<div className={styles.card_content}>
-											<div className={styles.card_content_league}>
-												{/* <img
-                          src={slide.leagueLogo}
-                          alt='league'
-                          className={styles.card_content_league_laliga}
-                        /> */}
-											</div>
-											{/* <div className={styles.card_content_teams}>
-												<div>
-													<img src={slide.team1Logo} alt='leicester' />
-												</div>
-												<div className={styles.card_content_teams_goals}>
-													<span>{slide.score}</span>
-												</div>
-												<div>
-													<img src={slide.team2Logo} alt='napoli' />
-												</div>
-											</div> */}
-											<div className={styles.card_content_time}>
-												{/* {slide.leagueName === "premierLeague" && (
-                          <YouTubeIcon style={{ color: "red" }} />
-                        )} */}
-												<span>{slide.time}</span>
-											</div>
-											<div className={styles.card_content_teamOneScore}>
-												<span>{slide.team1Name}</span>
-												{/* <span>{slide.team1Percent}</span> */}
-											</div>
-											<div className={styles.card_content_teamTwoScore}>
-												<span>{slide.team2Name}</span>
-												{/* <span>{slide.team2Percent}</span> */}
-											</div>
-
-											<div className={styles.card_content_oddboxes}>
-												{slide.box.map((box, index) => (
-													<div
-														key={index}
-														className={
-															boxIndex === box.id
-																? `${styles.card_content_oddboxes_box} ${styles.card_content_oddboxes_activeBox}`
-																: `${styles.card_content_oddboxes_box}`
-														}
-														onClick={() => handleBoxIndex(box.id)}>
-														<div>{box.val1}</div>
-														<div>{box.val2}</div>
-													</div>
-												))}
-											</div>
-										</div>
-									</div>
-								</SwiperSlide>
-							);
-						})}
+						{OddsBoxValues.map((slide, slideIndex: number) => (
+							<SwiperSlide key={slideIndex}>
+								<Card
+									slide={slide}
+									slideIndex={slideIndex}
+									selectedGame={selectedGame}
+									setSelectedGame={setSelectedGame}
+								/>
+							</SwiperSlide>
+						))}
 					</Swiper>
 				</div>
 			</div>
