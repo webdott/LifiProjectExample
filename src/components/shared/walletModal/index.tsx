@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useConnect } from 'wagmi';
 
@@ -36,9 +35,9 @@ export default function WalletModal({
 			if (error?.code === 4001) {
 				toast.error(<span>User rejected the request</span>);
 				return;
+			} else {
+				toast.error(<span>Error connecting wallet, try again</span>);
 			}
-			//@ts-ignore
-			console.log('Error', error, error?.code);
 		},
 	});
 

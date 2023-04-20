@@ -70,7 +70,13 @@ export default function WalletBalance({
 
 	const { isLoading, pendingChainId, switchNetwork } = useSwitchNetwork({
 		onError(error) {
-			toast.error(<span>Error switching Network</span>);
+			//@ts-ignore
+			if (error?.code === 4001) {
+				toast.error(<span>User rejected the request</span>);
+				return;
+			} else {
+				toast.error(<span>Error connecting wallet, try again</span>);
+			}
 			checkChain();
 		},
 	});
