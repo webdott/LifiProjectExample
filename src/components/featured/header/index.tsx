@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { useMetaMask } from 'metamask-react';
+import { NavLink } from 'react-router-dom';
+import { useAccount } from 'wagmi';
 
 import Button from '../../shared/button';
 import WalletModal from './../../shared/walletModal';
@@ -17,15 +17,12 @@ import activeWalletIcon from '../../../assets/images/activeWalletIcon.png';
 import styles from './header.module.scss';
 
 export default function Header(): JSX.Element {
-	const navigate = useNavigate();
+	const { address, isConnected: walletIsConnected } = useAccount();
 	const [showWallet, setShowWallet] = useState<boolean>(false);
 	const [showModal, setShowModal] = useState<boolean>(false);
 	const [netState, setNetState] = useState<boolean>(true);
 	const [isMetamask, setIsMetamask] = useState<boolean>(false);
 	const [NeterrorWin, setNeterrorWin] = useState<string>('block');
-	const walletStatus = window.location.href.split('/')[5];
-
-	const { status } = useMetaMask();
 
 	const [walletIcon, setWalletIcon] = useState(disableWalletIcon);
 
@@ -33,65 +30,8 @@ export default function Header(): JSX.Element {
 		setShowModal(!showModal);
 	};
 
-	const Neterror = () => {
-		setNeterrorWin('none');
-	};
-
 	const close = () => {
 		setShowModal(showModal);
-	};
-
-	const ToHomepage = () => {
-		navigate('/');
-	};
-
-	useEffect(() => {
-		if (walletStatus === 'connected') {
-			setShowWallet(true);
-		} else {
-			setShowWallet(false);
-		}
-	}, [walletStatus]);
-	const onChangeNet = (val: boolean) => {
-		setNetState(val);
-	};
-	const SwitchNetwork = async () => {
-		setNetState(true);
-		const toHex = (num: number) => {
-			return '0x' + num.toString(16);
-		};
-		const params = {
-			chainId: toHex(100),
-			chainName: 'Gnosis',
-			nativeCurrency: {
-				name: 'GNO',
-				symbol: 'xDAI',
-				decimals: 18,
-			},
-			rpcUrls: ['https://rpc.gnosischain.com'],
-			blockExplorerUrls: ['https://gnosisscan.io'],
-		};
-		let accounts = (window as any).ethereum.request({ method: 'eth_accounts' });
-
-		await (window as any).ethereum
-			.request({
-				method: 'wallet_switchEthereumChain',
-				params: [{ chainId: '0x64' }],
-			})
-			.then((e: any) => {})
-			.catch(async (switchError: any) => {
-				await (window as any).ethereum
-					.request({
-						method: 'wallet_addEthereumChain',
-						params: [params, accounts[0]],
-					})
-					.then(() => {
-						console.log('success');
-					})
-					.catch(() => {
-						console.log('error');
-					});
-			});
 	};
 
 	return (
@@ -161,7 +101,7 @@ export default function Header(): JSX.Element {
 						</div>
 					) : (
 						<div className={styles.headerRightSection}>
-							{status === 'connected' ? (
+							{walletIsConnected ? (
 								<>
 									<CheckBalance /> <AccountPage />
 									{/* <Transactions /> */}

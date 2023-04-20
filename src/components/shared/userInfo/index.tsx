@@ -3,14 +3,14 @@ import Upload from '../uploadPhoto/Upload';
 import { WalletProps } from './../../../constants/wallet';
 import walletIcon from '../../../assets/images/buttonWalletIcon.png';
 import copyIcon from '../../../assets/images/copyIcon.png';
-import { useMetaMask } from 'metamask-react';
+import { useAccount } from 'wagmi';
 import viewIcon from '../../../assets/images/viewIcon.png';
 import useCopyToClipboard from '../../../hooks/useCopyToClipboard';
 
 import styles from './userInfo.module.scss';
 
 export default function UserInfo(props: WalletProps): JSX.Element {
-	const { account } = useMetaMask();
+	const { address } = useAccount();
 	const { copyToClipboard, feedback } = useCopyToClipboard();
 	return (
 		<div className={styles.container}>
@@ -22,12 +22,12 @@ export default function UserInfo(props: WalletProps): JSX.Element {
 						<div className={styles.walletAddress}>
 							<img src={walletIcon} />
 							<span>
-								{account
-									? account.length > 8
-										? account.substring(0, 4) +
+								{address
+									? address.length > 8
+										? address.substring(0, 4) +
 										  '...' +
-										  account.substring(account.length - 4, account.length)
-										: account
+										  address.substring(address.length - 4, address.length)
+										: address
 									: ''}
 							</span>{' '}
 							<Tooltip
@@ -36,12 +36,12 @@ export default function UserInfo(props: WalletProps): JSX.Element {
 								<img
 									src={copyIcon}
 									alt='copy address'
-									onClick={() => copyToClipboard(account ?? '')}
+									onClick={() => copyToClipboard(address ?? '')}
 								/>
 							</Tooltip>
 						</div>
 						<a
-							href={`https://gnosisscan.io/address/${account}`}
+							href={`https://gnosisscan.io/address/${address}`}
 							target='_blank'
 							rel='noreferrer'
 							className={styles.viewBtn}>

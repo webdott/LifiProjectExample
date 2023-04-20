@@ -1,5 +1,5 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
-import { useMetaMask } from 'metamask-react';
+import { useAccount } from 'wagmi';
 
 import UserAccount from '../pages/user/account';
 import Error404 from '../pages/error404';
@@ -14,7 +14,7 @@ import GetUSDCPage from '../components/shared/getUSDCPage';
 import GetXDAIPage from '../components/shared/getXDAIPage';
 
 const RouterComp = () => {
-	const { status } = useMetaMask();
+	const { isConnected: walletIsConnected } = useAccount();
 
 	return (
 		<Routes>
@@ -24,11 +24,7 @@ const RouterComp = () => {
 			<Route
 				path={'/account'}
 				element={
-					status === 'connected' ? (
-						<UserAccount />
-					) : (
-						<Navigate replace to={'/'} />
-					)
+					walletIsConnected ? <UserAccount /> : <Navigate replace to={'/'} />
 				}
 			/>
 			<Route path={'/membership'} element={<Gxp />} />

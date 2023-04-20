@@ -1,12 +1,19 @@
+import { useNavigate } from 'react-router';
+import { useAccount, useBalance } from 'wagmi';
+import Skeleton from 'react-loading-skeleton';
+
 import Button from '../../shared/button';
 import { ButtonType } from '../../shared/button/type';
 
+import 'react-loading-skeleton/dist/skeleton.css';
 import styles from './walletbalance.module.scss';
+import { Box } from '@mui/material';
 
 interface TabPanelProps {
 	children?: React.ReactNode;
 	index: number;
 	value: number;
+	isLoading: boolean;
 }
 
 const walletbalanceDetails: {
@@ -34,7 +41,12 @@ const walletbalanceDetails: {
 };
 
 export default function TabPanel(props: TabPanelProps) {
-	const { children, value, index, ...other } = props;
+	const navigate = useNavigate();
+	const { address } = useAccount();
+	const { data, isLoading: isLoadingBalance } = useBalance({
+		address,
+	});
+	const { children, value, index, isLoading, ...other } = props;
 	const balanceDetail: 'poly' | 'gnosis' = value === 0 ? 'poly' : 'gnosis';
 
 	return (
@@ -49,9 +61,24 @@ export default function TabPanel(props: TabPanelProps) {
 				<>
 					<div className={styles.block}>
 						<p className={styles.title}>Balance</p>
-						<p className={styles.value}>
-							{walletbalanceDetails[balanceDetail].balance}
-						</p>
+						{isLoading || isLoadingBalance ? (
+							<Box
+								sx={{
+									opacity: 0.25,
+								}}>
+								<Skeleton
+									style={{
+										width: '80px',
+										height: '18px',
+										borderRadius: '50px',
+									}}
+								/>
+							</Box>
+						) : (
+							<p className={styles.value}>
+								{data?.formatted} {data?.symbol}
+							</p>
+						)}
 					</div>
 
 					<div className={styles.block}>
@@ -83,6 +110,9 @@ export default function TabPanel(props: TabPanelProps) {
 							className={styles.ctaButton}
 							btnType={ButtonType.membershipButton}
 							text={index === 0 ? 'Get USDC' : 'Get XDAI'}
+							onClick={() =>
+								index === 0 ? navigate('/get-usdc') : navigate('/get-xdai')
+							}
 						/>
 					</div>
 				</>
