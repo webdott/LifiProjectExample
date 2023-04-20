@@ -5,6 +5,7 @@ import headerWalletIcon from '../../../assets/images/headerWalletIcon.png';
 import WalletBalance from '../../featured/walletBalances';
 
 import styles from './balancecheck.module.scss';
+import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
 
 const BalanceCheck: React.FC = () => {
 	const [showWalletBalance, setShowWalletBalance] = useState<boolean>(false);
@@ -20,8 +21,14 @@ const BalanceCheck: React.FC = () => {
 					setShowWalletBalance((showWalletBalance) => !showWalletBalance)
 				}
 				className={styles.balanceCheckBtn}>
-				<span>$3202</span>
+				{/* //TODO: Clarify what this value is meant to be */}
+				<span>$0</span>
 				<img src={headerWalletIcon} />
+				{showWalletBalance ? (
+					<AiFillCaretUp size={18} />
+				) : (
+					<AiFillCaretDown size={18} />
+				)}
 				<div className={styles.hoverEffect}></div>
 			</div>
 

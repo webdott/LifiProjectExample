@@ -118,11 +118,27 @@
 				}
 			}
 
+			.disconnectButton {
+				max-width: 100%;
+				border: 1px solid var(--warning_text);
+				color: var(--warning_text);
+				font-weight: 600;
+				font-weight: 16px;
+				border-radius: 8px;
+
+				&:hover {
+					background: var(--warning_text);
+					color: var(--white_900);
+				}
+			}
+
 			.cta {
 				width: 100%;
-				height: 50px;
-				padding: 4px 8px;
+				padding: 10px 8px;
 				background: var(--bet_info_bg_col);
+				display: flex;
+				flex-direction: column;
+				gap: 10px;
 			}
 		}
 	}

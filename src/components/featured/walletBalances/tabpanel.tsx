@@ -1,13 +1,13 @@
 import { useNavigate } from 'react-router';
-import { useAccount, useBalance } from 'wagmi';
+import { useAccount, useBalance, useDisconnect } from 'wagmi';
 import Skeleton from 'react-loading-skeleton';
+import { Box } from '@mui/material';
 
 import Button from '../../shared/button';
 import { ButtonType } from '../../shared/button/type';
 
 import 'react-loading-skeleton/dist/skeleton.css';
 import styles from './walletbalance.module.scss';
-import { Box } from '@mui/material';
 
 interface TabPanelProps {
 	children?: React.ReactNode;
@@ -43,6 +43,7 @@ const walletbalanceDetails: {
 export default function TabPanel(props: TabPanelProps) {
 	const navigate = useNavigate();
 	const { address } = useAccount();
+	const { disconnect } = useDisconnect();
 	const { data, isLoading: isLoadingBalance } = useBalance({
 		address,
 	});
@@ -113,6 +114,13 @@ export default function TabPanel(props: TabPanelProps) {
 							onClick={() =>
 								index === 0 ? navigate('/get-usdc') : navigate('/get-xdai')
 							}
+						/>
+
+						<Button
+							className={styles.disconnectButton}
+							btnType={ButtonType.membershipButton}
+							text={'Diconnect wallet'}
+							onClick={() => disconnect()}
 						/>
 					</div>
 				</>

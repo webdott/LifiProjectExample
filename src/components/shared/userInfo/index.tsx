@@ -1,17 +1,25 @@
+import { useAccount, useNetwork } from 'wagmi';
 import Tooltip from '@mui/material/Tooltip';
+
 import Upload from '../uploadPhoto/Upload';
-import { WalletProps } from './../../../constants/wallet';
+import { CHAIN_IDS, WalletProps } from './../../../constants/wallet';
 import walletIcon from '../../../assets/images/buttonWalletIcon.png';
 import copyIcon from '../../../assets/images/copyIcon.png';
-import { useAccount } from 'wagmi';
 import viewIcon from '../../../assets/images/viewIcon.png';
 import useCopyToClipboard from '../../../hooks/useCopyToClipboard';
 
 import styles from './userInfo.module.scss';
 
 export default function UserInfo(props: WalletProps): JSX.Element {
+	const { chain } = useNetwork();
 	const { address } = useAccount();
 	const { copyToClipboard, feedback } = useCopyToClipboard();
+
+	const baseNetworkUrl =
+		chain?.id === CHAIN_IDS.POLYGON
+			? 'https://polygonscan.com'
+			: 'https://gnosisscan.io';
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.userSection}>
@@ -41,7 +49,7 @@ export default function UserInfo(props: WalletProps): JSX.Element {
 							</Tooltip>
 						</div>
 						<a
-							href={`https://gnosisscan.io/address/${address}`}
+							href={`${baseNetworkUrl}/address/${address}`}
 							target='_blank'
 							rel='noreferrer'
 							className={styles.viewBtn}>
