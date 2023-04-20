@@ -27,14 +27,7 @@ export default function WalletModal({
 		toast.success(<span>{text}</span>);
 	};
 
-	const {
-		connect: wagmiConnect,
-		connectors,
-		error,
-		isLoading,
-		pendingConnector,
-		status,
-	} = useConnect({
+	const { connect: wagmiConnect } = useConnect({
 		onSuccess(data) {
 			metamaskSuccessNotify('Wallet connected successfully');
 		},
