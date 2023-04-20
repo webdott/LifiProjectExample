@@ -20,8 +20,6 @@ const { chains, provider, webSocketProvider } = configureChains(
 	[publicProvider()]
 );
 
-console.log(process.env.REACT_APP_WALLET_CONNECT_PROJECT_ID);
-
 export const Connectors = {
 	METAMASK: new MetaMaskConnector({ chains }),
 	WALLET_CONNECT: new WalletConnectConnector({
