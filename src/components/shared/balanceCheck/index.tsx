@@ -1,25 +1,34 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import headerWalletIcon from "../../../assets/images/headerWalletIcon.png";
-import WalletBalance from "../../featured/walletBalances";
+import headerWalletIcon from '../../../assets/images/headerWalletIcon.png';
+import WalletBalance from '../../featured/walletBalances';
 
-import styles from "./balancecheck.module.scss";
+import styles from './balancecheck.module.scss';
 
 const BalanceCheck: React.FC = () => {
 	const [showWalletBalance, setShowWalletBalance] = useState<boolean>(false);
 
-  return (
-    <div className={styles.balanceCheckContainer}>
-      <div onClick={() => setShowWalletBalance(showWalletBalance => !showWalletBalance)} className={styles.balanceCheckBtn}>
-        <span>$3202</span>
-        <img src={headerWalletIcon} />
-        <div className={styles.hoverEffect}></div>
-      </div>
+	return (
+		<div className={styles.balanceCheckContainer}>
+			<Link to={'/get-xdai'} className={styles.getFunds}>
+				<div className={styles.hoverEffect}></div>
+				<span>Get Funds</span>
+			</Link>
+			<div
+				onClick={() =>
+					setShowWalletBalance((showWalletBalance) => !showWalletBalance)
+				}
+				className={styles.balanceCheckBtn}>
+				<span>$3202</span>
+				<img src={headerWalletIcon} />
+				<div className={styles.hoverEffect}></div>
+			</div>
 
-      {showWalletBalance && (
-        <WalletBalance closeWalletBalance={() => setShowWalletBalance(false)}/>
-      )}
-      {/* <Modal
+			{showWalletBalance && (
+				<WalletBalance closeWalletBalance={() => setShowWalletBalance(false)} />
+			)}
+			{/* <Modal
         footer={null}
         title="Balance"
         open={isModalOpen}
@@ -33,8 +42,8 @@ const BalanceCheck: React.FC = () => {
           <Button btnType={ButtonType.claim} text={SidebarButtonsText.GXP} />
         </div>
       </Modal> */}
-    </div>
-  );
+		</div>
+	);
 };
 
 export default BalanceCheck;
