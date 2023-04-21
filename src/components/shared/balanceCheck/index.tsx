@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useNetwork } from 'wagmi';
 
 import headerWalletIcon from '../../../assets/images/headerWalletIcon.png';
 import WalletBalance from '../../featured/walletBalances';
 
 import styles from './balancecheck.module.scss';
 import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
+import { CHAIN_IDS } from '../../../constants/wallet';
 
 const BalanceCheck: React.FC = () => {
+	const { chain } = useNetwork();
 	const [showWalletBalance, setShowWalletBalance] = useState<boolean>(false);
 
 	return (
 		<div className={styles.balanceCheckContainer}>
-			<Link to={'/get-xdai'} className={styles.getFunds}>
+			<Link
+				to={chain?.id === CHAIN_IDS.POLYGON ? '/get-usdc' : '/get-xdai'}
+				className={styles.getFunds}>
 				<div className={styles.hoverEffect}></div>
 				<span>Get Funds</span>
 			</Link>

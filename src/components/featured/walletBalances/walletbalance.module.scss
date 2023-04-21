@@ -61,6 +61,23 @@
 				padding: 4px 8px;
 				border-radius: 8px;
 				background: var(--bet_info_bg_col);
+
+				.polyBalance {
+					height: 20px;
+					display: flex;
+					align-items: center;
+					gap: 8px;
+				}
+
+				.info {
+					color: var(--gray);
+					opacity: 0.7;
+
+					&:hover {
+						color: var(--medium_green);
+						opacity: 1;
+					}
+				}
 			}
 
 			p {
@@ -140,6 +157,22 @@
 				flex-direction: column;
 				gap: 10px;
 			}
+		}
+	}
+}
+
+.infoPrompt {
+	margin: 0;
+	opacity: 0.7;
+	font-size: 12px;
+	font-weight: 500;
+
+	.getFunds {
+		font-weight: bold;
+		color: var(--medium_green);
+
+		&:hover {
+			text-decoration: underline;
 		}
 	}
 }

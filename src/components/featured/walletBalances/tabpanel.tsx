@@ -1,7 +1,11 @@
 import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 import { useAccount, useBalance, useDisconnect } from 'wagmi';
 import Skeleton from 'react-loading-skeleton';
-import { Box } from '@mui/material';
+import Tooltip from '@mui/material/Tooltip';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import InfoIcon from '@mui/icons-material/Info';
 
 import Button from '../../shared/button';
 import { ButtonType } from '../../shared/button/type';
@@ -76,9 +80,32 @@ export default function TabPanel(props: TabPanelProps) {
 								/>
 							</Box>
 						) : (
-							<p className={styles.value}>
-								{data?.formatted} {data?.symbol}
-							</p>
+							<div className={styles.polyBalance}>
+								<p className={styles.value}>
+									{data?.formatted} {data?.symbol}
+								</p>
+								{value === 0 && (
+									<Tooltip
+										title={
+											<p className={styles.infoPrompt}>
+												To place bets Polygon Mainnet, you'll need USDC and some
+												MATIC to pay for transactions. You can get USDC and
+												MATIC in the{' '}
+												<Link to='/get-usdc'>
+													<span className={styles.getFunds}>
+														funding section here
+													</span>
+												</Link>
+											</p>
+										}
+										arrow={true}
+										placement='bottom'>
+										<IconButton className={styles.info}>
+											<InfoIcon />
+										</IconButton>
+									</Tooltip>
+								)}
+							</div>
 						)}
 					</div>
 
