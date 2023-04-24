@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { invitePageButtons } from "../../../constants/sidebar";
-import Button from "../button";
-import CheckerLayout from "../../../layout/GxpPage";
-import { ButtonType } from "../button/type";
-import MyTimer from "./timer";
+import { useState } from 'react';
+import { invitePageButtons } from '../../../constants/sidebar';
+import Button from '../button';
+import CheckerLayout from '../../../layout/GxpPage';
+import { ButtonType } from '../button/type';
+import MyTimer from './timer';
 
-import styles from "./invite.module.scss";
+import styles from './invite.module.scss';
 
 export default function Invite() {
   const [counter, setCounter] = useState<number>(5);

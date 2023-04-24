@@ -1,192 +1,188 @@
 .header {
-	width: 100%;
-	display: flex;
-	background-color: black;
-	max-height: 90px;
-	display: flex;
-	justify-content: center;
+  width: 100%;
+  display: flex;
+  background-color: black;
+  max-height: 90px;
+  display: flex;
+  justify-content: center;
 
-	.headerContainer {
-		width: 100%;
-		display: flex;
-		justify-content: space-between;
-		padding: 21px 30px;
-		align-items: center;
-		max-width: 1920px;
+  .headerContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 21px 30px;
+    align-items: center;
+    max-width: 1920px;
 
-		.headerLeftSection {
-			display: flex;
-			align-items: center;
-			font-size: var(--text_s);
-			max-width: 643px;
-			width: 100%;
-			justify-content: space-between;
+    .headerLeftSection {
+      display: flex;
+      align-items: center;
+      font-size: var(--text_s);
+      max-width: 643px;
+      width: 100%;
+      justify-content: space-between;
 
-			.headerLogo {
-				width: 15rem;
-				height: 3rem;
-				background-color: var(--black_900);
-				display: flex;
-				align-items: center;
-				justify-content: flex-start;
-			}
+      .headerLogo {
+        width: 15rem;
+        height: 3rem;
+        background-color: var(--black_900);
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+      }
 
-			.headerNav {
-				display: flex;
-				justify-content: space-between;
-				width: 100%;
-				column-gap: 0.6rem;
-				align-items: center;
-				max-width: 372px;
-				margin-bottom: 0px;
-				.navLink {
-					color: var(--gray);
-					font-weight: bold;
-					cursor: pointer;
-					font-weight: 700;
-					font-size: 16px;
-					line-height: 19px;
-					color: var(--white_900);
-					padding-bottom: 3px;
-					position: relative;
-					.soonIcon {
-						padding: 2px 15px;
-						background: linear-gradient(
-							90.03deg,
-							#0bf1ac -41.61%,
-							#058465 105.53%
-						);
-						border-radius: 5px;
-						max-width: 60px;
-						font-weight: 500;
-						font-size: 12px;
-						line-height: 15px;
-						color: var(--white_900);
-						position: absolute;
-						top: -14px;
-						right: -58px;
-					}
-					.hoverEffect {
-						width: 137px;
-						height: 16px;
-						position: absolute;
-						bottom: -18px;
-						left: -30px;
-						transition: 0.3s;
-					}
-					&:hover .hoverEffect {
-						background: var(--hover_effect);
-						filter: blur(10px);
-					}
-					&:hover {
-						color: var(--medium_green);
-						border-bottom: 2px solid var(--medium_green);
-					}
-				}
-				.activeNavLink {
-					text-decoration: none;
-					color: var(--medium_green);
-					font-weight: bold;
-					position: relative;
-					border-bottom: 2px solid var(--medium_green);
-					.hoverEffect {
-						width: 137px;
-						height: 16px;
-						position: absolute;
-						bottom: -18px;
-						left: -30px;
-						transition: 0.3s;
-						background: var(--hover_effect);
-						filter: blur(10px);
-					}
-				}
-				.navItem {
-					padding: 0.1rem;
-					border: 1px solid var(--black_900);
-					border-radius: 20%;
-					display: flex;
-					align-items: center;
-					max-height: 1.9rem;
-				}
-			}
-		}
+      .headerNav {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        column-gap: 0.6rem;
+        align-items: center;
+        max-width: 372px;
+        margin-bottom: 0px;
+        .navLink {
+          color: var(--gray);
+          font-weight: bold;
+          cursor: pointer;
+          font-weight: 700;
+          font-size: 16px;
+          line-height: 19px;
+          color: var(--white_900);
+          padding-bottom: 3px;
+          position: relative;
+          .soonIcon {
+            padding: 2px 15px;
+            background: linear-gradient(90.03deg, #0bf1ac -41.61%, #058465 105.53%);
+            border-radius: 5px;
+            max-width: 60px;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 15px;
+            color: var(--white_900);
+            position: absolute;
+            top: -14px;
+            right: -58px;
+          }
+          .hoverEffect {
+            width: 137px;
+            height: 16px;
+            position: absolute;
+            bottom: -18px;
+            left: -30px;
+            transition: 0.3s;
+          }
+          &:hover .hoverEffect {
+            background: var(--hover_effect);
+            filter: blur(10px);
+          }
+          &:hover {
+            color: var(--medium_green);
+            border-bottom: 2px solid var(--medium_green);
+          }
+        }
+        .activeNavLink {
+          text-decoration: none;
+          color: var(--medium_green);
+          font-weight: bold;
+          position: relative;
+          border-bottom: 2px solid var(--medium_green);
+          .hoverEffect {
+            width: 137px;
+            height: 16px;
+            position: absolute;
+            bottom: -18px;
+            left: -30px;
+            transition: 0.3s;
+            background: var(--hover_effect);
+            filter: blur(10px);
+          }
+        }
+        .navItem {
+          padding: 0.1rem;
+          border: 1px solid var(--black_900);
+          border-radius: 20%;
+          display: flex;
+          align-items: center;
+          max-height: 1.9rem;
+        }
+      }
+    }
 
-		.headerRightSection {
-			display: flex;
-			align-items: center;
-			column-gap: 27px;
-			max-width: 340px;
-			width: 100%;
-			font-size: var(--text_s);
-			justify-content: space-between;
-			.walletPageNavButton {
-				background-image: url(../../../public/images/walletIcon.png);
-				background-size: 70%;
-				background-repeat: no-repeat;
-				background-position: center;
-				width: 50px;
-				height: 40px;
-				border-radius: 10px;
-				transition: 0.3s;
-				border: 1px solid var(--sidebar_green);
-				cursor: pointer;
-				&:hover {
-					color: #00ffb2;
-				}
-			}
-		}
+    .headerRightSection {
+      display: flex;
+      align-items: center;
+      column-gap: 27px;
+      max-width: 340px;
+      width: 100%;
+      font-size: var(--text_s);
+      justify-content: space-between;
+      .walletPageNavButton {
+        background-image: url(../../../public/images/walletIcon.png);
+        background-size: 70%;
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 50px;
+        height: 40px;
+        border-radius: 10px;
+        transition: 0.3s;
+        border: 1px solid var(--sidebar_green);
+        cursor: pointer;
+        &:hover {
+          color: #00ffb2;
+        }
+      }
+    }
 
-		.walletModal {
-			.walleteNavItems {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				column-gap: 10px;
-			}
-		}
-	}
+    .walletModal {
+      .walleteNavItems {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        column-gap: 10px;
+      }
+    }
+  }
 }
 
 .connectWalletBtn {
-	width: 100%;
-	max-width: 210px;
-	border-radius: 10px;
-	padding: 15px 24px;
-	background-color: var(--footer_icons_col);
-	transition: 0.3s;
-	border: 1px solid var(--footer_icons_col);
-	display: flex;
-	column-gap: 9px;
-	align-items: center;
-	justify-content: center;
-	cursor: pointer;
-	position: relative;
-	.hoverEffect {
-		position: absolute;
-		width: 42px;
-		height: 42px;
-		left: 17px;
-		top: 6px;
-	}
-	.connectWalletIcon {
-		width: 24px;
-		height: 24px;
-	}
-	&:hover {
-		border: 1px solid var(--medium_green);
-		& > span {
-			color: var(--medium_green);
-		}
-		.hoverEffect {
-			background: var(--hover_effect);
-			filter: blur(10px);
-		}
-	}
-	& > span {
-		font-weight: 700;
-		font-size: 16px;
-		line-height: 19px;
-		color: var(--white_900);
-		transition: 0.3s;
-	}
+  width: 100%;
+  max-width: 210px;
+  border-radius: 10px;
+  padding: 15px 24px;
+  background-color: var(--footer_icons_col);
+  transition: 0.3s;
+  border: 1px solid var(--footer_icons_col);
+  display: flex;
+  column-gap: 9px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  .hoverEffect {
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    left: 17px;
+    top: 6px;
+  }
+  .connectWalletIcon {
+    width: 24px;
+    height: 24px;
+  }
+  &:hover {
+    border: 1px solid var(--medium_green);
+    & > span {
+      color: var(--medium_green);
+    }
+    .hoverEffect {
+      background: var(--hover_effect);
+      filter: blur(10px);
+    }
+  }
+  & > span {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    color: var(--white_900);
+    transition: 0.3s;
+  }
 }

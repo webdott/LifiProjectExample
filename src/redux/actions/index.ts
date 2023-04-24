@@ -5,12 +5,9 @@ import {
   GetButtonStateStartAction,
   GetButtonStateSuccessAction,
   GetButtonStateErrorAction,
-} from "./interfaces";
+} from './interfaces';
 
-export type Action =
-  | FetchGamesAction
-  | FetchGamesSuccessAction
-  | FecthGamesErrorAction;
+export type Action = FetchGamesAction | FetchGamesSuccessAction | FecthGamesErrorAction;
 
 export type GPXButtonsAction =
   | GetButtonStateStartAction

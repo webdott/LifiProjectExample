@@ -1,14 +1,14 @@
-import RouterComp from "./route/public";
-import "./@azuroConfig/@azuro.config";
+import RouterComp from './route/public';
+import './@azuroConfig/@azuro.config';
 
-import "./App.css";
-import "antd/dist/antd.css";
+import './App.css';
+import 'antd/dist/antd.css';
 
-import { Buffer } from "buffer";
+import { Buffer } from 'buffer';
 window.Buffer = window.Buffer || Buffer;
 function App() {
   return (
-    <div className="App">
+    <div className='App'>
       <RouterComp />
     </div>
   );

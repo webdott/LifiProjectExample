@@ -14,30 +14,28 @@ import GetUSDCPage from '../components/shared/getUSDCPage';
 import GetXDAIPage from '../components/shared/getXDAIPage';
 
 const RouterComp = () => {
-	const { isConnected: walletIsConnected } = useAccount();
+  const { isConnected: walletIsConnected } = useAccount();
 
-	return (
-		<Routes>
-			<Route path='/' element={<Home />} />
-			<Route path='/sports' element={<Sports />} />
-			<Route path='*' element={<Error404 />} />
-			<Route
-				path={'/account'}
-				element={
-					walletIsConnected ? <UserAccount /> : <Navigate replace to={'/'} />
-				}
-			/>
-			<Route path={'/membership'} element={<Gxp />} />
-			<Route path={'/mint'} element={<Mint />} />
-			<Route path={'/upgrade'} element={<Upgrade />} />
-			{/* Invite Page commented incase of future reversal*/}
-			{/* <Route path={"/invite"} element={<Invite />} /> */}
-			<Route path={'/help'} element={<Help />} />
-			<Route path={'/esports'} element={<Esports />} />
-			<Route path={'/get-usdc'} element={<GetUSDCPage />} />
-			<Route path={'/get-xdai'} element={<GetXDAIPage />} />
-		</Routes>
-	);
+  return (
+    <Routes>
+      <Route path='/' element={<Home />} />
+      <Route path='/sports' element={<Sports />} />
+      <Route path='*' element={<Error404 />} />
+      <Route
+        path={'/account'}
+        element={walletIsConnected ? <UserAccount /> : <Navigate replace to={'/'} />}
+      />
+      <Route path={'/membership'} element={<Gxp />} />
+      <Route path={'/mint'} element={<Mint />} />
+      <Route path={'/upgrade'} element={<Upgrade />} />
+      {/* Invite Page commented incase of future reversal*/}
+      {/* <Route path={"/invite"} element={<Invite />} /> */}
+      <Route path={'/help'} element={<Help />} />
+      <Route path={'/esports'} element={<Esports />} />
+      <Route path={'/get-usdc'} element={<GetUSDCPage />} />
+      <Route path={'/get-xdai'} element={<GetXDAIPage />} />
+    </Routes>
+  );
 };
 
 export default RouterComp;

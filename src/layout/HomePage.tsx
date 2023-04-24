@@ -19,99 +19,97 @@ import liveDisableIcon from '../assets/images/disableLiveIcon.png';
 import styles from './homelayout.module.scss';
 
 export default function Layout({ children }: LayoutProps) {
-	const location = useLocation();
-	const navigate = useNavigate();
-	const [topNav, setTopNav] = useState<number>(1);
-	const [liveIcon, setLiveIcon] = useState(liveDisableIcon);
-	const [homeHoverEffect, setHomeHoverEffect] = useState(false);
-	const [liveHoverEffect, setLiveHoverEffect] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [topNav, setTopNav] = useState<number>(1);
+  const [liveIcon, setLiveIcon] = useState(liveDisableIcon);
+  const [homeHoverEffect, setHomeHoverEffect] = useState(false);
+  const [liveHoverEffect, setLiveHoverEffect] = useState(false);
 
-	useEffect(() => {
-		if (topNav === 1) {
-			setHomeHoverEffect(true);
-		} else {
-			setHomeHoverEffect(false);
-		}
-	}, [topNav]);
+  useEffect(() => {
+    if (topNav === 1) {
+      setHomeHoverEffect(true);
+    } else {
+      setHomeHoverEffect(false);
+    }
+  }, [topNav]);
 
-	useEffect(() => {
-		if (topNav === 2) {
-			setLiveIcon(liveActiveIcon);
-			setLiveHoverEffect(true);
-		} else {
-			setLiveIcon(liveDisableIcon);
-			setLiveHoverEffect(false);
-		}
-	}, [topNav]);
+  useEffect(() => {
+    if (topNav === 2) {
+      setLiveIcon(liveActiveIcon);
+      setLiveHoverEffect(true);
+    } else {
+      setLiveIcon(liveDisableIcon);
+      setLiveHoverEffect(false);
+    }
+  }, [topNav]);
 
-	return (
-		<Fragment>
-			<Header />
-			<div className={styles.section}>
-				<div className={styles.leftSidebar}>
-					<div className={styles.container}>
-						{location.pathname !== '/sports' && <SearchBar />}
-						<div className={styles.nav}>
-							<ListItemButton
-								className={
-									topNav === 1
-										? `${styles.homeLiveButton} ${styles.activeTab}`
-										: `${styles.homeLiveButton}`
-								}
-								onClick={() => {
-									navigate('/');
-									setTopNav(1);
-								}}>
-								<ListItemIcon className={styles.homeLiveButtonIcon} style={{ minWidth: '24px' }}>
-									<ImFire size={22} />
-									{homeHoverEffect ? (
-										<div className={styles.hoverEffect}></div>
-									) : null}
-								</ListItemIcon>
-								<ListItemText primary='Top Events' />
-							</ListItemButton>
-							<ListItemButton
-								onMouseOver={() => {
-									setLiveIcon(liveActiveIcon);
-									setLiveHoverEffect(true);
-								}}
-								onMouseOut={
-									topNav !== 2
-										? () => {
-												setLiveIcon(liveDisableIcon);
-												setLiveHoverEffect(false);
-										  }
-										: () => setLiveIcon(liveActiveIcon)
-								}
-								className={
-									topNav === 2
-										? `${styles.homeLiveButton} ${styles.activeTab}`
-										: `${styles.homeLiveButton}`
-								}
-								onClick={() => {
-									setTopNav(2);
-									navigate(`/live/${navData[1]?.sportTypeId}`);
-								}}>
-								<ListItemIcon style={{ minWidth: '24px' }}>
-									<img width={24} height={24} src={liveIcon} />
-									{liveHoverEffect && (
-										<div className={styles.hoverEffect}></div>
-									)}
-								</ListItemIcon>
-								<ListItemText primary='Live' />
-							</ListItemButton>
-						</div>
-						<div className={styles.leagues}>
-							<LeftSideBar />
-						</div>
-					</div>
-				</div>
-				<div className={styles.cards}>
-					{children}
-					<Footer />
-				</div>
-				<BetInfo />
-			</div>
-		</Fragment>
-	);
+  return (
+    <Fragment>
+      <Header />
+      <div className={styles.section}>
+        <div className={styles.leftSidebar}>
+          <div className={styles.container}>
+            {location.pathname !== '/sports' && <SearchBar />}
+            <div className={styles.nav}>
+              <ListItemButton
+                className={
+                  topNav === 1
+                    ? `${styles.homeLiveButton} ${styles.activeTab}`
+                    : `${styles.homeLiveButton}`
+                }
+                onClick={() => {
+                  navigate('/');
+                  setTopNav(1);
+                }}
+              >
+                <ListItemIcon className={styles.homeLiveButtonIcon} style={{ minWidth: '24px' }}>
+                  <ImFire size={22} />
+                  {homeHoverEffect ? <div className={styles.hoverEffect}></div> : null}
+                </ListItemIcon>
+                <ListItemText primary='Top Events' />
+              </ListItemButton>
+              <ListItemButton
+                onMouseOver={() => {
+                  setLiveIcon(liveActiveIcon);
+                  setLiveHoverEffect(true);
+                }}
+                onMouseOut={
+                  topNav !== 2
+                    ? () => {
+                        setLiveIcon(liveDisableIcon);
+                        setLiveHoverEffect(false);
+                      }
+                    : () => setLiveIcon(liveActiveIcon)
+                }
+                className={
+                  topNav === 2
+                    ? `${styles.homeLiveButton} ${styles.activeTab}`
+                    : `${styles.homeLiveButton}`
+                }
+                onClick={() => {
+                  setTopNav(2);
+                  navigate(`/live/${navData[1]?.sportTypeId}`);
+                }}
+              >
+                <ListItemIcon style={{ minWidth: '24px' }}>
+                  <img width={24} height={24} src={liveIcon} />
+                  {liveHoverEffect && <div className={styles.hoverEffect}></div>}
+                </ListItemIcon>
+                <ListItemText primary='Live' />
+              </ListItemButton>
+            </div>
+            <div className={styles.leagues}>
+              <LeftSideBar />
+            </div>
+          </div>
+        </div>
+        <div className={styles.cards}>
+          {children}
+          <Footer />
+        </div>
+        <BetInfo />
+      </div>
+    </Fragment>
+  );
 }

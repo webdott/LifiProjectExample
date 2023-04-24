@@ -1,5 +1,5 @@
-import { ActionType } from "../action-types";
-import { GPXButtonsAction } from "../actions";
+import { ActionType } from '../action-types';
+import { GPXButtonsAction } from '../actions';
 
 interface GpxButtonState {
   loading: boolean;

@@ -1,4 +1,4 @@
-import styles from "./transaction.module.scss";
+import styles from './transaction.module.scss';
 
 export default function Transaction(): JSX.Element {
   return (

@@ -1,71 +1,71 @@
 .container {
-	max-width: 325px;
-	width: 100%;
-	padding: 30px 30px 36px;
-	background-color: var(--bet_info_bg_col);
-	border-radius: 20px;
-	max-height: 307px;
-	margin: 30px 30px 0 0;
+  max-width: 325px;
+  width: 100%;
+  padding: 30px 30px 36px;
+  background-color: var(--bet_info_bg_col);
+  border-radius: 20px;
+  max-height: 307px;
+  margin: 30px 30px 0 0;
 
-	.betSection {
-		display: flex;
-		flex-direction: column;
-		.topSection {
-			display: flex;
-			justify-content: center;
-			column-gap: 15px;
-			align-items: center;
-			.betButton {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				border: 1px solid var(--bet_info_border_col);
-				max-width: 315px;
-				width: 100%;
-				border-radius: 10px;
-				background-color: var(--bet_info_bg_col);
-				margin-bottom: 32px;
-				div {
-					span {
-						display: flex;
-						justify-content: center;
-						align-items: center;
-						width: 6.5rem;
-					}
-				}
-			}
-		}
-	}
+  .betSection {
+    display: flex;
+    flex-direction: column;
+    .topSection {
+      display: flex;
+      justify-content: center;
+      column-gap: 15px;
+      align-items: center;
+      .betButton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid var(--bet_info_border_col);
+        max-width: 315px;
+        width: 100%;
+        border-radius: 10px;
+        background-color: var(--bet_info_bg_col);
+        margin-bottom: 32px;
+        div {
+          span {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 6.5rem;
+          }
+        }
+      }
+    }
+  }
 
-	.playButton {
-		display: flex;
-		justify-content: center;
-		align-items: center;
+  .playButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-		div {
-			span {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				width: 15.6rem;
-			}
-		}
-	}
+    div {
+      span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 15.6rem;
+      }
+    }
+  }
 }
 
 @media only screen and (max-width: 1024px) {
-	.container {
-		max-width: 220px;
-		width: 50%;
-		padding: 0;
-	}
+  .container {
+    max-width: 220px;
+    width: 50%;
+    padding: 0;
+  }
 
-	.topSection {
-		padding: 10px;
-	}
+  .topSection {
+    padding: 10px;
+  }
 
-	.betButton {
-		width: 100%;
-		padding: 0;
-	}
+  .betButton {
+    width: 100%;
+    padding: 0;
+  }
 }

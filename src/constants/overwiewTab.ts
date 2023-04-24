@@ -1,10 +1,10 @@
-import { HeaderButtonText } from "./navbar";
-import overviewIcon from "./../assets/images/userIcon.png";
-import mybetsIcon from "./../assets/images/betSlipIconSmall.png";
-import myNftIcon from "./../assets/images/nftIcon.png";
-import settingIcon from "./../assets/images/settingsIcon.png";
-import transactionIcon from "./../assets/images/refreshIcon.png";
-import { ButtonType } from "../components/shared/button/type";
+import { HeaderButtonText } from './navbar';
+import overviewIcon from './../assets/images/userIcon.png';
+import mybetsIcon from './../assets/images/betSlipIconSmall.png';
+import myNftIcon from './../assets/images/nftIcon.png';
+import settingIcon from './../assets/images/settingsIcon.png';
+import transactionIcon from './../assets/images/refreshIcon.png';
+import { ButtonType } from '../components/shared/button/type';
 
 export interface OverViewProps {
   icon: string;
@@ -22,26 +22,26 @@ export interface MenuItemType {
 }
 
 export enum OverViewTabEnum {
-  OVERVIEW = "Overview",
-  MY_BETS = "My Bets",
-  MY_NFTS = "My NFTs",
-  TRANSACTION = "Transaction",
-  SETTINGS = "Settings",
+  OVERVIEW = 'Overview',
+  MY_BETS = 'My Bets',
+  MY_NFTS = 'My NFTs',
+  TRANSACTION = 'Transaction',
+  SETTINGS = 'Settings',
 }
 
 export enum UserMenuPath {
-  OverviewTab = "/overviewTab",
-  Overview = "overview",
-  My_Bets = "my_bets",
-  My_NFT = "my_NFTs",
-  Transaction = "transaction",
-  Settings = "settings",
+  OverviewTab = '/overviewTab',
+  Overview = 'overview',
+  My_Bets = 'my_bets',
+  My_NFT = 'my_NFTs',
+  Transaction = 'transaction',
+  Settings = 'settings',
 }
 
 export enum SortEnum {
-  Dashboard = "Dashboard",
-  Event_Time = "Event time",
-  Bet_Time = "Bet time",
+  Dashboard = 'Dashboard',
+  Event_Time = 'Event time',
+  Bet_Time = 'Bet time',
 }
 
 export const overview: OverViewProps[] = [

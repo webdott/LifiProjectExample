@@ -1,4 +1,4 @@
-import type { AzuroGame } from "@azuro-protocol/sdk";
+import type { AzuroGame } from '@azuro-protocol/sdk';
 
 export interface GamesState {
   loading: boolean;

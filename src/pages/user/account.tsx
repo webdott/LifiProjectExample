@@ -1,11 +1,11 @@
-import { Fragment, useMemo } from "react";
-import UserInfo from "../../components/shared/userInfo";
-import OverviewTab from "../../components/shared/overviewTab";
-import Layout from "../../layout/HomePage";
+import { Fragment, useMemo } from 'react';
+import UserInfo from '../../components/shared/userInfo';
+import OverviewTab from '../../components/shared/overviewTab';
+import Layout from '../../layout/HomePage';
 
-import styles from "./account.module.scss";
-import { useLocation } from "react-router-dom";
-import MyBetsPage from "../../components/shared/myBetsPage";
+import styles from './account.module.scss';
+import { useLocation } from 'react-router-dom';
+import MyBetsPage from '../../components/shared/myBetsPage';
 
 function useQuery() {
   const { search } = useLocation();
@@ -21,7 +21,7 @@ const UserAccount = () => {
         <div className={styles.userAccount}>
           <UserInfo />
           <OverviewTab />
-          {query.get("name") === "my_bets" ? <MyBetsPage /> : ""}
+          {query.get('name') === 'my_bets' ? <MyBetsPage /> : ''}
         </div>
       </Layout>
     </Fragment>

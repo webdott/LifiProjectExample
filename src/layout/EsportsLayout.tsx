@@ -8,25 +8,25 @@ import EsportSideBar from './EsportsSideBar';
 import styles from './homelayout.module.scss';
 
 export default function Layout({ children }: LayoutProps) {
-	return (
-		<Fragment>
-			<Header />
-			<div className={styles.section}>
-				<div className={styles.leftSidebar}>
-					<div className={styles.container}>
-						{/* <SearchBar /> */}
-						<div className={styles.leagues}>
-							<EsportSideBar />
-						</div>
-					</div>
-				</div>
-				<div className={styles.cards}>
-					{children}
-					<div></div>
-					<Footer />
-				</div>
-				<BetInfo />
-			</div>
-		</Fragment>
-	);
+  return (
+    <Fragment>
+      <Header />
+      <div className={styles.section}>
+        <div className={styles.leftSidebar}>
+          <div className={styles.container}>
+            {/* <SearchBar /> */}
+            <div className={styles.leagues}>
+              <EsportSideBar />
+            </div>
+          </div>
+        </div>
+        <div className={styles.cards}>
+          {children}
+          <div></div>
+          <Footer />
+        </div>
+        <BetInfo />
+      </div>
+    </Fragment>
+  );
 }

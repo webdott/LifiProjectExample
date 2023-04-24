@@ -1,4 +1,4 @@
-import styles from "./myNft.module.scss";
+import styles from './myNft.module.scss';
 
 export default function MyNft(): JSX.Element {
   return (

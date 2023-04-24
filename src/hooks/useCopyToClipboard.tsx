@@ -1,52 +1,52 @@
 import { useState } from 'react';
 
 const useCopyToClipboard = () => {
-	const [feedback, setFeedback] = useState<string>('');
+  const [feedback, setFeedback] = useState<string>('');
 
-	const fallbackCopyTextToClipboard = (str: string) => {
-		const textArea = document.createElement('textarea');
-		textArea.value = str;
+  const fallbackCopyTextToClipboard = (str: string) => {
+    const textArea = document.createElement('textarea');
+    textArea.value = str;
 
-		// Avoid scrolling to bottom
-		textArea.style.top = '0';
-		textArea.style.left = '0';
-		textArea.style.position = 'fixed';
+    // Avoid scrolling to bottom
+    textArea.style.top = '0';
+    textArea.style.left = '0';
+    textArea.style.position = 'fixed';
 
-		document.body.appendChild(textArea);
-		textArea.focus();
-		textArea.select();
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
 
-		try {
-			document.execCommand('copy');
-			setFeedback('Copied!');
-			setTimeout(() => setFeedback(''), 1000);
-		} catch (err) {
-			setFeedback('Error copying, try again');
-		}
+    try {
+      document.execCommand('copy');
+      setFeedback('Copied!');
+      setTimeout(() => setFeedback(''), 1000);
+    } catch (err) {
+      setFeedback('Error copying, try again');
+    }
 
-		document.body.removeChild(textArea);
-	};
+    document.body.removeChild(textArea);
+  };
 
-	const copyToClipboard = (str: string) => {
-		if (!navigator.clipboard) {
-			fallbackCopyTextToClipboard(str);
-			return;
-		}
-		navigator.clipboard.writeText(str).then(
-			function () {
-				setFeedback('Copied!');
-				setTimeout(() => setFeedback(''), 1000);
-			},
-			function (err) {
-				setFeedback('Error copying, try again');
-			}
-		);
-	};
+  const copyToClipboard = (str: string) => {
+    if (!navigator.clipboard) {
+      fallbackCopyTextToClipboard(str);
+      return;
+    }
+    navigator.clipboard.writeText(str).then(
+      function () {
+        setFeedback('Copied!');
+        setTimeout(() => setFeedback(''), 1000);
+      },
+      function (err) {
+        setFeedback('Error copying, try again');
+      }
+    );
+  };
 
-	return {
-		feedback,
-		copyToClipboard,
-	};
+  return {
+    feedback,
+    copyToClipboard,
+  };
 };
 
 export default useCopyToClipboard;

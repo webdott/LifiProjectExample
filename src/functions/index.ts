@@ -5,29 +5,27 @@ const provider = new ethers.providers.CloudflareProvider();
 const dater = new EthDater(provider);
 
 export const getBlockNumber = async () => {
-	let block = await dater.getDate(new Date(), true, false);
-	return block.block;
+  let block = await dater.getDate(new Date(), true, false);
+  return block.block;
 };
 
 export const formatDate = (startDate: number) => {
-	let date = new Date(startDate),
-		dataFormatter =
-			[date.getMonth() + 1, date.getDate(), date.getFullYear()].join('/') +
-			' ' +
-			[date.getHours(), date.getMinutes(), date.getSeconds()].join(':');
+  let date = new Date(startDate),
+    dataFormatter =
+      [date.getMonth() + 1, date.getDate(), date.getFullYear()].join('/') +
+      ' ' +
+      [date.getHours(), date.getMinutes(), date.getSeconds()].join(':');
 
-	return dataFormatter.split(' ')[1];
+  return dataFormatter.split(' ')[1];
 };
 
 export const pickFeaturedGame = () => {
-	return Math.floor(Math.random() * 10);
+  return Math.floor(Math.random() * 10);
 };
 
 export const getTruncatedAddress = (account: string | undefined) =>
-	account
-		? account.length > 8
-			? account.substring(0, 4) +
-			  '...' +
-			  account.substring(account.length - 4, account.length)
-			: account
-		: '';
+  account
+    ? account.length > 8
+      ? account.substring(0, 4) + '...' + account.substring(account.length - 4, account.length)
+      : account
+    : '';

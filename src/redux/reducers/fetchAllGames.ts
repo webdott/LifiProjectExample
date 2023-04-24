@@ -1,6 +1,6 @@
-import { ActionType } from "../action-types";
-import { Action } from "../actions";
-import type { AzuroGame } from "@azuro-protocol/sdk";
+import { ActionType } from '../action-types';
+import { Action } from '../actions';
+import type { AzuroGame } from '@azuro-protocol/sdk';
 
 interface GamesState {
   loading: boolean;
@@ -14,10 +14,7 @@ const initialState = {
   data: [],
 };
 
-const reducer = (
-  state: GamesState = initialState,
-  action: Action
-): GamesState => {
+const reducer = (state: GamesState = initialState, action: Action): GamesState => {
   switch (action.type) {
     case ActionType.FETCH_GAMES_START:
       return {

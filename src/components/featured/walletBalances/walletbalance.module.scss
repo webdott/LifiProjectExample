@@ -1,178 +1,178 @@
 .walletBalanceContainer {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-end;
-	position: absolute;
-	z-index: 200;
-	top: 45px;
-	right: 0;
-	width: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  position: absolute;
+  z-index: 200;
+  top: 45px;
+  right: 0;
+  width: 360px;
 
-	.arrowUp {
-		display: block;
-		margin-bottom: -7px;
-		margin-right: 20px;
-	}
+  .arrowUp {
+    display: block;
+    margin-bottom: -7px;
+    margin-right: 20px;
+  }
 
-	.walletBalance {
-		width: 100%;
-		display: block;
-		position: relative;
-		z-index: 20;
-		background: var(--footer_icons_col);
-		padding: 8px 0 0 0;
-		border-radius: 8px 8px 0 0;
-		filter: drop-shadow(0 8px 40px rgba(0, 0, 0, 0.8));
+  .walletBalance {
+    width: 100%;
+    display: block;
+    position: relative;
+    z-index: 20;
+    background: var(--footer_icons_col);
+    padding: 8px 0 0 0;
+    border-radius: 8px 8px 0 0;
+    filter: drop-shadow(0 8px 40px rgba(0, 0, 0, 0.8));
 
-		.tabPanelContainer {
-			width: calc(100% - 16px);
-			margin: 0 auto;
-			height: 40px;
-			padding: 8px 4px;
-			border-radius: 8px;
-			background: var(--bet_info_bg_col);
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			margin-bottom: 8px;
+    .tabPanelContainer {
+      width: calc(100% - 16px);
+      margin: 0 auto;
+      height: 40px;
+      padding: 8px 4px;
+      border-radius: 8px;
+      background: var(--bet_info_bg_col);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
 
-			.tabs {
-				width: 100%;
-				height: 100%;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-			}
-		}
-		.tabPanel {
-			width: 100%;
-			display: flex;
-			flex-direction: column;
-			row-gap: 8px;
+      .tabs {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+    .tabPanel {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      row-gap: 8px;
 
-			.block {
-				display: flex;
-				flex-direction: column;
-				gap: 0px;
-				width: calc(100% - 16px);
-				margin: 0 auto;
-				height: 50px;
-				font-weight: 600;
-				padding: 4px 8px;
-				border-radius: 8px;
-				background: var(--bet_info_bg_col);
+      .block {
+        display: flex;
+        flex-direction: column;
+        gap: 0px;
+        width: calc(100% - 16px);
+        margin: 0 auto;
+        height: 50px;
+        font-weight: 600;
+        padding: 4px 8px;
+        border-radius: 8px;
+        background: var(--bet_info_bg_col);
 
-				.polyBalance {
-					height: 20px;
-					display: flex;
-					align-items: center;
-					gap: 8px;
-				}
+        .polyBalance {
+          height: 20px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
 
-				.info {
-					color: var(--gray);
-					opacity: 0.7;
+        .info {
+          color: var(--gray);
+          opacity: 0.7;
 
-					&:hover {
-						color: var(--medium_green);
-						opacity: 1;
-					}
-				}
-			}
+          &:hover {
+            color: var(--medium_green);
+            opacity: 1;
+          }
+        }
+      }
 
-			p {
-				margin: 0;
-			}
+      p {
+        margin: 0;
+      }
 
-			.title {
-				color: var(--white_900);
-				opacity: 0.7;
-				font-size: 12px;
-			}
+      .title {
+        color: var(--white_900);
+        opacity: 0.7;
+        font-size: 12px;
+      }
 
-			.value {
-				color: var(--medium_green);
-				font-size: 18px;
-			}
+      .value {
+        color: var(--medium_green);
+        font-size: 18px;
+      }
 
-			.payoutsBlock {
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				gap: 0px;
-				width: calc(100% - 16px);
-				margin: 0 auto;
-				height: 50px;
-				font-weight: 600;
-				padding: 4px 8px;
-				border-radius: 8px;
-				background: var(--bet_info_bg_col);
+      .payoutsBlock {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0px;
+        width: calc(100% - 16px);
+        margin: 0 auto;
+        height: 50px;
+        font-weight: 600;
+        padding: 4px 8px;
+        border-radius: 8px;
+        background: var(--bet_info_bg_col);
 
-				.payouts {
-					display: flex;
-					flex-direction: column;
-					gap: 0px;
-				}
+        .payouts {
+          display: flex;
+          flex-direction: column;
+          gap: 0px;
+        }
 
-				.ctaButton {
-					width: 64px;
-					height: 26px;
-					margin: 0;
-				}
-			}
+        .ctaButton {
+          width: 64px;
+          height: 26px;
+          margin: 0;
+        }
+      }
 
-			.ctaButton {
-				max-width: 100%;
-				border: 1px solid var(--medium_green);
-				color: var(--medium_green);
-				font-weight: 600;
-				font-weight: 16px;
-				border-radius: 8px;
+      .ctaButton {
+        max-width: 100%;
+        border: 1px solid var(--medium_green);
+        color: var(--medium_green);
+        font-weight: 600;
+        font-weight: 16px;
+        border-radius: 8px;
 
-				&:hover {
-					background: var(--medium_green);
-					color: var(--white_900);
-				}
-			}
+        &:hover {
+          background: var(--medium_green);
+          color: var(--white_900);
+        }
+      }
 
-			.disconnectButton {
-				max-width: 100%;
-				border: 1px solid var(--warning_text);
-				color: var(--warning_text);
-				font-weight: 600;
-				font-weight: 16px;
-				border-radius: 8px;
+      .disconnectButton {
+        max-width: 100%;
+        border: 1px solid var(--warning_text);
+        color: var(--warning_text);
+        font-weight: 600;
+        font-weight: 16px;
+        border-radius: 8px;
 
-				&:hover {
-					background: var(--warning_text);
-					color: var(--white_900);
-				}
-			}
+        &:hover {
+          background: var(--warning_text);
+          color: var(--white_900);
+        }
+      }
 
-			.cta {
-				width: 100%;
-				padding: 10px 8px;
-				background: var(--bet_info_bg_col);
-				display: flex;
-				flex-direction: column;
-				gap: 10px;
-			}
-		}
-	}
+      .cta {
+        width: 100%;
+        padding: 10px 8px;
+        background: var(--bet_info_bg_col);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  }
 }
 
 .infoPrompt {
-	margin: 0;
-	opacity: 0.7;
-	font-size: 12px;
-	font-weight: 500;
+  margin: 0;
+  opacity: 0.7;
+  font-size: 12px;
+  font-weight: 500;
 
-	.getFunds {
-		font-weight: bold;
-		color: var(--medium_green);
+  .getFunds {
+    font-weight: bold;
+    color: var(--medium_green);
 
-		&:hover {
-			text-decoration: underline;
-		}
-	}
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }

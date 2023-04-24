@@ -1,5 +1,5 @@
-import { Modal } from "antd";
-import { ModalProps } from "./types";
+import { Modal } from 'antd';
+import { ModalProps } from './types';
 
 export default function AntdModal({
   children,
@@ -9,10 +9,10 @@ export default function AntdModal({
 }: ModalProps): JSX.Element {
   return (
     <Modal
-      title=""
+      title=''
       open={isModalVisible}
       onCancel={onCancel}
-      bodyStyle={{ borderRadius: "15px" }}
+      bodyStyle={{ borderRadius: '15px' }}
       width={510}
       footer={null}
       {...rest}

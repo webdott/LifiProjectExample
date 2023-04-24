@@ -1,8 +1,8 @@
-import { Dispatch } from "redux";
-import { ActionType } from "../action-types";
-import { Action, GPXButtonsAction } from "../actions";
-import { fetchGames } from "@azuro-protocol/sdk";
-import { getBlockNumber } from "./../../functions";
+import { Dispatch } from 'redux';
+import { ActionType } from '../action-types';
+import { Action, GPXButtonsAction } from '../actions';
+import { fetchGames } from '@azuro-protocol/sdk';
+import { getBlockNumber } from './../../functions';
 
 export const fetchAllGames = () => {
   return async (dispatch: Dispatch<Action>) => {
@@ -46,7 +46,7 @@ export const getGpxButtonState = (indexNumber: number) => {
     } else {
       dispatch({
         type: ActionType.GET_BUTTON_STATE_ERROR,
-        payload: "Invalid Index Number",
+        payload: 'Invalid Index Number',
       });
     }
   };

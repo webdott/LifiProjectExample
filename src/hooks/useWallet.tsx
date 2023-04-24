@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function useWallet() {
-  const [wallet, setWallet] = useState("disconnected");
+  const [wallet, setWallet] = useState('disconnected');
 
   const connectWallet = () => {
-    setWallet("connected");
+    setWallet('connected');
   };
 
   return {

@@ -1,206 +1,206 @@
 .container {
-	width: 100%;
-	font-size: var(--text_s);
-	background: var(--bg_col);
-	padding-bottom: 31px;
-	.footer {
-		width: 100%;
-		margin: 0 auto;
-		.logoSection {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			margin-bottom: 24px;
+  width: 100%;
+  font-size: var(--text_s);
+  background: var(--bg_col);
+  padding-bottom: 31px;
+  .footer {
+    width: 100%;
+    margin: 0 auto;
+    .logoSection {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
 
-			.logo {
-				display: flex;
-				align-items: center;
-				justify-content: flex-start;
-			}
+      .logo {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+      }
 
-			.social {
-				column-gap: 24px;
-				display: flex;
+      .social {
+        column-gap: 24px;
+        display: flex;
 
-				.media {
-					a {
-						text-decoration: none;
-						width: 40px;
-						height: 40px;
-						display: flex;
-						justify-content: center;
-						align-items: center;
-						border-radius: 50%;
-						background-color: var(--footer_icons_col);
-						position: relative;
-						&:hover {
-							.hoverEffect {
-								background: var(--hover_effect);
-								filter: blur(5px);
-							}
-						}
-						img {
-							transition: 0.5s;
-							width: 24px;
-							height: 24px;
-						}
-					}
-				}
-			}
-		}
+        .media {
+          a {
+            text-decoration: none;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background-color: var(--footer_icons_col);
+            position: relative;
+            &:hover {
+              .hoverEffect {
+                background: var(--hover_effect);
+                filter: blur(5px);
+              }
+            }
+            img {
+              transition: 0.5s;
+              width: 24px;
+              height: 24px;
+            }
+          }
+        }
+      }
+    }
 
-		.disclaimer {
-			background-color: var(--bet_info_bg_col);
-			border-radius: 20px;
-			padding: 24px 29px;
-			width: 100%;
-			margin-bottom: 40px;
-			span {
-				color: var(--gray_100);
-				opacity: 0.7;
-				font-weight: 400;
-				font-size: 16px;
-				line-height: 150%;
-				span {
-					color: var(--medium_green);
-					opacity: 0.7;
-				}
-			}
-		}
+    .disclaimer {
+      background-color: var(--bet_info_bg_col);
+      border-radius: 20px;
+      padding: 24px 29px;
+      width: 100%;
+      margin-bottom: 40px;
+      span {
+        color: var(--gray_100);
+        opacity: 0.7;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 150%;
+        span {
+          color: var(--medium_green);
+          opacity: 0.7;
+        }
+      }
+    }
 
-		.contracts {
-			display: block;
-			border-bottom: 1px solid var(--gray_100);
-			margin-bottom: 19px;
-			.contractsTitle {
-				display: flex;
-				justify-content: center;
-				max-width: 240px;
-				width: 100%;
-				column-gap: 8px;
-				align-items: center;
-				margin-bottom: 12px;
-				img {
-					width: 24px;
-					height: 24px;
-				}
-				span {
-					font-weight: 700;
-					font-size: 24px;
-					line-height: 150%;
-					color: var(--gray_100);
-				}
-			}
-			.officialSection {
-				display: flex;
-				flex-wrap: wrap;
-				row-gap: 20px;
-				justify-content: space-between;
-				align-items: center;
-				width: 100%;
-				background: var(--footer_icons_col);
-				border-radius: 12px;
-				padding: 10px 36px;
-				margin-bottom: 37px;
-				.leftSection {
-					display: flex;
-					justify-content: flex-start;
-					max-width: 560px;
-					width: 100%;
-					align-items: center;
-					column-gap: 20px;
-					.betSection {
-						display: flex;
-						padding: 7px 12px;
-						column-gap: 3px;
-						background: #424245;
-						border-radius: 8px;
-						.bet {
-							span {
-								white-space: nowrap;
-								font-weight: 500;
-								font-size: 14px;
-								line-height: 150%;
-								color: var(--gray_100);
-							}
-						}
+    .contracts {
+      display: block;
+      border-bottom: 1px solid var(--gray_100);
+      margin-bottom: 19px;
+      .contractsTitle {
+        display: flex;
+        justify-content: center;
+        max-width: 240px;
+        width: 100%;
+        column-gap: 8px;
+        align-items: center;
+        margin-bottom: 12px;
+        img {
+          width: 24px;
+          height: 24px;
+        }
+        span {
+          font-weight: 700;
+          font-size: 24px;
+          line-height: 150%;
+          color: var(--gray_100);
+        }
+      }
+      .officialSection {
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 20px;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        background: var(--footer_icons_col);
+        border-radius: 12px;
+        padding: 10px 36px;
+        margin-bottom: 37px;
+        .leftSection {
+          display: flex;
+          justify-content: flex-start;
+          max-width: 560px;
+          width: 100%;
+          align-items: center;
+          column-gap: 20px;
+          .betSection {
+            display: flex;
+            padding: 7px 12px;
+            column-gap: 3px;
+            background: #424245;
+            border-radius: 8px;
+            .bet {
+              span {
+                white-space: nowrap;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 150%;
+                color: var(--gray_100);
+              }
+            }
 
-						.wallet {
-							display: flex;
-							align-items: center;
-							column-gap: 0.3rem;
+            .wallet {
+              display: flex;
+              align-items: center;
+              column-gap: 0.3rem;
 
-							span {
-								cursor: pointer;
-								font-weight: 500;
-								font-size: 14px;
-								line-height: 150%;
-								text-decoration-line: underline;
-								color: var(--medium_green);
-							}
-						}
-					}
-				}
-			}
+              span {
+                cursor: pointer;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 150%;
+                text-decoration-line: underline;
+                color: var(--medium_green);
+              }
+            }
+          }
+        }
+      }
 
-			.privacyLinks {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				column-gap: 24px;
+      .privacyLinks {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        column-gap: 24px;
 
-				span {
-					font-weight: 400;
-					font-size: 14px;
-					line-height: 150%;
-					color: var(--medium_green);
-					border-bottom: 1px solid inherit;
-					white-space: nowrap;
-					&:hover {
-						border-bottom: 1px solid var(--medium_green);
-					}
-				}
-			}
-		}
+        span {
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 150%;
+          color: var(--medium_green);
+          border-bottom: 1px solid inherit;
+          white-space: nowrap;
+          &:hover {
+            border-bottom: 1px solid var(--medium_green);
+          }
+        }
+      }
+    }
 
-		.copyRight {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			span {
-				font-weight: 600;
-				font-size: 14px;
-				line-height: 150%;
-				color: var(--gray_100);
-				opacity: 0.6;
-			}
-		}
-	}
+    .copyRight {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      span {
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 150%;
+        color: var(--gray_100);
+        opacity: 0.6;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 1422px) {
-	.officialSection {
-		flex-wrap: wrap;
-		row-gap: 10px;
-		justify-content: center !important;
-		.leftSection {
-			flex-wrap: wrap;
-			row-gap: 10px;
-			justify-content: center !important;
-		}
-	}
+  .officialSection {
+    flex-wrap: wrap;
+    row-gap: 10px;
+    justify-content: center !important;
+    .leftSection {
+      flex-wrap: wrap;
+      row-gap: 10px;
+      justify-content: center !important;
+    }
+  }
 
-	.logoSection {
-		flex-wrap: wrap;
-		justify-content: flex-start;
-		row-gap: 10px;
-	}
+  .logoSection {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    row-gap: 10px;
+  }
 }
 
 .hoverEffect {
-	width: 30px;
-	height: 30px;
-	position: absolute;
-	top: 6px;
-	left: 5px;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 6px;
+  left: 5px;
 }

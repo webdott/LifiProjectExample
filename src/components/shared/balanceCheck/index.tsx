@@ -10,37 +10,33 @@ import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
 import { CHAIN_IDS } from '../../../constants/wallet';
 
 const BalanceCheck: React.FC = () => {
-	const { chain } = useNetwork();
-	const [showWalletBalance, setShowWalletBalance] = useState<boolean>(false);
+  const { chain } = useNetwork();
+  const [showWalletBalance, setShowWalletBalance] = useState<boolean>(false);
 
-	return (
-		<div className={styles.balanceCheckContainer}>
-			<Link
-				to={chain?.id === CHAIN_IDS.POLYGON ? '/get-usdc' : '/get-xdai'}
-				className={styles.getFunds}>
-				<div className={styles.hoverEffect}></div>
-				<span>Get Funds</span>
-			</Link>
-			<div
-				onClick={() =>
-					setShowWalletBalance((showWalletBalance) => !showWalletBalance)
-				}
-				className={styles.balanceCheckBtn}>
-				{/* //TODO: Clarify what this value is meant to be */}
-				<span>$0</span>
-				<img src={headerWalletIcon} />
-				{showWalletBalance ? (
-					<AiFillCaretUp size={18} />
-				) : (
-					<AiFillCaretDown size={18} />
-				)}
-				<div className={styles.hoverEffect}></div>
-			</div>
+  return (
+    <div className={styles.balanceCheckContainer}>
+      <Link
+        to={chain?.id === CHAIN_IDS.POLYGON ? '/get-usdc' : '/get-xdai'}
+        className={styles.getFunds}
+      >
+        <div className={styles.hoverEffect}></div>
+        <span>Get Funds</span>
+      </Link>
+      <div
+        onClick={() => setShowWalletBalance((showWalletBalance) => !showWalletBalance)}
+        className={styles.balanceCheckBtn}
+      >
+        {/* //TODO: Clarify what this value is meant to be */}
+        <span>$0</span>
+        <img src={headerWalletIcon} />
+        {showWalletBalance ? <AiFillCaretUp size={18} /> : <AiFillCaretDown size={18} />}
+        <div className={styles.hoverEffect}></div>
+      </div>
 
-			{showWalletBalance && (
-				<WalletBalance closeWalletBalance={() => setShowWalletBalance(false)} />
-			)}
-			{/* <Modal
+      {showWalletBalance && (
+        <WalletBalance closeWalletBalance={() => setShowWalletBalance(false)} />
+      )}
+      {/* <Modal
         footer={null}
         title="Balance"
         open={isModalOpen}
@@ -54,8 +50,8 @@ const BalanceCheck: React.FC = () => {
           <Button btnType={ButtonType.claim} text={SidebarButtonsText.GXP} />
         </div>
       </Modal> */}
-		</div>
-	);
+    </div>
+  );
 };
 
 export default BalanceCheck;

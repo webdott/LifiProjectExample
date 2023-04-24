@@ -1,4 +1,4 @@
-import styles from "./settingsTab.module.scss";
+import styles from './settingsTab.module.scss';
 
 export default function SettingsTab(): JSX.Element {
   return (

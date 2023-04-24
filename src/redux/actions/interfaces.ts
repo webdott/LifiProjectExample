@@ -1,4 +1,4 @@
-import { ActionType } from "./../action-types";
+import { ActionType } from './../action-types';
 
 export interface FetchGamesAction {
   type: ActionType.FETCH_GAMES_START;

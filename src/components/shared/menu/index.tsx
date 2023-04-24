@@ -1,7 +1,7 @@
-import { MenuItemType } from "../../../constants/overwiewTab";
-import { MenuType } from "./types";
+import { MenuItemType } from '../../../constants/overwiewTab';
+import { MenuType } from './types';
 
-import styles from "./menu.module.scss";
+import styles from './menu.module.scss';
 
 export default function Menu({ menu, changeVisible }: MenuType): JSX.Element {
   return (

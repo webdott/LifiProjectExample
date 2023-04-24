@@ -6,20 +6,18 @@ import { allSportsAndGames } from '../../../constants/matches';
 import MatchesContainer from './matchesContainer';
 
 function Sport(): JSX.Element {
-	const { data, error, loading } = useTypedSelector((state) => state.games);
+  const { data, error, loading } = useTypedSelector((state) => state.games);
 
-	return (
-		<Layout>
-			<Cards games={data} />
-			{!error && !loading ? (
-				<MatchesContainer
-					games={allSportsAndGames.filter((game) => game.type === 'sports')}
-				/>
-			) : (
-				<Loader />
-			)}
-		</Layout>
-	);
+  return (
+    <Layout>
+      <Cards games={data} />
+      {!error && !loading ? (
+        <MatchesContainer games={allSportsAndGames.filter((game) => game.type === 'sports')} />
+      ) : (
+        <Loader />
+      )}
+    </Layout>
+  );
 }
 
 export default Sport;

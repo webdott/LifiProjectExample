@@ -1,19 +1,18 @@
-import type { MenuProps } from "antd";
-import { Dropdown } from "antd";
-import React from "react";
-import infoIcon from "../../../../../public/images/infoIcon.png";
+import type { MenuProps } from 'antd';
+import { Dropdown } from 'antd';
+import React from 'react';
+import infoIcon from '../../../../../public/images/infoIcon.png';
 
-import styles from "./betslipinfo.module.scss";
+import styles from './betslipinfo.module.scss';
 
-const items: MenuProps["items"] = [
+const items: MenuProps['items'] = [
   {
     label: (
       <div className={styles.infoText}>
-        Winners receive a part of total pool volume that is proportional to
-        their wager
+        Winners receive a part of total pool volume that is proportional to their wager
       </div>
     ),
-    key: "0",
+    key: '0',
   },
 ];
 

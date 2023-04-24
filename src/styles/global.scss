@@ -1,50 +1,50 @@
 html:root {
-	--white_900: #ffffff;
-	--black_900: #000;
-	--medium_green: #00ffb2;
-	--green_card_color: #00b07a;
-	--turquoise: #33ffcc;
-	--sidebar_green: #00cc8e;
-	--sidebar_green_hover: #00ffb2;
-	--left_hover_col: #02bd7a;
-	--left_active_col: #05a56c;
-	--gray_100: #e6e6e6;
-	--gray: #808080;
-	--matterhorn: #505050;
-	--footer_disclaimer: #121215;
-	--button_bg_col: #212735;
-	--bg_col: #0c0c0c;
-	--button_hover_col: #363d4f;
-	--search_button_col: #232937;
-	--border_col: #606b85;
-	--bet_info_bg_col: #1c1c1e;
-	--odds_bg_col: #3a3a3d;
-	--footer_color: #54545c;
-	--footer_icons_col: #2c2c2e;
-	--border_gray_col: #5a6683;
-	--footer_bet_color: #8a8a98;
-	--bet_info_border_col: #363d4f;
-	--contracts_color: #00ffb2;
-	--filter_check: invert(72%) sepia(55%) saturate(1195%) hue-rotate(195deg)
-		brightness(95%) contrast(108%);
-	--filter_icons: invert(31%) sepia(6%) saturate(555%) hue-rotate(201deg)
-		brightness(97%) contrast(85%);
-	--filter_hover: invert(100%) sepia(0%) saturate(7500%) hue-rotate(65deg)
-		brightness(112%) contrast(94%);
-	--hover_effect: radial-gradient(
-		59.37% 59.37% at 50% 54.69%,
-		rgba(0, 255, 178, 0.8) 0%,
-		rgba(0, 255, 178, 0) 100%
-	);
-	--warning_bg: #f98080;
-	--warning_text: #f05252;
+  --white_900: #ffffff;
+  --black_900: #000;
+  --medium_green: #00ffb2;
+  --green_card_color: #00b07a;
+  --turquoise: #33ffcc;
+  --sidebar_green: #00cc8e;
+  --sidebar_green_hover: #00ffb2;
+  --left_hover_col: #02bd7a;
+  --left_active_col: #05a56c;
+  --gray_100: #e6e6e6;
+  --gray: #808080;
+  --matterhorn: #505050;
+  --footer_disclaimer: #121215;
+  --button_bg_col: #212735;
+  --bg_col: #0c0c0c;
+  --button_hover_col: #363d4f;
+  --search_button_col: #232937;
+  --border_col: #606b85;
+  --bet_info_bg_col: #1c1c1e;
+  --odds_bg_col: #3a3a3d;
+  --footer_color: #54545c;
+  --footer_icons_col: #2c2c2e;
+  --border_gray_col: #5a6683;
+  --footer_bet_color: #8a8a98;
+  --bet_info_border_col: #363d4f;
+  --contracts_color: #00ffb2;
+  --filter_check: invert(72%) sepia(55%) saturate(1195%) hue-rotate(195deg) brightness(95%)
+    contrast(108%);
+  --filter_icons: invert(31%) sepia(6%) saturate(555%) hue-rotate(201deg) brightness(97%)
+    contrast(85%);
+  --filter_hover: invert(100%) sepia(0%) saturate(7500%) hue-rotate(65deg) brightness(112%)
+    contrast(94%);
+  --hover_effect: radial-gradient(
+    59.37% 59.37% at 50% 54.69%,
+    rgba(0, 255, 178, 0.8) 0%,
+    rgba(0, 255, 178, 0) 100%
+  );
+  --warning_bg: #f98080;
+  --warning_text: #f05252;
 }
 
 html:root {
-	--text_s: 0.8rem;
-	--text_xs: 0.75rem;
+  --text_s: 0.8rem;
+  --text_xs: 0.75rem;
 }
 
 ::-webkit-scrollbar {
-	visibility: hidden;
+  visibility: hidden;
 }

@@ -6,20 +6,14 @@ import { allSportsAndGames } from '../../../constants/matches';
 import MatchesContainer from './matchesContainer';
 
 function Home(): JSX.Element {
-	const { data, error, loading } = useTypedSelector((state) => state.games);
+  const { data, error, loading } = useTypedSelector((state) => state.games);
 
-	return (
-		<Layout>
-			<Cards games={data} />
-			{!error && !loading ? (
-				<MatchesContainer
-					games={allSportsAndGames}
-				/>
-			) : (
-				<Loader />
-			)}
-		</Layout>
-	);
+  return (
+    <Layout>
+      <Cards games={data} />
+      {!error && !loading ? <MatchesContainer games={allSportsAndGames} /> : <Loader />}
+    </Layout>
+  );
 }
 
 export default Home;

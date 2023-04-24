@@ -10,33 +10,33 @@ import mailActiveIcon from '../assets/images/activeMailLogo.png';
 import discordActiveIcon from '../assets/images/activeDiscordLogo.png';
 
 export interface SocialProps {
-	link: string;
-	icon: string;
-	activeIcon: string;
-	isMail?: boolean;
+  link: string;
+  icon: string;
+  activeIcon: string;
+  isMail?: boolean;
 }
 
 export const socialMedia: SocialProps[] = [
-	{
-		link: 'https://medium.com/@gamblrxyz',
-		icon: mediumIcon,
-		activeIcon: mediumActiveIcon,
-	},
-	{
-		link: 'https://gamblr-xyz.gitbook.io/gamblr.xyz/',
-		icon: gitHubIcon,
-		activeIcon: githubActiveIcon,
-	},
-	{
-		link: 'https://twitter.com/gamblrxyz',
-		icon: twitterIcon,
-		activeIcon: twitterActiveIcon,
-	},
-	{
-		link: 'Contact@gamblr.xyz',
-		icon: mailIcon,
-		activeIcon: mailActiveIcon,
-		isMail: true,
-	},
-	{ link: '#', icon: discordIcon, activeIcon: discordActiveIcon },
+  {
+    link: 'https://medium.com/@gamblrxyz',
+    icon: mediumIcon,
+    activeIcon: mediumActiveIcon,
+  },
+  {
+    link: 'https://gamblr-xyz.gitbook.io/gamblr.xyz/',
+    icon: gitHubIcon,
+    activeIcon: githubActiveIcon,
+  },
+  {
+    link: 'https://twitter.com/gamblrxyz',
+    icon: twitterIcon,
+    activeIcon: twitterActiveIcon,
+  },
+  {
+    link: 'Contact@gamblr.xyz',
+    icon: mailIcon,
+    activeIcon: mailActiveIcon,
+    isMail: true,
+  },
+  { link: '#', icon: discordIcon, activeIcon: discordActiveIcon },
 ];
