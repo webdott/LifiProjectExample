@@ -10,8 +10,8 @@ import Help from '../components/shared/helpPage';
 import Esports from '../components/shared/esports';
 import Sports from '../components/shared/sports';
 import Home from '../components/shared/home';
-import GetUSDCPage from '../components/shared/getUSDCPage';
 import GetXDAIPage from '../components/shared/getXDAIPage';
+import GetUSDTPage from '../components/shared/getUSDTPage';
 
 const RouterComp = () => {
   const { isConnected: walletIsConnected } = useAccount();
@@ -32,7 +32,7 @@ const RouterComp = () => {
       {/* <Route path={"/invite"} element={<Invite />} /> */}
       <Route path={'/help'} element={<Help />} />
       <Route path={'/esports'} element={<Esports />} />
-      <Route path={'/get-usdc'} element={<GetUSDCPage />} />
+      <Route path={'/get-usdt'} element={<GetUSDTPage />} />
       <Route path={'/get-xdai'} element={<GetXDAIPage />} />
     </Routes>
   );

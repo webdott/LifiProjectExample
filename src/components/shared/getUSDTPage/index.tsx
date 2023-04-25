@@ -4,19 +4,19 @@ import GetFundsLayout from '../../../layout/GetFundsLayout';
 import Button from '../button';
 import { ButtonType } from '../button/type';
 
-import styles from './getusdc.module.scss';
+import styles from './getusdt.module.scss';
 
-export default function GetUSDCPage() {
+export default function GetUSDTPage() {
   const navigate = useNavigate();
   return (
-    <GetFundsLayout token='USDC'>
-      <div className={styles.getUsdc}>
+    <GetFundsLayout token='USDT'>
+      <div className={styles.getUsdt}>
         <div className={styles.options}>
           <div className={styles.option}>
             <p className={styles.title}>Buy with Crypto</p>
 
             <p className={styles.subText}>
-              Fantastic! Just exchange your tokens for USDC/MATIC and/or transfer them to the
+              Fantastic! Just exchange your tokens for USDT/MATIC and/or transfer them to the
               Polygon Mainnet.
             </p>
             <Button
