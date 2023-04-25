@@ -1,0 +1,256 @@
+.betSlipTabContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 100%;
+
+  p {
+    margin: 0;
+  }
+
+  .betSlipTab {
+    width: 100%;
+    display: block;
+    filter: drop-shadow(0 8px 40px rgba(0, 0, 0, 0.8));
+
+    .tabPanelContainer {
+      margin: 0 auto;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+
+      .tabs {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .soonIcon {
+          padding: 0.5px 8px;
+          background: linear-gradient(90.03deg, #0bf1ac -41.61%, #058465 105.53%);
+          border-radius: 5px;
+          max-width: 60px;
+          font-weight: 500;
+          font-size: 10px;
+          line-height: 15px;
+          color: var(--white_900);
+          position: absolute;
+          z-index: 20;
+          top: -12px;
+          right: -14px;
+        }
+      }
+    }
+
+    .tabPanel {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      row-gap: 8px;
+
+      .selectedBet {
+        width: 100%;
+        background: var(--footer_icons_col);
+        min-height: 60px;
+        border-radius: 8px;
+        padding: 8px;
+        color: var(--white_900);
+        font-size: 14px;
+        line-height: 18px;
+
+        p,
+        span {
+          opacity: 0.7;
+        }
+
+        .top {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 14px;
+
+          .title {
+            overflow: hidden;
+            span {
+              width: 200px;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
+          }
+        }
+
+        .odds {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          span {
+            opacity: 1;
+            font-weight: bold;
+          }
+        }
+      }
+
+      .cta {
+        width: 100%;
+        padding: 10px 8px;
+        background: var(--bet_info_bg_col);
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        color: var(--white_900);
+        font-size: 14px;
+        line-height: 18px;
+        border-radius: 8px;
+
+        p,
+        span {
+          opacity: 0.7;
+        }
+
+        .betInput {
+          width: 100%;
+          height: 40px;
+
+          label {
+            width: 100%;
+            height: 100%;
+            padding: 0px 16px;
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--footer_icons_col);
+            background: var(--bet_info_bg_col);
+
+            .inputContainer {
+              flex: auto;
+              position: relative;
+              width: 100%;
+              height: 100%;
+
+              input {
+                width: 100%;
+                height: 100%;
+                padding-right: 8px;
+                background: transparent;
+                border: none;
+                outline: none;
+                color: var(--white_900);
+                font-size: 14px;
+                line-height: 18px;
+                text-align: right;
+                font-weight: 500;
+              }
+
+              .betAmountPlaceholder {
+                position: absolute;
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+                color: var(--white_900);
+                opacity: 0.7;
+                font-size: 14px;
+                line-height: 18px;
+                font-weight: 500;
+              }
+            }
+
+            .currency {
+              font-weight: bold;
+            }
+          }
+        }
+
+        .quickBet {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .quickBetButton {
+            max-width: 67px;
+            height: 26px;
+            border: 1px solid var(--medium_green);
+            color: var(--medium_green);
+            font-weight: 600;
+            font-weight: 16px;
+            border-radius: 100px;
+
+            &:hover {
+              background: var(--medium_green);
+              color: var(--white_900);
+            }
+
+            &.disabled {
+              background: var(--footer_icons_col);
+              color: var(--white_900);
+              opacity: 0.5;
+              border: none;
+              cursor: not-allowed;
+            }
+          }
+        }
+
+        .possibleWin {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-weight: bold;
+
+          .value {
+            color: var(--medium_green);
+            opacity: 1;
+          }
+        }
+
+        .ctaButton {
+          max-width: 100%;
+          border: 1px solid var(--medium_green);
+          color: var(--medium_green);
+          font-weight: 600;
+          font-weight: 16px;
+          border-radius: 8px;
+
+          &:hover {
+            background: var(--medium_green);
+            color: var(--white_900);
+          }
+
+          &.disabled {
+            background: var(--footer_icons_col);
+            color: var(--white_900);
+            opacity: 0.5;
+            border: none;
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+  }
+}
+
+.comboPrompt {
+  margin: 0;
+  opacity: 0.7;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--white_900);
+
+  p {
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 4px;
+    font-size: 16px;
+  }
+
+  span {
+    opacity: 0.7;
+    font-size: 14px;
+    line-height: 18px;
+  }
+}

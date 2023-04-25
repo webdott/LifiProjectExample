@@ -45,6 +45,12 @@ const tabStyles = {
       opacity: '1',
       borderBottom: 'none',
     },
+
+    '&.Mui-disabled': {
+      color: 'white',
+      opacity: '0.6',
+      borderBottom: 'none',
+    },
   },
 };
 
