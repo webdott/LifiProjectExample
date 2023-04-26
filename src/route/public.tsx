@@ -11,6 +11,7 @@ import Esports from '../components/shared/esports';
 import Sports from '../components/shared/sports';
 import Home from '../components/shared/home';
 import GetXDAIPage from '../components/shared/getXDAIPage';
+import BuyCryptoPage from '../components/shared/buyCryptoPage';
 import GetUSDTPage from '../components/shared/getUSDTPage';
 
 const RouterComp = () => {
@@ -33,6 +34,7 @@ const RouterComp = () => {
       <Route path={'/help'} element={<Help />} />
       <Route path={'/esports'} element={<Esports />} />
       <Route path={'/get-usdt'} element={<GetUSDTPage />} />
+      <Route path={'/buy-with-crypto'} element={<BuyCryptoPage />} />
       <Route path={'/get-xdai'} element={<GetXDAIPage />} />
     </Routes>
   );
