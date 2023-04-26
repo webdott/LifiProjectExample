@@ -33,9 +33,9 @@ const walletbalanceDetails: {
   };
 } = {
   poly: {
-    balance: '0 USDC',
-    inBets: '0 USDC',
-    toPayouts: '0 USDC',
+    balance: '0 USDT',
+    inBets: '0 USDT',
+    toPayouts: '0 USDT',
   },
   gnosis: {
     balance: '0 XDAI',
@@ -90,9 +90,9 @@ export default function TabPanel(props: TabPanelProps) {
                   <Tooltip
                     title={
                       <p className={styles.infoPrompt}>
-                        To place bets Polygon Mainnet, you'll need USDC and some MATIC to pay for
-                        transactions. You can get USDC and MATIC in the{' '}
-                        <Link to='/get-usdc'>
+                        To place bets Polygon Mainnet, you'll need USDT and some MATIC to pay for
+                        transactions. You can get USDT and MATIC in the{' '}
+                        <Link to='/get-usdt'>
                           <span className={styles.getFunds}>funding section here</span>
                         </Link>
                       </p>
@@ -133,8 +133,8 @@ export default function TabPanel(props: TabPanelProps) {
             <Button
               className={styles.ctaButton}
               btnType={ButtonType.membershipButton}
-              text={index === 0 ? 'Get USDC' : 'Get XDAI'}
-              onClick={() => (index === 0 ? navigate('/get-usdc') : navigate('/get-xdai'))}
+              text={index === 0 ? 'Get USDT' : 'Get XDAI'}
+              onClick={() => (index === 0 ? navigate('/get-usdt') : navigate('/get-xdai'))}
             />
 
             <Button

@@ -2,7 +2,7 @@ import { Fragment, ReactNode } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-import { getUSDCLinks, getXDAILinks } from '../constants/getFunds';
+import { getUSDTLinks, getXDAILinks } from '../constants/getFunds';
 import Header from '../components/featured/header';
 import Footer from '../components/featured/footer';
 import BetInfo from '../components/shared/betInfo';
@@ -10,7 +10,7 @@ import BetInfo from '../components/shared/betInfo';
 import styles from './gxplayout.module.scss';
 
 interface GetFundLayoutProps {
-  token: 'USDC' | 'XDAI';
+  token: 'USDT' | 'XDAI';
   children: ReactNode;
 }
 
@@ -28,7 +28,7 @@ export default function GetFundsLayout({ token, children }: GetFundLayoutProps):
       <div className={styles.section}>
         <div className={styles.sidebar}>
           <ul className={styles.sidebarNav}>
-            {(token === 'USDC' ? getUSDCLinks : getXDAILinks).map((el, index) => {
+            {(token === 'USDT' ? getUSDTLinks : getXDAILinks).map((el, index) => {
               return (
                 <button
                   key={index}
