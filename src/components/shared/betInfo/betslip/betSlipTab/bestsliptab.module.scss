@@ -74,6 +74,21 @@
           margin-bottom: 14px;
 
           .title {
+            display: flex;
+            align-items: center;
+            column-gap: 4px;
+
+            .sportIcon {
+              min-width: 20px;
+              color: var(--medium_green);
+              height: 22px;
+
+              svg {
+                min-width: 22px;
+                height: 22px;
+              }
+            }
+
             p {
               width: 240px;
               white-space: nowrap;
