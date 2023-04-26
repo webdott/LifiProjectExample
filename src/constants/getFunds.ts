@@ -14,10 +14,10 @@ const getFundsLinks: GetFundsNavBarTypes[] = [
   },
 ];
 
-export const getUSDCLinks: GetFundsNavBarTypes[] = [
+export const getUSDTLinks: GetFundsNavBarTypes[] = [
   {
-    text: 'Get USDC',
-    path: '/get-usdc',
+    text: 'Get USDT',
+    path: '/get-usdt',
   },
   ...getFundsLinks,
 ];

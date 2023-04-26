@@ -1,15 +1,10 @@
-import { useNavigate } from 'react-router';
-
 import GetFundsLayout from '../../../layout/GetFundsLayout';
-import Button from '../button';
-import { ButtonType } from '../button/type';
 
 import styles from './buycrypto.module.scss';
 
 export default function BuyCryptoPage() {
-  const navigate = useNavigate();
   return (
-    <GetFundsLayout token='USDC'>
+    <GetFundsLayout token='USDT'>
       <div className={styles.buyCrypto}>
         <div className={styles.options}>
           <div className={styles.header}>Buy Crypto</div>

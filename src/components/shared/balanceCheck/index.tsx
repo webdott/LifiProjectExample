@@ -16,7 +16,7 @@ const BalanceCheck: React.FC = () => {
   return (
     <div className={styles.balanceCheckContainer}>
       <Link
-        to={chain?.id === CHAIN_IDS.POLYGON ? '/get-usdc' : '/get-xdai'}
+        to={chain?.id === CHAIN_IDS.POLYGON ? '/get-usdt' : '/get-xdai'}
         className={styles.getFunds}
       >
         <div className={styles.hoverEffect}></div>
