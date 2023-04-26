@@ -8,6 +8,9 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import TabPanel from './tabpanel';
+import SettingsPage from '../../../settingsPage';
+import { useDispatch } from 'react-redux';
+import { removeBetSlip } from '../../../../../redux/action-creators';
 
 import styles from './bestsliptab.module.scss';
 
@@ -52,7 +55,9 @@ const tabStyles = {
 interface BetSlipTabProps {}
 
 export default function BetSlipTab() {
+  const dispatch = useDispatch();
   const [value, setValue] = useState(0);
+  const [showSettings, setShowSettings] = useState<boolean>(false);
 
   const handleChange = (newValue: number) => {
     if (newValue === 1) return;
@@ -60,67 +65,77 @@ export default function BetSlipTab() {
   };
 
   return (
-    <div className={styles.betSlipTabContainer}>
-      <Box className={styles.betSlipTab}>
-        <Box className={styles.tabPanelContainer}>
-          <IconButton sx={{ padding: 0, color: '#fff', opacity: '0.5' }}>
-            <SettingsIcon fontSize='small' />
-          </IconButton>
-          <Tabs
-            value={value}
-            onChange={(event, newValue) => handleChange(newValue)}
-            aria-label='bet slip tabs'
-            centered
-            className={styles.tabs}
-            sx={tabStyles.tabs}
-          >
-            <Tab label='SINGLE BET' {...a11yProps(0)} sx={tabStyles.tab} />
-            <Tab
-              label={
-                <Tooltip
-                  title={
-                    <div className={styles.comboPrompt}>
-                      <p>Combo is coming soon!</p>
-                      <span>
-                        You combine several outcomes from different games into one bet in order to
-                        create bigger odds and potentially a bigger payout. All the chosen need to
-                        be successful for you combo bet to win.
-                      </span>
-                    </div>
-                  }
-                  placement='bottom'
-                  slotProps={{
-                    tooltip: {
-                      sx: {
-                        backgroundColor: '#2c2c2e',
-                        right: '15px !important',
-                        width: '300px',
+    <>
+      <div className={styles.betSlipTabContainer}>
+        <Box className={styles.betSlipTab}>
+          <Box className={styles.tabPanelContainer}>
+            <IconButton
+              sx={{ padding: 0, color: '#fff', opacity: '0.5' }}
+              onClick={() => setShowSettings(true)}
+            >
+              <SettingsIcon fontSize='small' />
+            </IconButton>
+            <Tabs
+              value={value}
+              onChange={(event, newValue) => handleChange(newValue)}
+              aria-label='bet slip tabs'
+              centered
+              className={styles.tabs}
+              sx={tabStyles.tabs}
+            >
+              <Tab label='SINGLE BET' {...a11yProps(0)} sx={tabStyles.tab} />
+              <Tab
+                label={
+                  <Tooltip
+                    title={
+                      <div className={styles.comboPrompt}>
+                        <p>Combo is coming soon!</p>
+                        <span>
+                          You combine several outcomes from different games into one bet in order to
+                          create bigger odds and potentially a bigger payout. All the chosen need to
+                          be successful for you combo bet to win.
+                        </span>
+                      </div>
+                    }
+                    placement='bottom'
+                    slotProps={{
+                      tooltip: {
+                        sx: {
+                          backgroundColor: '#2c2c2e',
+                          right: '15px !important',
+                          width: '300px',
+                        },
                       },
-                    },
-                  }}
-                >
-                  <Box
-                    sx={{
-                      position: 'relative',
                     }}
                   >
-                    <div className={styles.soonIcon}>Soon</div>
-                    COMBO
-                  </Box>
-                </Tooltip>
-              }
-              {...a11yProps(1)}
-              sx={{ ...tabStyles.tab, ...tabStyles.disabledTab }}
-              disableRipple={true}
-            />
-          </Tabs>
-          <IconButton sx={{ padding: 0, color: '#fff', opacity: '0.5' }}>
-            <DeleteIcon fontSize='small' />
-          </IconButton>
+                    <Box
+                      sx={{
+                        position: 'relative',
+                      }}
+                    >
+                      <div className={styles.soonIcon}>Soon</div>
+                      COMBO
+                    </Box>
+                  </Tooltip>
+                }
+                {...a11yProps(1)}
+                sx={{ ...tabStyles.tab, ...tabStyles.disabledTab }}
+                disableRipple={true}
+              />
+            </Tabs>
+            <IconButton
+              sx={{ padding: 0, color: '#fff', opacity: '0.5' }}
+              onClick={() => removeBetSlip()(dispatch)}
+            >
+              <DeleteIcon fontSize='small' />
+            </IconButton>
+          </Box>
+          <TabPanel value={value} index={0} />
+          <TabPanel value={value} index={1} />
         </Box>
-        <TabPanel value={value} index={0} />
-        <TabPanel value={value} index={1} />
-      </Box>
-    </div>
+      </div>
+
+      {showSettings && <SettingsPage closePage={() => setShowSettings(false)} />}
+    </>
   );
 }

@@ -1,8 +1,10 @@
 import { Dispatch } from 'redux';
-import { ActionType } from '../action-types';
-import { Action, GPXButtonsAction } from '../actions';
 import { fetchGames } from '@azuro-protocol/sdk';
+
+import { ActionType } from '../action-types';
+import { Action, BetSlipAction, GPXButtonsAction } from '../actions';
 import { getBlockNumber } from './../../functions';
+import { CurrentGame } from '../reducers/betSlip';
 
 export const fetchAllGames = () => {
   return async (dispatch: Dispatch<Action>) => {
@@ -49,5 +51,22 @@ export const getGpxButtonState = (indexNumber: number) => {
         payload: 'Invalid Index Number',
       });
     }
+  };
+};
+
+export const addBetSlip = (game: CurrentGame) => {
+  return (dispatch: Dispatch<BetSlipAction>) => {
+    dispatch({
+      type: ActionType.ADD_BET_SLIP,
+      payload: game,
+    });
+  };
+};
+
+export const removeBetSlip = () => {
+  return (dispatch: Dispatch<BetSlipAction>) => {
+    dispatch({
+      type: ActionType.REMOVE_BET_SLIP,
+    });
   };
 };

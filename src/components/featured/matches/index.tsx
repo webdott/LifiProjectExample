@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { LeagueType, MatchesEnum } from '../../../constants/matches';
+import { LeagueType, MatchesEnum, SportsAndGamesType } from '../../../constants/matches';
 import BettingOption from '../../shared/bettingOption';
 import Odds from './odds';
 import Match from './match';
@@ -9,9 +9,11 @@ import styles from './matches.module.scss';
 export default function Matches({
   league,
   matchColumn,
+  game
 }: {
   league: LeagueType;
   matchColumn: MatchesEnum;
+  game: SportsAndGamesType;
 }) {
   const matches = league.matches.filter((match) =>
     matchColumn === 'All' ? Boolean(match) : match.timeLabel === matchColumn
@@ -39,7 +41,7 @@ export default function Matches({
               matchColumn === 'All' ? Boolean(match) : match.timeLabel === matchColumn
             )
             .map((match, index: number) => (
-              <Match key={index} match={match} />
+              <Match key={index} match={match} game={game}/>
             ))}
         </div>
       ) : null}

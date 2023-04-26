@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.container img {
+  margin-bottom: 33px;
+}
+
+.container h1 {
+  color: var(--black_900);
+  font-size: 2.6rem;
+}

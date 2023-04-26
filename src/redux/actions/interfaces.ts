@@ -1,3 +1,4 @@
+import { CurrentGame } from '../reducers/betSlip';
 import { ActionType } from './../action-types';
 
 export interface FetchGamesAction {
@@ -28,4 +29,12 @@ export interface GetButtonStateSuccessAction {
 export interface GetButtonStateErrorAction {
   type: ActionType.GET_BUTTON_STATE_ERROR;
   payload: string;
+}
+
+export interface AddBetSlippAction {
+  type: ActionType.ADD_BET_SLIP;
+  payload?: CurrentGame;
+}
+export interface RemoveBetSlippAction {
+  type: ActionType.REMOVE_BET_SLIP;
 }

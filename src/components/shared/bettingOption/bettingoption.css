@@ -1,0 +1,25 @@
+.optionBtn {
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--footer_icons_col);
+  cursor: pointer;
+  position: relative;
+}
+
+.optionBtn:hover {
+  color: var(--medium_green);
+}
+
+.optionBtn:hover .hoverEffect {
+  background: var(--hover_effect);
+  filter: blur(10px);
+}
+
+.optionsTriangle {
+  left: 25px;
+}

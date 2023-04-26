@@ -74,11 +74,11 @@
           margin-bottom: 14px;
 
           .title {
-            overflow: hidden;
-            span {
-              width: 200px;
-              text-overflow: ellipsis;
+            p {
+              width: 240px;
               white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
             }
           }
         }
@@ -125,6 +125,7 @@
             align-items: center;
             border: 1px solid var(--footer_icons_col);
             background: var(--bet_info_bg_col);
+            border-radius: 8px;
 
             .inputContainer {
               flex: auto;
@@ -172,17 +173,22 @@
           justify-content: space-between;
 
           .quickBetButton {
+            background: var(--footer_icons_col);
             max-width: 67px;
             height: 26px;
-            border: 1px solid var(--medium_green);
             color: var(--medium_green);
             font-weight: 600;
             font-weight: 16px;
             border-radius: 100px;
+            border-color: transparent;
 
             &:hover {
-              background: var(--medium_green);
+              border: 1px solid var(--medium_green);
+            }
+
+            &.active {
               color: var(--white_900);
+              background: var(--medium_green);
             }
 
             &.disabled {

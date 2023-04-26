@@ -1,0 +1,259 @@
+.btn {
+  position: relative;
+  max-width: 17rem;
+  cursor: pointer;
+}
+
+.btnIcon {
+  position: absolute;
+  left: 20px;
+  top: 3px;
+  max-width: 30px;
+  width: auto;
+  height: 30px;
+  object-fit: contain;
+}
+
+.xsmallButton {
+  border: 1px solid var(--black_900);
+  border-radius: 10px;
+  padding: 4px;
+}
+
+.smallButton {
+  border: 1px solid var(--black_900);
+  border-radius: 10px;
+  padding: 8px;
+  font-size: var(--text_s);
+}
+
+.mediumButtonActive {
+  background-color: var(--medium_green);
+  border-radius: 10px;
+  border: 1px solid #000;
+  height: 40px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mediumButtonActive span {
+  font-size: var(--text_s);
+  color: var(--black_900);
+}
+
+.GXP {
+  border-radius: 10px;
+  padding: 0.313rem;
+  max-width: 12.5rem;
+  height: 40px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--left_hover_col);
+  color: var(--white_900);
+}
+
+.GXP:hover {
+  color: var(--left_hover_col);
+}
+
+.mediumButton {
+  background-color: var(--sidebar_green);
+  border-radius: 10px;
+  border: 1px solid #000;
+  height: 40px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+}
+
+.mediumButton:hover {
+  background-color: var(--sidebar_green_hover);
+}
+
+.mediumButton span {
+  font-size: var(--text_s);
+  color: var(--black_900);
+}
+
+.membershipButton {
+  border-radius: 10px;
+  padding: 0.313rem;
+  max-width: 12.5rem;
+  height: 40px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--left_hover_col);
+  color: var(--left_hover_col);
+}
+
+.membershipButton:hover {
+  background: var(--left_active_col);
+  color: var(--white_900);
+}
+
+.clainGXPButton {
+  border-radius: 10px;
+  border: 1px solid var(--medium_green);
+  padding: 0.313rem;
+  background-color: var(--medium_green);
+  max-width: 12.5rem;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.betInfoBtn {
+  max-width: 157px;
+  width: 100%;
+  padding: 15px 0;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+  background: var(--bet_info_bg_col);
+  transition: 0.3s;
+  border: 1px solid var(--bet_info_bg_col);
+}
+
+.betInfoBtn:hover {
+  border: 1px solid var(--medium_green);
+}
+
+.betInfoBtn:hover span {
+  color: var(--medium_green);
+}
+
+.betInfoBtn:hover .hoverEffect {
+  background: var(--hover_effect);
+  filter: blur(10px);
+}
+
+.betInfoBtn span {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  color: var(--gray_100);
+  transition: 0.3s;
+}
+
+.betInfoBtn .hoverEffect {
+  width: 137px;
+  height: 32px;
+  position: absolute;
+  bottom: -10px;
+  transition: 0.3s;
+}
+
+.betInfoBtnActive {
+  max-width: 157px;
+  width: 100%;
+  padding: 15px 0;
+  display: flex;
+  justify-content: center;
+  border: 1px solid var(--medium_green);
+  border-radius: 10px;
+  background: var(--bet_info_bg_col);
+  transition: 0.3s;
+}
+
+.betInfoBtnActive .hoverEffect {
+  background: var(--hover_effect);
+  filter: blur(10px);
+}
+
+.betInfoBtnActive:hover .hoverEffect {
+  background: var(--hover_effect);
+  filter: blur(10px);
+}
+
+.betInfoBtnActive span {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  color: var(--medium_green);
+  transition: 0.3s;
+}
+
+.betInfoBtnActive .hoverEffect {
+  width: 137px;
+  height: 32px;
+  position: absolute;
+  bottom: -10px;
+  transition: 0.3s;
+}
+
+.betInfoLargeBtn {
+  max-width: 315px;
+  width: 100%;
+  border: 1px solid var(--gray_100);
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  background: var(--bet_info_bg_col);
+  transition: 0.3s;
+}
+
+.betInfoLargeBtn:hover {
+  background: radial-gradient(108% 108% at 49.84% -8%, rgba(25, 31, 44, 0.2) 0%, rgba(0, 255, 178, 0.2) 100%), #191f2c;
+  border: 1px solid var(--medium_green);
+}
+
+.betInfoLargeBtn:hover span {
+  color: var(--medium_green);
+}
+
+.betInfoLargeBtn span {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  color: var(--gray_100);
+  transition: 0.3s;
+}
+
+.walletBtn {
+  background: var(--footer_icons_col);
+  max-width: 371px;
+  width: 100%;
+  padding: 13px;
+  display: flex;
+  justify-content: center;
+  display: flex;
+  column-gap: 9px;
+  align-items: center;
+  border: 1px solid var(--border_gray_col);
+  border-radius: 10px;
+}
+
+.walletBtn .btnIcon {
+  width: 24px;
+  height: 24px;
+  position: unset;
+}
+
+.walletBtn span {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  color: var(--white_900);
+}
+
+@media only screen and (max-width: 1024px) {
+  .mediumButtonActive,
+  .mediumButton {
+    width: 50%;
+    padding: 0;
+  }
+}

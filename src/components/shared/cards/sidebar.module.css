@@ -1,0 +1,310 @@
+.container {
+  width: 100%;
+}
+
+.container .matchesTitle {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+  color: var(--white_900);
+  margin-bottom: 22px;
+}
+
+.container .sideSec {
+  display: flex;
+  gap: 0;
+}
+
+.container .sideSec .sidebar {
+  width: 100%;
+  height: 311px;
+}
+
+.container .sideSec .sidebar .card {
+  max-width: 320px;
+  width: 100%;
+  border-radius: 20px;
+  height: 100%;
+}
+
+.container .sideSec .sidebar .card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+.container .sideSec .sidebar .card_content {
+  height: 100%;
+  border-radius: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: space-between;
+  padding: 25px;
+  row-gap: 12px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .container .sideSec .sidebar .card_content {
+    padding: 25px 5px 0px 5px;
+    row-gap: 10px;
+  }
+}
+
+.container .sideSec .sidebar .card_content_league .card_content_league_laliga {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.container .sideSec .sidebar .card_content_league .card_content_league_premier {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+@media only screen and (max-width: 1024px) {
+  .container .sideSec .sidebar .card_content_league {
+    margin-top: 10px;
+  }
+}
+
+.container .sideSec .sidebar .card_content_teams {
+  display: flex;
+  column-gap: 20px;
+}
+
+.container .sideSec .sidebar .card_content_teams img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.container .sideSec .sidebar .card_content_teams_goals {
+  display: flex;
+  column-gap: 5px;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  position: relative;
+}
+
+.container .sideSec .sidebar .card_content_teams_goals span {
+  display: block;
+  color: #fff;
+}
+
+.container .sideSec .sidebar .card_content_time {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  color: #fff;
+  font-weight: 300;
+}
+
+.container .sideSec .sidebar .card_content_time img {
+  margin-top: -14px;
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+.container .sideSec .sidebar .card_content_live {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.container .sideSec .sidebar .card_content_live span {
+  display: block;
+  color: red;
+  font-weight: 500;
+  margin-left: 10px;
+}
+
+.container .sideSec .sidebar .card_content_teamOneScore {
+  display: flex;
+  column-gap: 10px;
+  color: #fff;
+}
+
+.container .sideSec .sidebar .card_content_teamOneScore span {
+  display: block;
+}
+
+.container .sideSec .sidebar .card_content_teamOneScore span:nth-child(2) {
+  color: var(--medium_green);
+}
+
+.container .sideSec .sidebar .card_content_teamTwoScore {
+  color: #fff;
+  display: flex;
+  column-gap: 10px;
+}
+
+.container .sideSec .sidebar .card_content_teamTwoScore span {
+  display: block;
+}
+
+.container .sideSec .sidebar .card_content_teamTwoScore span:nth-child(2) {
+  color: orangered;
+}
+
+.container .sideSec .sidebar .card_content_oddboxes {
+  display: flex;
+  column-gap: 5px;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .container .sideSec .sidebar .card_content_oddboxes {
+    column-gap: 2px;
+  }
+}
+
+.container .sideSec .sidebar .card_content_oddboxes_box {
+  width: 55px;
+  height: 55px;
+  background: rgba(0, 0, 0, 0.589);
+  color: #fff;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--text_s);
+  cursor: pointer;
+  cursor: pointer;
+  cursor: pointer;
+}
+
+.container .sideSec .sidebar .card_content_oddboxes_box:nth-child(1) div:not(:last-child) {
+  color: grey;
+}
+
+.container .sideSec .sidebar .card_content_oddboxes_box:nth-child(2) div:not(:last-child) {
+  color: grey;
+}
+
+.container .sideSec .sidebar .card_content_oddboxes_box:nth-child(3) div:not(:last-child) {
+  color: grey;
+}
+
+.container .sideSec .sidebar .card_content_oddboxes_box:nth-child(4) {
+  background: rgba(161, 161, 161, 0.267);
+}
+
+.container .sideSec .sidebar .card_content_oddboxes_box:nth-child(4) div:nth-child(2) {
+  color: grey;
+}
+
+.container .sideSec .sidebar .card_content_oddboxes_box:hover {
+  background: rgba(51, 255, 204, 0.45);
+  border: 2px solid green;
+}
+
+@media only screen and (max-width: 1024px) {
+  .container .sideSec .sidebar .card_content_oddboxes_box {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+.container .sideSec .sidebar .card_content_oddboxes_activeBox {
+  background: var(--turquoise) !important;
+  border: 1px solid green;
+}
+
+.container .sideSec .sidebar .lightCard {
+  background-color: var(--gray_100);
+}
+
+.container .sideSec .sidebar .lightCard .card_content_teams_goals span {
+  color: var(--footer_icons_col);
+}
+
+.container .sideSec .sidebar .lightCard .card_content_time span {
+  color: var(--footer_icons_col);
+}
+
+.container .sideSec .sidebar .lightCard .card_content_teamOneScore span,
+.container .sideSec .sidebar .lightCard .card_content_teamTwoScore span {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  color: var(--footer_icons_col);
+}
+
+.container .sideSec .sidebar .lightCard .card_content_oddboxes_box {
+  background-color: var(--footer_icons_col);
+}
+
+.container .sideSec .sidebar .lightCard .card_content_oddboxes_box div {
+  color: var(--white_900);
+}
+
+.container .sideSec .sidebar .greenCard {
+  background-color: var(--green_card_color);
+}
+
+.container .sideSec .sidebar .greenCard span {
+  color: var(--footer_icons_col);
+}
+
+.container .sideSec .sidebar .greenCard .card_content_time span {
+  color: var(--footer_icons_col);
+}
+
+.container .sideSec .sidebar .greenCard .card_content_teamOneScore span,
+.container .sideSec .sidebar .greenCard .card_content_teamTwoScore span {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  color: var(--footer_icons_col);
+}
+
+.container .sideSec .sidebar .greenCard .card_content_oddboxes_box {
+  background-color: var(--white_900);
+}
+
+.container .sideSec .sidebar .greenCard .card_content_oddboxes_box div {
+  color: var(--footer_icons_col);
+}
+
+.container .sideSec .sidebar .darkCard {
+  background-color: var(--footer_icons_col);
+}
+
+.container .sideSec .sidebar .darkCard span {
+  color: var(--white_900);
+}
+
+.container .sideSec .sidebar .darkCard .card_content_time span {
+  color: var(--white_900);
+}
+
+.container .sideSec .sidebar .darkCard .card_content_teamOneScore span,
+.container .sideSec .sidebar .darkCard .card_content_teamTwoScore span {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  color: var(--white_900);
+}
+
+.container .sideSec .sidebar .darkCard .card_content_oddboxes_box {
+  background-color: var(--white_900);
+}
+
+.container .sideSec .sidebar .darkCard .card_content_oddboxes_box div {
+  color: var(--footer_icons_col);
+}
+
+.container .sideSec .sidebar:nth-child(1) {
+  border-left: 2px solid var(--gray);
+}
+
+.container .sideSec .sidebar:nth-child(3) {
+  border-right: 2px solid var(--gray);
+}

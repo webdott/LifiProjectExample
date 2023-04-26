@@ -1,0 +1,200 @@
+.container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  background: var(--bet_info_bg_col);
+  border-radius: 20px;
+  padding: 16px 8px;
+}
+
+.container p {
+  margin: 0;
+}
+
+.container .heading {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.container .heading h1 {
+  color: var(--white_900);
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.container .top {
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
+  margin-bottom: 20px;
+}
+
+.container .top .info {
+  color: var(--gray);
+  opacity: 0.7;
+}
+
+.container .top .info:hover {
+  color: var(--medium_green);
+  opacity: 1;
+}
+
+.container .oddSlippageTolerance {
+  width: 100%;
+  background: var(--footer_icons_col);
+  min-height: 60px;
+  border-radius: 6px;
+  padding: 8px;
+  color: var(--white_900);
+}
+
+.container .oddSlippageTolerance .oddSlippageButtons {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.container .oddSlippageTolerance .oddSlippageButtons .oddSlippageButton {
+  background: var(--bet_info_bg_col);
+  max-width: 57px;
+  height: 26px;
+  color: var(--medium_green);
+  font-weight: 600;
+  font-weight: 16px;
+  border-radius: 100px;
+  border-color: transparent;
+}
+
+.container .oddSlippageTolerance .oddSlippageButtons .oddSlippageButton:last-child {
+  max-width: 90px;
+}
+
+.container .oddSlippageTolerance .oddSlippageButtons .oddSlippageButton:hover {
+  border: 1px solid var(--medium_green);
+}
+
+.container .oddSlippageTolerance .oddSlippageButtons .oddSlippageButton.active {
+  color: var(--white_900);
+  background: var(--medium_green);
+}
+
+.container .oddSlippageTolerance .oddSlippageInput {
+  width: 100%;
+  height: 40px;
+}
+
+.container .oddSlippageTolerance .oddSlippageInput label {
+  width: 100%;
+  height: 100%;
+  padding: 0px 16px;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--footer_bet_color);
+  background: var(--footer_icons_col);
+  border-radius: 6px;
+}
+
+.container .oddSlippageTolerance .oddSlippageInput label .inputContainer {
+  flex: auto;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.container .oddSlippageTolerance .oddSlippageInput label .inputContainer input {
+  width: 100%;
+  height: 100%;
+  padding-right: 8px;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--white_900);
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 500;
+}
+
+.container .oddSlippageTolerance .oddSlippageInput label .percent {
+  font-weight: bold;
+}
+
+.container .quickBet {
+  flex: auto;
+  width: 100%;
+  background: var(--footer_icons_col);
+  min-height: 60px;
+  border-radius: 6px;
+  padding: 8px;
+  color: var(--white_900);
+}
+
+.container .quickBet .quickBets {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+}
+
+.container .quickBet .quickBets .quickBetInput {
+  width: 100%;
+  height: 40px;
+}
+
+.container .quickBet .quickBets .quickBetInput label {
+  width: 100%;
+  height: 100%;
+  padding: 0px 16px;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--footer_bet_color);
+  background: var(--footer_icons_col);
+  border-radius: 6px;
+}
+
+.container .quickBet .quickBets .quickBetInput label .inputContainer {
+  flex: auto;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.container .quickBet .quickBets .quickBetInput label .inputContainer input {
+  width: 100%;
+  height: 100%;
+  padding-right: 8px;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--white_900);
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 500;
+}
+
+.container .quickBet .quickBets .quickBetInput label .percent {
+  font-weight: bold;
+}
+
+.infoPrompt {
+  margin: 0;
+  opacity: 0.7;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.infoPrompt .getFunds {
+  font-weight: bold;
+  color: var(--medium_green);
+}
+
+.infoPrompt .getFunds:hover {
+  text-decoration: underline;
+}

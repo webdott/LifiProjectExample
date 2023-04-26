@@ -1,0 +1,179 @@
+.walletBalanceContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  position: absolute;
+  z-index: 200;
+  top: 45px;
+  right: 0;
+  width: 360px;
+}
+
+.walletBalanceContainer .arrowUp {
+  display: block;
+  margin-bottom: -7px;
+  margin-right: 20px;
+}
+
+.walletBalanceContainer .walletBalance {
+  width: 100%;
+  display: block;
+  position: relative;
+  z-index: 20;
+  background: var(--footer_icons_col);
+  padding: 8px 0 0 0;
+  border-radius: 8px 8px 0 0;
+  filter: drop-shadow(0 8px 40px rgba(0, 0, 0, 0.8));
+}
+
+.walletBalanceContainer .walletBalance .tabPanelContainer {
+  width: calc(100% - 16px);
+  margin: 0 auto;
+  height: 40px;
+  padding: 8px 4px;
+  border-radius: 8px;
+  background: var(--bet_info_bg_col);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.walletBalanceContainer .walletBalance .tabPanelContainer .tabs {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.walletBalanceContainer .walletBalance .tabPanel {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+}
+
+.walletBalanceContainer .walletBalance .tabPanel .block {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  width: calc(100% - 16px);
+  margin: 0 auto;
+  height: 50px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: var(--bet_info_bg_col);
+}
+
+.walletBalanceContainer .walletBalance .tabPanel .block .polyBalance {
+  height: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.walletBalanceContainer .walletBalance .tabPanel .block .info {
+  color: var(--gray);
+  opacity: 0.7;
+}
+
+.walletBalanceContainer .walletBalance .tabPanel .block .info:hover {
+  color: var(--medium_green);
+  opacity: 1;
+}
+
+.walletBalanceContainer .walletBalance .tabPanel p {
+  margin: 0;
+}
+
+.walletBalanceContainer .walletBalance .tabPanel .title {
+  color: var(--white_900);
+  opacity: 0.7;
+  font-size: 12px;
+}
+
+.walletBalanceContainer .walletBalance .tabPanel .value {
+  color: var(--medium_green);
+  font-size: 18px;
+}
+
+.walletBalanceContainer .walletBalance .tabPanel .payoutsBlock {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0px;
+  width: calc(100% - 16px);
+  margin: 0 auto;
+  height: 50px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: var(--bet_info_bg_col);
+}
+
+.walletBalanceContainer .walletBalance .tabPanel .payoutsBlock .payouts {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
+
+.walletBalanceContainer .walletBalance .tabPanel .payoutsBlock .ctaButton {
+  width: 64px;
+  height: 26px;
+  margin: 0;
+}
+
+.walletBalanceContainer .walletBalance .tabPanel .ctaButton {
+  max-width: 100%;
+  border: 1px solid var(--medium_green);
+  color: var(--medium_green);
+  font-weight: 600;
+  font-weight: 16px;
+  border-radius: 8px;
+}
+
+.walletBalanceContainer .walletBalance .tabPanel .ctaButton:hover {
+  background: var(--medium_green);
+  color: var(--white_900);
+}
+
+.walletBalanceContainer .walletBalance .tabPanel .disconnectButton {
+  max-width: 100%;
+  border: 1px solid var(--warning_text);
+  color: var(--warning_text);
+  font-weight: 600;
+  font-weight: 16px;
+  border-radius: 8px;
+}
+
+.walletBalanceContainer .walletBalance .tabPanel .disconnectButton:hover {
+  background: var(--warning_text);
+  color: var(--white_900);
+}
+
+.walletBalanceContainer .walletBalance .tabPanel .cta {
+  width: 100%;
+  padding: 10px 8px;
+  background: var(--bet_info_bg_col);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.infoPrompt {
+  margin: 0;
+  opacity: 0.7;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.infoPrompt .getFunds {
+  font-weight: bold;
+  color: var(--medium_green);
+}
+
+.infoPrompt .getFunds:hover {
+  text-decoration: underline;
+}

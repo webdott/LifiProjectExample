@@ -1,17 +1,34 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
+import { useDispatch } from 'react-redux';
 
 import styles from './matches.module.scss';
-import { MatchType } from '../../../constants/matches';
+import { MatchType, SportsAndGamesType } from '../../../constants/matches';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../redux';
+import { addBetSlip, removeBetSlip } from '../../../redux/action-creators';
 
 interface MatchProps {
   match: MatchType;
+  game: SportsAndGamesType;
 }
 
-const Match: FC<MatchProps> = ({ match }) => {
-  const [tabIndex, setTabIndex] = useState<number>(1);
+const Match: FC<MatchProps> = ({ match, game }) => {
+  const { currentGame: currentBetSlipGame } = useSelector((root: RootState) => root.betSlip);
+  const dispatch = useDispatch();
 
-  const handleTabs = (index: number) => {
-    setTabIndex((prevTabIndex) => (prevTabIndex === index ? -1 : index));
+  const toggleBetSlip = (item: { id: number; oddName: string; odds: string }) => {
+    if (currentBetSlipGame?.id === match.id && currentBetSlipGame?.matchOdd.id === item.id) {
+      removeBetSlip()(dispatch);
+    } else {
+      addBetSlip({
+        game: game.sportName,
+        id: match.id,
+        team1: match.team1,
+        team2: match.team2,
+        betType: 'Full Time Result',
+        matchOdd: item,
+      })(dispatch);
+    }
   };
 
   return (
@@ -34,14 +51,18 @@ const Match: FC<MatchProps> = ({ match }) => {
         <p>{match.time}</p>
       </div>
       <ul className={styles.matchRightSection}>
-        {match.matchOdds.map((item: any, index: number) => {
+        {match.matchOdds.map((item, index: number) => {
           return (
             <li
               key={index}
-              className={tabIndex === item.id ? styles.activeTab : ''}
-              onClick={() => handleTabs(item.id)}
+              className={
+                currentBetSlipGame?.id === match.id && currentBetSlipGame?.matchOdd.id === item.id
+                  ? styles.activeTab
+                  : ''
+              }
+              onClick={() => toggleBetSlip(item)}
             >
-              <span>{item.oddName}</span>
+              <span>{item.id}</span>
               <span>{item.odds}</span>
             </li>
           );

@@ -1,0 +1,86 @@
+.balanceCheckContainer {
+  position: relative;
+  width: auto;
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+}
+
+.balanceCheckContainer .getFunds {
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--white_900);
+  white-space: nowrap;
+}
+
+.balanceCheckContainer .getFunds .hoverEffect {
+  position: absolute;
+  width: 42px;
+  height: 42px;
+  left: 17px;
+  top: 6px;
+}
+
+.balanceCheckContainer .getFunds:hover {
+  border-bottom: 2px solid var(--medium_green);
+}
+
+.balanceCheckContainer .getFunds:hover > span {
+  color: var(--medium_green);
+}
+
+.balanceCheckContainer .getFunds:hover .hoverEffect {
+  background: var(--hover_effect);
+  filter: blur(10px);
+}
+
+.balanceCheckContainer .balanceCheckButton {
+  border: 1px solid black;
+  padding: 5px 10px;
+  border-radius: 50px;
+}
+
+.balanceCheckContainer .balanceCheckBtn {
+  background-size: 24px;
+  border-radius: 10px;
+  transition: 0.3s;
+  background: var(--footer_icons_col);
+  border-radius: 15px;
+  padding: 13px 16px 13px 31px;
+  display: flex;
+  justify-content: space-between;
+  column-gap: 8px;
+  cursor: pointer;
+  align-items: center;
+  position: relative;
+  color: var(--white_900);
+}
+
+.balanceCheckContainer .balanceCheckBtn:hover span {
+  color: var(--medium_green);
+}
+
+.balanceCheckContainer .balanceCheckBtn:hover .hoverEffect {
+  background: var(--hover_effect);
+  filter: blur(10px);
+}
+
+.balanceCheckContainer .balanceCheckBtn img {
+  width: 24px;
+  height: 24px;
+}
+
+.balanceCheckContainer .balanceCheckBtn span {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  color: var(--white_900);
+}
+
+.balanceCheckContainer .balanceCheckBtn .hoverEffect {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  right: 37px;
+  top: 5px;
+}
