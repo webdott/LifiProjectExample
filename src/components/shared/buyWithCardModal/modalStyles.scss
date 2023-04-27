@@ -1,9 +1,14 @@
 .ant-modal-body {
   padding: 0 !important;
 }
+.ant-modal {
+  top: 0 !important;
+}
 .ant-modal-content {
   border-radius: 25px !important;
 }
 .ant-modal-wrap {
   background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
 }
