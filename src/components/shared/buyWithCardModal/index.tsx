@@ -35,7 +35,7 @@ export default function BuyWithCardModal({
           <iframe
             title='mt-pelerin-iframe'
             allow='usb; ethereum; clipboard-write'
-            src={`https://widget.mtpelerin.com/?lang=en&tab=buy&tabs=buy&type=web&primary=%2305a56c&success=%2305a56c&mode=dark&mylogo=%2E%2Ficons%2Fgamblr.xyz.png&chain=${selectedChain}&net=${network}&nets=${network}&bsc=USD&bdc=${bdc}&crys=${crys}&addr=${address}&hash=${base64Hash}`}
+            src={`https://widget.mtpelerin.com/?lang=en&tab=buy&tabs=buy&type=web&primary=%2305a56c&success=%2305a56c&mode=dark&mylogo=https://raw.githubusercontent.com/webdott/customHooks-and-Functions/master/gamblr.xyz.png&chain=${selectedChain}&net=${network}&nets=${network}&bsc=USD&bdc=${bdc}&crys=${crys}&addr=${address}&hash=${base64Hash}`}
             className={styles.rampWidget}
           />
         ) : (
