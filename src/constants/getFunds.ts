@@ -17,7 +17,7 @@ const getFundsLinks: GetFundsNavBarTypes[] = [
 export const getUSDTLinks: GetFundsNavBarTypes[] = [
   {
     text: 'Get USDT',
-    path: '/get-usdt',
+    path: '/get-funds',
   },
   ...getFundsLinks,
 ];
@@ -25,7 +25,7 @@ export const getUSDTLinks: GetFundsNavBarTypes[] = [
 export const getXDAILinks: GetFundsNavBarTypes[] = [
   {
     text: 'Get XDAI',
-    path: '/get-xdai',
+    path: '/get-funds',
   },
   ...getFundsLinks,
 ];
