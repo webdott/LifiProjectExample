@@ -37,6 +37,7 @@ export const matchesColumn: MatchesColumnTypes[] = [
 ];
 
 export interface MatchType {
+  id: string;
   team1: string;
   team2: string;
   timeLabel: string;
@@ -68,6 +69,7 @@ export const allSportsAndGames: SportsAndGamesType[] = [
         leagueName: 'Premier League',
         matches: [
           {
+            id: '1',
             team1: 'Manchester United',
             team2: 'Manchester City',
             timeLabel: 'Today',
@@ -84,6 +86,7 @@ export const allSportsAndGames: SportsAndGamesType[] = [
         leagueName: 'LaLiga',
         matches: [
           {
+            id: '2',
             team1: 'Real Madrid',
             team2: 'Atletic Bilbao',
             timeLabel: 'Tomorrow',
@@ -106,6 +109,7 @@ export const allSportsAndGames: SportsAndGamesType[] = [
         leagueName: 'NBA',
         matches: [
           {
+            id: '3',
             team1: 'Golden State Warriors',
             team2: 'Los Angeles Lakers',
             timeLabel: 'Today',
@@ -122,6 +126,7 @@ export const allSportsAndGames: SportsAndGamesType[] = [
         leagueName: 'WNBA',
         matches: [
           {
+            id: '4',
             team1: 'Los Angeles Sparks',
             team2: 'Chicago Sky',
             timeLabel: 'Today',
@@ -144,6 +149,7 @@ export const allSportsAndGames: SportsAndGamesType[] = [
         leagueName: 'UFC',
         matches: [
           {
+            id: '5',
             team1: 'Azamat Murzakanov',
             team2: 'Dustin Jacoby',
             timeLabel: 'Today',
@@ -155,6 +161,7 @@ export const allSportsAndGames: SportsAndGamesType[] = [
             ],
           },
           {
+            id: '6',
             team1: 'Ion Cutelaba',
             team2: 'Tanner Boser',
             timeLabel: 'Tomorrow',
@@ -177,6 +184,7 @@ export const allSportsAndGames: SportsAndGamesType[] = [
         leagueName: 'ATP Monte-Carlo - R16',
         matches: [
           {
+            id: '7',
             team1: 'Novak Djokovic',
             team2: 'Lorenzo Musetti',
             timeLabel: 'Today',
@@ -188,6 +196,7 @@ export const allSportsAndGames: SportsAndGamesType[] = [
             ],
           },
           {
+            id: '8',
             team1: 'Daniil Medvedev',
             team2: 'Alexander Zverev',
             timeLabel: 'Tomorrow',
@@ -210,6 +219,7 @@ export const allSportsAndGames: SportsAndGamesType[] = [
         leagueName: 'NHL',
         matches: [
           {
+            id: '9',
             team1: 'Vegas Golden Knights',
             team2: 'Seattle Kraken',
             timeLabel: 'Today',
@@ -221,6 +231,7 @@ export const allSportsAndGames: SportsAndGamesType[] = [
             ],
           },
           {
+            id: '10',
             team1: 'Vancouver Canucks',
             team2: 'Arizona Coyotes',
             timeLabel: 'Tomorrow',
@@ -243,6 +254,7 @@ export const allSportsAndGames: SportsAndGamesType[] = [
         leagueName: 'Boxing Matches',
         matches: [
           {
+            id: '11',
             team1: 'Zhilei Zhang',
             team2: 'Joe Joyce',
             timeLabel: 'Today',
@@ -254,6 +266,7 @@ export const allSportsAndGames: SportsAndGamesType[] = [
             ],
           },
           {
+            id: '12',
             team1: 'Christina Linardatou',
             team2: 'Mikaela Mayer',
             timeLabel: 'Tomorrow',
@@ -281,6 +294,7 @@ export const allSportsAndGames: SportsAndGamesType[] = [
         leagueName: 'DreamLeague',
         matches: [
           {
+            id: '13',
             team1: 'Aster',
             team2: 'TSM',
             timeLabel: 'Today',
@@ -303,6 +317,7 @@ export const allSportsAndGames: SportsAndGamesType[] = [
         leagueName: 'ESL Challenger League Europe',
         matches: [
           {
+            id: '14',
             team1: 'DomiNation',
             team2: 'LDLC',
             timeLabel: 'Today',

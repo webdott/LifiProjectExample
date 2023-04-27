@@ -1,15 +1,10 @@
 import { useNavigate } from 'react-router';
-import { Link } from 'react-router-dom';
-import { useAccount, useBalance, useDisconnect } from 'wagmi';
-import Skeleton from 'react-loading-skeleton';
-import Tooltip from '@mui/material/Tooltip';
-import IconButton from '@mui/material/IconButton';
+import { useAccount, useBalance } from 'wagmi';
 
 import SelectedBet from './selectedBet';
 import Button from '../../../button';
 import { ButtonType } from '../../../button/type';
 
-import 'react-loading-skeleton/dist/skeleton.css';
 import styles from './bestsliptab.module.scss';
 
 interface TabPanelProps {

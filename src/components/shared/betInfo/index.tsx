@@ -1,17 +1,21 @@
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+
 import { HeaderButtonText } from '../../../constants/navbar';
 import Button from '../button';
 import { ButtonType } from '../button/type';
 import BetSlip from './betslip';
 import MyBets from '../myBets';
-import { useState } from 'react';
+import { RootState } from '../../../redux';
 
 import styles from './betInfo.module.scss';
 
 export default function BetInfo(): JSX.Element {
   const [betContent, setBetContent] = useState<string>(HeaderButtonText.Bet_Slip);
+  const { currentGame: currentBetSlipGame } = useSelector((root: RootState) => root.betSlip);
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${currentBetSlipGame ? styles.expand : ''}`}>
       <div className={styles.betSection}>
         <div className={styles.topSection}>
           <div className={styles.betButton}>

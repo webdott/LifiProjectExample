@@ -1,22 +1,200 @@
-.settingsIcon {
-  width: 30px;
-  height: 30px;
-  border: 1px solid black;
+.container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
-  cursor: pointer;
-  background-color: var(--sidebar_green);
-  &:hover {
-    background-color: var(--sidebar_green_hover);
+  flex-direction: column;
+  row-gap: 20px;
+  background: var(--bet_info_bg_col);
+  border-radius: 20px;
+  padding: 16px 8px;
+
+  p {
+    margin: 0;
   }
-  img {
-    width: 90%;
-    height: 90%;
+
+  .heading {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h1 {
+      color: var(--white_900);
+      font-size: 18px;
+      line-height: 24px;
+    }
+  }
+
+  .top {
+    display: flex;
+    align-items: center;
+    column-gap: 4px;
+    margin-bottom: 20px;
+
+    .info {
+      color: var(--gray);
+      opacity: 0.7;
+
+      &:hover {
+        color: var(--medium_green);
+        opacity: 1;
+      }
+    }
+  }
+
+  .oddSlippageTolerance {
+    width: 100%;
+    background: var(--footer_icons_col);
+    min-height: 60px;
+    border-radius: 6px;
+    padding: 8px;
+    color: var(--white_900);
+
+    .oddSlippageButtons {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+
+      .oddSlippageButton {
+        background: var(--bet_info_bg_col);
+        max-width: 57px;
+        height: 26px;
+        color: var(--medium_green);
+        font-weight: 600;
+        font-weight: 16px;
+        border-radius: 100px;
+        border-color: transparent;
+
+        &:last-child {
+          max-width: 90px;
+        }
+
+        &:hover {
+          border: 1px solid var(--medium_green);
+        }
+
+        &.active {
+          color: var(--white_900);
+          background: var(--medium_green);
+        }
+      }
+    }
+
+    .oddSlippageInput {
+      width: 100%;
+      height: 40px;
+
+      label {
+        width: 100%;
+        height: 100%;
+        padding: 0px 16px;
+        display: flex;
+        align-items: center;
+        border: 1px solid var(--footer_bet_color);
+        background: var(--footer_icons_col);
+        border-radius: 6px;
+
+        .inputContainer {
+          flex: auto;
+          position: relative;
+          width: 100%;
+          height: 100%;
+
+          input {
+            width: 100%;
+            height: 100%;
+            padding-right: 8px;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--white_900);
+            font-size: 14px;
+            line-height: 18px;
+            font-weight: 500;
+          }
+        }
+
+        .percent {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  .quickBet {
+    flex: auto;
+    width: 100%;
+    background: var(--footer_icons_col);
+    min-height: 60px;
+    border-radius: 6px;
+    padding: 8px;
+    color: var(--white_900);
+
+    .quickBets {
+      display: flex;
+      flex-direction: column;
+      row-gap: 12px;
+
+      .quickBetInput {
+        width: 100%;
+        height: 40px;
+
+        label {
+          width: 100%;
+          height: 100%;
+          padding: 0px 16px;
+          display: flex;
+          align-items: center;
+          border: 1px solid var(--footer_bet_color);
+          background: var(--footer_icons_col);
+          border-radius: 6px;
+
+          .inputContainer {
+            flex: auto;
+            position: relative;
+            width: 100%;
+            height: 100%;
+
+            input {
+              width: 100%;
+              height: 100%;
+              padding-right: 8px;
+              background: transparent;
+              border: none;
+              outline: none;
+              color: var(--white_900);
+              font-size: 14px;
+              line-height: 18px;
+              font-weight: 500;
+            }
+          }
+
+          .percent {
+            font-weight: bold;
+          }
+        }
+      }
+    }
   }
 }
-.settingsContainer {
-  width: 300px;
-  height: 300px;
+
+.infoPrompt {
+  margin: 0;
+  opacity: 0.7;
+  font-size: 14px;
+  font-weight: 500;
+
+  .getFunds {
+    font-weight: bold;
+    color: var(--medium_green);
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }

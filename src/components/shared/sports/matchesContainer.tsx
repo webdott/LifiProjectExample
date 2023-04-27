@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import _ from 'lodash';
+
 import { MatchesEnum, SportsAndGamesType, matchesColumn } from '../../../constants/matches';
 import Matches from '../../featured/matches';
 
@@ -50,7 +51,7 @@ const MatchesContainer = ({ games }: { games: SportsAndGamesType[] }) => {
                 <div key={index}>
                   <h1 className={styles.sportNav}>{_.capitalize(game.sportName)}</h1>
                   {game.leagues.map((league, index) => (
-                    <Matches league={league} matchColumn={matchColumn} key={index} />
+                    <Matches league={league} matchColumn={matchColumn} key={index} game={game}/>
                   ))}
                 </div>
               )
