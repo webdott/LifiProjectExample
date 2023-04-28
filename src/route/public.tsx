@@ -1,5 +1,5 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
-import { useAccount } from 'wagmi';
+import { useAccount, useNetwork } from 'wagmi';
 
 import UserAccount from '../pages/user/account';
 import Error404 from '../pages/error404';
@@ -11,11 +11,14 @@ import Esports from '../components/shared/esports';
 import Sports from '../components/shared/sports';
 import Home from '../components/shared/home';
 import GetXDAIPage from '../components/shared/getXDAIPage';
-import BuyCryptoPage from '../components/shared/buyCryptoPage';
+import BuyWithCardPage from '../components/shared/buyWithCardPage';
+import BuyWithCryptoPage from '../components/shared/buyWithCryptoPage';
 import GetUSDTPage from '../components/shared/getUSDTPage';
+import { CHAIN_IDS } from '../constants/wallet';
 
 const RouterComp = () => {
   const { isConnected: walletIsConnected } = useAccount();
+  const { chain } = useNetwork();
 
   return (
     <Routes>
@@ -33,9 +36,12 @@ const RouterComp = () => {
       {/* <Route path={"/invite"} element={<Invite />} /> */}
       <Route path={'/help'} element={<Help />} />
       <Route path={'/esports'} element={<Esports />} />
-      <Route path={'/get-usdt'} element={<GetUSDTPage />} />
-      <Route path={'/buy-with-crypto'} element={<BuyCryptoPage />} />
-      <Route path={'/get-xdai'} element={<GetXDAIPage />} />
+      <Route
+        path={'/get-funds'}
+        element={chain?.id === CHAIN_IDS.POLYGON ? <GetUSDTPage /> : <GetXDAIPage />}
+      />
+      <Route path={'/buy-with-crypto'} element={<BuyWithCryptoPage />} />
+      <Route path={'/buy-with-card'} element={<BuyWithCardPage />} />
     </Routes>
   );
 };

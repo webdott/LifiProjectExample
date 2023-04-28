@@ -1,0 +1,75 @@
+.buyCrypto {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  margin-bottom: 40px;
+  .options {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    .header {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      border-radius: 10px;
+      padding: 16px 24px;
+      row-gap: 16px;
+      font-weight: 600;
+      font-size: 30px;
+      color: var(--white_900);
+    }
+    .buyCryptoContent {
+      width: 100%;
+      background: var(--bet_info_bg_col);
+      padding: 12px;
+      border-radius: 10px;
+      .toast {
+        display: flex;
+        align-items: center;
+        column-gap: 12px;
+        cursor: pointer;
+        background: var(--footer_icons_col);
+        border-radius: 10px;
+        border-color: var(footer_icons_col);
+        padding: 0 12px;
+
+        &:hover {
+          background: var(--matterhorn);
+        }
+
+        .fiatProvider {
+          width: 84px;
+          height: 26px;
+        }
+
+        .commisionDetails {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          padding: 8px 12px;
+          row-gap: 8px;
+          font-weight: 600;
+          font-size: 18px;
+          color: var(--white_900);
+          opacity: 0.7;
+          border-left: 1px solid var(--gray);
+
+          p {
+            font-size: 14px;
+            margin: 0;
+          }
+
+          .title {
+            font-weight: bold;
+          }
+
+          .subText {
+            opacity: 0.7;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+}
