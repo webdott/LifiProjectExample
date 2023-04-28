@@ -11,9 +11,9 @@ import './styles.css';
 import styles from './sidebar.module.scss';
 import { AzuroGame } from '../../../redux/reducers/games';
 
-export interface Props  {
-  games: AzuroGame
-};
+export interface Props {
+  games: AzuroGame[];
+}
 function Cards({ games }: Props): JSX.Element {
   return (
     <div className={styles.container}>
