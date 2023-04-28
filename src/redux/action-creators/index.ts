@@ -1,29 +1,172 @@
 import { Dispatch } from 'redux';
-import { fetchGames } from '@azuro-protocol/sdk';
-
+import axios from 'axios';
+import dayjs from 'dayjs';
 import { ActionType } from '../action-types';
 import { Action, BetSlipAction, GPXButtonsAction } from '../actions';
 import { getBlockNumber } from './../../functions';
 import { CurrentGame } from '../reducers/betSlip';
+import { GRAPHQL_URLS, LIQUIDITY_POOLS } from '../../constants/azuro';
+import { SPORTS_HUB_MAP, SportHubs } from '../../constants/sports';
+import { store } from '../store';
 
-export const fetchAllGames = () => {
+const SPORTS_QUERY = `
+  query Sports($sportFilter: Sport_filter, $countryFilter: Country_filter, $leagueFilter: League_filter, $gameFilter: Game_filter, $gameOrderBy: Game_orderBy, $gameOrderDirection: OrderDirection) {
+    sports(where: $sportFilter, subgraphError: allow) {
+      countries(where: $countryFilter, orderBy: turnover, orderDirection: desc) {
+        leagues(where: $leagueFilter, orderBy: turnover, orderDirection: desc) {
+          games(
+            where: $gameFilter
+            orderBy: $gameOrderBy
+            orderDirection: $gameOrderDirection
+          ) {
+            id
+            __typename
+
+          }
+          __typename
+        }
+        __typename
+      }
+      __typename
+      name
+      sporthub {name}
+    }
+  }
+`;
+
+const GAMES_QUERY = `
+  query Games($first: Int, $gamesFilter: Game_filter) {
+    games(first: $first, where: $gamesFilter, subgraphError: allow) {
+      ...Game
+      conditions {
+        ...GameCondition
+        __typename
+      }
+      __typename
+    }
+  }
+
+  fragment Game on Game {
+    id
+    gameId
+    slug
+    title
+    status
+    sport {
+      sportId
+      name
+      slug
+      sporthub {
+        slug
+        __typename
+      }
+      __typename
+    }
+    league {
+      name
+      slug
+      country {
+        name
+        slug
+        turnover
+        __typename
+      }
+      __typename
+    }
+    participants {
+      image
+      name
+      __typename
+    }
+    startsAt
+    hasActiveConditions
+    liquidityPool {
+      address
+      __typename
+    }
+    __typename
+  }
+
+  fragment GameCondition on Condition {
+    id
+    conditionId
+    status
+    outcomes {
+      id
+      outcomeId
+      odds
+      __typename
+    }
+    core {
+      address
+      type
+      __typename
+    }
+    __typename
+  }
+`;
+
+export const fetchAllGames = (chainId: number, hubIds: SportHubs[]) => {
   return async (dispatch: Dispatch<Action>) => {
     dispatch({
       type: ActionType.FETCH_GAMES_START,
     });
-    const blockNumber = await getBlockNumber();
+
+    const tsNow = dayjs().unix().toString();
+    let operation = 'Sports';
     try {
-      const games = await fetchGames({
-        filters: {
-          resolved: false,
-          canceled: false,
+      const { data: sportsData } = await axios.post(GRAPHQL_URLS[chainId] + `?op=${operation}`, {
+        operation,
+        query: SPORTS_QUERY,
+        variables: {
+          sportFilter: {
+            sporthub_in: hubIds,
+            slug_in: hubIds.map((i) => SPORTS_HUB_MAP[i]).flat(),
+          },
+          countryFilter: {
+            hasActiveLeagues: true,
+          },
+          leagueFilter: {
+            games_: {
+              startsAt_gt: tsNow,
+              hasActiveConditions: true,
+              liquidityPool: LIQUIDITY_POOLS[chainId],
+            },
+          },
+          gameFilter: {
+            startsAt_gt: tsNow,
+            hasActiveConditions: true,
+            liquidityPool: LIQUIDITY_POOLS[chainId],
+          },
+          gameOrderBy: 'turnover',
+          gameOrderDirection: 'desc',
         },
-        from: blockNumber,
       });
 
+      const gameIds: number[] = [];
+
+      sportsData.data.sports.forEach((sp: any) => {
+        sp.countries.forEach((c: any) => {
+          c.leagues.forEach((lg: any) => {
+            gameIds.push(...lg.games.map((g: any) => g.id));
+          });
+        });
+      });
+
+      operation = 'Games';
+      const { data: gamesData } = await axios.post(GRAPHQL_URLS[chainId] + `?op=${operation}`, {
+        operation,
+        query: GAMES_QUERY,
+        variables: {
+          first: 1000,
+          gamesFilter: {
+            id_in: gameIds,
+          },
+        },
+      });
       dispatch({
         type: ActionType.FETCH_GAMES_SUCCESSS,
-        payload: games,
+        payload: gamesData.data,
       });
     } catch (err: any) {
       dispatch({

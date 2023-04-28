@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -8,8 +8,25 @@ import { useSideBar } from '../hooks/useSideBar';
 import SportButton from '../components/shared/sportButton';
 
 import styles from './homelayout.module.scss';
+import { SportHubs } from '../constants/sports';
+import { fetchAllGames } from '../redux/action-creators';
+import { useDispatch } from 'react-redux';
+import { useTypedSelector } from '../hooks/useTypedSelector';
+import { useNetwork } from 'wagmi';
 
 function SideBarButtonList(): JSX.Element {
+  const dispatch = useDispatch();
+  const { chain } = useNetwork();
+
+  const { data: games, loading: gamesLoading } = useTypedSelector((state) => state.games);
+
+  useEffect(() => {
+    (async () => {
+      // TODO: get sportshub info from redux state
+      if (chain) await fetchAllGames(chain.id, [SportHubs.sports])(dispatch);
+    })();
+  }, [chain]);
+
   const [sportTab, setSportTab] = useState<number>(-1);
   const [leagueTab, setLeagueTab] = useState<number>(1);
 
