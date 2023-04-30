@@ -17,12 +17,12 @@ import activeWalletIcon from '../../../assets/images/activeWalletIcon.png';
 import styles from './header.module.scss';
 
 export default function Header(): JSX.Element {
-  const { address, isConnected: walletIsConnected } = useAccount();
-  const [showWallet, setShowWallet] = useState<boolean>(false);
+  const { isConnected: walletIsConnected } = useAccount();
+  const [showWallet] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [netState, setNetState] = useState<boolean>(true);
+  const [netState] = useState<boolean>(true);
   const [isMetamask, setIsMetamask] = useState<boolean>(false);
-  const [NeterrorWin, setNeterrorWin] = useState<string>('block');
+  const [NeterrorWin] = useState<string>('block');
 
   const [walletIcon, setWalletIcon] = useState(disableWalletIcon);
 
@@ -87,15 +87,7 @@ export default function Header(): JSX.Element {
                   onClick={visible}
                 />
               )}
-              {showModal && (
-                <WalletModal
-                  hide={close}
-                  onChangeNet={setNetState}
-                  visible={showModal}
-                  close={visible}
-                  ConnectWallet={setIsMetamask}
-                />
-              )}
+              {showModal && <WalletModal visible={showModal} close={close} />}
             </div>
           ) : (
             <div className={styles.headerRightSection}>
@@ -116,15 +108,7 @@ export default function Header(): JSX.Element {
                   <span>{HeaderButtonText.Connect_Wallet}</span>
                 </div>
               )}
-              {showModal && (
-                <WalletModal
-                  hide={close}
-                  onChangeNet={setNetState}
-                  visible={showModal}
-                  close={visible}
-                  ConnectWallet={setIsMetamask}
-                />
-              )}
+              {showModal && <WalletModal visible={showModal} close={close} />}
             </div>
           )}
         </div>

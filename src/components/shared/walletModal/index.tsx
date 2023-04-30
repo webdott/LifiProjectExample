@@ -15,13 +15,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './modalStyles.scss';
 import styles from './walletModal.module.scss';
 
-export default function WalletModal({
-  hide,
-  visible,
-  onChangeNet,
-  ConnectWallet,
-  close,
-}: WalletModalProps): JSX.Element {
+export default function WalletModal({ visible, close }: WalletModalProps): JSX.Element {
   const metamaskSuccessNotify = (text: string) => {
     toast.success(<span>{text}</span>);
   };

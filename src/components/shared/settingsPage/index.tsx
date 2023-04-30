@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
 import IconButton from '@mui/material/IconButton';
+import { Tooltip } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import InfoIcon from '@mui/icons-material/Info';
 
@@ -7,7 +8,6 @@ import Button from '../button';
 import { ButtonType } from '../button/type';
 
 import styles from './settings.module.scss';
-import { Tooltip } from '@mui/material';
 
 const oddSlippageValues: string[] = ['2%', '3%', '10%', 'Custom'];
 

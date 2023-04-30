@@ -28,7 +28,7 @@ const BalanceCheck: React.FC = () => {
       >
         {/* //TODO: Clarify what this value is meant to be */}
         <span>$0</span>
-        <img src={headerWalletIcon} />
+        <img src={headerWalletIcon} alt='wallet'/>
         {showWalletBalance ? <AiFillCaretUp size={18} /> : <AiFillCaretDown size={18} />}
         <div className={styles.hoverEffect}></div>
       </div>

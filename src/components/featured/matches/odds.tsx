@@ -4,7 +4,7 @@ import { Dropdown } from 'antd';
 
 import './odds.scss';
 
-const items: MenuProps['items'] = [
+export const items: MenuProps['items'] = [
   {
     label: (
       <div className='oddsItems'>
@@ -24,7 +24,7 @@ const items: MenuProps['items'] = [
 ];
 
 const Odds: React.FC = () => (
-  <Dropdown menu={{ items }} trigger={['click']}>
+  <Dropdown menu={{ items }} trigger={['click']} placement='bottom'>
     <a className='oddsButton' onClick={(e) => e.preventDefault()}>
       <div className='hoverEffect'></div>
     </a>

@@ -11,6 +11,10 @@ html {
   overflow-x: hidden;
 }
 
+p {
+  margin: 0;
+}
+
 code {
   font-family: 'Inter', sans-serif;
 }

@@ -14,6 +14,7 @@ import GetXDAIPage from '../components/shared/getXDAIPage';
 import BuyWithCardPage from '../components/shared/buyWithCardPage';
 import BuyWithCryptoPage from '../components/shared/buyWithCryptoPage';
 import GetUSDTPage from '../components/shared/getUSDTPage';
+import MatchPage from '../components/featured/matches/matchPage';
 import { CHAIN_IDS } from '../constants/wallet';
 
 const RouterComp = () => {
@@ -29,19 +30,20 @@ const RouterComp = () => {
         path={'/account'}
         element={walletIsConnected ? <UserAccount /> : <Navigate replace to={'/'} />}
       />
-      <Route path={'/membership'} element={<Gxp />} />
-      <Route path={'/mint'} element={<Mint />} />
-      <Route path={'/upgrade'} element={<Upgrade />} />
+      <Route path='/membership' element={<Gxp />} />
+      <Route path='/mint' element={<Mint />} />
+      <Route path='/upgrade' element={<Upgrade />} />
       {/* Invite Page commented incase of future reversal*/}
       {/* <Route path={"/invite"} element={<Invite />} /> */}
-      <Route path={'/help'} element={<Help />} />
-      <Route path={'/esports'} element={<Esports />} />
+      <Route path='/help' element={<Help />} />
+      <Route path='/esports' element={<Esports />} />
+      <Route path='/:sportCategory/:sportName/:id' element={<MatchPage />} />
       <Route
         path={'/get-funds'}
         element={chain?.id === CHAIN_IDS.POLYGON ? <GetUSDTPage /> : <GetXDAIPage />}
       />
-      <Route path={'/buy-with-crypto'} element={<BuyWithCryptoPage />} />
-      <Route path={'/buy-with-card'} element={<BuyWithCardPage />} />
+      <Route path='/buy-with-crypto' element={<BuyWithCryptoPage />} />
+      <Route path='/buy-with-card' element={<BuyWithCardPage />} />
     </Routes>
   );
 };

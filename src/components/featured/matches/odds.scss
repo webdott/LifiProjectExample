@@ -17,12 +17,12 @@
     }
   }
 }
-
 .ant-dropdown-menu-submenu-title {
   padding: 0px !important;
   background: var(--footer_icons_col);
 }
 .ant-dropdown-menu {
+  top: 10px;
   border-radius: 10px !important;
   padding: 0px !important;
   background: var(--footer_icons_col) !important;
@@ -43,9 +43,11 @@
 .triangle {
   position: absolute;
   top: -10px;
-  right: 60px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 0px;
   height: 0px;
+  z-index: -20;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
   border-bottom: 20px solid #2c2c2e;

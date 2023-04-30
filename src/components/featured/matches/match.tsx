@@ -1,11 +1,12 @@
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-import styles from './matches.module.scss';
 import { MatchType, SportsAndGamesType } from '../../../constants/matches';
-import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux';
 import { addBetSlip, removeBetSlip } from '../../../redux/action-creators';
+
+import styles from './matches.module.scss';
 
 interface MatchProps {
   match: MatchType;
@@ -67,6 +68,11 @@ const Match: FC<MatchProps> = ({ match, game }) => {
             </li>
           );
         })}
+        <li className={styles.allMarkets}>
+          <Link to={`/${game.type}/${game.sportName}/${match.id}`}>
+            <span>All markets</span>
+          </Link>
+        </li>
       </ul>
     </div>
   );
