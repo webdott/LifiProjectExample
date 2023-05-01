@@ -1,15 +1,17 @@
+import { SportHubSlug, SportSlug } from '../../constants/sports';
 import { ActionType } from '../action-types';
 import { Action } from '../actions';
 
 export type AzuraStatus = 'Resolved' | 'Canceled' | 'Created';
 
 export type AzureSportHub = {
-  slug: string;
+  name: string;
+  slug: SportHubSlug;
 };
 export type AzureSport = {
   sportId: string;
   name: string;
-  slug: string;
+  slug: SportSlug;
   sporthub: AzureSportHub;
 };
 
@@ -50,7 +52,7 @@ export type AzuerCondition = {
 export type AzuroGame = {
   id: string;
   gameId: string;
-  slug: string;
+  slug: SportSlug;
   title: string;
   status: AzuraStatus;
   sport: AzureSport;

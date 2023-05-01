@@ -2,17 +2,18 @@ import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 
 import styles from './matches.module.scss';
-import { MatchType, SportsAndGamesType } from '../../../constants/matches';
+import { MatchType, SportsByLeagues } from '../../../constants/matches';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux';
 import { addBetSlip, removeBetSlip } from '../../../redux/action-creators';
+import { round } from '../../../utils/numbers';
 
 interface MatchProps {
   match: MatchType;
-  game: SportsAndGamesType;
+  sport: SportsByLeagues;
 }
 
-const Match: FC<MatchProps> = ({ match, game }) => {
+const Match: FC<MatchProps> = ({ match, sport }) => {
   const { currentGame: currentBetSlipGame } = useSelector((root: RootState) => root.betSlip);
   const dispatch = useDispatch();
 
@@ -21,7 +22,7 @@ const Match: FC<MatchProps> = ({ match, game }) => {
       removeBetSlip()(dispatch);
     } else {
       addBetSlip({
-        game: game.sportName,
+        game: sport.sport,
         id: match.id,
         team1: match.team1,
         team2: match.team2,
@@ -48,10 +49,10 @@ const Match: FC<MatchProps> = ({ match, game }) => {
       </div>
       <div className={styles.matchTime}>
         <p>{match.timeLabel}</p>
-        <p>{match.time}</p>
+        <p>{match.startsAtString}</p>
       </div>
       <ul className={styles.matchRightSection}>
-        {match.matchOdds.map((item, index: number) => {
+        {match.markets[0].outcomes[0].map((item: any, index: number) => {
           return (
             <li
               key={index}
@@ -62,8 +63,8 @@ const Match: FC<MatchProps> = ({ match, game }) => {
               }
               onClick={() => toggleBetSlip(item)}
             >
-              <span>{item.id}</span>
-              <span>{item.odds}</span>
+              <span>{item.selectionName}</span>
+              <span>{round(parseFloat(item.odds), 2)}</span>
             </li>
           );
         })}

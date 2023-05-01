@@ -27,9 +27,8 @@ export interface LeftSidebarTypes {
   sport?: string;
   sportsGames?: number;
   leagues?: LeaguesTypes[];
-  icon: string | IconType;
   sportTypeId?: number;
-  disableIcon?: string;
+  disableIcon: string | IconType;
   activeIcon: string | IconType;
 }
 
@@ -54,10 +53,9 @@ export const navData: NavDataProps[] = [
   },
 ];
 
-export const leaguesData: LeftSidebarTypes[] = [
+export const leaguesData: any[] = [
   {
     sport: 'Football',
-    icon: LeftSideIcons.disableFootbal,
     disableIcon: LeftSideIcons.disableFootbal,
     activeIcon: LeftSideIcons.activeFootball,
     sportsGames: 10,
@@ -75,7 +73,6 @@ export const leaguesData: LeftSidebarTypes[] = [
   },
   {
     sport: 'Basketball',
-    icon: LeftSideIcons.disableBasketball,
     disableIcon: LeftSideIcons.disableBasketball,
     activeIcon: LeftSideIcons.activeBasketball,
     sportsGames: 10,
@@ -93,7 +90,6 @@ export const leaguesData: LeftSidebarTypes[] = [
   },
   {
     sport: 'MMA',
-    icon: LeftSideIcons.disableMMA,
     disableIcon: LeftSideIcons.disableMMA,
     activeIcon: LeftSideIcons.activeMma,
     sportsGames: 10,
@@ -111,7 +107,6 @@ export const leaguesData: LeftSidebarTypes[] = [
   },
   {
     sport: 'Boxing',
-    icon: GiBoxingGlove,
     activeIcon: GiBoxingGlove,
     sportsGames: 10,
     leagues: [
@@ -128,7 +123,6 @@ export const leaguesData: LeftSidebarTypes[] = [
   },
   {
     sport: 'Tennis',
-    icon: BiTennisBall,
     activeIcon: BiTennisBall,
     sportsGames: 10,
     leagues: [
@@ -145,7 +139,6 @@ export const leaguesData: LeftSidebarTypes[] = [
   },
   {
     sport: 'Icehockey',
-    icon: FaHockeyPuck,
     activeIcon: FaHockeyPuck,
     sportsGames: 10,
     leagues: [
@@ -162,7 +155,6 @@ export const leaguesData: LeftSidebarTypes[] = [
   },
   {
     sport: 'American Football',
-    icon: IoMdAmericanFootball,
     activeIcon: IoMdAmericanFootball,
     sportsGames: 10,
     leagues: [

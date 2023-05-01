@@ -3,11 +3,9 @@ import axios from 'axios';
 import dayjs from 'dayjs';
 import { ActionType } from '../action-types';
 import { Action, BetSlipAction, GPXButtonsAction } from '../actions';
-import { getBlockNumber } from './../../functions';
 import { CurrentGame } from '../reducers/betSlip';
 import { GRAPHQL_URLS, LIQUIDITY_POOLS } from '../../constants/azuro';
-import { SPORTS_HUB_MAP, SportHubs } from '../../constants/sports';
-import { store } from '../store';
+import { SPORTS_HUB_MAP, SportHubSlug } from '../../constants/sports';
 
 const SPORTS_QUERY = `
   query Sports($sportFilter: Sport_filter, $countryFilter: Country_filter, $leagueFilter: League_filter, $gameFilter: Game_filter, $gameOrderBy: Game_orderBy, $gameOrderDirection: OrderDirection) {
@@ -57,6 +55,7 @@ const GAMES_QUERY = `
       name
       slug
       sporthub {
+        name
         slug
         __typename
       }
@@ -106,13 +105,15 @@ const GAMES_QUERY = `
   }
 `;
 
-export const fetchAllGames = (chainId: number, hubIds: SportHubs[]) => {
+export const fetchAllGames = (chainId: number, hubSlugs: SportHubSlug[]) => {
   return async (dispatch: Dispatch<Action>) => {
     dispatch({
       type: ActionType.FETCH_GAMES_START,
     });
 
-    const tsNow = dayjs().unix().toString();
+    const now = dayjs();
+    const tsNow = now.unix().toString();
+    const tomorrowEnd = now.add(1, 'd').endOf('d').unix().toString();
     let operation = 'Sports';
     try {
       const { data: sportsData } = await axios.post(GRAPHQL_URLS[chainId] + `?op=${operation}`, {
@@ -120,8 +121,8 @@ export const fetchAllGames = (chainId: number, hubIds: SportHubs[]) => {
         query: SPORTS_QUERY,
         variables: {
           sportFilter: {
-            sporthub_in: hubIds,
-            slug_in: hubIds.map((i) => SPORTS_HUB_MAP[i]).flat(),
+            sporthub_in: hubSlugs,
+            slug_in: hubSlugs.map((i) => SPORTS_HUB_MAP[i]).flat(),
           },
           countryFilter: {
             hasActiveLeagues: true,
@@ -129,12 +130,14 @@ export const fetchAllGames = (chainId: number, hubIds: SportHubs[]) => {
           leagueFilter: {
             games_: {
               startsAt_gt: tsNow,
+              startsAt_lt: tomorrowEnd,
               hasActiveConditions: true,
               liquidityPool: LIQUIDITY_POOLS[chainId],
             },
           },
           gameFilter: {
             startsAt_gt: tsNow,
+            startsAt_lt: tomorrowEnd,
             hasActiveConditions: true,
             liquidityPool: LIQUIDITY_POOLS[chainId],
           },
@@ -166,7 +169,7 @@ export const fetchAllGames = (chainId: number, hubIds: SportHubs[]) => {
       });
       dispatch({
         type: ActionType.FETCH_GAMES_SUCCESSS,
-        payload: gamesData.data,
+        payload: gamesData.data.games,
       });
     } catch (err: any) {
       dispatch({

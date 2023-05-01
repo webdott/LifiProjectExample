@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import _ from 'lodash';
 
-import { MatchesEnum, SportsAndGamesType, matchesColumn } from '../../../constants/matches';
+import { MatchesEnum, SportsByLeagues, matchesColumn } from '../../../constants/matches';
 import Matches from '../../featured/matches';
 
 import styles from '../../featured/matches/matches.module.scss';
 
-const MatchesContainer = ({ games }: { games: SportsAndGamesType[] }) => {
+const MatchesContainer = ({ games }: { games: SportsByLeagues[] }) => {
   const [matchColumn, setMatchColumn] = useState<MatchesEnum>(MatchesEnum.ALL);
 
   const [activeTabId, setActiveTabId] = useState<number>(0);
@@ -40,18 +40,18 @@ const MatchesContainer = ({ games }: { games: SportsAndGamesType[] }) => {
         {games
           .filter((game) =>
             game.leagues.some((league) =>
-              league.matches.some((match) =>
-                matchColumn === 'All' ? true : match.timeLabel === matchColumn
+              league.games.some((game) =>
+                matchColumn === 'All' ? true : game.timeLabel === matchColumn
               )
             )
           )
           .map(
-            (game, index: number) =>
-              game.leagues.length > 0 && (
+            (sport, index: number) =>
+              sport.leagues.length > 0 && (
                 <div key={index}>
-                  <h1 className={styles.sportNav}>{_.capitalize(game.sportName)}</h1>
-                  {game.leagues.map((league, index) => (
-                    <Matches league={league} matchColumn={matchColumn} key={index} game={game}/>
+                  <h1 className={styles.sportNav}>{_.capitalize(sport.sport)}</h1>
+                  {sport.leagues.map((league, index) => (
+                    <Matches league={league} matchColumn={matchColumn} key={index} sport={sport} />
                   ))}
                 </div>
               )
