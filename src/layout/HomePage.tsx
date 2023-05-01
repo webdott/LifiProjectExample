@@ -17,6 +17,7 @@ import liveActiveIcon from '../assets/images/activeLiveIcon.png';
 import liveDisableIcon from '../assets/images/disableLiveIcon.png';
 
 import styles from './homelayout.module.scss';
+import { SportHubSlug } from '../constants/sports';
 
 export default function Layout({ children }: LayoutProps) {
   const location = useLocation();
@@ -50,7 +51,7 @@ export default function Layout({ children }: LayoutProps) {
       <div className={styles.section}>
         <div className={styles.leftSidebar}>
           <div className={styles.container}>
-            {location.pathname !== '/sports' && <SearchBar />}
+            {location.pathname == '/' && <SearchBar />}
             <div className={styles.nav}>
               <ListItemButton
                 className={
@@ -100,7 +101,15 @@ export default function Layout({ children }: LayoutProps) {
               </ListItemButton>
             </div>
             <div className={styles.leagues}>
-              <LeftSideBar />
+              <LeftSideBar
+                sportSlugs={
+                  location.pathname === '/'
+                    ? [SportHubSlug.sports, SportHubSlug.esports]
+                    : location.pathname === '/sports'
+                    ? [SportHubSlug.sports]
+                    : [SportHubSlug.esports]
+                }
+              />
             </div>
           </div>
         </div>

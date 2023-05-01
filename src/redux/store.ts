@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
-import gamesReducer from './reducers/fetchAllGames';
+import gamesReducer from './reducers/games';
 import gpxButtonReducer from './reducers/gpxButtonStates';
 import betSlipReducer from './reducers/betSlip';
 

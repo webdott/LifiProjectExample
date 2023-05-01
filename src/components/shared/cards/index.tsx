@@ -1,7 +1,6 @@
 import { Autoplay, Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { cardProps } from '../../../constants/games';
 import { OddsBoxValues } from './../../../constants/featuresGame';
 import Card from './card';
 
@@ -10,8 +9,12 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import './styles.css';
 import styles from './sidebar.module.scss';
+import { AzuroGame } from '../../../redux/reducers/games';
 
-function Cards({ games }: cardProps): JSX.Element {
+export interface Props {
+  games: AzuroGame[];
+}
+function Cards({ games }: Props): JSX.Element {
   return (
     <div className={styles.container}>
       <p className={styles.matchesTitle}>Featured Games</p>

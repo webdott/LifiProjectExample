@@ -1,3 +1,9 @@
+.vscode
+.git
 node_modules
 package-lock.json
 .env
+
+yarn-error.log
+
+**/.DS_Store

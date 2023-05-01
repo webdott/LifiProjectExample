@@ -1,9 +1,10 @@
 import Cards from '../cards';
-import Layout from '../../../layout/EsportsLayout';
+import Layout from '../../../layout/HomePage';
 import Loader from '../Loader/Loader';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
-import { allSportsAndGames } from '../../../constants/matches';
 import MatchesContainer from '../sports/matchesContainer';
+import { getGamesByLeageus } from '../../../helpers/redux';
+import { SportHubSlug } from '../../../constants/sports';
 
 function Esport(): JSX.Element {
   const { data, error, loading } = useTypedSelector((state) => state.games);
@@ -12,7 +13,7 @@ function Esport(): JSX.Element {
     <Layout>
       <Cards games={data} />
       {!error && !loading ? (
-        <MatchesContainer games={allSportsAndGames.filter((game) => game.type === 'esports')} />
+        <MatchesContainer games={getGamesByLeageus([SportHubSlug.esports])} />
       ) : (
         <>
           <Loader />

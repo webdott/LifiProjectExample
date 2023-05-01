@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
@@ -29,7 +28,7 @@ export const Connectors = {
   INJECTED: new InjectedConnector({ chains }),
 };
 
-const client = createClient({
+const wagmiClient = createClient({
   autoConnect: true,
   connectors: [Connectors.METAMASK, Connectors.WALLET_CONNECT, Connectors.INJECTED],
   provider,
@@ -40,12 +39,10 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <BrowserRouter>
-    <React.StrictMode>
-      <Provider store={store}>
-        <WagmiConfig client={client}>
-          <App />
-        </WagmiConfig>
-      </Provider>
-    </React.StrictMode>
+    <Provider store={store}>
+      <WagmiConfig client={wagmiClient}>
+        <App />
+      </WagmiConfig>
+    </Provider>
   </BrowserRouter>
 );

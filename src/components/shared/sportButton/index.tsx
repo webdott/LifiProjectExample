@@ -13,16 +13,16 @@ export default function SportButton({
   sportTab,
   setSportTab,
   fn,
-  state,
+  selected,
 }: {
   sport: LeftSidebarTypes;
   index: number;
   sportTab: number;
   setSportTab: Dispatch<SetStateAction<number>>;
   fn: () => void;
-  state?: boolean;
+  selected?: boolean;
 }) {
-  const [Icon, setIcon] = useState<string | IconType>(sport.icon);
+  const [Icon, setIcon] = useState<string | IconType>(sport.disableIcon);
   const [hoverEffect, setHoverEffect] = useState(false);
 
   useEffect(() => {
@@ -30,14 +30,14 @@ export default function SportButton({
       setIcon(sport.activeIcon);
       setHoverEffect(true);
     } else {
-      setIcon(sport.icon);
+      setIcon(sport.disableIcon);
       setHoverEffect(false);
     }
   }, [sportTab]);
 
   const hoverEnd = () => {
     if (sportTab !== index + 1) {
-      setIcon(sport.icon);
+      setIcon(sport.disableIcon);
       setHoverEffect(false);
     }
   };
@@ -70,7 +70,7 @@ export default function SportButton({
       </ListItemIcon>
       <ListItemText primary={sport.sport} />
       {/* <span className={styles.gameNumber}>{sport.sportsGames}</span> */}
-      {state ? <ExpandLess /> : <ArrowForwardIosIcon sx={{ fontSize: 16 }} />}
+      {selected ? <ExpandLess /> : <ArrowForwardIosIcon sx={{ fontSize: 16 }} />}
       {sport.sport === 'MMA' || sport.sport === 'Basketball' ? (
         <div className={styles.soonIcon}>Soon</div>
       ) : null}
