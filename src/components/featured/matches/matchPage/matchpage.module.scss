@@ -140,6 +140,7 @@
     }
 
     .actions {
+      position: relative;
       display: flex;
       align-items: center;
       column-gap: 8px;
@@ -177,33 +178,101 @@
           background: var(--bet_info_bg_col);
         }
       }
+
+      .searchMarkets {
+        height: auto;
+        position: absolute;
+        right: 0;
+        bottom: -6px;
+        width: 500px;
+        padding-right: 16px;
+        padding-bottom: 4px;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        box-shadow: -20px -11px 18px 42px var(--bg_col);
+        color: #54545c;
+        background: var(--bg_col);
+        border-bottom: 2px solid var(--bet_info_bg_col);
+        border-radius: 0;
+
+        .searchIcon {
+          color: var(--white_900);
+          opacity: 0.7;
+        }
+
+        input {
+          outline: none;
+          border: none;
+          height: 26px;
+          flex: auto;
+          padding: 10px 0 10px 30px;
+          color: var(--white_900);
+          opacity: 0.7;
+          font-weight: 500;
+          font-size: 13px;
+          line-height: 16px;
+          background: transparent;
+
+          &:focus {
+            opacity: 1;
+          }
+        }
+
+        .actionButtons {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+
+          button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &:first-child {
+              border: none;
+              height: 26px;
+              font-weight: 500;
+              padding: 0 10px;
+              font-size: 13px;
+              border-radius: 6px;
+              white-space: nowrap;
+              text-align: center;
+              text-decoration: none !important;
+              background: var(--bet_info_bg_col);
+              color: var(--white_900);
+              width: 70px;
+
+              &:disabled {
+                opacity: 0.4;
+                cursor: not-allowed;
+              }
+            }
+
+            &.closeButton {
+              color: var(--white_900);
+              opacity: 0.7;
+
+              &:hover,
+              &:focus {
+                opacity: 1;
+              }
+            }
+          }
+        }
+      }
     }
   }
 
   .matchOddsContainer {
     width: 100%;
-    display: grid;
-    gap: 20px;
-
-    &.fullGrid {
-      grid-template-columns: 100%;
-      grid-template-rows: 1fr;
-    }
-
-    &.halfGrid {
-      grid-template-columns: calc(50% - 10px) calc(50% - 10px);
-      grid-auto-rows: min-content;
-
-      @media screen and (max-width: 800px) {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
 
     .matchOddView {
-      width: 100%;
+      width: calc(100% - 8px);
       padding: 8px;
       background: var(--bet_info_bg_col);
       border-radius: 8px;
+      margin: 4px 0;
 
       .topSection {
         width: 100%;
@@ -263,33 +332,40 @@
         justify-content: flex-start;
         width: 100%;
         cursor: pointer;
-        gap: 16px;
+        gap: 8px;
         &.four {
           display: grid;
-          grid-template-columns: calc(50% - 10px) calc(50% - 10px);
+          grid-template-columns: calc(50% - 4px) calc(50% - 4px);
         }
         button {
           border: none;
-          padding: 15px;
+          padding: 0 12px;
+          height: 40px;
           background: var(--footer_icons_col);
-          border-radius: 10px;
+          border-radius: 6px;
           color: var(--white_900);
           width: 100%;
-          min-width: 142px;
+          min-width: 107px;
           display: flex;
           justify-content: space-between;
           align-items: center;
+          border: 1px solid transparent;
           cursor: pointer;
           span {
             font-weight: 500;
             font-size: 16px;
             line-height: 19px;
             color: var(--white_900);
+
+            @media screen and (max-width: 1600px) {
+              font-size: 13px;
+              line-height: 16px;
+            }
           }
           &:hover,
           &:focus {
             background: var(--odds_bg_col);
-            border: 1px solid var(--medium_green);
+            border-color: var(--medium_green);
           }
         }
         .activeTab {

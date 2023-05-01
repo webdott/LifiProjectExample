@@ -171,6 +171,7 @@
     margin: 0 auto;
     height: calc(100vh - 100px);
     overflow-y: auto;
+    overflow-x: hidden;
     max-width: 1920px;
     padding-top: 40px;
     display: flex;

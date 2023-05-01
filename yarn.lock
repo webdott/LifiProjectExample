@@ -12025,6 +12025,11 @@ react-transition-group@^4.4.5:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
+react-xmasonry@^3.0.6:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/react-xmasonry/-/react-xmasonry-3.0.6.tgz#0ae5ce89d1179e1a866b458ef1a46df2fe0a60a3"
+  integrity sha512-FsvEb1SMTVbyZtS/LhIICY0vczKqhzAZIKFvqhFMdEGiCXailJSaStaYqnc428Taxzwn0ju7h/kFs5AU0lo9pA==
+
 react@^16.8.6:
   version "16.14.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"

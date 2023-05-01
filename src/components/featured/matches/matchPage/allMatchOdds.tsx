@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import { Component, useEffect, useRef, useState } from 'react';
 import { CiGrid2H, CiGrid2V } from 'react-icons/ci';
 import { CgArrowsScrollV } from 'react-icons/cg';
 import { FiSearch } from 'react-icons/fi';
 import { RiSettings5Fill } from 'react-icons/ri';
+import { XMasonry, XBlock, XMasonryProps } from 'react-xmasonry';
 import { Dropdown } from 'antd';
 
 import MatchOddView from './matchOddView';
+import SearchMarkets from './searchMarkets';
 import { items } from '../odds';
 
 import styles from './matchpage.module.scss';
@@ -44,9 +46,27 @@ const allOdds: Record<
 };
 
 const AllMatchOdds = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [showMasonry, setShowMasonry] = useState<boolean>(false);
+  const [halfWidth, setHalfWidth] = useState<number>(900);
+  const [searchValue, setSearchValue] = useState<string>('');
   const [showSearch, setShowSearch] = useState<boolean>(false);
   const [gridClass, setGridClass] = useState<'fullGrid' | 'halfGrid'>('fullGrid');
   const [allCollapsed, setAllCollapsed] = useState<boolean>(false);
+
+  useEffect(() => {
+    // get width of masonry container in order to get accurate width for get block
+    // delay rendering of masonry component after setting width for it to take effect
+    setHalfWidth((containerRef?.current?.offsetWidth ?? 1800) / 2);
+    if (containerRef?.current) {
+      window.addEventListener('resize', (evt) => {
+        setHalfWidth((containerRef?.current?.offsetWidth ?? 1800) / 2);
+      });
+    }
+    setTimeout(() => {
+      setShowMasonry(true);
+    }, 500);
+  }, [containerRef?.current]);
 
   return (
     <div className={styles.allMatchOdds}>
@@ -65,9 +85,17 @@ const AllMatchOdds = () => {
           >
             <CiGrid2V size={20} />
           </button>
-          <button className={showSearch ? styles.active : ''}>
+          <button className={showSearch ? styles.active : ''} onClick={() => setShowSearch(true)}>
             <FiSearch size={20} />
           </button>
+
+          {showSearch && (
+            <SearchMarkets
+              searchValue={searchValue}
+              setSearchValue={setSearchValue}
+              setShowSearch={setShowSearch}
+            />
+          )}
 
           <div className={styles.rightIcon}>
             <Dropdown menu={{ items }} trigger={['click']} placement='bottom'>
@@ -83,15 +111,20 @@ const AllMatchOdds = () => {
         </div>
       </div>
 
-      <div className={`${styles.matchOddsContainer} ${styles?.[gridClass]}`}>
-        {Object.keys(allOdds).map((odd) => (
-          <MatchOddView
-            key={odd}
-            oddTitle={odd}
-            odds={allOdds[odd].matchOdds}
-            allCollapsed={allCollapsed}
-          />
-        ))}
+      <div className={styles.matchOddsContainer} ref={containerRef}>
+        {showMasonry && (
+          <XMasonry targetBlockWidth={halfWidth} smartUpdateCeil={100}>
+            {Object.keys(allOdds).map((odd) => (
+              <XBlock key={odd} width={gridClass === 'halfGrid' ? 1 : 2}>
+                <MatchOddView
+                  oddTitle={odd}
+                  odds={allOdds[odd].matchOdds}
+                  allCollapsed={allCollapsed}
+                />
+              </XBlock>
+            ))}
+          </XMasonry>
+        )}
       </div>
     </div>
   );
