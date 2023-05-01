@@ -1,11 +1,16 @@
-import type { AzuroGame } from '@azuro-protocol/sdk';
+import { SportHubSlug, SportSlug } from './sports';
 
-export interface GamesState {
-  loading: boolean;
-  error: string | null;
-  games: AzuroGame[];
-}
-
-export type cardProps = {
-  games: AzuroGame[];
+export const GAMES_ORDER = {
+  [SportHubSlug.sports]: [
+    SportSlug.football,
+    SportSlug.basketball,
+    SportSlug.mma,
+    SportSlug.boxing,
+    SportSlug.tennis,
+    SportSlug.iceHockey,
+    SportSlug.americanFootball,
+    SportSlug.rugbyLeague,
+    SportSlug.rugbyUnion,
+  ],
+  [SportHubSlug.esports]: [SportSlug.dota2, SportSlug.csgo, SportSlug.lol],
 };

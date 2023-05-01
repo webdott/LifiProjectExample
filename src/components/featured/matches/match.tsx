@@ -2,18 +2,19 @@ import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { MatchType, SportsAndGamesType } from '../../../constants/matches';
+import { MatchType, SportsByLeagues } from '../../../constants/matches';
 import { RootState } from '../../../redux';
 import { addBetSlip, removeBetSlip } from '../../../redux/action-creators';
+import { round } from '../../../utils/numbers';
 
 import styles from './matches.module.scss';
 
 interface MatchProps {
   match: MatchType;
-  game: SportsAndGamesType;
+  sport: SportsByLeagues;
 }
 
-const Match: FC<MatchProps> = ({ match, game }) => {
+const Match: FC<MatchProps> = ({ match, sport }) => {
   const { currentGame: currentBetSlipGame } = useSelector((root: RootState) => root.betSlip);
   const dispatch = useDispatch();
 
@@ -22,7 +23,7 @@ const Match: FC<MatchProps> = ({ match, game }) => {
       removeBetSlip()(dispatch);
     } else {
       addBetSlip({
-        game: game.sportName,
+        game: sport.sport,
         id: match.id,
         team1: match.team1,
         team2: match.team2,
@@ -49,10 +50,10 @@ const Match: FC<MatchProps> = ({ match, game }) => {
       </div>
       <div className={styles.matchTime}>
         <p>{match.timeLabel}</p>
-        <p>{match.time}</p>
+        <p>{match.startsAtString}</p>
       </div>
       <ul className={styles.matchRightSection}>
-        {match.matchOdds.map((item, index: number) => {
+        {match.markets[0].outcomes[0].map((item: any, index: number) => {
           return (
             <li
               key={index}
@@ -63,13 +64,13 @@ const Match: FC<MatchProps> = ({ match, game }) => {
               }
               onClick={() => toggleBetSlip(item)}
             >
-              <span>{item.id}</span>
-              <span>{item.odds}</span>
+              <span>{item.selectionName}</span>
+              <span>{round(parseFloat(item.odds), 2)}</span>
             </li>
           );
         })}
         <li className={styles.allMarkets}>
-          <Link to={`/${game.type}/${game.sportName}/${match.id}`}>
+          <Link to={`/${sport.sportHub}/${sport.sport}/${match.id}`}>
             <span>All markets</span>
           </Link>
         </li>

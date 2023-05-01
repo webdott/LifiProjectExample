@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { LeagueType, MatchesEnum, SportsAndGamesType } from '../../../constants/matches';
+import { LeagueType, MatchesEnum, SportsByLeagues } from '../../../constants/matches';
 import BettingOption from '../../shared/bettingOption';
 import Odds from './odds';
 import Match from './match';
@@ -9,14 +9,14 @@ import styles from './matches.module.scss';
 export default function Matches({
   league,
   matchColumn,
-  game
+  sport,
 }: {
   league: LeagueType;
   matchColumn: MatchesEnum;
-  game: SportsAndGamesType;
+  sport: SportsByLeagues;
 }) {
-  const matches = league.matches.filter((match) =>
-    matchColumn === 'All' ? Boolean(match) : match.timeLabel === matchColumn
+  const matches = league.games.filter((game) =>
+    matchColumn === 'All' ? Boolean(game) : game.timeLabel === matchColumn
   );
 
   return (
@@ -25,7 +25,7 @@ export default function Matches({
         <div className={styles.matchesBottomSection}>
           <div className={styles.matchesTopSection}>
             <div className={styles.matchesTitles}>
-              <p className={styles.leagueName}>{league.leagueName}</p>
+              <p className={styles.leagueName}>{league.name}</p>
             </div>
             <div className={styles.titleRightSection}>
               <BettingOption />
@@ -36,12 +36,12 @@ export default function Matches({
 							</div> */}
             </div>
           </div>
-          {league.matches
-            .filter((match) =>
-              matchColumn === 'All' ? Boolean(match) : match.timeLabel === matchColumn
+          {league.games
+            .filter((game) =>
+              matchColumn === 'All' ? Boolean(game) : game.timeLabel === matchColumn
             )
             .map((match, index: number) => (
-              <Match key={index} match={match} game={game}/>
+              <Match key={index} match={match} sport={sport} />
             ))}
         </div>
       ) : null}
