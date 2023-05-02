@@ -106,6 +106,7 @@ const GAMES_QUERY = `
 `;
 
 export const fetchAllGames = (chainId: number, hubSlugs: SportHubSlug[]) => {
+  console.log(chainId);
   return async (dispatch: Dispatch<Action>) => {
     dispatch({
       type: ActionType.FETCH_GAMES_START,

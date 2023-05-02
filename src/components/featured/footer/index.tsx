@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNetwork } from 'wagmi';
+import { useParams } from 'react-router-dom';
 
 import {
   officialContract,
@@ -8,7 +8,6 @@ import {
   PrivacyLinkProps,
 } from '../../../constants/footer';
 import { socialMedia, SocialProps } from '../../../constants/social';
-import { CHAIN_IDS } from '../../../constants/wallet';
 import GamblrXYZLogo from '../../shared/logo';
 import editIcon from '../../../assets/images/editIcon.png';
 import { getTruncatedAddress } from '../../../functions';
@@ -16,7 +15,7 @@ import { getTruncatedAddress } from '../../../functions';
 import styles from './footer.module.scss';
 
 export default function Footer(): JSX.Element {
-  const { chain } = useNetwork();
+  const { selectedChain } = useParams();
   const [activeIcon, setActiveIcon] = useState<number | null>(null);
 
   return (
@@ -71,16 +70,14 @@ export default function Footer(): JSX.Element {
                     <span>{e.bet}:</span>
                   </div>
                   <a
-                    href={
-                      e.wallets?.[chain?.id === CHAIN_IDS.POLYGON ? 'poly' : 'gnosis'].link ?? '#'
-                    }
+                    href={e.wallets?.[selectedChain === 'polygon' ? 'poly' : 'gnosis'].link ?? '#'}
                     target='_blank'
                     rel='noreferrer'
                     className={styles.wallet}
                   >
                     <span>
                       {getTruncatedAddress(
-                        e.wallets?.[chain?.id === CHAIN_IDS.POLYGON ? 'poly' : 'gnosis'].wallet
+                        e.wallets?.[selectedChain === 'polygon' ? 'poly' : 'gnosis'].wallet
                       )}
                     </span>
                   </a>

@@ -50,7 +50,7 @@ const Match: FC<MatchProps> = ({ match, sport }) => {
       </div>
       <div className={styles.matchTime}>
         <p>{match.timeLabel}</p>
-        <p>{match.startsAtString}</p>
+        <p>{match.startsAtString.replace('-', ':')}</p>
       </div>
       <ul className={styles.matchRightSection}>
         {match.markets[0].outcomes[0].map((item: any, index: number) => {

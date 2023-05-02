@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { useAccount, useBalance, useDisconnect } from 'wagmi';
 import Skeleton from 'react-loading-skeleton';
@@ -9,6 +9,8 @@ import InfoIcon from '@mui/icons-material/Info';
 
 import Button from '../../shared/button';
 import { ButtonType } from '../../shared/button/type';
+import { getSelectedChainFromBase } from '../../../functions';
+import { CHAIN_IDS } from '../../../constants/wallet';
 
 import 'react-loading-skeleton/dist/skeleton.css';
 import styles from './walletbalance.module.scss';
@@ -17,7 +19,6 @@ interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
   value: number;
-  isLoading: boolean;
 }
 
 const walletbalanceDetails: {
@@ -46,12 +47,17 @@ const walletbalanceDetails: {
 
 export default function TabPanel(props: TabPanelProps) {
   const navigate = useNavigate();
+  const location = useLocation();
   const { address } = useAccount();
   const { disconnect } = useDisconnect();
   const { data, isLoading: isLoadingBalance } = useBalance({
     address,
+    chainId:
+      getSelectedChainFromBase(location.pathname) === 'polygon'
+        ? CHAIN_IDS.POLYGON
+        : CHAIN_IDS.GNOSIS,
   });
-  const { children, value, index, isLoading, ...other } = props;
+  const { children, value, index, ...other } = props;
   const balanceDetail: 'poly' | 'gnosis' = value === 0 ? 'poly' : 'gnosis';
 
   return (
@@ -67,7 +73,7 @@ export default function TabPanel(props: TabPanelProps) {
         <>
           <div className={styles.block}>
             <p className={styles.title}>Balance</p>
-            {isLoading || isLoadingBalance ? (
+            {isLoadingBalance ? (
               <Box
                 sx={{
                   opacity: 0.25,
@@ -92,7 +98,7 @@ export default function TabPanel(props: TabPanelProps) {
                       <p className={styles.infoPrompt}>
                         To place bets Polygon Mainnet, you'll need USDT and some MATIC to pay for
                         transactions. You can get USDT and MATIC in the{' '}
-                        <Link to='/get-usdt'>
+                        <Link to='/polygon/get-funds'>
                           <span className={styles.getFunds}>funding section here</span>
                         </Link>
                       </p>
@@ -134,7 +140,9 @@ export default function TabPanel(props: TabPanelProps) {
               className={styles.ctaButton}
               btnType={ButtonType.membershipButton}
               text={index === 0 ? 'Get USDT' : 'Get XDAI'}
-              onClick={() => (index === 0 ? navigate('/get-usdt') : navigate('/get-xdai'))}
+              onClick={() =>
+                index === 0 ? navigate('/polygon/get-funds') : navigate('/gnosis/get-funds')
+              }
             />
 
             <Button

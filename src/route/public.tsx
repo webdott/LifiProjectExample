@@ -1,5 +1,5 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
-import { useAccount, useNetwork } from 'wagmi';
+import { useAccount } from 'wagmi';
 
 import UserAccount from '../pages/user/account';
 import Error404 from '../pages/error404';
@@ -10,40 +10,38 @@ import Help from '../components/shared/helpPage';
 import Esports from '../components/shared/esports';
 import Sports from '../components/shared/sports';
 import Home from '../components/shared/home';
-import GetXDAIPage from '../components/shared/getXDAIPage';
+import GetFundsPage from '../components/shared/getFundsPage';
 import BuyWithCardPage from '../components/shared/buyWithCardPage';
 import BuyWithCryptoPage from '../components/shared/buyWithCryptoPage';
-import GetUSDTPage from '../components/shared/getUSDTPage';
 import MatchPage from '../components/featured/matches/matchPage';
-import { CHAIN_IDS } from '../constants/wallet';
+import RedirectPage from '../pages/redirect';
 
 const RouterComp = () => {
   const { isConnected: walletIsConnected } = useAccount();
-  const { chain } = useNetwork();
 
   return (
     <Routes>
-      <Route path='/' element={<Home />} />
-      <Route path='/sports' element={<Sports />} />
-      <Route path='*' element={<Error404 />} />
+      <Route path='/' element={<RedirectPage />} />
+      <Route path='/polygon' element={<Home />} />
+      <Route path='/gnosis' element={<Home />} />
+      <Route path='/help' element={<Help />} />
+      <Route path='/:redirectUrl' element={<RedirectPage />} />
+      <Route path='/:selectedChain/sports' element={<Sports />} />
       <Route
-        path={'/account'}
+        path={'/:selectedChain/account'}
         element={walletIsConnected ? <UserAccount /> : <Navigate replace to={'/'} />}
       />
-      <Route path='/membership' element={<Gxp />} />
-      <Route path='/mint' element={<Mint />} />
-      <Route path='/upgrade' element={<Upgrade />} />
+      <Route path='/:selectedChain/membership' element={<Gxp />} />
+      <Route path='/:selectedChain/mint' element={<Mint />} />
+      <Route path='/:selectedChain/upgrade' element={<Upgrade />} />
+      <Route path='/:selectedChain/esports' element={<Esports />} />
+      <Route path={'/:selectedChain/get-funds'} element={<GetFundsPage />} />
+      <Route path='/:selectedChain/buy-with-crypto' element={<BuyWithCryptoPage />} />
+      <Route path='/:selectedChain/buy-with-card' element={<BuyWithCardPage />} />
+      <Route path='/:selectedChain/:sportCategory/:sportName/:id' element={<MatchPage />} />
+      <Route path='*' element={<Error404 />} />
       {/* Invite Page commented incase of future reversal*/}
       {/* <Route path={"/invite"} element={<Invite />} /> */}
-      <Route path='/help' element={<Help />} />
-      <Route path='/esports' element={<Esports />} />
-      <Route path='/:sportCategory/:sportName/:id' element={<MatchPage />} />
-      <Route
-        path={'/get-funds'}
-        element={chain?.id === CHAIN_IDS.POLYGON ? <GetUSDTPage /> : <GetXDAIPage />}
-      />
-      <Route path='/buy-with-crypto' element={<BuyWithCryptoPage />} />
-      <Route path='/buy-with-card' element={<BuyWithCardPage />} />
     </Routes>
   );
 };
