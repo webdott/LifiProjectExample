@@ -9,8 +9,8 @@ import styles from './matchpage.module.scss';
 interface MatchOddViewProps {
   oddTitle: string;
   odds: {
+    selectionName: string;
     odds: string;
-    oddName: string;
     id: number;
   }[];
   allCollapsed: boolean;
@@ -61,7 +61,7 @@ const MatchOddView: FC<MatchOddViewProps> = ({ oddTitle, odds, allCollapsed }) =
         <div className={`${styles.odds} ${odds.length === 4 ? styles.four : ''}`}>
           {odds.map((item) => (
             <button key={item.id}>
-              <span>{item.oddName}</span>
+              <span>{item.selectionName}</span>
               <span>{item.odds}</span>
             </button>
           ))}

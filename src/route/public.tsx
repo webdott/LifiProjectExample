@@ -37,7 +37,7 @@ const RouterComp = () => {
       {/* <Route path={"/invite"} element={<Invite />} /> */}
       <Route path='/help' element={<Help />} />
       <Route path='/esports' element={<Esports />} />
-      <Route path='/:sportCategory/:sportName/:id' element={<MatchPage />} />
+      <Route path='/:sportHub/:sport/:gameId' element={<MatchPage />} />
       <Route
         path={'/get-funds'}
         element={chain?.id === CHAIN_IDS.POLYGON ? <GetUSDTPage /> : <GetXDAIPage />}

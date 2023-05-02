@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useCallback, useEffect, useState } from 'react';
 import { ImFire } from 'react-icons/im';
 import { useNavigate } from 'react-router';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -45,13 +45,21 @@ export default function Layout({ children }: LayoutProps) {
     }
   }, [topNav]);
 
+  const getSportHubSlugs = useCallback(() => {
+    if (location.pathname.startsWith('/sports')) return [SportHubSlug.sports];
+
+    if (location.pathname.startsWith('/esports')) return [SportHubSlug.esports];
+
+    return [SportHubSlug.sports, SportHubSlug.esports];
+  }, [location]);
+
   return (
     <Fragment>
       <Header />
       <div className={styles.section}>
         <div className={styles.leftSidebar}>
           <div className={styles.container}>
-            {location.pathname == '/' && <SearchBar />}
+            {location.pathname === '/' && <SearchBar />}
             <div className={styles.nav}>
               <ListItemButton
                 className={
@@ -94,22 +102,14 @@ export default function Layout({ children }: LayoutProps) {
                 }}
               >
                 <ListItemIcon style={{ minWidth: '24px' }}>
-                  <img width={24} height={24} src={liveIcon} />
+                  <img width={24} height={24} src={liveIcon} alt='img' />
                   {liveHoverEffect && <div className={styles.hoverEffect}></div>}
                 </ListItemIcon>
                 <ListItemText primary='Live' />
               </ListItemButton>
             </div>
             <div className={styles.leagues}>
-              <LeftSideBar
-                sportSlugs={
-                  location.pathname === '/'
-                    ? [SportHubSlug.sports, SportHubSlug.esports]
-                    : location.pathname === '/sports'
-                    ? [SportHubSlug.sports]
-                    : [SportHubSlug.esports]
-                }
-              />
+              <LeftSideBar sportHubSlugs={getSportHubSlugs()} />
             </div>
           </div>
         </div>

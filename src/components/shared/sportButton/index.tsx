@@ -4,8 +4,8 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
-import { LeftSidebarTypes } from '../../../constants/leftSidebar';
 import styles from '../../../layout/homelayout.module.scss';
+import { Sport } from '../../../constants/matches';
 
 export default function SportButton({
   sport,
@@ -15,7 +15,7 @@ export default function SportButton({
   fn,
   selected,
 }: {
-  sport: LeftSidebarTypes;
+  sport: Sport;
   index: number;
   sportTab: number;
   setSportTab: Dispatch<SetStateAction<number>>;

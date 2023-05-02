@@ -11,11 +11,11 @@ import { SportSlug } from '../constants/sports';
 import { getGamesByLeageus } from '../helpers/redux';
 
 interface Props {
-  sportSlugs?: SportHubSlug[];
+  sportHubSlugs?: SportHubSlug[];
 }
 
 function SideBarButtonList({
-  sportSlugs = [SportHubSlug.sports, SportHubSlug.esports],
+  sportHubSlugs = [SportHubSlug.sports, SportHubSlug.esports],
 }: Props): JSX.Element {
   // const gamesLoading = useTypedSelector((state) => state.games.loading);
   const [selectedSport, setSelectedSport] = useState<SportSlug | null>(null);
@@ -25,7 +25,7 @@ function SideBarButtonList({
 
   return (
     <Fragment>
-      {getGamesByLeageus(sportSlugs).map((sport, index) => {
+      {getGamesByLeageus(sportHubSlugs).map((sport, index) => {
         return (
           <Fragment key={index}>
             <SportButton
