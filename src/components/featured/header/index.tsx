@@ -13,9 +13,9 @@ import ConnetedUser from './../connectedUser';
 import { HeaderButtonText, navbar } from '../../../constants/navbar';
 import disableWalletIcon from '../../../assets/images/disableWalletIcon.png';
 import activeWalletIcon from '../../../assets/images/activeWalletIcon.png';
+import { checkIfBase, getSelectedChainFromBase } from '../../../functions';
 
 import styles from './header.module.scss';
-import { checkIfBase, getSelectedChainFromBase } from '../../../functions';
 
 export default function Header(): JSX.Element {
   const { isConnected: walletIsConnected } = useAccount();
@@ -72,7 +72,7 @@ export default function Header(): JSX.Element {
                       ? `/${getSelectedChainFromBase(location.pathname)}${
                           navItem.path === '/' ? '' : navItem.path
                         }`
-                      : `/${selectedChain}${navItem.path === '/' ? '' : navItem.path}`
+                      : `/${selectedChain}${navItem.path}`
                   }
                 >
                   {navItem.name}
