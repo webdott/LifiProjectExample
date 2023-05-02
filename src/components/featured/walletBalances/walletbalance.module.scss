@@ -93,6 +93,11 @@
       .value {
         color: var(--medium_green);
         font-size: 18px;
+
+        span {
+          font-size: 14px;
+          opacity: 0.5;
+        }
       }
 
       .payoutsBlock {

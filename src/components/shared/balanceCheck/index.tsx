@@ -14,7 +14,7 @@ const BalanceCheck: React.FC = () => {
 
   return (
     <div className={styles.balanceCheckContainer}>
-      <Link to={`${getSelectedChainFromBase(location.pathname)}/get-funds`} className={styles.getFunds}>
+      <Link to={`/${getSelectedChainFromBase(location.pathname)}/get-funds`} className={styles.getFunds}>
         <div className={styles.hoverEffect}></div>
         <span>Get Funds</span>
       </Link>

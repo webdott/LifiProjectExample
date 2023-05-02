@@ -50,12 +50,20 @@ export default function TabPanel(props: TabPanelProps) {
   const location = useLocation();
   const { address } = useAccount();
   const { disconnect } = useDisconnect();
-  const { data, isLoading: isLoadingBalance } = useBalance({
+  const { data: nativeData, isLoading: isLoadingNativeDataBalance } = useBalance({
     address,
     chainId:
       getSelectedChainFromBase(location.pathname) === 'polygon'
         ? CHAIN_IDS.POLYGON
         : CHAIN_IDS.GNOSIS,
+  });
+  const { data: USDTBalanceData, isLoading: isLoadingUSDTBalance } = useBalance({
+    address: getSelectedChainFromBase(location.pathname) === 'polygon' ? address : undefined,
+    chainId:
+      getSelectedChainFromBase(location.pathname) === 'polygon'
+        ? CHAIN_IDS.POLYGON
+        : CHAIN_IDS.GNOSIS,
+    token: '0xc2132d05d31c914a87c6611c10748aeb04b58e8f',
   });
   const { children, value, index, ...other } = props;
   const balanceDetail: 'poly' | 'gnosis' = value === 0 ? 'poly' : 'gnosis';
@@ -73,7 +81,7 @@ export default function TabPanel(props: TabPanelProps) {
         <>
           <div className={styles.block}>
             <p className={styles.title}>Balance</p>
-            {isLoadingBalance ? (
+            {isLoadingNativeDataBalance || isLoadingUSDTBalance ? (
               <Box
                 sx={{
                   opacity: 0.25,
@@ -90,7 +98,19 @@ export default function TabPanel(props: TabPanelProps) {
             ) : (
               <div className={styles.polyBalance}>
                 <p className={styles.value}>
-                  {data?.formatted} {data?.symbol}
+                  {value === 0 ? (
+                    <>
+                      {USDTBalanceData?.formatted} {USDTBalanceData?.symbol}
+                      <span>
+                        {' '}
+                        + {nativeData?.formatted} {nativeData?.symbol}
+                      </span>
+                    </>
+                  ) : (
+                    `
+                    ${nativeData?.formatted} ${nativeData?.symbol}
+                  `
+                  )}
                 </p>
                 {value === 0 && (
                   <Tooltip

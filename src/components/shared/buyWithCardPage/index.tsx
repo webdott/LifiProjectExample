@@ -13,7 +13,7 @@ import styles from './buywithcard.module.scss';
 
 export default function BuyWithCardPage() {
   const { isConnected: walletIsConnected } = useAccount();
-const {selectedChain} = useParams();
+  const { selectedChain } = useParams();
   const [showModal, setShowModal] = useState<boolean>(false);
   const { base64Hash, isErrorSigning, getSignature } = usePelerinSigner();
 
