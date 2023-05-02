@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useCallback, useEffect, useState } from 'react';
 import { ImFire } from 'react-icons/im';
 import { useNavigate } from 'react-router';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -45,6 +45,13 @@ export default function Layout({ children }: LayoutProps) {
       setLiveHoverEffect(false);
     }
   }, [topNav]);
+
+  const getSportHubSlugs = useCallback(() => {
+    if (location.pathname.includes('/esports')) return [SportHubSlug.esports];
+    if (location.pathname.includes('/sports')) return [SportHubSlug.sports];
+
+    return [SportHubSlug.sports, SportHubSlug.esports];
+  }, [location]);
 
   return (
     <Fragment>
@@ -95,22 +102,14 @@ export default function Layout({ children }: LayoutProps) {
                 }}
               >
                 <ListItemIcon style={{ minWidth: '24px' }}>
-                  <img width={24} height={24} src={liveIcon} />
+                  <img width={24} height={24} src={liveIcon} alt='img' />
                   {liveHoverEffect && <div className={styles.hoverEffect}></div>}
                 </ListItemIcon>
                 <ListItemText primary='Live' />
               </ListItemButton>
             </div>
             <div className={styles.leagues}>
-              <LeftSideBar
-                sportSlugs={
-                  checkIfBase(location.pathname)
-                    ? [SportHubSlug.sports, SportHubSlug.esports]
-                    : checkIfSPorts(location.pathname)
-                    ? [SportHubSlug.sports]
-                    : [SportHubSlug.esports]
-                }
-              />
+              <LeftSideBar sportHubSlugs={getSportHubSlugs()} />
             </div>
           </div>
         </div>

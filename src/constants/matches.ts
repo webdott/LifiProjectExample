@@ -1,11 +1,5 @@
 import { matchesDisableIcons, matchesIcons } from './../constants/icons';
-import ManuLogo from './../assets/images/manu.png';
-import MancityLogo from './../assets/images/mancity.png';
-import RealMadridLogo from './../assets/images/realMadrid.png';
-import AtleticoLogo from './../assets/images/Atletico.png';
-import PremierLeagueLogo from './../assets/images/premier-league.png';
-import laligaLogo from './../assets/images/laligaLogo.png';
-import { AzuroLeague } from '../redux/reducers/games';
+import { SportSlug } from './sports';
 
 export enum MatchesEnum {
   ALL = 'All',
@@ -37,9 +31,8 @@ export const matchesColumn: MatchesColumnTypes[] = [
   },
 ];
 
-export interface MatchType {
+export interface Game {
   id: string;
-  startsAt: string;
   startsAtString: string;
   team1: string;
   team2: string;
@@ -47,16 +40,21 @@ export interface MatchType {
   markets: any[];
 }
 
-export interface LeagueType {
+export interface League {
   slug: string;
   name: string;
-  games: MatchType[];
+  flag: string;
+  games: Game[];
 }
 
-export interface SportsByLeagues {
+export interface Sport {
   sport: string;
+  activeIcon: string;
+  disableIcon: string;
+  sportSlug: SportSlug;
   sportHub: string;
-  leagues: LeagueType[];
+  sportHubSlug: string;
+  leagues: League[];
 }
 
 export enum oddsEnum {

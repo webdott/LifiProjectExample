@@ -1,9 +1,9 @@
-import { Component, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { CiGrid2H, CiGrid2V } from 'react-icons/ci';
 import { CgArrowsScrollV } from 'react-icons/cg';
 import { FiSearch } from 'react-icons/fi';
 import { RiSettings5Fill } from 'react-icons/ri';
-import { XMasonry, XBlock, XMasonryProps } from 'react-xmasonry';
+import { XMasonry, XBlock } from 'react-xmasonry';
 import { Dropdown } from 'antd';
 
 import MatchOddView from './matchOddView';
@@ -11,6 +11,7 @@ import SearchMarkets from './searchMarkets';
 import { items } from '../odds';
 
 import styles from './matchpage.module.scss';
+import { Game } from '../../../../constants/matches';
 
 const allOdds: Record<
   string,
@@ -45,7 +46,10 @@ const allOdds: Record<
   },
 };
 
-const AllMatchOdds = () => {
+interface Props {
+  game: Game | null;
+}
+const AllMatchOdds = ({ game }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [showMasonry, setShowMasonry] = useState<boolean>(false);
   const [halfWidth, setHalfWidth] = useState<number>(900);
@@ -114,13 +118,15 @@ const AllMatchOdds = () => {
       <div className={styles.matchOddsContainer} ref={containerRef}>
         {showMasonry && (
           <XMasonry targetBlockWidth={halfWidth} smartUpdateCeil={100}>
-            {Object.keys(allOdds).map((odd) => (
-              <XBlock key={odd} width={gridClass === 'halfGrid' ? 1 : 2}>
-                <MatchOddView
-                  oddTitle={odd}
-                  odds={allOdds[odd].matchOdds}
-                  allCollapsed={allCollapsed}
-                />
+            {game?.markets.map((market) => (
+              <XBlock key={market.marketName} width={gridClass === 'halfGrid' ? 1 : 2}>
+                {market.outcomes.map((ou: any) => (
+                  <MatchOddView
+                    oddTitle={market.marketName}
+                    odds={ou}
+                    allCollapsed={allCollapsed}
+                  />
+                ))}
               </XBlock>
             ))}
           </XMasonry>

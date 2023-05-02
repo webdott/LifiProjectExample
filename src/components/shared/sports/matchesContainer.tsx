@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import _ from 'lodash';
 
-import { MatchesEnum, SportsByLeagues, matchesColumn } from '../../../constants/matches';
+import { MatchesEnum, Sport, matchesColumn } from '../../../constants/matches';
 import Matches from '../../featured/matches';
 
 import styles from '../../featured/matches/matches.module.scss';
 
-const MatchesContainer = ({ games }: { games: SportsByLeagues[] }) => {
+const MatchesContainer = ({ games }: { games: Sport[] }) => {
   const [matchColumn, setMatchColumn] = useState<MatchesEnum>(MatchesEnum.ALL);
 
   const [activeTabId, setActiveTabId] = useState<number>(0);

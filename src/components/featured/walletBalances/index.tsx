@@ -10,7 +10,6 @@ import Box from '@mui/material/Box';
 import PolygonIcon from '../../shared/icons/polygonIcon';
 import GnosisIcon from '../../shared/icons/gnosisIcon';
 import { getResultingChainUrl, getSelectedChainFromBase } from '../../../functions';
-import { CHAIN_IDS } from '../../../constants/wallet';
 import useOutsideClick from '../../../hooks/useClickOutside';
 import TabPanel from './tabpanel';
 
