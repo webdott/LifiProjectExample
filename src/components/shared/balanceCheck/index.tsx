@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
 
 import headerWalletIcon from '../../../assets/images/headerWalletIcon.png';
 import WalletBalance from '../../featured/walletBalances';
 
 import styles from './balancecheck.module.scss';
-import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
+import { getSelectedChainFromBase } from '../../../functions';
 
 const BalanceCheck: React.FC = () => {
+  const location = useLocation();
   const [showWalletBalance, setShowWalletBalance] = useState<boolean>(false);
 
   return (
     <div className={styles.balanceCheckContainer}>
-      <Link to={'/get-funds'} className={styles.getFunds}>
+      <Link to={`${getSelectedChainFromBase(location.pathname)}/get-funds`} className={styles.getFunds}>
         <div className={styles.hoverEffect}></div>
         <span>Get Funds</span>
       </Link>
