@@ -7,6 +7,7 @@ import { RootState } from '../../../redux';
 import { addBetSlip, removeBetSlip } from '../../../redux/action-creators';
 import { round } from '../../../utils/numbers';
 import { getSelectedChainFromBase } from '../../../functions';
+import OddChangeListItem from './oddChange';
 
 import styles from './matches.module.scss';
 
@@ -71,6 +72,7 @@ const Match: FC<MatchProps> = ({ game, sport }) => {
             </li>
           );
         })}
+        <OddChangeListItem />
         <li className={styles.allMarkets}>
           <Link
             to={`/${getSelectedChainFromBase(location.pathname)}/${sport.sportHub}/${sport.sport}/${
