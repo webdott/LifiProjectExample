@@ -1,14 +1,14 @@
 import { SportHubSlug, SportSlug } from '../../constants/sports';
 import { ActionType } from '../action-types';
-import { Action } from '../actions';
+import { GamesAction } from '../actions';
 
-export type AzuraStatus = 'Resolved' | 'Canceled' | 'Created';
+export type AzuroStatus = 'Resolved' | 'Canceled' | 'Created';
 
 export type AzureSportHub = {
   name: string;
   slug: SportHubSlug;
 };
-export type AzureSport = {
+export type AzuroSport = {
   sportId: string;
   name: string;
   slug: SportSlug;
@@ -32,17 +32,17 @@ export type AzuroParticipant = {
   name: string;
 };
 
-export type AzuerOutcome = {
+export type AzuroOutcome = {
   id: string;
   outcomeId: string;
-  odds: string;
+  odds: number;
 };
 
-export type AzuerCondition = {
+export type AzuroCondition = {
   id: string;
   conditionId: string;
-  status: AzuraStatus;
-  outcomes: AzuerOutcome[];
+  status: AzuroStatus;
+  outcomes: AzuroOutcome[];
   core: {
     address: string;
     type: string;
@@ -54,8 +54,8 @@ export type AzuroGame = {
   gameId: string;
   slug: SportSlug;
   title: string;
-  status: AzuraStatus;
-  sport: AzureSport;
+  status: AzuroStatus;
+  sport: AzuroSport;
   league: AzuroLeague;
   participants: AzuroParticipant[];
   startsAt: string;
@@ -63,7 +63,7 @@ export type AzuroGame = {
   liquidityPool: {
     address: string;
   };
-  conditions: AzuerCondition[];
+  conditions: AzuroCondition[];
 };
 
 interface GamesState {
@@ -78,7 +78,7 @@ const initialState = {
   data: [],
 };
 
-const reducer = (state: GamesState = initialState, action: Action): GamesState => {
+const reducer = (state: GamesState = initialState, action: GamesAction): GamesState => {
   switch (action.type) {
     case ActionType.FETCH_GAMES_START:
       return {

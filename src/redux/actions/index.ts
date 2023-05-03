@@ -7,9 +7,16 @@ import {
   GetButtonStateErrorAction,
   AddBetSlippAction,
   RemoveBetSlippAction,
+  FetchBetsHistoryAction,
+  FecthBetsHistoryErrorAction,
+  FetchBetsHistorySuccessAction,
 } from './interfaces';
 
-export type Action = FetchGamesAction | FetchGamesSuccessAction | FecthGamesErrorAction;
+export type GamesAction = FetchGamesAction | FetchGamesSuccessAction | FecthGamesErrorAction;
+export type BestHistoryAction =
+  | FetchBetsHistoryAction
+  | FetchBetsHistorySuccessAction
+  | FecthBetsHistoryErrorAction;
 
 export type BetSlipAction = AddBetSlippAction | RemoveBetSlippAction;
 

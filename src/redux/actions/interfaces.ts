@@ -1,4 +1,6 @@
 import { CurrentGame } from '../reducers/betSlip';
+import { AzuroBet } from '../reducers/betsHistory';
+import { AzuroGame } from '../reducers/games';
 import { ActionType } from './../action-types';
 
 export interface FetchGamesAction {
@@ -7,11 +9,25 @@ export interface FetchGamesAction {
 
 export interface FetchGamesSuccessAction {
   type: ActionType.FETCH_GAMES_SUCCESSS;
-  payload: any[];
+  payload: AzuroGame[];
 }
 
 export interface FecthGamesErrorAction {
   type: ActionType.FETCH_GAMES_ERROR;
+  payload: string;
+}
+
+export interface FetchBetsHistoryAction {
+  type: ActionType.FETCH_BETS_HISTORY_START;
+}
+
+export interface FetchBetsHistorySuccessAction {
+  type: ActionType.FETCH_BETS_HISTORY_SUCCESSS;
+  payload: AzuroBet[];
+}
+
+export interface FecthBetsHistoryErrorAction {
+  type: ActionType.FETCH_BETS_HISTORY_ERROR;
   payload: string;
 }
 

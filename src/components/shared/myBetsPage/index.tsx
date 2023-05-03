@@ -1,10 +1,29 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { betsArray, navItems, titleItems } from './bets';
 import SortButton from '../sortButton';
 
 import styles from './mybetspage.module.scss';
+import { useDispatch } from 'react-redux';
+import { useNetwork } from 'wagmi';
+import { fetchBetsHistory } from '../../../redux/action-creators';
+import { polygon } from 'wagmi/chains';
+import { useTypedSelector } from '../../../hooks/useTypedSelector';
+import { BetsResult } from '../../../redux/reducers/betsHistory';
+import { round } from '../../../utils/numbers';
+import dayjs from 'dayjs';
 
 export default function MyBetsPage() {
+  const dispatch = useDispatch();
+  const { chain } = useNetwork();
+
+  const { data: bets, loading } = useTypedSelector((state) => state.betsHistory);
+
+  useEffect(() => {
+    (async () => {
+      fetchBetsHistory(chain?.id || polygon.id)(dispatch);
+    })();
+  }, [chain]);
+
   const [activeItemIndex, setActiveIndex] = useState<number>(0);
   const activeNav = (index: number) => {
     if (index === activeItemIndex) {
@@ -43,18 +62,19 @@ export default function MyBetsPage() {
         </ul>
 
         <ul className={styles.betsTable}>
-          {betsArray.map((el, index: number) => {
+          {bets.map((el, index: number) => {
+            const createdAt = dayjs(el.createdBlockTimestamp * 1000);
             return (
               <li key={index}>
                 <div className={styles.betId}>
-                  <span>{el.id}</span>
+                  <span>{el.betId}</span>
                 </div>
                 <div className={styles.betResultSection}>
                   <div
                     className={
-                      el.result === 'Win'
+                      el.result === BetsResult.won
                         ? styles.betResultWin
-                        : el.result === 'Lose'
+                        : el.result === BetsResult.lose
                         ? styles.betResultLose
                         : styles.betResultActive
                     }
@@ -63,23 +83,27 @@ export default function MyBetsPage() {
                   </div>
                 </div>
                 <div className={styles.betAmount}>
-                  <div>{el.amount}</div>
-                  <div>{el.pool}</div>
+                  <div>{round(el.amount, 2)}</div>
+                  <div>BTC</div>
                 </div>
                 <div className={styles.betWLamount}>
-                  <span>{el.wlAmount}</span>
+                  <span>
+                    {el.result === BetsResult.won
+                      ? round(el.potentialPayout - el.amount, 2)
+                      : round(el.amount, 2)}
+                  </span>
                 </div>
                 <div className={styles.betMatch}>
-                  <div>{el.team1}</div>
+                  <div>{el.game.participants[0].name}</div>
                   <div>vs</div>
-                  <div>{el.team2}</div>
+                  <div>{el.game.participants[1].name}</div>
                 </div>
                 <div className={styles.betCoef}>
-                  <div>{el.coef}</div>
+                  <div>{round(el.outcome.odds, 2)}</div>
                 </div>
                 <div className={styles.betDateTime}>
-                  <div>{el.time}</div>
-                  <div>{el.date}</div>
+                  <div>{createdAt.format('D MMM, YYYY')}</div>
+                  <div>{createdAt.format('HH:mm:ss')}</div>
                 </div>
               </li>
             );

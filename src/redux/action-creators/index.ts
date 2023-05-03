@@ -2,10 +2,11 @@ import { Dispatch } from 'redux';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import { ActionType } from '../action-types';
-import { Action, BetSlipAction, GPXButtonsAction } from '../actions';
+import { GamesAction, BetSlipAction, GPXButtonsAction, BestHistoryAction } from '../actions';
 import { CurrentGame } from '../reducers/betSlip';
 import { GRAPHQL_URLS, LIQUIDITY_POOLS } from '../../constants/azuro';
 import { SPORTS_HUB_MAP, SportHubSlug } from '../../constants/sports';
+const PAGE_SIZE = 10;
 
 const SPORTS_QUERY = `
   query Sports($sportFilter: Sport_filter, $countryFilter: Country_filter, $leagueFilter: League_filter, $gameFilter: Game_filter, $gameOrderBy: Game_orderBy, $gameOrderDirection: OrderDirection) {
@@ -105,8 +106,48 @@ const GAMES_QUERY = `
   }
 `;
 
+const BETS_HISTORY_QUERY = `
+  query BetsHistory($first: Int, $skip: Int, $where: Bet_filter) {
+  bets(first: $first, skip: $skip where: $where) {
+    betId 
+    amount 
+    potentialPayout 
+    status 
+    result 
+    isRedeemable 
+    isRedeemed 
+    createdBlockTimestamp 
+    createdTxHash 
+    outcome { 
+      outcomeId
+      odds
+    }
+    game { 
+      ...Game
+    }
+  }
+}
+ 
+fragment Game on Game {
+  sport {
+    name
+  }
+  league {
+    name
+    country {
+      name
+    }
+  }
+  participants {
+    name
+    image
+  }
+  startsAt
+}
+`;
+
 export const fetchAllGames = (chainId: number, hubSlugs: SportHubSlug[]) => {
-  return async (dispatch: Dispatch<Action>) => {
+  return async (dispatch: Dispatch<GamesAction>) => {
     dispatch({
       type: ActionType.FETCH_GAMES_START,
     });
@@ -174,6 +215,39 @@ export const fetchAllGames = (chainId: number, hubSlugs: SportHubSlug[]) => {
     } catch (err: any) {
       dispatch({
         type: ActionType.FETCH_GAMES_ERROR,
+        payload: err.message,
+      });
+    }
+  };
+};
+
+export const fetchBetsHistory = (chainId: number, page: number = 2) => {
+  return async (dispatch: Dispatch<BestHistoryAction>) => {
+    dispatch({
+      type: ActionType.FETCH_BETS_HISTORY_START,
+    });
+
+    let operation = 'BetsHistory';
+    try {
+      const { data: betsHistory } = await axios.post(GRAPHQL_URLS[chainId] + `?op=${operation}`, {
+        operation,
+        query: BETS_HISTORY_QUERY,
+        variables: {
+          skip: (page - 1) * PAGE_SIZE,
+          first: PAGE_SIZE,
+          where: {
+            actor: '0xa416b49c0e513ffdd25198f709ccb553256642dc',
+          },
+        },
+      });
+
+      dispatch({
+        type: ActionType.FETCH_BETS_HISTORY_SUCCESSS,
+        payload: betsHistory.data.bets,
+      });
+    } catch (err: any) {
+      dispatch({
+        type: ActionType.FETCH_BETS_HISTORY_ERROR,
         payload: err.message,
       });
     }
