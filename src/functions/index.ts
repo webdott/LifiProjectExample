@@ -57,3 +57,8 @@ export const checkIfSPorts = (url: string): boolean => {
 export const getSelectedChainFromBase = (url: string) => {
   return url.split('/')?.[1] ?? 'gnosis';
 };
+
+export const formatBalanceString = (balance: string, places?: number): string => {
+  const balanceArr: string[] = balance.split('.');
+  return balanceArr[0] + '.' + (balanceArr[1]?.slice(0, places ?? 2) ?? '');
+};

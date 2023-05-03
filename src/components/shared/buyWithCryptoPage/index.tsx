@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { gnosis, polygon } from 'wagmi/chains';
-import { useAccount, useConnect, useDisconnect } from 'wagmi';
+import { useAccount, useConnect, useDisconnect, useSwitchNetwork } from 'wagmi';
 import { HiddenUI, LiFiWidget, WidgetConfig } from '@lifi/widget';
 
 import GetFundsLayout from '../../../layout/GetFundsLayout';
@@ -12,6 +12,7 @@ import { getSelectedChainFromBase } from '../../../functions';
 
 export default function BuyWithCryptoPage() {
   const [signer, setSigner] = useState();
+  const { switchNetworkAsync } = useSwitchNetwork();
   const { isConnected: walletIsConnected, connector: activeConnector } = useAccount();
   const { connect } = useConnect();
   const { selectedChain } = useParams();
@@ -37,7 +38,6 @@ export default function BuyWithCryptoPage() {
         connect: async () => {
           connect();
           if (signer) {
-            console.log(signer!);
             return signer!;
           } else {
             throw Error('No signer object after login');
@@ -45,6 +45,14 @@ export default function BuyWithCryptoPage() {
         },
         disconnect: async () => {
           disconnect();
+        },
+        switchChain: async (reqChainId: number) => {
+          await switchNetworkAsync?.(reqChainId);
+          if (signer) {
+            return signer!;
+          } else {
+            throw Error('No signer object after chain switch');
+          }
         },
       },
       containerStyle: {
@@ -66,7 +74,7 @@ export default function BuyWithCryptoPage() {
       appearance: 'dark',
       hiddenUI: [HiddenUI.Appearance, HiddenUI.Language, HiddenUI.PoweredBy],
     };
-  }, [signer, disconnect, location.pathname]);
+  }, [signer, connect, switchNetworkAsync, disconnect, location.pathname]);
 
   return (
     <GetFundsLayout token={selectedChain === 'polygon' ? 'USDT' : 'XDAI'}>

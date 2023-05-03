@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { overview } from '../../../constants/overwiewTab';
+import { getSelectedChainFromBase } from '../../../functions';
 
 import styles from './overviewTab.module.scss';
 
 export default function OverviewTab(): JSX.Element {
+  const location = useLocation();
   const [toggleState, setToggleState] = useState<number>(0);
 
   return (
@@ -19,7 +21,7 @@ export default function OverviewTab(): JSX.Element {
                 : `${styles.tabSection_tab}`
             }
             key={el.name}
-            to={`/account?name=${el.path}`}
+            to={`/${getSelectedChainFromBase(location.pathname)}/account?name=${el.path}`}
             onClick={() => setToggleState(index)}
           >
             <div className={styles.hoverEffect}></div>

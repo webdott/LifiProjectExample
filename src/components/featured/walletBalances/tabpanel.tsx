@@ -9,7 +9,7 @@ import InfoIcon from '@mui/icons-material/Info';
 
 import Button from '../../shared/button';
 import { ButtonType } from '../../shared/button/type';
-import { getSelectedChainFromBase } from '../../../functions';
+import { formatBalanceString, getSelectedChainFromBase } from '../../../functions';
 import { CHAIN_IDS } from '../../../constants/wallet';
 
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -100,15 +100,16 @@ export default function TabPanel(props: TabPanelProps) {
                 <p className={styles.value}>
                   {value === 0 ? (
                     <>
-                      {USDTBalanceData?.formatted} {USDTBalanceData?.symbol}
+                      {formatBalanceString(USDTBalanceData?.formatted ?? '')}{' '}
+                      {USDTBalanceData?.symbol}
                       <span>
                         {' '}
-                        + {nativeData?.formatted} {nativeData?.symbol}
+                        + {formatBalanceString(nativeData?.formatted ?? '')} {nativeData?.symbol}
                       </span>
                     </>
                   ) : (
                     `
-                    ${nativeData?.formatted} ${nativeData?.symbol}
+                    ${formatBalanceString(nativeData?.formatted ?? '')} ${nativeData?.symbol}
                   `
                   )}
                 </p>
@@ -168,7 +169,7 @@ export default function TabPanel(props: TabPanelProps) {
             <Button
               className={styles.disconnectButton}
               btnType={ButtonType.membershipButton}
-              text={'Diconnect wallet'}
+              text={'Disconnect wallet'}
               onClick={() => disconnect()}
             />
           </div>

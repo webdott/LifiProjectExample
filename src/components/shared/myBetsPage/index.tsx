@@ -1,28 +1,31 @@
 import { useEffect, useState } from 'react';
-import { betsArray, navItems, titleItems } from './bets';
+import { navItems, titleItems } from './bets';
 import SortButton from '../sortButton';
 
 import styles from './mybetspage.module.scss';
 import { useDispatch } from 'react-redux';
-import { useNetwork } from 'wagmi';
 import { fetchBetsHistory } from '../../../redux/action-creators';
-import { polygon } from 'wagmi/chains';
+import { gnosis, polygon } from 'wagmi/chains';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import { BetsResult } from '../../../redux/reducers/betsHistory';
 import { round } from '../../../utils/numbers';
 import dayjs from 'dayjs';
+import { useLocation } from 'react-router';
+import { getSelectedChainFromBase } from '../../../functions';
 
 export default function MyBetsPage() {
   const dispatch = useDispatch();
-  const { chain } = useNetwork();
+  const location = useLocation();
 
   const { data: bets, loading } = useTypedSelector((state) => state.betsHistory);
 
   useEffect(() => {
+    const chainId =
+      getSelectedChainFromBase(location.pathname) === 'polygon' ? polygon.id : gnosis.id;
     (async () => {
-      fetchBetsHistory(chain?.id || polygon.id)(dispatch);
+      fetchBetsHistory(chainId)(dispatch);
     })();
-  }, [chain]);
+  }, [location.pathname]);
 
   const [activeItemIndex, setActiveIndex] = useState<number>(0);
   const activeNav = (index: number) => {
@@ -36,6 +39,7 @@ export default function MyBetsPage() {
   const handleClickNav = (index: number) => {
     setActiveIndex(index);
   };
+
   return (
     <div className={styles.container}>
       <p className={styles.pageTitle}>My Bets</p>
