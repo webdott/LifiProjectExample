@@ -1,11 +1,13 @@
 import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { Game, Sport } from '../../../constants/matches';
 import { RootState } from '../../../redux';
 import { addBetSlip, removeBetSlip } from '../../../redux/action-creators';
 import { round } from '../../../utils/numbers';
+import { getSelectedChainFromBase } from '../../../functions';
+import OddChangeListItem from './oddChange';
 
 import styles from './matches.module.scss';
 
@@ -15,6 +17,7 @@ interface MatchProps {
 }
 
 const Match: FC<MatchProps> = ({ game, sport }) => {
+  const location = useLocation();
   const { currentGame: currentBetSlipGame } = useSelector((root: RootState) => root.betSlip);
   const dispatch = useDispatch();
 
@@ -69,8 +72,13 @@ const Match: FC<MatchProps> = ({ game, sport }) => {
             </li>
           );
         })}
+        <OddChangeListItem />
         <li className={styles.allMarkets}>
-          <Link to={`/${sport.sportHub}/${sport.sport}/${game.id}`}>
+          <Link
+            to={`/${getSelectedChainFromBase(location.pathname)}/${sport.sportHub}/${sport.sport}/${
+              game.id
+            }`}
+          >
             <span>All markets</span>
           </Link>
         </li>

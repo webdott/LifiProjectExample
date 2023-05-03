@@ -3,13 +3,14 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
-import SportButton from '../components/shared/sportButton';
 
-import styles from './homelayout.module.scss';
+import SportButton from '../components/shared/sportButton';
 import { SportHubSlug } from '../constants/sports';
 import { SportSlug } from '../constants/sports';
 import { getGamesByLeageus } from '../helpers/redux';
 import FlagIcon from '../components/shared/icons/FlagIcon';
+
+import styles from './homelayout.module.scss';
 
 interface Props {
   sportHubSlugs?: SportHubSlug[];

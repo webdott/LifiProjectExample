@@ -1,5 +1,5 @@
 import { Fragment, ReactNode } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 import { getUSDTLinks, getXDAILinks } from '../constants/getFunds';
@@ -16,10 +16,11 @@ interface GetFundLayoutProps {
 
 export default function GetFundsLayout({ token, children }: GetFundLayoutProps): JSX.Element {
   const location = useLocation();
+  const { selectedChain } = useParams();
   const navigate = useNavigate();
 
   const handleNavigation = (path: string) => {
-    navigate(`${path}`);
+    navigate(`/${selectedChain}${path}`);
   };
 
   return (
@@ -33,7 +34,7 @@ export default function GetFundsLayout({ token, children }: GetFundLayoutProps):
                 <button
                   key={index}
                   className={
-                    location.pathname === el.path
+                    location.pathname === `/${selectedChain}${el.path}`
                       ? `${styles.sidebarButton} ${styles.activeTab}`
                       : `${styles.sidebarButton}`
                   }

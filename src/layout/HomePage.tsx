@@ -15,9 +15,10 @@ import { useLocation } from 'react-router-dom';
 import LeftSideBar from './sideBarButtonList';
 import liveActiveIcon from '../assets/images/activeLiveIcon.png';
 import liveDisableIcon from '../assets/images/disableLiveIcon.png';
+import { SportHubSlug } from '../constants/sports';
+import { checkIfBase, checkIfSPorts } from '../functions';
 
 import styles from './homelayout.module.scss';
-import { SportHubSlug } from '../constants/sports';
 
 export default function Layout({ children }: LayoutProps) {
   const location = useLocation();
@@ -46,9 +47,8 @@ export default function Layout({ children }: LayoutProps) {
   }, [topNav]);
 
   const getSportHubSlugs = useCallback(() => {
-    if (location.pathname.startsWith('/sports')) return [SportHubSlug.sports];
-
-    if (location.pathname.startsWith('/esports')) return [SportHubSlug.esports];
+    if (location.pathname.includes('/esports')) return [SportHubSlug.esports];
+    if (location.pathname.includes('/sports')) return [SportHubSlug.sports];
 
     return [SportHubSlug.sports, SportHubSlug.esports];
   }, [location]);
@@ -59,7 +59,7 @@ export default function Layout({ children }: LayoutProps) {
       <div className={styles.section}>
         <div className={styles.leftSidebar}>
           <div className={styles.container}>
-            {location.pathname === '/' && <SearchBar />}
+            {checkIfBase(location.pathname) && <SearchBar />}
             <div className={styles.nav}>
               <ListItemButton
                 className={

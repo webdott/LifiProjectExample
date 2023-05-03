@@ -1,25 +1,28 @@
 import Cards from '../cards';
 import Layout from '../../../layout/HomePage';
 import Loader from '../Loader/Loader';
+import { useLocation } from 'react-router';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import MatchesContainer from '../sports/matchesContainer';
 import { getGamesByLeageus } from '../../../helpers/redux';
 import { SportHubSlug } from '../../../constants/sports';
 import { useDispatch } from 'react-redux';
-import { useNetwork } from 'wagmi';
 import { fetchAllGames } from '../../../redux/action-creators';
 import { useEffect } from 'react';
-import { polygon } from 'wagmi/chains';
+import { gnosis, polygon } from 'wagmi/chains';
+import { getSelectedChainFromBase } from '../../../functions';
 
 function Esport(): JSX.Element {
   const dispatch = useDispatch();
-  const { chain } = useNetwork();
+  const location = useLocation();
 
   const { data, error, loading } = useTypedSelector((state) => state.games);
 
   useEffect(() => {
-    fetchAllGames(chain?.id || polygon.id, [SportHubSlug.esports])(dispatch);
-  }, [chain]);
+    const chainId =
+      getSelectedChainFromBase(location.pathname) === 'polygon' ? polygon.id : gnosis.id;
+    fetchAllGames(chainId, [SportHubSlug.esports])(dispatch);
+  }, [location.pathname]);
 
   return (
     <Layout>

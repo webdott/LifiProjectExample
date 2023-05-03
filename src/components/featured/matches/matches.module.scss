@@ -305,6 +305,7 @@
         li {
           padding: 15px;
           background: var(--footer_icons_col);
+          border: 1px solid transparent;
           border-radius: 10px;
           color: var(--white_900);
           width: 142px;
@@ -320,7 +321,7 @@
           }
           &:hover {
             background: var(--odds_bg_col);
-            border: 1px solid var(--medium_green);
+            border-color: var(--medium_green);
           }
           &.allMarkets {
             flex: auto;
@@ -336,7 +337,29 @@
             }
             &:hover {
               background: var(--odds_bg_col);
-              border: none;
+              border-color: transparent;
+            }
+          }
+          &.oddChange {
+            max-width: 60px;
+            height: 50px;
+            padding: 0 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .selectButton {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              row-gap: 2px;
+              color: var(--white_900);
+            }
+
+            &:hover {
+              .selectButton {
+                color: rgba(0, 176, 122, 0.3);
+              }
             }
           }
           @media only screen and (max-width: 1024px) {
@@ -464,32 +487,3 @@
     align-items: center;
   }
 }
-
-// @media screen and (max-width: 1775px) {
-// 	.matches {
-// 		.matchesBottomSection {
-// 			.match {
-// 				max-height: none;
-// 				.matchLeftSection {
-// 					ul {
-// 						column-gap: 20px;
-// 						.scores {
-// 							white-space: pre;
-// 						}
-// 					}
-// 				}
-// 				.matchRightSection {
-// 					max-height: none;
-// 					flex-wrap: wrap;
-// 					row-gap: 5px;
-// 					justify-content: center;
-// 					width: unset;
-// 					padding-right: 5px;
-// 					li {
-// 						padding: 10px 5px;
-// 					}
-// 				}
-// 			}
-// 		}
-// 	}
-// }

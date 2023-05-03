@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { useAccount, useNetwork } from 'wagmi';
+import { useParams } from 'react-router-dom';
+import { useAccount } from 'wagmi';
 
 import GetFundsLayout from '../../../layout/GetFundsLayout';
-import { CHAIN_IDS } from '../../../constants/wallet';
 import BuyWithCardModal from '../buyWithCardModal';
 import MTPELERIN from '../../../assets/images/mt_pelerin.svg';
 import usePelerinSigner from '../../../hooks/usePelerinSigner';
+import ConnectWallet from './connectWallet';
 
 import styles from './buywithcard.module.scss';
-import ConnectWallet from './connectWallet';
 
 export default function BuyWithCardPage() {
   const { isConnected: walletIsConnected } = useAccount();
-  const { chain } = useNetwork();
+  const { selectedChain } = useParams();
   const [showModal, setShowModal] = useState<boolean>(false);
   const { base64Hash, isErrorSigning, getSignature } = usePelerinSigner();
 
@@ -25,7 +25,7 @@ export default function BuyWithCardPage() {
   }, [isErrorSigning]);
 
   return (
-    <GetFundsLayout token={chain?.id === CHAIN_IDS.POLYGON ? 'USDT' : 'XDAI'}>
+    <GetFundsLayout token={selectedChain === 'polygon' ? 'USDT' : 'XDAI'}>
       <div className={styles.buyCrypto}>
         <div className={styles.options}>
           <div className={styles.header}>Buy With Card</div>

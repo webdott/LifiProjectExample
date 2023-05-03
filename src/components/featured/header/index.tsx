@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation, useParams } from 'react-router-dom';
 import { useAccount } from 'wagmi';
 
 import Button from '../../shared/button';
@@ -13,11 +13,14 @@ import ConnetedUser from './../connectedUser';
 import { HeaderButtonText, navbar } from '../../../constants/navbar';
 import disableWalletIcon from '../../../assets/images/disableWalletIcon.png';
 import activeWalletIcon from '../../../assets/images/activeWalletIcon.png';
+import { checkIfBase, getSelectedChainFromBase } from '../../../functions';
 
 import styles from './header.module.scss';
 
 export default function Header(): JSX.Element {
   const { isConnected: walletIsConnected } = useAccount();
+  const { selectedChain } = useParams();
+  const location = useLocation();
   const [showWallet] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [netState] = useState<boolean>(true);
@@ -64,7 +67,13 @@ export default function Header(): JSX.Element {
                   className={({ isActive }) =>
                     isActive ? `${styles.navLink} ${styles.activeNavLink}` : `${styles.navLink} `
                   }
-                  to={`${navItem.path}`}
+                  to={
+                    checkIfBase(location.pathname)
+                      ? `/${getSelectedChainFromBase(location.pathname)}${
+                          navItem.path === '/' ? '' : navItem.path
+                        }`
+                      : `/${selectedChain}${navItem.path}`
+                  }
                 >
                   {navItem.name}
                   {navItem.name === 'Membership' && <div className={styles.soonIcon}>Soon</div>}
