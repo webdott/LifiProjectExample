@@ -9,6 +9,7 @@ import styles from './homelayout.module.scss';
 import { SportHubSlug } from '../constants/sports';
 import { SportSlug } from '../constants/sports';
 import { getGamesByLeageus } from '../helpers/redux';
+import FlagIcon from '../components/shared/icons/FlagIcon';
 
 interface Props {
   sportHubSlugs?: SportHubSlug[];
@@ -51,7 +52,7 @@ function SideBarButtonList({
                   onClick={() => setLeagueTab(index + 1)}
                 >
                   <ListItemIcon className={styles.leagueIconSection}>
-                    <img className={styles.leagueIcon} src={league.flag} alt='Premier League' />
+                    <FlagIcon countryCode={league.country.slug} />
                   </ListItemIcon>
                   <ListItemText primary={league.name} />
                   <span className={styles.leagueNumber}>{league.games.length}</span>

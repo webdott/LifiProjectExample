@@ -32,12 +32,14 @@ const MatchPage = () => {
     if (data.length === 0) fetchAllGames(chain?.id || polygon.id, getSportHubSlugs())(dispatch);
   }, [chain, getSportHubSlugs, dispatch]);
 
+  const getGameIfAvailable = useCallback((): Game | null => {
+    if (!loading) return getGame(gameId as string);
+    else return null;
+  }, [gameId]);
   return (
     <Layout>
-      <MatchHeader value={value} setValue={setValue} />
-      {value === 0 && (
-        <AllMatchOdds game={!loading ? (getGame(gameId as string) as unknown as Game) : null} />
-      )}
+      <MatchHeader value={value} setValue={setValue} game={getGameIfAvailable()} />
+      {value === 0 && <AllMatchOdds game={getGameIfAvailable()} />}
     </Layout>
   );
 };

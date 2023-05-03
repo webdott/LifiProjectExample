@@ -1,22 +1,29 @@
-import React, { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { MdOutlineKeyboardArrowUp, MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { Tooltip } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import IconButton from '@mui/material/IconButton';
 
 import styles from './matchpage.module.scss';
+import { round } from '../../../../utils/numbers';
 
 interface MatchOddViewProps {
   oddTitle: string;
-  odds: {
+  outcomes: {
     selectionName: string;
     odds: string;
     id: number;
-  }[];
+  }[][];
   allCollapsed: boolean;
+  marketDescription: string;
 }
 
-const MatchOddView: FC<MatchOddViewProps> = ({ oddTitle, odds, allCollapsed }) => {
+const MatchOddView: FC<MatchOddViewProps> = ({
+  oddTitle,
+  outcomes,
+  allCollapsed,
+  marketDescription,
+}) => {
   const [isCollapsed, setIsCollapsed] = useState<boolean>(allCollapsed);
 
   useEffect(() => {
@@ -31,12 +38,7 @@ const MatchOddView: FC<MatchOddViewProps> = ({ oddTitle, odds, allCollapsed }) =
           <Tooltip
             title={
               <p className={styles.topPrompt}>
-                <p>Combo is coming soon!</p>
-                <span>
-                  You combine several outcomes from different games into one bet in order to create
-                  bigger odds and potentially a bigger payout. All the chosen need to be successful
-                  for you combo bet to win.
-                </span>
+                <span>{marketDescription}</span>
               </p>
             }
             arrow={true}
@@ -57,16 +59,17 @@ const MatchOddView: FC<MatchOddViewProps> = ({ oddTitle, odds, allCollapsed }) =
           </button>
         )}
       </div>
-      {!isCollapsed && (
-        <div className={`${styles.odds} ${odds.length === 4 ? styles.four : ''}`}>
-          {odds.map((item) => (
-            <button key={item.id}>
-              <span>{item.selectionName}</span>
-              <span>{item.odds}</span>
-            </button>
-          ))}
-        </div>
-      )}
+      {!isCollapsed &&
+        outcomes.map((odds) => (
+          <div className={`${styles.odds} ${odds.length === 4 ? styles.four : ''}`}>
+            {odds.map((item) => (
+              <button key={item.id}>
+                <span>{item.selectionName}</span>
+                <span>{round(parseFloat(item.odds), 2)}</span>
+              </button>
+            ))}
+          </div>
+        ))}
     </div>
   );
 };

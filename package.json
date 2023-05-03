@@ -30,6 +30,7 @@
     "dayjs": "^1.11.7",
     "ethereum-block-by-date": "^1.4.6",
     "ethers": "^5",
+    "flag-icons": "^6.6.6",
     "graphql": "^16.6.0",
     "lodash": "^4.17.21",
     "metamask-react": "^2.4.0",

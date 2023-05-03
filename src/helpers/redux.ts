@@ -4,21 +4,39 @@ import { AzuroGame } from '../redux/reducers/games';
 import { GAMES_ORDER } from '../constants/games';
 import { orderBy } from 'lodash';
 import dayjs from 'dayjs';
-import germanyFlag from '../public/images/leaguesFlags/germany.webp';
 import { Game, League, MatchesEnum, Sport } from '../constants/matches';
 import { SPORTS_HUB_MAP, SPORTS_ICONS, SPORTS_NAMES, SportHubSlug } from '../constants/sports';
+import { getMarketDescription, getMarketKey } from '@azuro-org/dictionaries';
 
 const generateGameObj = (game: AzuroGame): Game => {
-  const markets = aggregateOutcomesByMarkets({
+  let markets = aggregateOutcomesByMarkets({
     lpAddress: game.liquidityPool.address,
     conditions: game.conditions.map((item) => ({ ...item, coreAddress: item.core.address })),
+  });
+
+  const fmtMarkets = markets.map((m) => {
+    const marketId = getMarketKey(m.outcomes[0][0].outcomeId);
+    return {
+      ...m,
+      marketDescription: getMarketDescription({
+        marketKey: marketId,
+        outcomeId: m.outcomes[0][0].outcomeId,
+      }),
+    };
   });
   const startsAt = dayjs(parseInt(game.startsAt, 10) * 1000);
   const now = dayjs();
   return {
     id: game.id,
-    team1: game.title.split('-')[0].trim(),
-    team2: (game.title.split('-')[1] || '').trim(),
+    participant1: game.participants[0],
+    participant2: game.participants[1],
+    league: {
+      name: game.league.name,
+      country: {
+        name: game.league.country.name,
+        slug: game.league.country.slug,
+      },
+    },
     timeLabel:
       startsAt.format('YYYY-MM-DD') === now.format('YYYY-MM-DD')
         ? MatchesEnum.TODAY
@@ -26,7 +44,8 @@ const generateGameObj = (game: AzuroGame): Game => {
         ? MatchesEnum.TOMORROW
         : MatchesEnum.ALL,
     startsAtString: startsAt.format('HH-mm'),
-    markets: markets,
+    startsAt: startsAt,
+    markets: fmtMarkets,
   };
 };
 
@@ -34,7 +53,10 @@ const _generateLeagueObject = (game: AzuroGame): League => {
   return {
     slug: game.league.slug,
     name: game.league.name,
-    flag: germanyFlag,
+    country: {
+      name: game.league.country.name,
+      slug: game.league.country.slug,
+    },
     games: [generateGameObj(game)],
   };
 };

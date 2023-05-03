@@ -25,8 +25,8 @@ const Match: FC<MatchProps> = ({ game, sport }) => {
       addBetSlip({
         game: sport.sport,
         id: game.id,
-        team1: game.team1,
-        team2: game.team2,
+        team1: game.participant1.name,
+        team2: game.participant2.name,
         betType: 'Full Time Result',
         matchOdd: item,
       })(dispatch);
@@ -38,13 +38,13 @@ const Match: FC<MatchProps> = ({ game, sport }) => {
       <div className={styles.matchLeftSection}>
         <ul>
           <li className={styles.team1Section}>
-            <span>{game.team1}</span>{' '}
+            <span>{game.participant1.name}</span>{' '}
           </li>
           <li>
             <span>-</span>
           </li>
           <li className={styles.team2Section}>
-            <span>{game.team2}</span>{' '}
+            <span>{game.participant2.name}</span>{' '}
           </li>
         </ul>
       </div>

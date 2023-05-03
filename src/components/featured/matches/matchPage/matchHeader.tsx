@@ -2,10 +2,10 @@ import React, { Dispatch, FC, SetStateAction } from 'react';
 import { Box, Tab, Tabs, Tooltip } from '@mui/material';
 
 import PremierLeagueFlag from '../../../../public/images/leaguesFlags/england.webp';
-import Team1Flag from '../../../../assets/images/LeicesterCity.png';
-import Team2Flag from '../../../../assets/images/mancity.png';
 
 import styles from './matchpage.module.scss';
+import { Game } from '../../../../constants/matches';
+import FlagIcon from '../../../shared/icons/FlagIcon';
 
 function a11yProps(index: number) {
   return {
@@ -46,36 +46,43 @@ const tabStyles = {
 };
 
 interface MatchHeaderProps {
+  game: Game | null;
   value: number;
   setValue: Dispatch<SetStateAction<number>>;
 }
 
-const MatchHeader: FC<MatchHeaderProps> = ({ value, setValue }) => {
+const MatchHeader: FC<MatchHeaderProps> = ({ game, value, setValue }) => {
   const handleChange = (newValue: number) => {
     if (newValue === 1) return;
     setValue(newValue);
   };
 
+  if (!game) return null;
   return (
     <div className={styles.matchHeader}>
       <div className={styles.leagueName}>
-        <img className={styles.leagueIcon} src={PremierLeagueFlag} alt='league icon' />
-        <p>England &middot; Premier League</p>
+        <FlagIcon countryCode={game.league.country.slug} />
+        <p>
+          {game.league.country.name} &middot; {game.league.name}
+        </p>
       </div>
       <div className={styles.matchDetails}>
         <div className={styles.matchDetailsContent}>
           <div className={styles.teamLogo}>
-            <img src={Team1Flag} alt='team1 icon' />
+            <img src={game.participant1.image || ''} alt='team1 icon' />
           </div>
           <div className={styles.teamNames}>
             <div>
-              <p>05:30 PM</p>
-              <span>Tomorrow</span>
+              <p>{game.startsAtString}</p>
+              <span>{game.timeLabel}</span>
             </div>
-            <p>Leicester City – Manchester City</p>
+            <p>
+              {' '}
+              {game.participant1.name} – {game.participant2.name}
+            </p>
           </div>
           <div className={styles.teamLogo}>
-            <img src={Team2Flag} alt='team2 icon' />
+            <img src={game.participant2.image || ''} alt='team2 icon' />
           </div>
         </div>
       </div>

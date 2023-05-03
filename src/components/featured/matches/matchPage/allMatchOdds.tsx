@@ -71,11 +71,14 @@ const AllMatchOdds = ({ game }: Props) => {
       setShowMasonry(true);
     }, 500);
   }, [containerRef?.current]);
-
+  if (!game) return null;
   return (
     <div className={styles.allMatchOdds}>
       <div className={styles.top}>
-        <p>Leicester City – Manchester City Crypto Betting odds 30 April 2023</p>
+        <p>
+          {game?.participant1.name} – {game?.participant2.name} Crypto Betting odds{' '}
+          {game?.startsAt.format('DD MMM YYYY')}:
+        </p>
         <div className={styles.actions}>
           <button
             className={gridClass === 'fullGrid' ? styles.active : ''}
@@ -120,13 +123,12 @@ const AllMatchOdds = ({ game }: Props) => {
           <XMasonry targetBlockWidth={halfWidth} smartUpdateCeil={100}>
             {game?.markets.map((market) => (
               <XBlock key={market.marketName} width={gridClass === 'halfGrid' ? 1 : 2}>
-                {market.outcomes.map((ou: any) => (
-                  <MatchOddView
-                    oddTitle={market.marketName}
-                    odds={ou}
-                    allCollapsed={allCollapsed}
-                  />
-                ))}
+                <MatchOddView
+                  marketDescription={market.marketDescription}
+                  oddTitle={market.marketName}
+                  outcomes={market.outcomes}
+                  allCollapsed={allCollapsed}
+                />
               </XBlock>
             ))}
           </XMasonry>

@@ -1,3 +1,4 @@
+import { Dayjs } from 'dayjs';
 import { matchesDisableIcons, matchesIcons } from './../constants/icons';
 import { SportSlug } from './sports';
 
@@ -31,11 +32,25 @@ export const matchesColumn: MatchesColumnTypes[] = [
   },
 ];
 
+export interface Country {
+  name: string;
+  slug: string;
+}
+export interface GameLeague {
+  name: string;
+  country: Country;
+}
+export interface Participant {
+  name: string;
+  image: string | null;
+}
 export interface Game {
   id: string;
   startsAtString: string;
-  team1: string;
-  team2: string;
+  startsAt: Dayjs;
+  participant1: Participant;
+  participant2: Participant;
+  league: GameLeague;
   timeLabel: string;
   markets: any[];
 }
@@ -43,7 +58,7 @@ export interface Game {
 export interface League {
   slug: string;
   name: string;
-  flag: string;
+  country: Country;
   games: Game[];
 }
 
