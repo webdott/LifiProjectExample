@@ -327,7 +327,9 @@ export const fetchBetsHistory = (
           skip: (page - 1) * PAGE_SIZE,
           first: PAGE_SIZE,
           where: {
-            actor: accountId,
+            // actor: accountId,
+            //TODO: change back to accountId
+            actor: '0xa416b49c0e513ffdd25198f709ccb553256642dc',
             ...extraFilters,
           },
         },

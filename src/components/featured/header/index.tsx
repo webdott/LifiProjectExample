@@ -34,7 +34,7 @@ export default function Header(): JSX.Element {
   };
 
   const close = () => {
-    setShowModal(showModal);
+    setShowModal(false);
   };
 
   return (

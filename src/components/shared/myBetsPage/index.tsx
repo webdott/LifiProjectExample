@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Pagination from '@mui/material/Pagination';
 import { navItems, titleItems } from './bets';
 import SortButton from '../sortButton';
 
@@ -25,6 +26,7 @@ export default function MyBetsPage() {
   const dispatch = useDispatch();
   const location = useLocation();
 
+  const [page, setPage] = useState<number>(1);
   const [activeItemIndex, setActiveIndex] = useState<number>(0);
   const { data: bets, loading } = useTypedSelector((state) => state.betsHistory);
 
@@ -34,9 +36,10 @@ export default function MyBetsPage() {
     (async () => {
       fetchBetsHistory(chainId, address as string, {
         extraFilters: ACTIVE_TAB_FILTERS[activeItemIndex],
+        page,
       })(dispatch);
     })();
-  }, [location.pathname, activeItemIndex]);
+  }, [location.pathname, activeItemIndex, page]);
 
   const activeNav = (index: number) => {
     if (index === activeItemIndex) {
@@ -44,6 +47,10 @@ export default function MyBetsPage() {
     } else {
       return `${styles.navItem}`;
     }
+  };
+
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
   };
 
   const handleClickNav = (index: number) => {
@@ -123,6 +130,31 @@ export default function MyBetsPage() {
             );
           })}
         </ul>
+
+        <div className={styles.pagination}>
+          <Pagination
+            //TODO: getTotal amount and calculate the count
+            count={10}
+            page={page}
+            boundaryCount={2}
+            variant='outlined'
+            shape='rounded'
+            size='large'
+            onChange={handleChange}
+            sx={{
+              '& .MuiPaginationItem-sizeLarge': {
+                color: '#fff',
+                border: '1px solid #05a56c',
+                '&.MuiPaginationItem-previousNext,&.MuiPaginationItem-ellipsis': {
+                  border: 'none',
+                },
+                '&.Mui-selected': {
+                  background: '#05a56c',
+                },
+              },
+            }}
+          />
+        </div>
       </div>
     </div>
   );
