@@ -1,3 +1,4 @@
+import { OddsFormat } from '../reducers/app';
 import { CurrentGame } from '../reducers/betSlip';
 import { AzuroBet } from '../reducers/betsHistory';
 import { AzuroGame } from '../reducers/games';
@@ -53,4 +54,9 @@ export interface AddBetSlippAction {
 }
 export interface RemoveBetSlippAction {
   type: ActionType.REMOVE_BET_SLIP;
+}
+
+export interface UpdateOddsFormatAction {
+  type: ActionType.UPDATE_ODDS_FORMAT;
+  payload?: OddsFormat;
 }

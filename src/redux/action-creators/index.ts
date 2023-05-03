@@ -2,10 +2,17 @@ import { Dispatch } from 'redux';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import { ActionType } from '../action-types';
-import { GamesAction, BetSlipAction, GPXButtonsAction, BestHistoryAction } from '../actions';
+import {
+  GamesAction,
+  BetSlipAction,
+  GPXButtonsAction,
+  BestHistoryAction,
+  AppAction,
+} from '../actions';
 import { CurrentGame } from '../reducers/betSlip';
 import { GRAPHQL_URLS, LIQUIDITY_POOLS } from '../../constants/azuro';
 import { SPORTS_HUB_MAP, SportHubSlug } from '../../constants/sports';
+import { OddsFormat } from '../reducers/app';
 const PAGE_SIZE = 10;
 
 const SPORTS_QUERY = `
@@ -287,6 +294,15 @@ export const removeBetSlip = () => {
   return (dispatch: Dispatch<BetSlipAction>) => {
     dispatch({
       type: ActionType.REMOVE_BET_SLIP,
+    });
+  };
+};
+
+export const updateOddsFormat = (format: OddsFormat) => {
+  return (dispatch: Dispatch<AppAction>) => {
+    dispatch({
+      type: ActionType.UPDATE_ODDS_FORMAT,
+      payload: format,
     });
   };
 };
