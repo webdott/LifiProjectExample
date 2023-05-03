@@ -8,6 +8,7 @@ import {
   GPXButtonsAction,
   BestHistoryAction,
   AppAction,
+  CurrentGameAction,
 } from '../actions';
 import { CurrentGame } from '../reducers/betSlip';
 import { GRAPHQL_URLS, LIQUIDITY_POOLS } from '../../constants/azuro';
@@ -43,6 +44,79 @@ const SPORTS_QUERY = `
 const GAMES_QUERY = `
   query Games($first: Int, $gamesFilter: Game_filter) {
     games(first: $first, where: $gamesFilter, subgraphError: allow) {
+      ...Game
+      conditions {
+        ...GameCondition
+        __typename
+      }
+      __typename
+    }
+  }
+
+  fragment Game on Game {
+    id
+    gameId
+    slug
+    title
+    status
+    sport {
+      sportId
+      name
+      slug
+      sporthub {
+        name
+        slug
+        __typename
+      }
+      __typename
+    }
+    league {
+      name
+      slug
+      country {
+        name
+        slug
+        turnover
+        __typename
+      }
+      __typename
+    }
+    participants {
+      image
+      name
+      __typename
+    }
+    startsAt
+    hasActiveConditions
+    liquidityPool {
+      address
+      __typename
+    }
+    __typename
+  }
+
+  fragment GameCondition on Condition {
+    id
+    conditionId
+    status
+    outcomes {
+      id
+      outcomeId
+      odds
+      __typename
+    }
+    core {
+      address
+      type
+      __typename
+    }
+    __typename
+  }
+`;
+
+const CURRENT_GAMES_QUERY = `
+  query Games($gameFilter: Game_filter) {
+    games(where: $gameFilter) {
       ...Game
       conditions {
         ...GameCondition
@@ -304,5 +378,36 @@ export const updateOddsFormat = (format: OddsFormat) => {
       type: ActionType.UPDATE_ODDS_FORMAT,
       payload: format,
     });
+  };
+};
+
+export const fetchCurrentGame = (chainId: number, gameId: string) => {
+  return async (dispatch: Dispatch<CurrentGameAction>) => {
+    dispatch({
+      type: ActionType.FETCH_CURRENT_GAME_START,
+    });
+
+    let operation = 'CurrentGame';
+    try {
+      const { data: games } = await axios.post(GRAPHQL_URLS[chainId] + `?op=${operation}`, {
+        operation,
+        query: CURRENT_GAMES_QUERY,
+        variables: {
+          gameFilter: {
+            gameId: gameId,
+          },
+        },
+      });
+
+      dispatch({
+        type: ActionType.FETCH_CURRENT_GAME_SUCCESSS,
+        payload: games.data.games[0] || null,
+      });
+    } catch (err: any) {
+      dispatch({
+        type: ActionType.FETCH_CURRENT_GAME_ERROR,
+        payload: err.message,
+      });
+    }
   };
 };

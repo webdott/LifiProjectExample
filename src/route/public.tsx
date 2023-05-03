@@ -38,8 +38,7 @@ const RouterComp = () => {
       <Route path={'/:selectedChain/get-funds'} element={<GetFundsPage />} />
       <Route path='/:selectedChain/buy-with-card' element={<BuyWithCardPage />} />
       <Route path='/:selectedChain/buy-with-crypto/*' element={<BuyWithCryptoPage />} />
-      <Route path='/:selectedChain/sports/:sport/:gameId' element={<MatchPage />} />
-      <Route path='/:selectedChain/esports/:sport/:gameId' element={<MatchPage />} />
+      <Route path='/:selectedChain/:sportHub/:sport/:gameId' element={<MatchPage />} />
       <Route path='*' element={<Error404 />} />
       {/* Invite Page commented incase of future reversal*/}
       {/* <Route path={"/invite"} element={<Invite />} /> */}

@@ -14,7 +14,7 @@ import { useTypedSelector } from '../../../hooks/useTypedSelector';
 export default function Layout() {
   const navigate = useNavigate();
 
-  const { data } = useTypedSelector((state) => state.games);
+  const { data } = useTypedSelector((state) => state.games.list);
 
   const navigateToHome = () => {
     navigate('/');

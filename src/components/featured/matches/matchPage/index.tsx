@@ -7,9 +7,9 @@ import Layout from '../../../../layout/HomePage';
 import { useTypedSelector } from '../../../../hooks/useTypedSelector';
 import { gnosis, polygon } from 'wagmi/chains';
 import { useDispatch } from 'react-redux';
-import { fetchAllGames } from '../../../../redux/action-creators';
+import { fetchAllGames, fetchCurrentGame } from '../../../../redux/action-creators';
 import { SportHubSlug } from '../../../../constants/sports';
-import { getGame } from '../../../../helpers/redux';
+import { getCurrenGame } from '../../../../helpers/redux';
 import { Game } from '../../../../constants/matches';
 import { getSelectedChainFromBase } from '../../../../functions';
 
@@ -17,10 +17,9 @@ const MatchPage = () => {
   const [value, setValue] = useState<number>(0);
   const location = useLocation();
   const { sportHub, gameId } = useParams();
+  const { initialLoad } = useTypedSelector((state) => state.games);
 
   const dispatch = useDispatch();
-
-  const { data, loading } = useTypedSelector((state) => state.games);
 
   const getSportHubSlugs = useCallback(() => {
     if (sportHub === 'sports') return [SportHubSlug.sports];
@@ -28,19 +27,19 @@ const MatchPage = () => {
   }, [location]);
 
   useEffect(() => {
+    // Loading initial data for sidebar
     const chainId =
       getSelectedChainFromBase(location.pathname) === 'polygon' ? polygon.id : gnosis.id;
-    if (data.length === 0) fetchAllGames(chainId, getSportHubSlugs())(dispatch);
+    if (!initialLoad) fetchAllGames(chainId, getSportHubSlugs())(dispatch);
+
+    // Loading current game
+    fetchCurrentGame(chainId, gameId as string)(dispatch);
   }, [location.pathname, getSportHubSlugs, dispatch]);
 
-  const getGameIfAvailable = useCallback((): Game | null => {
-    if (!loading) return getGame(gameId as string);
-    else return null;
-  }, [gameId, location.pathname]);
   return (
     <Layout>
-      <MatchHeader value={value} setValue={setValue} game={getGameIfAvailable()} />
-      {value === 0 && <AllMatchOdds game={getGameIfAvailable()} />}
+      <MatchHeader value={value} setValue={setValue} game={getCurrenGame()} />
+      {value === 0 && <AllMatchOdds game={getCurrenGame()} />}
     </Layout>
   );
 };

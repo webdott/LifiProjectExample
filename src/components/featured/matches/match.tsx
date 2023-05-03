@@ -5,7 +5,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { Game, Sport } from '../../../constants/matches';
 import { RootState } from '../../../redux';
 import { addBetSlip, removeBetSlip } from '../../../redux/action-creators';
-import { round } from '../../../utils/numbers';
 import { getSelectedChainFromBase } from '../../../functions';
 import OddChangeListItem from './oddChange';
 
@@ -79,7 +78,7 @@ const Match: FC<MatchProps> = ({ game, sport }) => {
         <li className={styles.allMarkets}>
           <Link
             to={`/${getSelectedChainFromBase(location.pathname)}/${sport.sportHub}/${sport.sport}/${
-              game.id
+              game.gameId
             }`}
           >
             <span>All markets</span>

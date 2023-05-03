@@ -1,6 +1,6 @@
 import { SportHubSlug, SportSlug } from '../../constants/sports';
 import { ActionType } from '../action-types';
-import { GamesAction } from '../actions';
+import { CurrentGameAction, GamesAction } from '../actions';
 
 export type AzuroStatus = 'Resolved' | 'Canceled' | 'Created';
 
@@ -67,37 +67,94 @@ export type AzuroGame = {
 };
 
 interface GamesState {
-  loading: boolean;
-  error: string | null;
-  data: AzuroGame[];
+  initialLoad: boolean;
+  list: {
+    loading: boolean;
+    error: string | null;
+    data: AzuroGame[];
+  };
+  currentGame: {
+    loading: boolean;
+    error: string | null;
+    data: AzuroGame | null;
+  };
 }
 
 const initialState = {
-  loading: false,
-  error: null,
-  data: [],
+  initialLoad: false,
+  list: {
+    loading: false,
+    error: null,
+    data: [],
+  },
+  currentGame: {
+    loading: false,
+    error: null,
+    data: null,
+  },
 };
 
-const reducer = (state: GamesState = initialState, action: GamesAction): GamesState => {
+const reducer = (
+  state: GamesState = initialState,
+  action: GamesAction | CurrentGameAction
+): GamesState => {
   switch (action.type) {
     case ActionType.FETCH_GAMES_START:
       return {
-        loading: true,
-        error: null,
-        data: [],
+        ...state,
+        initialLoad: true,
+        list: {
+          loading: true,
+          error: null,
+          data: [],
+        },
       };
     case ActionType.FETCH_GAMES_SUCCESSS:
       return {
-        loading: false,
-        error: null,
-        data: action.payload,
+        ...state,
+        list: {
+          loading: false,
+          error: null,
+          data: action.payload,
+        },
       };
 
     case ActionType.FETCH_GAMES_ERROR:
       return {
-        loading: false,
-        error: action.payload,
-        data: [],
+        ...state,
+        list: {
+          loading: false,
+          error: action.payload,
+          data: [],
+        },
+      };
+    case ActionType.FETCH_CURRENT_GAME_START:
+      return {
+        ...state,
+        currentGame: {
+          loading: true,
+          error: null,
+          data: null,
+        },
+      };
+    case ActionType.FETCH_CURRENT_GAME_SUCCESSS:
+      return {
+        ...state,
+        currentGame: {
+          loading: false,
+          error: null,
+          data: action.payload,
+        },
+      };
+
+    case ActionType.FETCH_CURRENT_GAME_ERROR:
+      return {
+        ...state,
+        currentGame: {
+          loading: false,
+          error: action.payload,
+          data: null,
+        },
       };
 
     default:

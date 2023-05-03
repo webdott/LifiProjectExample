@@ -28,6 +28,7 @@ const generateGameObj = (game: AzuroGame): Game => {
   const now = dayjs();
   return {
     id: game.id,
+    gameId: game.gameId,
     participant1: game.participants[0],
     participant2: game.participants[1],
     league: {
@@ -73,7 +74,7 @@ const _generateSportObj = (game: AzuroGame) => {
 };
 
 export const getGamesByLeageus = (hubSlugs: SportHubSlug[]): Sport[] => {
-  const games = store.getState().games.data;
+  const games = store.getState().games.list.data;
   if (games.length === 0) return [];
   const gamesByLeague: any = {};
   games.forEach((g) => {
@@ -115,12 +116,9 @@ export const getGamesByLeageus = (hubSlugs: SportHubSlug[]): Sport[] => {
   return result;
 };
 
-export const getGame = (id: string): Game | null => {
-  const games = store.getState().games.data;
+export const getCurrenGame = (): Game | null => {
+  const game = store.getState().games.currentGame.data;
+  if (!game) return null;
 
-  const index = games.findIndex((item) => item.id === id);
-  if (index === -1) return null;
-
-  const result = games[index];
-  return generateGameObj(result);
+  return generateGameObj(game);
 };

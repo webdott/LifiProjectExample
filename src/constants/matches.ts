@@ -46,6 +46,7 @@ export interface Participant {
 }
 export interface Game {
   id: string;
+  gameId: string;
   startsAtString: string;
   startsAt: Dayjs;
   participant1: Participant;

@@ -17,6 +17,19 @@ export interface FecthGamesErrorAction {
   type: ActionType.FETCH_GAMES_ERROR;
   payload: string;
 }
+export interface FetchCurrentGameAction {
+  type: ActionType.FETCH_CURRENT_GAME_START;
+}
+
+export interface FetchCurrentGameSuccessAction {
+  type: ActionType.FETCH_CURRENT_GAME_SUCCESSS;
+  payload: AzuroGame;
+}
+
+export interface FecthCurrentGameErrorAction {
+  type: ActionType.FETCH_CURRENT_GAME_ERROR;
+  payload: string;
+}
 
 export interface FetchBetsHistoryAction {
   type: ActionType.FETCH_BETS_HISTORY_START;

@@ -11,9 +11,18 @@ import {
   FecthBetsHistoryErrorAction,
   FetchBetsHistorySuccessAction,
   UpdateOddsFormatAction,
+  FetchCurrentGameAction,
+  FetchCurrentGameSuccessAction,
+  FecthCurrentGameErrorAction,
 } from './interfaces';
 
 export type GamesAction = FetchGamesAction | FetchGamesSuccessAction | FecthGamesErrorAction;
+
+export type CurrentGameAction =
+  | FetchCurrentGameAction
+  | FetchCurrentGameSuccessAction
+  | FecthCurrentGameErrorAction;
+
 export type BestHistoryAction =
   | FetchBetsHistoryAction
   | FetchBetsHistorySuccessAction

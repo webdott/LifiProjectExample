@@ -17,7 +17,7 @@ function Home(): JSX.Element {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const { data, error, loading } = useTypedSelector((state) => state.games);
+  const { data, error, loading } = useTypedSelector((state) => state.games.list);
 
   useEffect(() => {
     const chainId =
