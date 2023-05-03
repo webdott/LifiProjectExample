@@ -12,8 +12,10 @@ import { round } from '../../../utils/numbers';
 import dayjs from 'dayjs';
 import { useLocation } from 'react-router';
 import { getSelectedChainFromBase } from '../../../functions';
+import { useAccount } from 'wagmi';
 
 export default function MyBetsPage() {
+  const { address } = useAccount();
   const dispatch = useDispatch();
   const location = useLocation();
 
@@ -23,7 +25,7 @@ export default function MyBetsPage() {
     const chainId =
       getSelectedChainFromBase(location.pathname) === 'polygon' ? polygon.id : gnosis.id;
     (async () => {
-      fetchBetsHistory(chainId)(dispatch);
+      fetchBetsHistory(chainId, address as string)(dispatch);
     })();
   }, [location.pathname]);
 

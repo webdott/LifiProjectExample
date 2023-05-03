@@ -188,8 +188,8 @@ const CURRENT_GAMES_QUERY = `
 `;
 
 const BETS_HISTORY_QUERY = `
-  query BetsHistory($first: Int, $skip: Int, $where: Bet_filter) {
-  bets(first: $first, skip: $skip where: $where) {
+  query BetsHistory($first: Int, $skip: Int,  $where: Bet_filter) {
+  bets(first: $first, skip: $skip where: $where, orderBy: createdBlockTimestamp, orderByDirection: desc) {
     betId 
     amount 
     potentialPayout 
@@ -302,7 +302,7 @@ export const fetchAllGames = (chainId: number, hubSlugs: SportHubSlug[]) => {
   };
 };
 
-export const fetchBetsHistory = (chainId: number, page: number = 2) => {
+export const fetchBetsHistory = (chainId: number, accountId: string, page: number = 2) => {
   return async (dispatch: Dispatch<BestHistoryAction>) => {
     dispatch({
       type: ActionType.FETCH_BETS_HISTORY_START,
@@ -317,7 +317,7 @@ export const fetchBetsHistory = (chainId: number, page: number = 2) => {
           skip: (page - 1) * PAGE_SIZE,
           first: PAGE_SIZE,
           where: {
-            actor: '0xa416b49c0e513ffdd25198f709ccb553256642dc',
+            actor: accountId,
           },
         },
       });
