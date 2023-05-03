@@ -26,6 +26,9 @@
   border-radius: 10px !important;
   padding: 0px !important;
   background: var(--footer_icons_col) !important;
+  .ant-dropdown-menu-item-selected {
+    background: var(--odds_bg_col) !important;
+  }
   .ant-dropdown-menu-item {
     padding: 9px 55px 10px 15px;
     background: var(--footer_icons_col);

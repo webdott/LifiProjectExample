@@ -10,6 +10,7 @@ import {
   FetchBetsHistoryAction,
   FecthBetsHistoryErrorAction,
   FetchBetsHistorySuccessAction,
+  UpdateOddsFormatAction,
 } from './interfaces';
 
 export type GamesAction = FetchGamesAction | FetchGamesSuccessAction | FecthGamesErrorAction;
@@ -17,6 +18,8 @@ export type BestHistoryAction =
   | FetchBetsHistoryAction
   | FetchBetsHistorySuccessAction
   | FecthBetsHistoryErrorAction;
+
+export type AppAction = UpdateOddsFormatAction;
 
 export type BetSlipAction = AddBetSlippAction | RemoveBetSlippAction;
 
