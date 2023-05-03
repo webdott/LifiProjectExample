@@ -14,22 +14,30 @@ import { useLocation } from 'react-router';
 import { getSelectedChainFromBase } from '../../../functions';
 import { useAccount } from 'wagmi';
 
+const ACTIVE_TAB_FILTERS: {}[] = [
+  {},
+  { isRedeemable: true, isRedeemed: false },
+  { isRedeemed: true },
+  { status: 'Resolved' },
+];
 export default function MyBetsPage() {
   const { address } = useAccount();
   const dispatch = useDispatch();
   const location = useLocation();
 
+  const [activeItemIndex, setActiveIndex] = useState<number>(0);
   const { data: bets, loading } = useTypedSelector((state) => state.betsHistory);
 
   useEffect(() => {
     const chainId =
       getSelectedChainFromBase(location.pathname) === 'polygon' ? polygon.id : gnosis.id;
     (async () => {
-      fetchBetsHistory(chainId, address as string)(dispatch);
+      fetchBetsHistory(chainId, address as string, {
+        extraFilters: ACTIVE_TAB_FILTERS[activeItemIndex],
+      })(dispatch);
     })();
-  }, [location.pathname]);
+  }, [location.pathname, activeItemIndex]);
 
-  const [activeItemIndex, setActiveIndex] = useState<number>(0);
   const activeNav = (index: number) => {
     if (index === activeItemIndex) {
       return `${styles.navItem} ${styles.activeNavItem}`;

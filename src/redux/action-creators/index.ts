@@ -302,7 +302,17 @@ export const fetchAllGames = (chainId: number, hubSlugs: SportHubSlug[]) => {
   };
 };
 
-export const fetchBetsHistory = (chainId: number, accountId: string, page: number = 2) => {
+export const fetchBetsHistory = (
+  chainId: number,
+  accountId: string,
+  {
+    extraFilters,
+    page = 1,
+  }: {
+    extraFilters?: { [key: string]: any };
+    page?: number;
+  }
+) => {
   return async (dispatch: Dispatch<BestHistoryAction>) => {
     dispatch({
       type: ActionType.FETCH_BETS_HISTORY_START,
@@ -318,6 +328,7 @@ export const fetchBetsHistory = (chainId: number, accountId: string, page: numbe
           first: PAGE_SIZE,
           where: {
             actor: accountId,
+            ...extraFilters,
           },
         },
       });
