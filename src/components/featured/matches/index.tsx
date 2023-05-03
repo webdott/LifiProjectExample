@@ -1,14 +1,10 @@
-import { Fragment, useCallback } from 'react';
+import { Fragment } from 'react';
 import { League, MatchesEnum, Sport } from '../../../constants/matches';
 import BettingOption from '../../shared/bettingOption';
 import Odds from './odds';
 import Match from './match';
 
 import styles from './matches.module.scss';
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-import { useDispatch } from 'react-redux';
-import { updateOddsFormat } from '../../../redux/action-creators';
-import { OddsFormat } from '../../../redux/reducers/app';
 
 export default function Matches({
   league,
@@ -22,15 +18,6 @@ export default function Matches({
   const matches = league.games.filter((game) =>
     matchColumn === 'All' ? Boolean(game) : game.timeLabel === matchColumn
   );
-  const oddsFormat = useTypedSelector((state) => state.app.oddsFormat);
-  const dispatch = useDispatch();
-
-  const handelOddsChange = useCallback(
-    (format: OddsFormat) => {
-      updateOddsFormat(format)(dispatch);
-    },
-    [dispatch]
-  );
 
   return (
     <Fragment>
@@ -42,7 +29,7 @@ export default function Matches({
             </div>
             <div className={styles.titleRightSection}>
               <BettingOption />
-              <Odds value={oddsFormat} onChange={handelOddsChange} />
+              <Odds />
               {/* Uche: Layout button changed. Button to be replaced with another later */}
               {/* <div className={styles.rightSectionIcon}>
 								<div className={styles.smallHoverEffect}></div>

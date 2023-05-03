@@ -10,6 +10,8 @@ import { getSelectedChainFromBase } from '../../../functions';
 import OddChangeListItem from './oddChange';
 
 import styles from './matches.module.scss';
+import { getOddsDisplayString } from '../../../utils/odds';
+import { useTypedSelector } from '../../../hooks/useTypedSelector';
 
 interface MatchProps {
   game: Game;
@@ -19,6 +21,7 @@ interface MatchProps {
 const Match: FC<MatchProps> = ({ game, sport }) => {
   const location = useLocation();
   const { currentGame: currentBetSlipGame } = useSelector((root: RootState) => root.betSlip);
+  const oddsFormat = useTypedSelector((state) => state.app.oddsFormat);
   const dispatch = useDispatch();
 
   const toggleBetSlip = (item: { id: number; oddName: string; odds: string }) => {
@@ -68,7 +71,7 @@ const Match: FC<MatchProps> = ({ game, sport }) => {
               onClick={() => toggleBetSlip(item)}
             >
               <span>{item.selectionName}</span>
-              <span>{round(parseFloat(item.odds), 2)}</span>
+              <span>{getOddsDisplayString(item.odds, oddsFormat)}</span>
             </li>
           );
         })}

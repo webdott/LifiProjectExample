@@ -37,6 +37,7 @@
     "graphql": "^16.6.0",
     "lodash": "^4.17.21",
     "metamask-react": "^2.4.0",
+    "oddslib": "^2.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",

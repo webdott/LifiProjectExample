@@ -8,43 +8,10 @@ import { Dropdown } from 'antd';
 
 import MatchOddView from './matchOddView';
 import SearchMarkets from './searchMarkets';
-import { items } from '../odds';
+import Odds, { items } from '../odds';
 
 import styles from './matchpage.module.scss';
 import { Game } from '../../../../constants/matches';
-
-const allOdds: Record<
-  string,
-  {
-    matchOdds: {
-      odds: string;
-      oddName: string;
-      id: number;
-    }[];
-  }
-> = {
-  'Match Winner': {
-    matchOdds: [
-      { odds: '1.25', oddName: '1', id: 1 },
-      { odds: '4.25', oddName: 'x', id: 2 },
-      { odds: '10.00', oddName: '3', id: 3 },
-    ],
-  },
-  'Total Goals': {
-    matchOdds: [
-      { odds: '1.25', oddName: 'Over (5.5)', id: 1 },
-      { odds: '4.25', oddName: 'Under (5.5)', id: 2 },
-    ],
-  },
-  Handicap: {
-    matchOdds: [
-      { odds: '1.25', oddName: 'Team 1 (-0.5)', id: 1 },
-      { odds: '4.25', oddName: 'Team 1 (0.5)', id: 2 },
-      { odds: '4.25', oddName: 'Team 2 (-0.5)', id: 3 },
-      { odds: '4.25', oddName: 'Team 2 (0.5)', id: 4 },
-    ],
-  },
-};
 
 interface Props {
   game: Game | null;
@@ -105,11 +72,7 @@ const AllMatchOdds = ({ game }: Props) => {
           )}
 
           <div className={styles.rightIcon}>
-            <Dropdown menu={{ items }} trigger={['click']} placement='bottom'>
-              <button>
-                <RiSettings5Fill size={24} />
-              </button>
-            </Dropdown>
+            <Odds showSettingsIcon />
 
             <button onClick={() => setAllCollapsed((allCollapsed) => !allCollapsed)}>
               <CgArrowsScrollV size={26} />

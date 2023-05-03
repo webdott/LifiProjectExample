@@ -5,7 +5,8 @@ import InfoIcon from '@mui/icons-material/Info';
 import IconButton from '@mui/material/IconButton';
 
 import styles from './matchpage.module.scss';
-import { round } from '../../../../utils/numbers';
+import { getOddsDisplayString } from '../../../../utils/odds';
+import { useTypedSelector } from '../../../../hooks/useTypedSelector';
 
 interface MatchOddViewProps {
   oddTitle: string;
@@ -25,6 +26,7 @@ const MatchOddView: FC<MatchOddViewProps> = ({
   marketDescription,
 }) => {
   const [isCollapsed, setIsCollapsed] = useState<boolean>(allCollapsed);
+  const oddsFormat = useTypedSelector((state) => state.app.oddsFormat);
 
   useEffect(() => {
     setIsCollapsed(allCollapsed);
@@ -65,7 +67,7 @@ const MatchOddView: FC<MatchOddViewProps> = ({
             {odds.map((item) => (
               <button key={item.id}>
                 <span>{item.selectionName}</span>
-                <span>{round(parseFloat(item.odds), 2)}</span>
+                <span>{getOddsDisplayString(item.odds, oddsFormat)}</span>
               </button>
             ))}
           </div>
