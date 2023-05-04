@@ -2,9 +2,25 @@ import { BrowserRouter } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { WagmiConfig, createClient, configureChains } from 'wagmi';
+import {
+  arbitrum,
+  aurora,
+  avalanche,
+  boba,
+  bsc,
+  celo,
+  cronos,
+  fantom,
+  gnosis,
+  mainnet,
+  moonbeam,
+  moonriver,
+  optimism,
+  polygon,
+} from 'wagmi/chains';
+
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
-import { gnosis, polygon } from 'wagmi/chains';
 import { InjectedConnector } from 'wagmi/connectors/injected';
 import { publicProvider } from 'wagmi/providers/public';
 
@@ -15,7 +31,23 @@ import './index.css';
 import './styles/global.scss';
 
 const { chains, provider, webSocketProvider } = configureChains(
-  [gnosis, polygon],
+  [
+    mainnet,
+    gnosis,
+    polygon,
+    avalanche,
+    bsc,
+    arbitrum,
+    avalanche,
+    celo,
+    aurora,
+    optimism,
+    fantom,
+    moonriver,
+    moonbeam,
+    cronos,
+    boba,
+  ],
   [publicProvider()]
 );
 

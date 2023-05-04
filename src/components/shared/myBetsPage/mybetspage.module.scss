@@ -72,6 +72,14 @@
         display: flex;
         justify-content: space-between;
 
+        &.noBets {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--white_900);
+        }
+
         .betId {
           display: flex;
           justify-content: center;
@@ -196,8 +204,13 @@
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      gap: 10px;
+      gap: 15px;
       padding: 10px 0 40px 0;
+
+      .pageNumber {
+        color: var(--medium_green);
+        font-size: 16px;
+      }
 
       .prevNext {
         display: flex;

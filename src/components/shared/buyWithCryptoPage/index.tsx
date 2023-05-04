@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { gnosis, polygon } from 'wagmi/chains';
-import { useAccount, useConnect, useDisconnect, useSwitchNetwork } from 'wagmi';
+import { useAccount, useConnect, useDisconnect, useNetwork, useSwitchNetwork } from 'wagmi';
 import { HiddenUI, LiFiWidget, WidgetConfig } from '@lifi/widget';
 
 import GetFundsLayout from '../../../layout/GetFundsLayout';
@@ -12,6 +12,7 @@ import { getSelectedChainFromBase } from '../../../functions';
 
 export default function BuyWithCryptoPage() {
   const [signer, setSigner] = useState();
+  const { chain } = useNetwork();
   const { switchNetworkAsync } = useSwitchNetwork();
   const { isConnected: walletIsConnected, connector: activeConnector } = useAccount();
   const { connect } = useConnect();
@@ -26,13 +27,18 @@ export default function BuyWithCryptoPage() {
     };
 
     if (activeConnector) getSigner();
-  }, [activeConnector, location.pathname]);
+  }, [activeConnector, location.pathname, chain]);
 
   const widgetConfig: WidgetConfig = useMemo(() => {
+    console.log(signer);
     return {
       toChain: getSelectedChainFromBase(location.pathname) === 'polygon' ? polygon.id : gnosis.id,
       toToken: '0x0000000000000000000000000000000000000000',
       integrator: 'Gamblr xyz',
+      chains: {
+        // remove OkexChain, Fuse, and Velas from chain list
+        deny: [122, 66, 106],
+      },
       walletManagement: {
         signer: signer!,
         connect: async () => {

@@ -1,5 +1,7 @@
 import { toast } from 'react-toastify';
+import { useLocation } from 'react-router';
 import { useConnect } from 'wagmi';
+import { gnosis, polygon } from 'wagmi/chains';
 
 import { HeaderButtonText } from '../../../constants/navbar';
 import Button from '../button';
@@ -14,8 +16,10 @@ import { Connectors } from '../../..';
 import 'react-toastify/dist/ReactToastify.css';
 import './modalStyles.scss';
 import styles from './walletModal.module.scss';
+import { getSelectedChainFromBase } from '../../../functions';
 
 export default function WalletModal({ visible, close }: WalletModalProps): JSX.Element {
+  const location = useLocation();
   const metamaskSuccessNotify = (text: string) => {
     toast.success(<span>{text}</span>);
   };
@@ -51,7 +55,7 @@ export default function WalletModal({ visible, close }: WalletModalProps): JSX.E
     close();
     wagmiConnect({
       connector: Connectors.METAMASK,
-      chainId: 100,
+      chainId: getSelectedChainFromBase(location.pathname) === 'polygon' ? polygon.id : gnosis.id,
     });
   };
 
@@ -59,7 +63,7 @@ export default function WalletModal({ visible, close }: WalletModalProps): JSX.E
     close();
     wagmiConnect({
       connector: Connectors.WALLET_CONNECT,
-      chainId: 100,
+      chainId: getSelectedChainFromBase(location.pathname) === 'polygon' ? polygon.id : gnosis.id,
     });
   };
 
@@ -136,18 +140,6 @@ export default function WalletModal({ visible, close }: WalletModalProps): JSX.E
   // 			to Gnosis
   // 		</span>
   // 	);
-
-  const addMetamaskNetworkNotify = () => {
-    toast.warn(
-      <span>
-        You don't have Gnosis Chain network, please{' '}
-        <span onClick={() => null} className={styles.notifySwitchBtn}>
-          click
-        </span>{' '}
-        to add
-      </span>
-    );
-  };
 
   return (
     <Modal title='' onCancel={close} isModalVisible={visible} closable={false}>

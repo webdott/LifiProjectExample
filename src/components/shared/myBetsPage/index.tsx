@@ -84,6 +84,7 @@ export default function MyBetsPage() {
         </ul>
 
         <ul className={styles.betsTable}>
+          {bets.length === 0 && <li className={styles.noBets}>No bets placed</li>}
           {bets.map((el, index: number) => {
             const createdAt = dayjs(el.createdBlockTimestamp * 1000);
             return (
@@ -141,6 +142,7 @@ export default function MyBetsPage() {
             <MdKeyboardArrowLeft />
             prevPage
           </button>
+          <p className={styles.pageNumber}>page {page}</p>
           <button
             className={styles.prevNext}
             onClick={() => handleChange(page + 1)}
