@@ -196,7 +196,37 @@
       display: flex;
       align-items: center;
       justify-content: flex-end;
+      gap: 10px;
       padding: 10px 0 40px 0;
+
+      .prevNext {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        color: var(--white_900);
+        outline: none;
+        background: transparent;
+        padding: 8px 15px;
+        border: 1px solid transparent;
+        border-radius: 12px;
+        cursor: pointer;
+
+        &:hover {
+          border: 1px solid var(--left_active_col);
+        }
+
+        &:focus {
+          background: var(--left_active_col);
+        }
+
+        &:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+          background: transparent;
+          border: none;
+        }
+      }
     }
   }
 }

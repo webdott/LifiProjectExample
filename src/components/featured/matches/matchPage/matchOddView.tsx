@@ -62,8 +62,8 @@ const MatchOddView: FC<MatchOddViewProps> = ({
         )}
       </div>
       {!isCollapsed &&
-        outcomes.map((odds) => (
-          <div className={`${styles.odds} ${odds.length === 4 ? styles.four : ''}`}>
+        outcomes.map((odds, idx: number) => (
+          <div className={`${styles.odds} ${odds.length === 4 ? styles.four : ''}`} key={idx}>
             {odds.map((item) => (
               <button key={item.id}>
                 <span>{item.selectionName}</span>

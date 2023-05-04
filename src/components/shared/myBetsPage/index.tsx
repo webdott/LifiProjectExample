@@ -1,19 +1,20 @@
 import { useEffect, useState } from 'react';
-import Pagination from '@mui/material/Pagination';
+import { useLocation } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
+import dayjs from 'dayjs';
+import { useAccount } from 'wagmi';
+import { gnosis, polygon } from 'wagmi/chains';
+
 import { navItems, titleItems } from './bets';
 import SortButton from '../sortButton';
-
-import styles from './mybetspage.module.scss';
-import { useDispatch } from 'react-redux';
 import { fetchBetsHistory } from '../../../redux/action-creators';
-import { gnosis, polygon } from 'wagmi/chains';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import { BetsResult } from '../../../redux/reducers/betsHistory';
 import { round } from '../../../utils/numbers';
-import dayjs from 'dayjs';
-import { useLocation } from 'react-router';
 import { getSelectedChainFromBase } from '../../../functions';
-import { useAccount } from 'wagmi';
+
+import styles from './mybetspage.module.scss';
 
 const ACTIVE_TAB_FILTERS: {}[] = [
   {},
@@ -49,7 +50,7 @@ export default function MyBetsPage() {
     }
   };
 
-  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+  const handleChange = (value: number) => {
     setPage(value);
   };
 
@@ -132,28 +133,22 @@ export default function MyBetsPage() {
         </ul>
 
         <div className={styles.pagination}>
-          <Pagination
-            //TODO: getTotal amount and calculate the count
-            count={10}
-            page={page}
-            boundaryCount={2}
-            variant='outlined'
-            shape='rounded'
-            size='large'
-            onChange={handleChange}
-            sx={{
-              '& .MuiPaginationItem-sizeLarge': {
-                color: '#fff',
-                border: '1px solid #05a56c',
-                '&.MuiPaginationItem-previousNext,&.MuiPaginationItem-ellipsis': {
-                  border: 'none',
-                },
-                '&.Mui-selected': {
-                  background: '#05a56c',
-                },
-              },
-            }}
-          />
+          <button
+            className={styles.prevNext}
+            onClick={() => handleChange(page === 1 ? 1 : page - 1)}
+            disabled={loading || page === 1}
+          >
+            <MdKeyboardArrowLeft />
+            prevPage
+          </button>
+          <button
+            className={styles.prevNext}
+            onClick={() => handleChange(page + 1)}
+            disabled={loading || bets.length < 10}
+          >
+            NextPage
+            <MdKeyboardArrowRight />
+          </button>
         </div>
       </div>
     </div>
