@@ -77,61 +77,65 @@ export default function MyBetsPage() {
         </div>
       </div>
       <div className={styles.bottomSection}>
-        <ul className={styles.sectionTitles}>
-          {titleItems.map((el, index) => {
-            return <li key={index}>{el}</li>;
-          })}
-        </ul>
+        <div className={styles.tableWrapper}>
+          <div className={styles.tableContainer}>
+            <ul className={styles.sectionTitles}>
+              {titleItems.map((el, index) => {
+                return <li key={index}>{el}</li>;
+              })}
+            </ul>
 
-        <ul className={styles.betsTable}>
-          {bets.length === 0 && <li className={styles.noBets}>No bets placed</li>}
-          {bets.map((el, index: number) => {
-            const createdAt = dayjs(el.createdBlockTimestamp * 1000);
-            return (
-              <li key={index}>
-                <div className={styles.betId}>
-                  <span>{el.betId}</span>
-                </div>
-                <div className={styles.betResultSection}>
-                  <div
-                    className={
-                      el.result === BetsResult.won
-                        ? styles.betResultWin
-                        : el.result === BetsResult.lose
-                        ? styles.betResultLose
-                        : styles.betResultActive
-                    }
-                  >
-                    {el.result}
-                  </div>
-                </div>
-                <div className={styles.betAmount}>
-                  <div>{round(el.amount, 2)}</div>
-                  <div>BTC</div>
-                </div>
-                <div className={styles.betWLamount}>
-                  <span>
-                    {el.result === BetsResult.won
-                      ? round(el.potentialPayout - el.amount, 2)
-                      : round(el.amount, 2)}
-                  </span>
-                </div>
-                <div className={styles.betMatch}>
-                  <div>{el.game.participants[0].name}</div>
-                  <div>vs</div>
-                  <div>{el.game.participants[1].name}</div>
-                </div>
-                <div className={styles.betCoef}>
-                  <div>{round(el.outcome.odds, 2)}</div>
-                </div>
-                <div className={styles.betDateTime}>
-                  <div>{createdAt.format('D MMM, YYYY')}</div>
-                  <div>{createdAt.format('HH:mm:ss')}</div>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+            <ul className={styles.betsTable}>
+              {bets.length === 0 && <li className={styles.noBets}>No bets placed</li>}
+              {bets.map((el, index: number) => {
+                const createdAt = dayjs(el.createdBlockTimestamp * 1000);
+                return (
+                  <li key={index}>
+                    <div className={styles.betId}>
+                      <span>{el.betId}</span>
+                    </div>
+                    <div className={styles.betResultSection}>
+                      <div
+                        className={
+                          el.result === BetsResult.won
+                            ? styles.betResultWin
+                            : el.result === BetsResult.lose
+                            ? styles.betResultLose
+                            : styles.betResultActive
+                        }
+                      >
+                        {el.result}
+                      </div>
+                    </div>
+                    <div className={styles.betAmount}>
+                      <div>{round(el.amount, 2)}</div>
+                      <div>BTC</div>
+                    </div>
+                    <div className={styles.betWLamount}>
+                      <span>
+                        {el.result === BetsResult.won
+                          ? round(el.potentialPayout - el.amount, 2)
+                          : round(el.amount, 2)}
+                      </span>
+                    </div>
+                    <div className={styles.betMatch}>
+                      <div>{el.game.participants[0].name}</div>
+                      <div>vs</div>
+                      <div>{el.game.participants[1].name}</div>
+                    </div>
+                    <div className={styles.betCoef}>
+                      <div>{round(el.outcome.odds, 2)}</div>
+                    </div>
+                    <div className={styles.betDateTime}>
+                      <div>{createdAt.format('D MMM, YYYY')}</div>
+                      <div>{createdAt.format('HH:mm:ss')}</div>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
 
         <div className={styles.pagination}>
           <button

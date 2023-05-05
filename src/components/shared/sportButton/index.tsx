@@ -4,7 +4,7 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
-import styles from '../../../layout/homelayout.module.scss';
+import styles from '../../../layout/sidebarbuttonlist.module.scss';
 import { Sport } from '../../../constants/matches';
 
 export default function SportButton({

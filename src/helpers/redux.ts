@@ -44,7 +44,7 @@ const generateGameObj = (game: AzuroGame): Game => {
         : startsAt.format('YYYY-MM-DD') === now.add(1, 'd').format('YYYY-MM-DD')
         ? MatchesEnum.TOMORROW
         : MatchesEnum.ALL,
-    startsAtString: startsAt.format('HH-mm'),
+    startsAtString: startsAt.format('HH:mm'),
     startsAt: startsAt,
     markets: fmtMarkets,
   };

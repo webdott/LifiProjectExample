@@ -204,6 +204,12 @@
       border-top: 1px solid #64718d;
       border-bottom: 1px solid #212b40;
       margin-bottom: 15px;
+      .matchTimeMobile {
+        display: none;
+        font-size: 14px;
+        line-height: 16px;
+        color: var(--white_900);
+      }
       .matchLeftSection {
         p {
           max-width: 152px;
@@ -222,7 +228,7 @@
         }
         ul {
           display: flex;
-          justify-content: center;
+          // justify-content: center;
           align-items: center;
           max-width: 583px;
           width: 100%;
@@ -312,6 +318,7 @@
           display: flex;
           justify-content: space-between;
           align-items: center;
+          white-space: nowrap;
           cursor: pointer;
           span {
             font-weight: 500;
@@ -362,11 +369,6 @@
               }
             }
           }
-          @media only screen and (max-width: 1024px) {
-            width: 100%;
-            height: 80px;
-            flex-wrap: wrap;
-          }
         }
         .activeTab {
           background: var(--medium_green);
@@ -381,7 +383,22 @@
           }
         }
         @media only screen and (max-width: 1024px) {
-          overflow-x: scroll;
+          width: 100%;
+          overflow-x: auto;
+          overflow-y: hidden;
+        }
+      }
+
+      @media screen and (max-width: 600px) {
+        flex-direction: column;
+        align-items: flex-start;
+
+        .matchTimeMobile {
+          display: block;
+        }
+
+        .matchTime {
+          display: none;
         }
       }
     }
@@ -436,10 +453,6 @@
 @media only screen and (max-width: 1024px) {
   .activeNavItem {
     width: 53%;
-  }
-
-  .matchLeftSection {
-    margin-left: 15px;
   }
 
   .leftNav {

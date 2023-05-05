@@ -25,7 +25,7 @@ export default function GetFundsLayout({ token, children }: GetFundLayoutProps):
 
   return (
     <Fragment>
-      <Header />
+      <Header page='get-funds'/>
       <div className={styles.section}>
         <div className={styles.sidebar}>
           <ul className={styles.sidebarNav}>

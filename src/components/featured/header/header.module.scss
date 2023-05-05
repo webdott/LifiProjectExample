@@ -105,6 +105,17 @@
           max-height: 1.9rem;
         }
       }
+      @media screen and (max-width: 1200px) {
+        justify-content: flex-start;
+
+        .headerLogo {
+          width: 150px;
+        }
+
+        .headerNav {
+          display: none;
+        }
+      }
     }
 
     .headerRightSection {

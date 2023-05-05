@@ -69,6 +69,20 @@
             font-weight: 600;
           }
         }
+
+        @media screen and (max-width: 540px) {
+          flex-direction: column;
+
+          .commisionDetails {
+            border-left: none;
+            border-top: 1px solid var(--gray);
+            padding: 20px 0;
+          }
+
+          .fiatProvider {
+            margin: 20px 0;
+          }
+        }
       }
     }
     .connectWallet {

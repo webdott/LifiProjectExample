@@ -1,4 +1,5 @@
 import { ethers } from 'ethers';
+import { privacy } from '../constants/footer';
 const EthDater = require('ethereum-block-by-date');
 const provider = new ethers.providers.CloudflareProvider();
 
@@ -31,12 +32,24 @@ export const getTruncatedAddress = (account: string | undefined) =>
     : '';
 
 export const getResultingChainUrl = (selectedChain: 'polygon' | 'gnosis', fullPath: string) => {
-  const restPath = fullPath.split('/').slice(2);
+  localStorage.setItem('gamblr-selected-chain', selectedChain);
 
-  const restPathJoined = restPath.join('/');
+  const urlWithoutChainKeys: string[] = [
+    'help',
+    'privacy-policy',
+    'about',
+    'terms-conditions',
+    'faq',
+  ];
+
+  let restPathJoined = urlWithoutChainKeys.find((url) => fullPath.includes(url));
+
+  if (restPathJoined) return `/${restPathJoined}`;
+
+  const restPath = fullPath.split('/').slice(2);
+  restPathJoined = restPath.join('/');
   const bareRestPathJoined = restPathJoined.replaceAll('/', '');
-  if (bareRestPathJoined === 'polygon' || bareRestPathJoined === 'gnosis')
-    return `/${selectedChain}`;
+  if (bareRestPathJoined.length === 0) return `/${selectedChain}`;
 
   return `/${selectedChain}/${restPath.join('/')}`;
 };
@@ -55,7 +68,14 @@ export const checkIfSPorts = (url: string): boolean => {
 };
 
 export const getSelectedChainFromBase = (url: string) => {
-  return url.split('/')?.[1] ?? 'gnosis';
+  const selectedChain = url.split('/')?.[1];
+
+  if (selectedChain === 'polygon' || selectedChain === 'gnosis') {
+    localStorage.setItem('gamblr-selected-chain', selectedChain);
+    return selectedChain;
+  } else {
+    return localStorage.getItem('gamblr-selected-chain') ?? 'gnosis';
+  }
 };
 
 export const formatBalanceString = (balance: string, places?: number): string => {

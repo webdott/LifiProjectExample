@@ -29,6 +29,7 @@ import App from './App';
 
 import './index.css';
 import './styles/global.scss';
+import { WalletProvider } from './context/LifiWalletProvider';
 
 const { chains, provider, webSocketProvider } = configureChains(
   [
@@ -73,7 +74,9 @@ root.render(
   <BrowserRouter>
     <Provider store={store}>
       <WagmiConfig client={wagmiClient}>
-        <App />
+        <WalletProvider>
+          <App />
+        </WalletProvider>
       </WagmiConfig>
     </Provider>
   </BrowserRouter>

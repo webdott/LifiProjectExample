@@ -10,7 +10,7 @@ import { SportSlug } from '../constants/sports';
 import { getGamesByLeageus } from '../helpers/redux';
 import FlagIcon from '../components/shared/icons/FlagIcon';
 
-import styles from './homelayout.module.scss';
+import styles from './sidebarbuttonlist.module.scss';
 
 interface Props {
   sportHubSlugs?: SportHubSlug[];
@@ -26,7 +26,7 @@ function SideBarButtonList({
   const [leagueTab, setLeagueTab] = useState<number>(1);
 
   return (
-    <Fragment>
+    <div className={styles.leagues}>
       {getGamesByLeageus(sportHubSlugs).map((sport, index) => {
         return (
           <Fragment key={index}>
@@ -63,7 +63,7 @@ function SideBarButtonList({
           </Fragment>
         );
       })}
-    </Fragment>
+    </div>
   );
 }
 

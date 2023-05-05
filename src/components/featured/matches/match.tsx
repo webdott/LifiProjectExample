@@ -40,6 +40,9 @@ const Match: FC<MatchProps> = ({ game, sport }) => {
 
   return (
     <div className={styles.match}>
+      <p className={styles.matchTimeMobile}>
+        {game.timeLabel}&nbsp;&middot;&nbsp;{game.startsAtString}
+      </p>
       <div className={styles.matchLeftSection}>
         <ul>
           <li className={styles.team1Section}>

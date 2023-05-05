@@ -18,8 +18,9 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    height: 10vh;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
     .gxpValueItem {
       background: var(--bet_info_bg_col);
       border-radius: 4px;
@@ -27,6 +28,7 @@
       font-weight: 600;
       width: 30%;
       min-width: 200px;
+      max-width: 350px;
       display: flex;
       flex-direction: column;
       align-items: center;

@@ -55,7 +55,7 @@ export default function Layout({ children }: LayoutProps) {
 
   return (
     <Fragment>
-      <Header />
+      <Header page='home' />
       <div className={styles.section}>
         <div className={styles.leftSidebar}>
           <div className={styles.container}>
@@ -108,9 +108,7 @@ export default function Layout({ children }: LayoutProps) {
                 <ListItemText primary='Live' />
               </ListItemButton>
             </div>
-            <div className={styles.leagues}>
-              <LeftSideBar sportHubSlugs={getSportHubSlugs()} />
-            </div>
+            <LeftSideBar sportHubSlugs={getSportHubSlugs()} />
           </div>
         </div>
         <div className={styles.cards}>

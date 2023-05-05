@@ -6,6 +6,7 @@ import Header from '../components/featured/header';
 import Footer from '../components/featured/footer';
 import { useNavigate } from 'react-router-dom';
 import BetInfo from '../components/shared/betInfo';
+import { getSelectedChainFromBase } from '../functions';
 
 import styles from './gxplayout.module.scss';
 
@@ -14,13 +15,15 @@ export default function Sidebar({ children }: checkBalanceProps): JSX.Element {
 
   const navigate = useNavigate();
 
-  const handleNavigation = (path: string, index: number) => {
-    navigate(`${path}`);
+  const handleNavigation = (path: string) => {
+    navigate(
+      path.includes('help') ? path : `/${getSelectedChainFromBase(location.pathname)}${path}`
+    );
   };
 
   return (
     <Fragment>
-      <Header />
+      <Header page='gxp' />
       <div className={styles.section}>
         <div className={styles.sidebar}>
           <ul className={styles.sidebarNav}>
@@ -29,11 +32,13 @@ export default function Sidebar({ children }: checkBalanceProps): JSX.Element {
                 <button
                   key={index}
                   className={
-                    location.pathname === el.path
+                    location.pathname ===
+                      `/${getSelectedChainFromBase(location.pathname)}${el.path}` ||
+                    location.pathname === `${el.path}`
                       ? `${styles.sidebarButton} ${styles.activeTab}`
                       : `${styles.sidebarButton}`
                   }
-                  onClick={() => handleNavigation(el.path, index + 1)}
+                  onClick={() => handleNavigation(el.path)}
                 >
                   {el.text}
                 </button>

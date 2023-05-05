@@ -68,4 +68,22 @@
       border: 1px solid #c0bdbd;
     }
   }
+
+  @media screen and (max-width: 1200px) {
+    .sidebar {
+      display: none !important;
+    }
+    .cards {
+      width: 100% !important;
+      overflow-x: auto;
+      padding: 40px 10px 0 30px;
+      height: calc(100vh - 87px);
+    }
+  }
+
+  @media screen and (max-width: 540px) {
+    .cards {
+      padding: 40px 0px 0 15px;
+    }
+  }
 }

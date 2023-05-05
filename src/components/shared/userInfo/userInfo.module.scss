@@ -2,7 +2,8 @@
   .userSection {
     display: flex;
     align-items: center;
-    column-gap: 36px;
+    flex-wrap: wrap;
+    gap: 36px;
     margin-bottom: 61px;
 
     .user {
@@ -18,7 +19,8 @@
       }
       .bottomSection {
         display: flex;
-        column-gap: 20px;
+        flex-wrap: wrap;
+        gap: 20px;
         .walletAddress {
           max-width: 185px;
           width: 100%;

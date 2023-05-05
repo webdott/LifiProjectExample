@@ -124,7 +124,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    column-gap: 24px;
+    gap: 24px;
     margin-bottom: 30px;
 
     p {
@@ -140,6 +140,7 @@
     }
 
     .actions {
+      min-width: 125px;
       position: relative;
       display: flex;
       align-items: center;
@@ -177,6 +178,12 @@
           opacity: 1;
           background: var(--bet_info_bg_col);
         }
+
+        @media screen and (max-width: 750px) {
+          &.gridButton {
+            display: none;
+          }
+        }
       }
 
       .searchMarkets {
@@ -197,6 +204,7 @@
         border-radius: 0;
 
         .searchIcon {
+          min-width: 20px;
           color: var(--white_900);
           opacity: 0.7;
         }
@@ -216,6 +224,10 @@
 
           &:focus {
             opacity: 1;
+          }
+
+          @media screen and (max-width: 550px) {
+            padding: 10px 0 10px 10px;
           }
         }
 
@@ -260,6 +272,18 @@
             }
           }
         }
+
+        @media screen and (max-width: 550px) {
+          width: 100%;
+        }
+      }
+    }
+    @media screen and (max-width: 510px) {
+      flex-wrap: wrap;
+
+      .actions {
+        width: 100%;
+        justify-content: flex-end;
       }
     }
   }

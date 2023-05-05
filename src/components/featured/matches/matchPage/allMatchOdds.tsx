@@ -2,16 +2,14 @@ import { useEffect, useRef, useState } from 'react';
 import { CiGrid2H, CiGrid2V } from 'react-icons/ci';
 import { CgArrowsScrollV } from 'react-icons/cg';
 import { FiSearch } from 'react-icons/fi';
-import { RiSettings5Fill } from 'react-icons/ri';
 import { XMasonry, XBlock } from 'react-xmasonry';
-import { Dropdown } from 'antd';
 
 import MatchOddView from './matchOddView';
 import SearchMarkets from './searchMarkets';
-import Odds, { items } from '../odds';
+import Odds from '../odds';
+import { Game } from '../../../../constants/matches';
 
 import styles from './matchpage.module.scss';
-import { Game } from '../../../../constants/matches';
 
 interface Props {
   game: Game | null;
@@ -26,18 +24,19 @@ const AllMatchOdds = ({ game }: Props) => {
   const [allCollapsed, setAllCollapsed] = useState<boolean>(false);
 
   useEffect(() => {
-    // get width of masonry container in order to get accurate width for get block
-    // delay rendering of masonry component after setting width for it to take effect
-    setHalfWidth((containerRef?.current?.offsetWidth ?? 1800) / 2);
     if (containerRef?.current) {
+      setHalfWidth((containerRef?.current?.offsetWidth ?? 1800) / 2);
       window.addEventListener('resize', (evt) => {
         setHalfWidth((containerRef?.current?.offsetWidth ?? 1800) / 2);
       });
+      // get width of masonry container in order to get accurate width for get block
+      // delay rendering of masonry component after setting width for it to take effect
+      setTimeout(() => {
+        setShowMasonry(true);
+      }, 500);
     }
-    setTimeout(() => {
-      setShowMasonry(true);
-    }, 500);
   }, [containerRef?.current]);
+
   if (!game) return null;
   return (
     <div className={styles.allMatchOdds}>
@@ -48,13 +47,17 @@ const AllMatchOdds = ({ game }: Props) => {
         </p>
         <div className={styles.actions}>
           <button
-            className={gridClass === 'fullGrid' ? styles.active : ''}
+            className={
+              gridClass === 'fullGrid' ? `${styles.active} ${styles.gridButton}` : styles.gridButton
+            }
             onClick={() => setGridClass('fullGrid')}
           >
             <CiGrid2H size={20} />
           </button>
           <button
-            className={gridClass === 'halfGrid' ? styles.active : ''}
+            className={
+              gridClass === 'halfGrid' ? `${styles.active} ${styles.gridButton}` : styles.gridButton
+            }
             onClick={() => setGridClass('halfGrid')}
           >
             <CiGrid2V size={20} />
