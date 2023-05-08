@@ -3,7 +3,7 @@ import Layout from '../../../layout/HomePage';
 import Loader from '../Loader/Loader';
 import { useLocation } from 'react-router';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
-import MatchesContainer from '../sports/matchesContainer';
+import MatchesContainer from '../home/matchesContainer';
 import { getSportsWithGames } from '../../../helpers/redux';
 import { SportHubSlug } from '../../../constants/sports';
 import { useDispatch } from 'react-redux';

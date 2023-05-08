@@ -7,7 +7,7 @@ import Cards from '../cards';
 import Layout from '../../../layout/HomePage';
 import Loader from '../Loader/Loader';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
-import MatchesContainer from './matchesContainer';
+import MatchesContainer from '../home/matchesContainer';
 import { getSportsWithGames } from '../../../helpers/redux';
 import { SportHubSlug } from '../../../constants/sports';
 import { fetchGames, fetchSports } from '../../../redux/action-creators';
