@@ -1,17 +1,17 @@
+import { SportSlug } from '../../constants/sports';
 import { ActionType } from '../action-types';
 import { BetSlipAction } from '../actions';
-// import type { AzuroGame } from '@azuro-protocol/sdk';
 
 export interface CurrentGame {
   id: string;
-  game: string;
+  sportSlug: SportSlug;
   team1: string;
   team2: string;
   betType: string;
   matchOdd: {
     id: number;
     odds: string;
-    oddName: string;
+    selectionName: string;
   };
 }
 

@@ -24,12 +24,12 @@ const Match: FC<MatchProps> = ({ game, sport, selectedMarketId }) => {
   const oddsFormat = useTypedSelector((state) => state.app.oddsFormat);
   const dispatch = useDispatch();
 
-  const toggleBetSlip = (item: { id: number; oddName: string; odds: string }) => {
+  const toggleBetSlip = (item: { id: number; selectionName: string; odds: string }) => {
     if (currentBetSlipGame?.id === game.id && currentBetSlipGame?.matchOdd.id === item.id) {
       removeBetSlip()(dispatch);
     } else {
       addBetSlip({
-        game: sport.slug,
+        sportSlug: sport.slug,
         id: game.id,
         team1: game.participant1.name,
         team2: game.participant2.name,
