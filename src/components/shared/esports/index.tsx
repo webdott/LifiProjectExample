@@ -4,10 +4,10 @@ import Loader from '../Loader/Loader';
 import { useLocation } from 'react-router';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import MatchesContainer from '../sports/matchesContainer';
-import { getGamesByLeageus } from '../../../helpers/redux';
+import { getSportsWithGames } from '../../../helpers/redux';
 import { SportHubSlug } from '../../../constants/sports';
 import { useDispatch } from 'react-redux';
-import { fetchAllGames } from '../../../redux/action-creators';
+import { fetchGames, fetchSports } from '../../../redux/action-creators';
 import { useEffect } from 'react';
 import { gnosis, polygon } from 'wagmi/chains';
 import { getSelectedChainFromBase } from '../../../functions';
@@ -15,24 +15,45 @@ import { getSelectedChainFromBase } from '../../../functions';
 function Esport(): JSX.Element {
   const dispatch = useDispatch();
   const location = useLocation();
+  const chainId =
+    getSelectedChainFromBase(location.pathname) === 'polygon' ? polygon.id : gnosis.id;
 
-  const { data, error, loading } = useTypedSelector((state) => state.games.list);
+  const {
+    list: { data: sportsData, error: sportsError, loading: sportsLoading },
+  } = useTypedSelector((state) => state.sports);
+
+  const {
+    list: { data: gamesData, error: gamesError, loading: gamesLoading },
+    currentSportSlug,
+    currentLeagueSlug,
+    currentCountrySlug,
+  } = useTypedSelector((state) => state.games);
 
   useEffect(() => {
-    const chainId =
-      getSelectedChainFromBase(location.pathname) === 'polygon' ? polygon.id : gnosis.id;
-    fetchAllGames(chainId, [SportHubSlug.esports])(dispatch);
+    (async () => {
+      await fetchSports({
+        chainId,
+        hubSlugs: [SportHubSlug.esports],
+      })(dispatch);
+    })();
   }, [location.pathname]);
+
+  useEffect(() => {
+    fetchGames({
+      chainId,
+      sportSlug: currentSportSlug,
+      leagueSlug: currentLeagueSlug,
+      countrySlug: currentCountrySlug,
+    })(dispatch);
+  }, [sportsData, currentLeagueSlug, currentSportSlug]);
 
   return (
     <Layout>
-      <Cards games={data} />
-      {!error && !loading ? (
-        <MatchesContainer games={getGamesByLeageus([SportHubSlug.esports])} />
+      <Cards games={Object.values(gamesData)} />
+      {!gamesError && !sportsError && !gamesLoading && !sportsLoading ? (
+        <MatchesContainer sports={getSportsWithGames([SportHubSlug.esports])} />
       ) : (
-        <>
-          <Loader />
-        </>
+        <Loader />
       )}
     </Layout>
   );

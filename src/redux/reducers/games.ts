@@ -1,18 +1,14 @@
 import { SportHubSlug, SportSlug } from '../../constants/sports';
 import { ActionType } from '../action-types';
-import { CurrentGameAction, GamesAction } from '../actions';
+import { CurrentGameAction, GamesAction, SetCurrentSlugAction } from '../actions';
+import { SetCurrentLeagueSlugAction, SetCurrentSportSlugAction } from '../actions/interfaces';
+import { AzuroSport } from './sports';
 
 export type AzuroStatus = 'Resolved' | 'Canceled' | 'Created';
 
-export type AzureSportHub = {
+export type AzuroSportHub = {
   name: string;
   slug: SportHubSlug;
-};
-export type AzuroSport = {
-  sportId: string;
-  name: string;
-  slug: SportSlug;
-  sporthub: AzureSportHub;
 };
 
 export type AzuroCountry = {
@@ -25,6 +21,7 @@ export type AzuroLeague = {
   name: string;
   slug: string;
   country: AzuroCountry;
+  games: { id: string }[];
 };
 
 export type AzuroParticipant = {
@@ -71,13 +68,16 @@ interface GamesState {
   list: {
     loading: boolean;
     error: string | null;
-    data: AzuroGame[];
+    data: { [key: string]: AzuroGame };
   };
   currentGame: {
     loading: boolean;
     error: string | null;
     data: AzuroGame | null;
   };
+  currentSportSlug: SportSlug | null;
+  currentLeagueSlug: string | null;
+  currentCountrySlug: string | null;
 }
 
 const initialState = {
@@ -85,18 +85,21 @@ const initialState = {
   list: {
     loading: false,
     error: null,
-    data: [],
+    data: {},
   },
   currentGame: {
     loading: false,
     error: null,
     data: null,
   },
+  currentSportSlug: null,
+  currentLeagueSlug: null,
+  currentCountrySlug: null,
 };
 
 const reducer = (
   state: GamesState = initialState,
-  action: GamesAction | CurrentGameAction
+  action: GamesAction | CurrentGameAction | SetCurrentSlugAction
 ): GamesState => {
   switch (action.type) {
     case ActionType.FETCH_GAMES_START:
@@ -106,10 +109,10 @@ const reducer = (
         list: {
           loading: true,
           error: null,
-          data: [],
+          data: {},
         },
       };
-    case ActionType.FETCH_GAMES_SUCCESSS:
+    case ActionType.FETCH_GAMES_SUCCESS:
       return {
         ...state,
         list: {
@@ -125,7 +128,7 @@ const reducer = (
         list: {
           loading: false,
           error: action.payload,
-          data: [],
+          data: {},
         },
       };
     case ActionType.FETCH_CURRENT_GAME_START:
@@ -137,7 +140,7 @@ const reducer = (
           data: null,
         },
       };
-    case ActionType.FETCH_CURRENT_GAME_SUCCESSS:
+    case ActionType.FETCH_CURRENT_GAME_SUCCESS:
       return {
         ...state,
         currentGame: {
@@ -155,6 +158,21 @@ const reducer = (
           error: action.payload,
           data: null,
         },
+      };
+    case ActionType.SET_CURRENT_SPORT_SLUG:
+      return {
+        ...state,
+        currentSportSlug: action.payload,
+      };
+    case ActionType.SET_CURRENT_LEAGUE_SLUG:
+      return {
+        ...state,
+        currentLeagueSlug: action.payload,
+      };
+    case ActionType.SET_CURRENT_COUNTRY_SLUG:
+      return {
+        ...state,
+        currentCountrySlug: action.payload,
       };
 
     default:

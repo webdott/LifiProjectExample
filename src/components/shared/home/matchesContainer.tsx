@@ -48,7 +48,7 @@ const MatchesContainer = ({ sports }: { sports: Sport[] }) => {
             (sport, index: number) =>
               sport.leagues.length > 0 && (
                 <div key={index}>
-                  <h1 className={styles.sportNav}>{_.capitalize(sport.sport)}</h1>
+                  <h1 className={styles.sportNav}>{_.capitalize(sport.name)}</h1>
                   {sport.leagues.map((league, index) => (
                     <Matches league={league} matchColumn={matchColumn} key={index} sport={sport} />
                   ))}

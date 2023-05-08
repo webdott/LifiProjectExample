@@ -5,6 +5,7 @@ export const GAMES_ORDER = {
     SportSlug.football,
     SportSlug.basketball,
     SportSlug.mma,
+    SportSlug.baseball,
     SportSlug.boxing,
     SportSlug.tennis,
     SportSlug.iceHockey,

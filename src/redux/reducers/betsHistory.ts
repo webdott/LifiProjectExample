@@ -1,14 +1,8 @@
 import { SportSlug } from '../../constants/sports';
 import { ActionType } from '../action-types';
 import { BestHistoryAction } from '../actions';
-import {
-  AzuroCondition,
-  AzuroOutcome,
-  AzuroSport,
-  AzuroStatus,
-  AzuroLeague,
-  AzuroParticipant,
-} from './games';
+import { AzuroCondition, AzuroOutcome, AzuroStatus, AzuroLeague, AzuroParticipant } from './games';
+import { AzuroSport } from './sports';
 
 export enum BetsResult {
   won = 'Won',
@@ -69,7 +63,7 @@ const reducer = (
         error: null,
         data: [],
       };
-    case ActionType.FETCH_BETS_HISTORY_SUCCESSS:
+    case ActionType.FETCH_BETS_HISTORY_SUCCESS:
       return {
         loading: false,
         error: null,

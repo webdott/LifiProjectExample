@@ -28,7 +28,7 @@ const Match: FC<MatchProps> = ({ game, sport }) => {
       removeBetSlip()(dispatch);
     } else {
       addBetSlip({
-        game: sport.sport,
+        game: sport.slug,
         id: game.id,
         team1: game.participant1.name,
         team2: game.participant2.name,
@@ -80,9 +80,9 @@ const Match: FC<MatchProps> = ({ game, sport }) => {
         <OddChangeListItem />
         <li className={styles.allMarkets}>
           <Link
-            to={`/${getSelectedChainFromBase(location.pathname)}/${sport.sportHub}/${sport.sport}/${
-              game.gameId
-            }`}
+            to={`/${getSelectedChainFromBase(location.pathname)}/${sport.sporthub.slug}/${
+              sport.slug
+            }/${game.gameId}`}
           >
             <span>All markets</span>
           </Link>

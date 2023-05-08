@@ -1,36 +1,50 @@
 import {
   FetchGamesAction,
   FetchGamesSuccessAction,
-  FecthGamesErrorAction,
+  FetchGamesErrorAction,
+  FetchSportsAction,
+  FetchSportsSuccessAction,
+  FetchSportsErrorAction,
   GetButtonStateStartAction,
   GetButtonStateSuccessAction,
   GetButtonStateErrorAction,
   AddBetSlippAction,
   RemoveBetSlippAction,
   FetchBetsHistoryAction,
-  FecthBetsHistoryErrorAction,
+  FetchBetsHistoryErrorAction,
   FetchBetsHistorySuccessAction,
   UpdateOddsFormatAction,
   FetchCurrentGameAction,
   FetchCurrentGameSuccessAction,
-  FecthCurrentGameErrorAction,
+  FetchCurrentGameErrorAction,
+  SetCurrentSportSlugAction,
+  SetCurrentLeagueSlugAction,
+  SetCurrentCountrySlugAction,
 } from './interfaces';
 
-export type GamesAction = FetchGamesAction | FetchGamesSuccessAction | FecthGamesErrorAction;
+export type GamesAction = FetchGamesAction | FetchGamesSuccessAction | FetchGamesErrorAction;
+export type SportsAction = FetchSportsAction | FetchSportsSuccessAction | FetchSportsErrorAction;
 
 export type CurrentGameAction =
   | FetchCurrentGameAction
   | FetchCurrentGameSuccessAction
-  | FecthCurrentGameErrorAction;
+  | FetchCurrentGameErrorAction;
 
 export type BestHistoryAction =
   | FetchBetsHistoryAction
   | FetchBetsHistorySuccessAction
-  | FecthBetsHistoryErrorAction;
+  | FetchBetsHistoryErrorAction;
+
+export type SetCurrentSlugAction =
+  | SetCurrentSportSlugAction
+  | SetCurrentLeagueSlugAction
+  | SetCurrentCountrySlugAction;
 
 export type AppAction = UpdateOddsFormatAction;
 
 export type BetSlipAction = AddBetSlippAction | RemoveBetSlippAction;
+
+export type SetSlugAction = SetCurrentSportSlugAction | SetCurrentLeagueSlugAction;
 
 export type GPXButtonsAction =
   | GetButtonStateStartAction

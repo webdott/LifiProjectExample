@@ -28,6 +28,11 @@ export enum SportHubSlug {
   esports = 'esports',
 }
 
+export const SPORT_HUB_NAMES: { [key in SportHubSlug]: string } = {
+  [SportHubSlug.sports]: 'Sports',
+  [SportHubSlug.esports]: 'Esports',
+};
+
 export const SPORTS_HUB_MAP: { [k in SportHubSlug]: SportSlug[] } = {
   [SportHubSlug.sports]: [
     SportSlug.football,

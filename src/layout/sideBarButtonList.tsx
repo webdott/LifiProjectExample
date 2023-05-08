@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useCallback, useState } from 'react';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -6,57 +6,79 @@ import Collapse from '@mui/material/Collapse';
 
 import SportButton from '../components/shared/sportButton';
 import { SportHubSlug } from '../constants/sports';
-import { SportSlug } from '../constants/sports';
-import { getGamesByLeageus } from '../helpers/redux';
 import FlagIcon from '../components/shared/icons/FlagIcon';
 
 import styles from './sidebarbuttonlist.module.scss';
+import { useTypedSelector } from '../hooks/useTypedSelector';
+import {
+  setCurrentCountrySlug,
+  setCurrentLeagueSlug,
+  setCurrentSportSlug,
+} from '../redux/action-creators';
+import { useDispatch } from 'react-redux';
+import { getSportsWithGames, getOrderedSports } from '../helpers/redux';
+import { League, Sport } from '../constants/matches';
+import { AzuroSport } from '../redux/reducers/sports';
+import { AzuroLeague } from '../redux/reducers/games';
 
 interface Props {
-  sportHubSlugs?: SportHubSlug[];
+  sportHubSlugs: SportHubSlug[];
 }
 
-function SideBarButtonList({
-  sportHubSlugs = [SportHubSlug.sports, SportHubSlug.esports],
-}: Props): JSX.Element {
-  // const gamesLoading = useTypedSelector((state) => state.games.loading);
-  const [selectedSport, setSelectedSport] = useState<SportSlug | null>(null);
+function SideBarButtonList({ sportHubSlugs }: Props): JSX.Element {
+  const { data: sportData, loading } = useTypedSelector((state) => state.sports.list);
+  const dispatch = useDispatch();
+  const { currentSportSlug, currentLeagueSlug, currentCountrySlug } = useTypedSelector(
+    (state) => state.games
+  );
 
-  const [sportTab, setSportTab] = useState<number>(-1);
-  const [leagueTab, setLeagueTab] = useState<number>(1);
+  const handleSportClick = useCallback(
+    (sport: Sport) => {
+      if (currentSportSlug === sport.slug) {
+        setCurrentSportSlug(null)(dispatch);
+        setCurrentLeagueSlug(null)(dispatch);
+        setCurrentCountrySlug(null)(dispatch);
+      } else setCurrentSportSlug(sport.slug)(dispatch);
+    },
+    [dispatch, currentSportSlug]
+  );
+
+  const handleLeagueClick = useCallback(
+    (league: League) => {
+      setCurrentLeagueSlug(league.slug)(dispatch);
+      setCurrentCountrySlug(league.country.slug)(dispatch);
+    },
+    [dispatch]
+  );
 
   return (
     <div className={styles.leagues}>
-      {getGamesByLeageus(sportHubSlugs).map((sport, index) => {
+      {getOrderedSports(sportHubSlugs).map((sport, index) => {
         return (
           <Fragment key={index}>
             <SportButton
-              selected={selectedSport === sport.sportSlug}
-              sportTab={sportTab}
-              setSportTab={setSportTab}
-              fn={() =>
-                setSelectedSport((prev) => (prev === sport.sportSlug ? null : sport.sportSlug))
-              }
+              selected={currentSportSlug === sport.slug}
+              onClick={() => handleSportClick(sport)}
               index={index}
               sport={sport}
             />
 
-            <Collapse in={selectedSport === sport.sportSlug} timeout='auto' unmountOnExit>
-              {sport?.leagues?.map((league: any, index: number) => (
+            <Collapse in={currentSportSlug === sport.slug} timeout='auto' unmountOnExit>
+              {sport.leagues?.map((league, index) => (
                 <ListItemButton
                   className={
-                    leagueTab === index + 1
+                    currentLeagueSlug === league.slug && currentCountrySlug === league.country.slug
                       ? `${styles.sidebarButton} ${styles.activeTab}`
                       : `${styles.sidebarButton}`
                   }
                   key={index}
-                  onClick={() => setLeagueTab(index + 1)}
+                  onClick={() => handleLeagueClick(league)}
                 >
                   <ListItemIcon className={styles.leagueIconSection}>
                     <FlagIcon countryCode={league.country.slug} />
                   </ListItemIcon>
                   <ListItemText primary={league.name} />
-                  <span className={styles.leagueNumber}>{league.games.length}</span>
+                  <span className={styles.leagueNumber}>{league.games?.length || 0}</span>
                 </ListItemButton>
               ))}
             </Collapse>

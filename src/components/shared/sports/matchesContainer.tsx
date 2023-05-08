@@ -6,7 +6,7 @@ import Matches from '../../featured/matches';
 
 import styles from '../../featured/matches/matches.module.scss';
 
-const MatchesContainer = ({ games }: { games: Sport[] }) => {
+const MatchesContainer = ({ sports: games }: { sports: Sport[] }) => {
   const [matchColumn, setMatchColumn] = useState<MatchesEnum>(MatchesEnum.ALL);
 
   const [activeTabId, setActiveTabId] = useState<number>(0);
@@ -49,7 +49,7 @@ const MatchesContainer = ({ games }: { games: Sport[] }) => {
             (sport, index: number) =>
               sport.leagues.length > 0 && (
                 <div key={index}>
-                  <h1 className={styles.sportNav}>{_.capitalize(sport.sport)}</h1>
+                  <h1 className={styles.sportNav}>{_.capitalize(sport.name)}</h1>
                   {sport.leagues.map((league, index) => (
                     <Matches league={league} matchColumn={matchColumn} key={index} sport={sport} />
                   ))}

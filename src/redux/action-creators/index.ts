@@ -1,5 +1,6 @@
 import { Dispatch } from 'redux';
 import axios from 'axios';
+import _ from 'lodash';
 import dayjs from 'dayjs';
 import { ActionType } from '../action-types';
 import {
@@ -9,18 +10,38 @@ import {
   BestHistoryAction,
   AppAction,
   CurrentGameAction,
+  SportsAction,
 } from '../actions';
 import { CurrentGame } from '../reducers/betSlip';
 import { GRAPHQL_URLS, LIQUIDITY_POOLS } from '../../constants/azuro';
-import { SPORTS_HUB_MAP, SportHubSlug } from '../../constants/sports';
+import { SPORTS_HUB_MAP, SportHubSlug, SportSlug } from '../../constants/sports';
 import { OddsFormat } from '../reducers/app';
+import { SetCurrentCountrySlugAction, SetCurrentSportSlugAction } from '../actions/interfaces';
+import { SetCurrentLeagueSlugAction } from '../actions/interfaces';
+import { store } from '../store';
+import { AzuroSport } from '../reducers/sports';
 const PAGE_SIZE = 10;
 
 const SPORTS_QUERY = `
   query Sports($sportFilter: Sport_filter, $countryFilter: Country_filter, $leagueFilter: League_filter, $gameFilter: Game_filter, $gameOrderBy: Game_orderBy, $gameOrderDirection: OrderDirection) {
     sports(where: $sportFilter, subgraphError: allow) {
+      sportId
+      name
+      slug
+      sporthub {
+        name
+        slug
+        __typename
+      }
       countries(where: $countryFilter, orderBy: turnover, orderDirection: desc) {
         leagues(where: $leagueFilter, orderBy: turnover, orderDirection: desc) {
+          name
+          slug
+          country {
+            name
+            slug
+            turnover
+          }
           games(
             where: $gameFilter
             orderBy: $gameOrderBy
@@ -35,8 +56,6 @@ const SPORTS_QUERY = `
         __typename
       }
       __typename
-      name
-      sporthub {name}
     }
   }
 `;
@@ -227,10 +246,16 @@ fragment Game on Game {
 }
 `;
 
-export const fetchAllGames = (chainId: number, hubSlugs: SportHubSlug[]) => {
-  return async (dispatch: Dispatch<GamesAction>) => {
+export const fetchSports = ({
+  chainId,
+  hubSlugs,
+}: {
+  chainId: number;
+  hubSlugs: SportHubSlug[];
+}) => {
+  return async (dispatch: Dispatch<SportsAction>) => {
     dispatch({
-      type: ActionType.FETCH_GAMES_START,
+      type: ActionType.FETCH_SPORTS_START,
     });
 
     const now = dayjs();
@@ -244,7 +269,6 @@ export const fetchAllGames = (chainId: number, hubSlugs: SportHubSlug[]) => {
         variables: {
           sportFilter: {
             sporthub_in: hubSlugs,
-            slug_in: hubSlugs.map((i) => SPORTS_HUB_MAP[i]).flat(),
           },
           countryFilter: {
             hasActiveLeagues: true,
@@ -268,17 +292,59 @@ export const fetchAllGames = (chainId: number, hubSlugs: SportHubSlug[]) => {
         },
       });
 
-      const gameIds: number[] = [];
-
-      sportsData.data.sports.forEach((sp: any) => {
-        sp.countries.forEach((c: any) => {
-          c.leagues.forEach((lg: any) => {
-            gameIds.push(...lg.games.map((g: any) => g.id));
-          });
-        });
+      const fmtData = sportsData.data.sports.map((item: any) => ({
+        ...item,
+        leagues: item.countries.map((c: any) => c.leagues).flat(),
+      }));
+      dispatch({
+        type: ActionType.FETCH_SPORTS_SUCCESS,
+        payload: fmtData,
       });
+    } catch (err: any) {
+      dispatch({
+        type: ActionType.FETCH_SPORTS_ERROR,
+        payload: err.message,
+      });
+    }
+  };
+};
 
-      operation = 'Games';
+export const fetchGames = ({
+  chainId,
+  sportSlug = null,
+  leagueSlug = null,
+  countrySlug = null,
+}: {
+  chainId: number;
+  sportSlug?: SportSlug | null;
+  leagueSlug?: string | null;
+  countrySlug?: string | null;
+}) => {
+  return async (dispatch: Dispatch<GamesAction>) => {
+    const sportsData: AzuroSport[] = JSON.parse(JSON.stringify(store.getState().sports.list.data));
+    if (sportsData.length === 0) return;
+    dispatch({
+      type: ActionType.FETCH_GAMES_START,
+    });
+
+    try {
+      const gameIds: string[] = [];
+
+      sportsData
+        .filter((sp) => !sportSlug || sp.slug === sportSlug)
+        .forEach((sp) => {
+          sp.leagues
+            ?.filter(
+              (lg) =>
+                (!leagueSlug || lg.slug === leagueSlug) &&
+                (!countrySlug || lg.country.slug === countrySlug)
+            )
+            .forEach((lg) => {
+              gameIds.push(...(lg.games?.map((g) => g.id) || []));
+            });
+        });
+
+      const operation = 'Games';
       const { data: gamesData } = await axios.post(GRAPHQL_URLS[chainId] + `?op=${operation}`, {
         operation,
         query: GAMES_QUERY,
@@ -290,8 +356,8 @@ export const fetchAllGames = (chainId: number, hubSlugs: SportHubSlug[]) => {
         },
       });
       dispatch({
-        type: ActionType.FETCH_GAMES_SUCCESSS,
-        payload: gamesData.data.games,
+        type: ActionType.FETCH_GAMES_SUCCESS,
+        payload: _.keyBy(gamesData.data.games, 'id'),
       });
     } catch (err: any) {
       dispatch({
@@ -336,7 +402,7 @@ export const fetchBetsHistory = (
       });
 
       dispatch({
-        type: ActionType.FETCH_BETS_HISTORY_SUCCESSS,
+        type: ActionType.FETCH_BETS_HISTORY_SUCCESS,
         payload: betsHistory.data.bets,
       });
     } catch (err: any) {
@@ -413,7 +479,7 @@ export const fetchCurrentGame = (chainId: number, gameId: string) => {
       });
 
       dispatch({
-        type: ActionType.FETCH_CURRENT_GAME_SUCCESSS,
+        type: ActionType.FETCH_CURRENT_GAME_SUCCESS,
         payload: games.data.games[0] || null,
       });
     } catch (err: any) {
@@ -422,5 +488,32 @@ export const fetchCurrentGame = (chainId: number, gameId: string) => {
         payload: err.message,
       });
     }
+  };
+};
+
+export const setCurrentSportSlug = (slug: SportSlug | null) => {
+  return async (dispatch: Dispatch<SetCurrentSportSlugAction>) => {
+    dispatch({
+      type: ActionType.SET_CURRENT_SPORT_SLUG,
+      payload: slug,
+    });
+  };
+};
+
+export const setCurrentLeagueSlug = (slug: string | null) => {
+  return async (dispatch: Dispatch<SetCurrentLeagueSlugAction>) => {
+    dispatch({
+      type: ActionType.SET_CURRENT_LEAGUE_SLUG,
+      payload: slug,
+    });
+  };
+};
+
+export const setCurrentCountrySlug = (slug: string | null) => {
+  return async (dispatch: Dispatch<SetCurrentCountrySlugAction>) => {
+    dispatch({
+      type: ActionType.SET_CURRENT_COUNTRY_SLUG,
+      payload: slug,
+    });
   };
 };

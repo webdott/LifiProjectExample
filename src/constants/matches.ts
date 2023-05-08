@@ -1,6 +1,6 @@
 import { Dayjs } from 'dayjs';
 import { matchesDisableIcons, matchesIcons } from './../constants/icons';
-import { SportSlug } from './sports';
+import { SportHubSlug, SportSlug } from './sports';
 
 export enum MatchesEnum {
   ALL = 'All',
@@ -63,13 +63,15 @@ export interface League {
   games: Game[];
 }
 
+export type SportHub = {
+  name: string;
+  slug: SportHubSlug;
+};
 export interface Sport {
-  sport: string;
-  activeIcon: string;
-  disableIcon: string;
-  sportSlug: SportSlug;
-  sportHub: string;
-  sportHubSlug: string;
+  sportId: string;
+  name: string;
+  slug: SportSlug;
+  sporthub: SportHub;
   leagues: League[];
 }
 

@@ -1,43 +1,40 @@
-import { useEffect, useState, Dispatch, SetStateAction } from 'react';
+import { useEffect, useState } from 'react';
 import { IconType } from 'react-icons/lib';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import styles from '../../../layout/sidebarbuttonlist.module.scss';
+import { SPORTS_ICONS } from '../../../constants/sports';
 import { Sport } from '../../../constants/matches';
 
 export default function SportButton({
   sport,
   index,
-  sportTab,
-  setSportTab,
-  fn,
+  onClick,
   selected,
 }: {
   sport: Sport;
   index: number;
-  sportTab: number;
-  setSportTab: Dispatch<SetStateAction<number>>;
-  fn: () => void;
+  onClick: () => void;
   selected?: boolean;
 }) {
-  const [Icon, setIcon] = useState<string | IconType>(sport.disableIcon);
+  const [Icon, setIcon] = useState<string | IconType>(SPORTS_ICONS[sport.slug]?.disableIcon);
   const [hoverEffect, setHoverEffect] = useState(false);
 
   useEffect(() => {
-    if (sportTab === index + 1) {
-      setIcon(sport.activeIcon);
+    if (selected) {
+      setIcon(SPORTS_ICONS[sport.slug].activeIcon);
       setHoverEffect(true);
     } else {
-      setIcon(sport.disableIcon);
+      setIcon(SPORTS_ICONS[sport.slug].disableIcon);
       setHoverEffect(false);
     }
-  }, [sportTab]);
+  }, [selected, sport]);
 
   const hoverEnd = () => {
-    if (sportTab !== index + 1) {
-      setIcon(sport.disableIcon);
+    if (!selected) {
+      setIcon(SPORTS_ICONS[sport.slug].disableIcon);
       setHoverEffect(false);
     }
   };
@@ -45,20 +42,15 @@ export default function SportButton({
   return (
     <ListItemButton
       onMouseOver={() => {
-        setIcon(sport.activeIcon);
+        setIcon(SPORTS_ICONS[sport.slug].activeIcon);
         setHoverEffect(true);
       }}
       onMouseOut={() => hoverEnd()}
       key={index}
       className={
-        sportTab === index + 1
-          ? `${styles.sidebarButton} ${styles.activeTab}`
-          : `${styles.sidebarButton}`
+        selected ? `${styles.sidebarButton} ${styles.activeTab}` : `${styles.sidebarButton}`
       }
-      onClick={() => {
-        fn();
-        setSportTab(index + 1);
-      }}
+      onClick={onClick}
     >
       <ListItemIcon className={styles.sportIcon}>
         {hoverEffect ? <div className={styles.hoverEffect}></div> : ''}
@@ -68,10 +60,10 @@ export default function SportButton({
           <img alt='' src={Icon as string} width={22} height={22} />
         )}
       </ListItemIcon>
-      <ListItemText primary={sport.sport} />
+      <ListItemText primary={sport.name} />
       {/* <span className={styles.gameNumber}>{sport.sportsGames}</span> */}
       {selected ? <ExpandLess /> : <ArrowForwardIosIcon sx={{ fontSize: 16 }} />}
-      {sport.sport === 'MMA' || sport.sport === 'Basketball' ? (
+      {sport.name === 'MMA' || sport.name === 'Basketball' ? (
         <div className={styles.soonIcon}>Soon</div>
       ) : null}
     </ListItemButton>
