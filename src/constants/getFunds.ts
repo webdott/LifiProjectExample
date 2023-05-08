@@ -6,11 +6,11 @@ export interface GetFundsNavBarTypes {
 const getFundsLinks: GetFundsNavBarTypes[] = [
   {
     text: 'Buy with crypto',
-    path: '/buy-with-crypto',
+    path: '/get-funds/buy-with-crypto',
   },
   {
     text: 'Buy with card',
-    path: '/buy-with-card',
+    path: '/get-funds/buy-with-card',
   },
 ];
 

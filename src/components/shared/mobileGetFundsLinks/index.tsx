@@ -1,36 +1,28 @@
-import { KeyboardEvent, MouseEvent, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router';
+import { FC } from 'react';
+import { useLocation, useNavigate } from 'react-router';
+import { HiOutlineChevronLeft } from 'react-icons/hi';
 import { IoMdClose } from 'react-icons/io';
-import { GiHamburgerMenu } from 'react-icons/gi';
 import Box from '@mui/material/Box';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
 
 import { getUSDTLinks, getXDAILinks } from '../../../constants/getFunds';
+import { getSelectedChainFromBase } from '../../../functions';
 
 import styles from './mobilegetfundsleftsidebar.module.scss';
 
-export default function MobileGetFundsLeftSidebar() {
+interface MobileGetFundsLinksProps {
+  closeDrawer: () => void;
+  goBack: () => void;
+}
+
+const MobileGetFundsLinks: FC<MobileGetFundsLinksProps> = ({ closeDrawer, goBack }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { selectedChain } = useParams();
-  const [openDrawer, setOpenDrawer] = useState<boolean>(false);
 
   const handleNavigation = (path: string) => {
-    navigate(`/${selectedChain}${path}`);
-  };
-
-  const toggleDrawer = (open: boolean) => (event: KeyboardEvent | MouseEvent) => {
-    if (
-      event.type === 'keydown' &&
-      ((event as KeyboardEvent).key === 'Tab' || (event as KeyboardEvent).key === 'Shift')
-    ) {
-      return;
-    }
-
-    setOpenDrawer(open);
+    navigate(`/${getSelectedChainFromBase(location.pathname)}${path}`);
   };
 
   const List = () => (
@@ -39,20 +31,32 @@ export default function MobileGetFundsLeftSidebar() {
         <div className={styles.container}>
           <ListItemButton
             className={styles.closeDrawer}
-            onClick={toggleDrawer(false)}
-            onKeyDown={toggleDrawer(false)}
+            onClick={closeDrawer}
+            onKeyDown={closeDrawer}
           >
             <ListItemIcon className={styles.close} style={{ minWidth: '24px' }}>
               <IoMdClose size={24} />
             </ListItemIcon>
           </ListItemButton>
+
+          <div className={styles.title} onClick={goBack}>
+            <HiOutlineChevronLeft size={20} />
+            <p>Get Funds</p>
+          </div>
+
+          <Divider sx={{ background: '#fff', opacity: 0.5 }} />
+
           <div className={styles.sidebarNav}>
-            {(selectedChain === 'polygon' ? getUSDTLinks : getXDAILinks).map((el, index) => {
+            {(getSelectedChainFromBase(location.pathname) === 'polygon'
+              ? getUSDTLinks
+              : getXDAILinks
+            ).map((el, index) => {
               return (
                 <button
                   key={index}
                   className={
-                    location.pathname === `/${selectedChain}${el.path}`
+                    location.pathname ===
+                    `/${getSelectedChainFromBase(location.pathname)}${el.path}`
                       ? `${styles.sidebarButton} ${styles.activeTab}`
                       : `${styles.sidebarButton}`
                   }
@@ -68,19 +72,7 @@ export default function MobileGetFundsLeftSidebar() {
     </Box>
   );
 
-  return (
-    <div className={styles.mobileCover}>
-      <Button onClick={toggleDrawer(true)} className={styles.hamburgerButton}>
-        <GiHamburgerMenu size={30} />
-      </Button>
-      <Drawer
-        anchor='left'
-        open={openDrawer}
-        onClose={toggleDrawer(false)}
-        className={styles.mobileSidebarDrawer}
-      >
-        <List />
-      </Drawer>
-    </div>
-  );
-}
+  return <List />;
+};
+
+export default MobileGetFundsLinks;

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { CiGrid2H, CiGrid2V } from 'react-icons/ci';
 import { CgArrowsScrollV } from 'react-icons/cg';
 import { FiSearch } from 'react-icons/fi';
@@ -15,7 +15,7 @@ interface Props {
   game: Game | null;
 }
 const AllMatchOdds = ({ game }: Props) => {
-  const containerRef = useRef<HTMLDivElement>(null);
+  // const containerRef = useRef<HTMLDivElement>(null);
   const [showMasonry, setShowMasonry] = useState<boolean>(false);
   const [halfWidth, setHalfWidth] = useState<number>(900);
   const [searchValue, setSearchValue] = useState<string>('');
@@ -23,19 +23,19 @@ const AllMatchOdds = ({ game }: Props) => {
   const [gridClass, setGridClass] = useState<'fullGrid' | 'halfGrid'>('fullGrid');
   const [allCollapsed, setAllCollapsed] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (containerRef?.current) {
-      setHalfWidth((containerRef?.current?.offsetWidth ?? 1800) / 2);
-      window.addEventListener('resize', (evt) => {
-        setHalfWidth((containerRef?.current?.offsetWidth ?? 1800) / 2);
-      });
+  const containerRef = useCallback((node: HTMLDivElement) => {
+    if (node !== null) {
+      setHalfWidth((node?.offsetWidth ?? 1800) / 2);
       // get width of masonry container in order to get accurate width for get block
       // delay rendering of masonry component after setting width for it to take effect
       setTimeout(() => {
         setShowMasonry(true);
       }, 500);
+      window.addEventListener('resize', (evt) => {
+        setHalfWidth((node?.offsetWidth ?? 1800) / 2);
+      });
     }
-  }, [containerRef?.current]);
+  }, []);
 
   if (!game) return null;
   return (
