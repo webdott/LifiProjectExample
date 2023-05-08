@@ -26,6 +26,7 @@ const generateGameObj = (game: AzuroGame): Game => {
     const marketId = getMarketKey(m.outcomes[0][0].outcomeId);
     return {
       ...m,
+      marketId: marketId,
       marketDescription: getMarketDescription({
         marketKey: marketId,
         outcomeId: m.outcomes[0][0].outcomeId,

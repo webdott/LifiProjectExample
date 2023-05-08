@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import type { MenuProps } from 'antd';
 import { Dropdown } from 'antd';
 import { AiOutlinePlus } from 'react-icons/ai';
@@ -40,13 +40,35 @@ const items: MenuProps['items'] = [
   },
 ];
 
-const BettingOption: React.FC = () => (
-  <Dropdown menu={{ items }} trigger={['click']}>
-    <a className='optionBtn' onClick={(e) => e.preventDefault()}>
-      <AiOutlinePlus size={20} />
-      <div className='hoverEffect'></div>
-    </a>
-  </Dropdown>
-);
+interface Props {
+  options: { key: string; label: string }[];
+  selected: string | null;
+  onChange: (key: string) => void;
+}
+const BettingOption = ({ options, selected, onChange }: Props) => {
+  const handleChange = useCallback(
+    ({ key }: { key: string }) => {
+      onChange(key);
+    },
+    [onChange]
+  );
+
+  return (
+    <Dropdown
+      menu={{
+        items: options,
+        selectable: true,
+        ...(selected && { defaultSelectedKeys: [selected] }),
+        onClick: handleChange,
+      }}
+      trigger={['click']}
+    >
+      <a className='optionBtn' onClick={(e) => e.preventDefault()}>
+        <AiOutlinePlus size={20} />
+        <div className='hoverEffect'></div>
+      </a>
+    </Dropdown>
+  );
+};
 
 export default BettingOption;

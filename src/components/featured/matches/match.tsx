@@ -15,9 +15,10 @@ import { useTypedSelector } from '../../../hooks/useTypedSelector';
 interface MatchProps {
   game: Game;
   sport: Sport;
+  selectedMarketId: string | null;
 }
 
-const Match: FC<MatchProps> = ({ game, sport }) => {
+const Match: FC<MatchProps> = ({ game, sport, selectedMarketId }) => {
   const location = useLocation();
   const { currentGame: currentBetSlipGame } = useSelector((root: RootState) => root.betSlip);
   const oddsFormat = useTypedSelector((state) => state.app.oddsFormat);
@@ -61,23 +62,25 @@ const Match: FC<MatchProps> = ({ game, sport }) => {
         <p>{game.startsAtString}</p>
       </div>
       <ul className={styles.matchRightSection}>
-        {game.markets[0].outcomes[0].map((item: any, index: number) => {
-          return (
-            <li
-              key={index}
-              className={
-                currentBetSlipGame?.id === game.id && currentBetSlipGame?.matchOdd.id === item.id
-                  ? styles.activeTab
-                  : ''
-              }
-              onClick={() => toggleBetSlip(item)}
-            >
-              <span>{item.selectionName}</span>
-              <span>{getOddsDisplayString(item.odds, oddsFormat)}</span>
-            </li>
-          );
-        })}
-        <OddChangeListItem />
+        {game.markets
+          .filter((m) => m.marketId === selectedMarketId)[0]
+          ?.outcomes[0].map((item: any, index: number) => {
+            return (
+              <li
+                key={index}
+                className={
+                  currentBetSlipGame?.id === game.id && currentBetSlipGame?.matchOdd.id === item.id
+                    ? styles.activeTab
+                    : ''
+                }
+                onClick={() => toggleBetSlip(item)}
+              >
+                <span>{item.selectionName}</span>
+                <span>{getOddsDisplayString(item.odds, oddsFormat)}</span>
+              </li>
+            );
+          })}
+        {/* <OddChangeListItem /> */}
         <li className={styles.allMarkets}>
           <Link
             to={`/${getSelectedChainFromBase(location.pathname)}/${sport.sporthub.slug}/${
