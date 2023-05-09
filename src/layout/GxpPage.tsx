@@ -7,6 +7,7 @@ import Footer from '../components/featured/footer';
 import { useNavigate } from 'react-router-dom';
 import BetInfo from '../components/shared/betInfo';
 import { getSelectedChainFromBase } from '../functions';
+import MobileBetInfo from '../components/shared/mobileBetInfo';
 
 import styles from './gxplayout.module.scss';
 
@@ -51,6 +52,7 @@ export default function Sidebar({ children }: checkBalanceProps): JSX.Element {
           <Footer />
         </div>
         <BetInfo />
+        <MobileBetInfo />
       </div>
     </Fragment>
   );
