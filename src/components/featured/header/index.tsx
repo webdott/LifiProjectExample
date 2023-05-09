@@ -10,7 +10,7 @@ import CheckBalance from '../../shared/balanceCheck';
 import GamblrXYZLogo from '../../shared/logo';
 import AccountPage from '../accountPage';
 import ConnetedUser from './../connectedUser';
-import MobileLeftSidebar from '../../mobileLeftSidebar';
+import MobileLeftSidebar from '../../shared/mobileLeftSidebar';
 import { HeaderButtonText, navbar } from '../../../constants/navbar';
 import disableWalletIcon from '../../../assets/images/disableWalletIcon.png';
 import activeWalletIcon from '../../../assets/images/activeWalletIcon.png';
@@ -120,7 +120,7 @@ export default function Header({ page }: { page: 'home' | 'gxp' | 'get-funds' })
                     <img alt='walletIcon' src={walletIcon} className={styles.connectWalletIcon} />
                     <span>{HeaderButtonText.Connect_Wallet}</span>
                   </div>
-                  
+
                   <MobileConnectWalletDrawer />
                 </>
               )}
