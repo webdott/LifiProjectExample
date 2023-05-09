@@ -45,9 +45,9 @@ const SelectedBet = () => {
       </div>
       <p>{currentBetSlipGame?.betType ?? ''}</p>
       <div className={styles.odds}>
-        <span className={styles.who}>{currentBetSlipGame?.matchOdd.selectionName}</span>
+        <span className={styles.who}>{currentBetSlipGame?.outcome.selectionName}</span>
         <span className={styles.odd}>
-          {getOddsDisplayString(currentBetSlipGame?.matchOdd.odds || '0', oddsFormat)}
+          {getOddsDisplayString(currentBetSlipGame?.outcome.odds || '0', oddsFormat)}
         </span>
       </div>
     </div>

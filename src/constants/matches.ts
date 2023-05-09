@@ -44,6 +44,15 @@ export interface Participant {
   name: string;
   image: string | null;
 }
+export interface Outcome {
+  conditionId: string;
+  coreAddress: string;
+  id: string;
+  lpAddress: string;
+  odds: string;
+  outcomeId: string;
+  selectionName: string;
+}
 export interface Game {
   id: string;
   gameId: string;

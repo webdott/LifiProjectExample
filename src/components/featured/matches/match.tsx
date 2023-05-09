@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 
-import { Game, Sport } from '../../../constants/matches';
+import { Game, Outcome, Sport } from '../../../constants/matches';
 import { RootState } from '../../../redux';
 import { addBetSlip, removeBetSlip } from '../../../redux/action-creators';
 import { getSelectedChainFromBase } from '../../../functions';
@@ -24,8 +24,8 @@ const Match: FC<MatchProps> = ({ game, sport, selectedMarketId }) => {
   const oddsFormat = useTypedSelector((state) => state.app.oddsFormat);
   const dispatch = useDispatch();
 
-  const toggleBetSlip = (item: { id: number; selectionName: string; odds: string }) => {
-    if (currentBetSlipGame?.id === game.id && currentBetSlipGame?.matchOdd.id === item.id) {
+  const toggleBetSlip = (item: Outcome) => {
+    if (currentBetSlipGame?.id === game.id && currentBetSlipGame?.outcome.id === item.id) {
       removeBetSlip()(dispatch);
     } else {
       addBetSlip({
@@ -34,7 +34,7 @@ const Match: FC<MatchProps> = ({ game, sport, selectedMarketId }) => {
         team1: game.participant1.name,
         team2: game.participant2.name,
         betType: 'Full Time Result',
-        matchOdd: item,
+        outcome: item,
       })(dispatch);
     }
   };
@@ -69,7 +69,7 @@ const Match: FC<MatchProps> = ({ game, sport, selectedMarketId }) => {
               <li
                 key={index}
                 className={
-                  currentBetSlipGame?.id === game.id && currentBetSlipGame?.matchOdd.id === item.id
+                  currentBetSlipGame?.id === game.id && currentBetSlipGame?.outcome.id === item.id
                     ? styles.activeTab
                     : ''
                 }

@@ -1,3 +1,4 @@
+import { Outcome } from '../../constants/matches';
 import { SportSlug } from '../../constants/sports';
 import { ActionType } from '../action-types';
 import { BetSlipAction } from '../actions';
@@ -8,11 +9,7 @@ export interface CurrentGame {
   team1: string;
   team2: string;
   betType: string;
-  matchOdd: {
-    id: number;
-    odds: string;
-    selectionName: string;
-  };
+  outcome: Outcome;
 }
 
 interface BetSlipState {
