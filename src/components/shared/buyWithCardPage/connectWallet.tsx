@@ -5,6 +5,7 @@ import WalletModal from '../walletModal';
 import Button from '../button';
 import { ButtonType } from '../button/type';
 import { HeaderButtonText } from '../../../constants/navbar';
+import MobileConnectWalletDrawer from '../mobileConnectWalletDrawer';
 
 import styles from './buywithcard.module.scss';
 
@@ -30,6 +31,7 @@ const ConnectWallet = () => {
       </div>
 
       {showModal && <WalletModal visible={showModal} close={() => setShowModal(false)} />}
+      <MobileConnectWalletDrawer withFullText/>
     </>
   );
 };

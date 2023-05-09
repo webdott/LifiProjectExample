@@ -51,6 +51,10 @@
       }
     }
   }
+
+  @media screen and (max-width: 620px) {
+    display: none;
+  }
 }
 .notifySwitchBtn {
   font-weight: bold;

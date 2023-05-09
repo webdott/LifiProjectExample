@@ -76,14 +76,14 @@
     .cards {
       width: 100% !important;
       overflow-x: auto;
-      padding: 40px 10px 0 30px;
+      padding: 40px 30px 0 30px;
       height: calc(100vh - 87px);
     }
   }
 
   @media screen and (max-width: 540px) {
     .cards {
-      padding: 40px 0px 0 15px;
+      padding: 40px 15px 0 15px;
     }
   }
 }

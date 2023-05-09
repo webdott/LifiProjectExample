@@ -98,13 +98,6 @@
             left: -30px;
             transition: 0.3s;
           }
-          &:hover .hoverEffect {
-            background: var(--hover_effect);
-            filter: blur(10px);
-          }
-          &:hover {
-            color: var(--medium_green);
-          }
         }
         .activeNavLink {
           text-decoration: none;
@@ -138,11 +131,6 @@
           font-size: 16px;
           line-height: 19px;
           cursor: pointer;
-
-          &:hover {
-            color: var(--medium_green);
-            border: 1.5px solid var(--medium_green);
-          }
         }
 
         .activeTab {

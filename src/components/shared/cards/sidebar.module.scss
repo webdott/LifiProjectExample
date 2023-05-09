@@ -34,7 +34,7 @@
           padding: 25px;
           row-gap: 12px;
           @media only screen and (max-width: 1024px) {
-            padding: 25px 5px 0px 5px;
+            padding: 25px 15px 0px 15px;
             row-gap: 10px;
           }
           &_league {
@@ -162,10 +162,6 @@
               &:hover {
                 background: rgba(51, 255, 204, 0.45);
                 border: 2px solid green;
-              }
-              @media only screen and (max-width: 1024px) {
-                width: 36px;
-                height: 36px;
               }
             }
             &_activeBox {

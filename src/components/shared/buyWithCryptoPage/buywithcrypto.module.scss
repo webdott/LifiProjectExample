@@ -134,6 +134,10 @@
           color: var(--white_900);
           transition: 0.3s;
         }
+
+        @media screen and (max-width: 620px) {
+          display: none;
+        }
       }
     }
   }

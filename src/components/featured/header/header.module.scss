@@ -147,6 +147,10 @@
           color: #00ffb2;
         }
       }
+
+      @media screen and (max-width: 1200px) {
+        justify-content: flex-end;
+      }
     }
 
     .walletModal {
@@ -201,5 +205,9 @@
     line-height: 19px;
     color: var(--white_900);
     transition: 0.3s;
+  }
+
+  @media screen and (max-width: 620px) {
+    display: none;
   }
 }
