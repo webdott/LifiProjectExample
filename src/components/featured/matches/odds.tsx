@@ -49,8 +49,9 @@ const Odds = ({ showSettingsIcon = false }: Props) => {
         defaultSelectedKeys: [oddsFormat],
         onClick: handleChange,
       }}
-      trigger={['click']}
-      placement='bottom'
+      // trigger={['click']}
+      placement='bottomRight'
+      arrow={{ pointAtCenter: true }}
     >
       {showSettingsIcon ? (
         <button>

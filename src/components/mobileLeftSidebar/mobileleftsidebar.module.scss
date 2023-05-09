@@ -21,7 +21,7 @@
     padding-bottom: 20px;
   }
   .mobileLeftSidebar {
-    width: 100%;
+    width: 320px;
     height: 100%;
     padding: 30px 20px;
     overflow-y: auto;
@@ -31,13 +31,15 @@
     background: -webkit-linear-gradient(0deg, #00cc8e 0%, #000000 100%);
     background: linear-gradient(0deg, #00cc8e 0%, #000000 100%);
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    row-gap: 40px;
 
     .container {
+      width: fit-content;
       display: flex;
       flex-direction: column;
-      row-gap: 0.94rem;
       padding-top: 60px;
+
       .closeDrawer {
         width: 100%;
         min-height: 40px;
@@ -57,7 +59,69 @@
       .sidebarNav {
         display: flex;
         flex-direction: column;
-        row-gap: 20px;
+        row-gap: 30px;
+
+        .navLink {
+          display: flex;
+          align-items: center;
+          column-gap: 12px;
+          background: none;
+          outline: none;
+          border: none;
+          width: auto;
+          font-weight: bold;
+          cursor: pointer;
+          font-weight: 700;
+          font-size: 16px;
+          line-height: 19px;
+          color: var(--white_900);
+          padding-bottom: 3px;
+          position: relative;
+          .soonIcon {
+            padding: 2px 8px;
+            background: linear-gradient(90.03deg, #0bf1ac -41.61%, #058465 105.53%);
+            border-radius: 5px;
+            max-width: 60px;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 15px;
+            color: var(--white_900);
+            position: absolute;
+            top: -14px;
+            right: -45px;
+          }
+          .hoverEffect {
+            width: 137px;
+            height: 16px;
+            position: absolute;
+            bottom: -18px;
+            left: -30px;
+            transition: 0.3s;
+          }
+          &:hover .hoverEffect {
+            background: var(--hover_effect);
+            filter: blur(10px);
+          }
+          &:hover {
+            color: var(--medium_green);
+          }
+        }
+        .activeNavLink {
+          text-decoration: none;
+          color: var(--medium_green);
+          font-weight: bold;
+          position: relative;
+          .hoverEffect {
+            width: 137px;
+            height: 16px;
+            position: absolute;
+            bottom: -18px;
+            left: -30px;
+            transition: 0.3s;
+            background: var(--hover_effect);
+            filter: blur(10px);
+          }
+        }
 
         .sidebarButton {
           display: flex;
@@ -86,6 +150,10 @@
           color: var(--medium_green);
           border: 1.5px solid var(--medium_green);
         }
+      }
+
+      &.second {
+        padding-top: 0;
       }
     }
   }

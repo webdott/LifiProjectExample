@@ -20,7 +20,7 @@ export default function GetUSDTPage() {
               Polygon Mainnet.
             </p>
             <Button
-              onClick={() => navigate('/polygon/buy-with-crypto')}
+              onClick={() => navigate('/polygon/get-funds/buy-with-crypto')}
               className={styles.buyButton}
               btnType={ButtonType.membershipButton}
               text='Buy with crypto'
@@ -31,7 +31,7 @@ export default function GetUSDTPage() {
             <p className={styles.title}>Buy with Card</p>
             <p className={styles.subText}>Use your debit or credit card to get crypto.</p>
             <Button
-              onClick={() => navigate('/polygon/buy-with-card')}
+              onClick={() => navigate('/polygon/get-funds/buy-with-card')}
               className={styles.buyButton}
               btnType={ButtonType.membershipButton}
               text='Buy with card'

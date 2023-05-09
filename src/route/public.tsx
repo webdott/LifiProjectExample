@@ -36,8 +36,8 @@ const RouterComp = () => {
       <Route path='/:selectedChain/upgrade' element={<Upgrade />} />
       <Route path='/:selectedChain/esports' element={<Esports />} />
       <Route path={'/:selectedChain/get-funds'} element={<GetFundsPage />} />
-      <Route path='/:selectedChain/buy-with-card' element={<BuyWithCardPage />} />
-      <Route path='/:selectedChain/buy-with-crypto/*' element={<BuyWithCryptoPage />} />
+      <Route path='/:selectedChain/get-funds/buy-with-card' element={<BuyWithCardPage />} />
+      <Route path='/:selectedChain/get-funds/buy-with-crypto/*' element={<BuyWithCryptoPage />} />
       {/* To make sure the match url doesn't intercept the buy with crypto route */}
       <Route path='/:selectedChain/sports/:sport/:gameId' element={<MatchPage />} />
       <Route path='/:selectedChain/esports/:sport/:gameId' element={<MatchPage />} />

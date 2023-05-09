@@ -167,6 +167,15 @@ export default function TabPanel(props: TabPanelProps) {
             />
 
             <Button
+              className={`${styles.ctaButton} ${styles.accountMobile}`}
+              btnType={ButtonType.membershipButton}
+              text='Go to Account'
+              onClick={() =>
+                index === 0 ? navigate('/polygon/account') : navigate('/gnosis/account')
+              }
+            />
+
+            <Button
               className={styles.disconnectButton}
               btnType={ButtonType.membershipButton}
               text={'Disconnect wallet'}

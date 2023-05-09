@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useState } from 'react';
+import { Fragment, useCallback } from 'react';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -16,16 +16,20 @@ import {
   setCurrentSportSlug,
 } from '../redux/action-creators';
 import { useDispatch } from 'react-redux';
-import { getSportsWithGames, getOrderedSports } from '../helpers/redux';
+import { getOrderedSports } from '../helpers/redux';
 import { League, Sport } from '../constants/matches';
-import { AzuroSport } from '../redux/reducers/sports';
-import { AzuroLeague } from '../redux/reducers/games';
+import { useLocation, useNavigate } from 'react-router';
+import { getSelectedChainFromBase } from '../functions';
 
 interface Props {
   sportHubSlugs: SportHubSlug[];
+  sportsHub?: string;
+  closeDrawer?: () => void;
 }
 
-function SideBarButtonList({ sportHubSlugs }: Props): JSX.Element {
+function SideBarButtonList({ sportHubSlugs, sportsHub, closeDrawer }: Props): JSX.Element {
+  const navigate = useNavigate();
+  const location = useLocation();
   const { data: sportData, loading } = useTypedSelector((state) => state.sports.list);
   const dispatch = useDispatch();
   const { currentSportSlug, currentLeagueSlug, currentCountrySlug } = useTypedSelector(
@@ -47,6 +51,10 @@ function SideBarButtonList({ sportHubSlugs }: Props): JSX.Element {
     (league: League) => {
       setCurrentLeagueSlug(league.slug)(dispatch);
       setCurrentCountrySlug(league.country.slug)(dispatch);
+      if (sportsHub) {
+        navigate(`/${getSelectedChainFromBase(location.pathname)}/${sportsHub}`);
+        closeDrawer && closeDrawer();
+      }
     },
     [dispatch]
   );

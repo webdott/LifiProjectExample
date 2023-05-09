@@ -116,6 +116,12 @@
           display: none;
         }
       }
+
+      @media screen and (max-width: 400px) {
+        .headerLogo {
+          width: 120px;
+        }
+      }
     }
 
     .headerRightSection {

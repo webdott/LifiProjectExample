@@ -17,7 +17,7 @@ export default function GetXDAIPage() {
             <p className={styles.title}>Buy with Crypto</p>
             <p className={styles.subText}>Just swap your tokens to XDAI and/or bridge them in.</p>
             <Button
-              onClick={() => navigate('/gnosis/buy-with-crypto')}
+              onClick={() => navigate('/gnosis/get-funds/buy-with-crypto')}
               className={styles.buyButton}
               btnType={ButtonType.membershipButton}
               text='Buy with crypto'
@@ -28,7 +28,7 @@ export default function GetXDAIPage() {
             <p className={styles.title}>Buy with Card</p>
             <p className={styles.subText}>Use your debit or credit card to get crypto.</p>
             <Button
-              onClick={() => navigate('/gnosis/buy-with-card')}
+              onClick={() => navigate('/gnosis/get-funds/buy-with-card')}
               className={styles.buyButton}
               btnType={ButtonType.membershipButton}
               text='Buy with card'

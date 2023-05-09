@@ -1,38 +1,30 @@
-import { KeyboardEvent, MouseEvent, useState } from 'react';
+import { FC } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { IoMdClose } from 'react-icons/io';
-import { GiHamburgerMenu } from 'react-icons/gi';
 import Box from '@mui/material/Box';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
 
 import { navBarLinks } from '../../../constants/sidebar';
 import { getSelectedChainFromBase } from '../../../functions';
 
 import styles from './mobilegxpleftsidebar.module.scss';
+import { HiOutlineChevronLeft } from 'react-icons/hi';
 
-export default function MobileGXPLeftSidebar() {
+interface MobileGXPLeftSidebarLinksProps {
+  closeDrawer: () => void;
+  goBack: () => void;
+}
+
+const MobileGXPLeftSidebarLinks: FC<MobileGXPLeftSidebarLinksProps> = ({ closeDrawer, goBack }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [openDrawer, setOpenDrawer] = useState<boolean>(false);
 
   const handleNavigation = (path: string) => {
     navigate(
       path.includes('help') ? path : `/${getSelectedChainFromBase(location.pathname)}${path}`
     );
-  };
-
-  const toggleDrawer = (open: boolean) => (event: KeyboardEvent | MouseEvent) => {
-    if (
-      event.type === 'keydown' &&
-      ((event as KeyboardEvent).key === 'Tab' || (event as KeyboardEvent).key === 'Shift')
-    ) {
-      return;
-    }
-
-    setOpenDrawer(open);
   };
 
   const List = () => (
@@ -41,13 +33,21 @@ export default function MobileGXPLeftSidebar() {
         <div className={styles.container}>
           <ListItemButton
             className={styles.closeDrawer}
-            onClick={toggleDrawer(false)}
-            onKeyDown={toggleDrawer(false)}
+            onClick={closeDrawer}
+            onKeyDown={closeDrawer}
           >
             <ListItemIcon className={styles.close} style={{ minWidth: '24px' }}>
               <IoMdClose size={24} />
             </ListItemIcon>
           </ListItemButton>
+
+          <div className={styles.title} onClick={goBack}>
+            <HiOutlineChevronLeft size={20} />
+            <p>Membership</p>
+          </div>
+
+          <Divider sx={{ background: '#fff', opacity: 0.5 }} />
+
           <div className={styles.sidebarNav}>
             {navBarLinks.map((el, index) => {
               return (
@@ -72,19 +72,7 @@ export default function MobileGXPLeftSidebar() {
     </Box>
   );
 
-  return (
-    <div className={styles.mobileCover}>
-      <Button onClick={toggleDrawer(true)} className={styles.hamburgerButton}>
-        <GiHamburgerMenu size={30} />
-      </Button>
-      <Drawer
-        anchor='left'
-        open={openDrawer}
-        onClose={toggleDrawer(false)}
-        className={styles.mobileSidebarDrawer}
-      >
-        <List />
-      </Drawer>
-    </div>
-  );
-}
+  return <List />;
+};
+
+export default MobileGXPLeftSidebarLinks;

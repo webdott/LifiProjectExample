@@ -17,19 +17,30 @@
     }
   }
 }
+
 .ant-dropdown-menu-submenu-title {
   padding: 0px !important;
   background: var(--footer_icons_col);
 }
 .ant-dropdown-menu {
-  top: 10px;
+  position: absolute !important;
+  max-height: 300px;
+  right: 0;
   border-radius: 10px !important;
-  padding: 0px !important;
+  padding: 4px !important;
   background: var(--footer_icons_col) !important;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   .ant-dropdown-menu-item-selected {
     background: var(--odds_bg_col) !important;
   }
   .ant-dropdown-menu-item {
+    white-space: nowrap;
+    width: 100%;
     padding: 9px 55px 10px 15px;
     background: var(--footer_icons_col);
     border-radius: 10px;
@@ -38,12 +49,22 @@
     line-height: 17px;
     color: var(--white_900);
     transition: 0.3s !important;
+    margin-bottom: 4px;
+    &:last-child {
+      margin-bottom: 0;
+    }
     &:hover {
       background: var(--odds_bg_col);
     }
   }
 }
+.ant-dropdown-show-arrow.ant-dropdown-placement-bottomRight {
+  .ant-dropdown-arrow:before {
+    background: var(--footer_icons_col);
+  }
+}
 .triangle {
+  display: none;
   position: absolute;
   top: -10px;
   left: 50%;

@@ -134,9 +134,19 @@
         font-weight: 16px;
         border-radius: 8px;
 
+        &.accountMobile {
+          display: flex;
+        }
+
         &:hover {
           background: var(--medium_green);
           color: var(--white_900);
+        }
+
+        @media screen and (min-width: 620px) {
+          &.accountMobile {
+            display: none;
+          }
         }
       }
 
@@ -163,6 +173,19 @@
         gap: 10px;
       }
     }
+  }
+
+  @media screen and (max-width: 620px) {
+    right: -25px;
+  }
+
+  @media screen and (max-width: 375px) {
+    width: 320px;
+  }
+
+  @media screen and (max-width: 345px) {
+    width: 300px;
+    right: -15px;
   }
 }
 

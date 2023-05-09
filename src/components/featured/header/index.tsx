@@ -10,9 +10,7 @@ import CheckBalance from '../../shared/balanceCheck';
 import GamblrXYZLogo from '../../shared/logo';
 import AccountPage from '../accountPage';
 import ConnetedUser from './../connectedUser';
-import MobileHomeLeftSidebar from '../../shared/mobileHomeLeftSidebar';
-import MobileGXPLeftSidebar from '../../shared/mobileGXPLeftSidebar copy';
-import MobileGetFundsLeftSidebar from '../../shared/mobileGetFundsLeftSidebar';
+import MobileLeftSidebar from '../../mobileLeftSidebar';
 import { HeaderButtonText, navbar } from '../../../constants/navbar';
 import disableWalletIcon from '../../../assets/images/disableWalletIcon.png';
 import activeWalletIcon from '../../../assets/images/activeWalletIcon.png';
@@ -58,9 +56,7 @@ export default function Header({ page }: { page: 'home' | 'gxp' | 'get-funds' })
       <div className={styles.header}>
         <div className={styles.headerContainer}>
           <div className={styles.headerLeftSection}>
-            {page === 'home' && <MobileHomeLeftSidebar />}
-            {page === 'gxp' && <MobileGXPLeftSidebar />}
-            {page === 'get-funds' && <MobileGetFundsLeftSidebar />}
+            <MobileLeftSidebar />
             <div className={styles.headerLogo}>
               <span>
                 <GamblrXYZLogo />
