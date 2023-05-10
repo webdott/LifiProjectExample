@@ -20,7 +20,8 @@ import {
 } from 'wagmi/chains';
 
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
-import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
+import { WalletConnectLegacyConnector } from '@wagmi/core/connectors/walletConnectLegacy';
+// import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 import { InjectedConnector } from 'wagmi/connectors/injected';
 import { publicProvider } from 'wagmi/providers/public';
 
@@ -29,7 +30,6 @@ import App from './App';
 
 import './index.css';
 import './styles/global.scss';
-import { WalletProvider } from './context/LifiWalletProvider';
 
 const { chains, provider, webSocketProvider } = configureChains(
   [
@@ -54,9 +54,11 @@ const { chains, provider, webSocketProvider } = configureChains(
 
 export const Connectors = {
   METAMASK: new MetaMaskConnector({ chains }),
-  WALLET_CONNECT: new WalletConnectConnector({
+  WALLET_CONNECT: new WalletConnectLegacyConnector({
     chains,
-    options: { projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID },
+    options: {
+      qrcode: true,
+    },
   }),
   INJECTED: new InjectedConnector({ chains }),
 };
@@ -74,9 +76,7 @@ root.render(
   <BrowserRouter>
     <Provider store={store}>
       <WagmiConfig client={wagmiClient}>
-        <WalletProvider>
-          <App />
-        </WalletProvider>
+        <App />
       </WagmiConfig>
     </Provider>
   </BrowserRouter>

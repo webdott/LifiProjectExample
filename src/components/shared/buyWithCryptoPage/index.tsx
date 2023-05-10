@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { gnosis, polygon } from 'wagmi/chains';
 import { useAccount, useConnect, useDisconnect, useSigner, useSwitchNetwork } from 'wagmi';
@@ -9,6 +9,7 @@ import ConnectWallet from './connectWallet';
 import { getSelectedChainFromBase } from '../../../functions';
 
 import styles from './buywithcrypto.module.scss';
+import { Connectors } from '../../..';
 
 export default function BuyWithCryptoPage() {
   const { switchNetworkAsync } = useSwitchNetwork();
@@ -19,6 +20,10 @@ export default function BuyWithCryptoPage() {
   const { disconnect } = useDisconnect();
   const location = useLocation();
 
+  useEffect(() => {
+
+  }, []);
+
   const widgetConfig: WidgetConfig = useMemo(() => {
     const obj: WidgetConfig = {
       toChain: getSelectedChainFromBase(location.pathname) === 'polygon' ? polygon.id : gnosis.id,
@@ -28,31 +33,31 @@ export default function BuyWithCryptoPage() {
         // remove OkexChain, Fuse, and Velas from chain list
         deny: [122, 66, 106],
       },
-      walletManagement: {
-        signer: wagmiSigner!,
-        connect: async () => {
-          connect();
-          const signer = await activeConnector?.getSigner();
-          if (signer) {
-            return signer!;
-          } else {
-            throw Error('No signer object after login');
-          }
-        },
-        disconnect: async () => {
-          disconnect();
-        },
-        switchChain: async (reqChainId: number) => {
-          await switchNetworkAsync?.(reqChainId);
-          const signer = await activeConnector?.getSigner();
+      // walletManagement: {
+      //   signer: wagmiSigner!,
+      //   connect: async () => {
+      //     connect();
+      //     const signer = await activeConnector?.getSigner();
+      //     if (signer) {
+      //       return signer!;
+      //     } else {
+      //       throw Error('No signer object after login');
+      //     }
+      //   },
+      //   disconnect: async () => {
+      //     disconnect();
+      //   },
+      //   switchChain: async (reqChainId: number) => {
+      //     await switchNetworkAsync?.(reqChainId);
+      //     const signer = await activeConnector?.getSigner();
 
-          if (signer) {
-            return signer!;
-          } else {
-            throw Error('No signer object after chain switch');
-          }
-        },
-      },
+      //     if (signer) {
+      //       return signer!;
+      //     } else {
+      //       throw Error('No signer object after chain switch');
+      //     }
+      //   },
+      // },
       containerStyle: {
         width: '100%',
         minWidth: '280px',
@@ -71,7 +76,7 @@ export default function BuyWithCryptoPage() {
         },
       },
       appearance: 'dark',
-      hiddenUI: [HiddenUI.Appearance, HiddenUI.Language, HiddenUI.PoweredBy],
+      hiddenUI: [HiddenUI.Appearance, HiddenUI.Language, HiddenUI.PoweredBy, HiddenUI.ToAddress],
     };
 
     return obj;
