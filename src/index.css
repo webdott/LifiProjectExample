@@ -30,6 +30,6 @@ code {
   scrollbar-width: none; /* Firefox */
 }
 
-.MuiPopover-root > div > ul > li + a + button.MuiButton-disableElevation:last-child {
+/* .MuiPopover-root > div > ul > li + a + button.MuiButton-disableElevation:last-child {
   display: none;
-}
+} */
