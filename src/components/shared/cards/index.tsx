@@ -1,18 +1,19 @@
 import { Autoplay, Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import Skeleton from '@mui/material/Skeleton';
 
-import { OddsBoxValues } from './../../../constants/featuresGame';
 import Card from './card';
+import { FeaturedGame } from '../../../constants/matches';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import './styles.css';
 import styles from './sidebar.module.scss';
-import { AzuroGame } from '../../../redux/reducers/games';
+// import { AzuroGame } from '../../../redux/reducers/games';
 
 export interface Props {
-  games: AzuroGame[];
+  games: FeaturedGame[];
 }
 function Cards({ games }: Props): JSX.Element {
   return (
@@ -36,11 +37,25 @@ function Cards({ games }: Props): JSX.Element {
             modules={[Autoplay, Navigation]}
             className='mySwiper'
           >
-            {OddsBoxValues.map((slide, slideIndex: number) => (
-              <SwiperSlide key={slideIndex}>
-                <Card slide={slide} slideIndex={slideIndex} />
-              </SwiperSlide>
-            ))}
+            {games.length > 0
+              ? games.map((game, slideIndex: number) => (
+                  <SwiperSlide key={slideIndex}>
+                    <Card game={game} slideIndex={slideIndex} />
+                  </SwiperSlide>
+                ))
+              : new Array(6).fill(0).map((_, idx) => (
+                  <SwiperSlide key={idx}>
+                    <div className={styles.card}>
+                      <Skeleton
+                        variant='rectangular'
+                        sx={{ backgroundColor: '#2c2c2e', borderRadius: '20px' }}
+                        animation='wave'
+                        height={311}
+                        width={320}
+                      />
+                    </div>
+                  </SwiperSlide>
+                ))}
           </Swiper>
         </div>
       </div>

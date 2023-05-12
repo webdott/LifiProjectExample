@@ -65,6 +65,11 @@ export interface Game {
   markets: any[];
 }
 
+export interface FeaturedGame extends Game {
+  sportSlug: SportSlug;
+  sportHubSlug: SportHubSlug;
+}
+
 export interface League {
   slug: string;
   name: string;

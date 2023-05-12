@@ -30,6 +30,7 @@ import App from './App';
 
 import './index.css';
 import './styles/global.scss';
+import ErrorBoundary from './components/shared/ErrorBoundary';
 
 const { chains, provider, webSocketProvider } = configureChains(
   [
@@ -76,7 +77,9 @@ root.render(
   <BrowserRouter>
     <Provider store={store}>
       <WagmiConfig client={wagmiClient}>
-        <App />
+        <ErrorBoundary fallback={'something went wrong'}>
+          <App />
+        </ErrorBoundary>
       </WagmiConfig>
     </Provider>
   </BrowserRouter>

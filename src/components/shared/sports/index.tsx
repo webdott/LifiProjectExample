@@ -8,7 +8,7 @@ import Layout from '../../../layout/HomePage';
 import Loader from '../Loader/Loader';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import MatchesContainer from '../home/matchesContainer';
-import { getSportsWithGames } from '../../../helpers/redux';
+import { getFeaturedGames, getSportsWithGames } from '../../../helpers/redux';
 import { SportHubSlug } from '../../../constants/sports';
 import { fetchGames, fetchSports } from '../../../redux/action-creators';
 import { getSelectedChainFromBase } from '../../../functions';
@@ -49,7 +49,7 @@ function Sport(): JSX.Element {
 
   return (
     <Layout>
-      <Cards games={Object.values(gamesData)} />
+      <Cards games={getFeaturedGames()} />
       {!gamesError && !sportsError && !gamesLoading && !sportsLoading ? (
         <MatchesContainer sports={getSportsWithGames([SportHubSlug.sports])} />
       ) : (
