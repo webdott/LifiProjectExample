@@ -33,11 +33,10 @@ export default function BuyWithCryptoPage() {
       try {
         await switchNetworkAsync?.(reqChainId);
         await wagmiSigner.getChainId();
-        console.log('m3');
       } catch {
         throw new Error("Couldn't switch chain.");
       }
-      console.log(chainId);
+      // console.log(chainId);
       if (chainId !== reqChainId) throw new Error('Chain was not switched here');
       else return wagmiSigner!;
     }
