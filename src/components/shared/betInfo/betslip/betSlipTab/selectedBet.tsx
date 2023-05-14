@@ -1,23 +1,20 @@
-import { useSelector, useDispatch } from 'react-redux';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-
-import { RootState } from '../../../../../redux';
-import { removeBetSlip } from '../../../../../redux/action-creators';
 
 import styles from './bestsliptab.module.scss';
 import { SPORTS_ICONS } from '../../../../../constants/sports';
 import { getOddsDisplayString } from '../../../../../utils/odds';
-import { useTypedSelector } from '../../../../../hooks/useTypedSelector';
+import { CurrentGame } from '../../../../../redux/reducers/betSlip';
+import { OddsFormat } from '../../../../../redux/reducers/app';
 
-const SelectedBet = () => {
-  const { currentGame: currentBetSlipGame } = useSelector((root: RootState) => root.betSlip);
-  const oddsFormat = useTypedSelector((state) => state.app.oddsFormat);
-  const dispatch = useDispatch();
+interface Props {
+  currentSlipBet: CurrentGame | null;
+  oddsFormat: OddsFormat;
+  onRemoveBet: () => void;
+}
 
-  const Icon = currentBetSlipGame?.sportSlug
-    ? SPORTS_ICONS[currentBetSlipGame.sportSlug].activeIcon
-    : null;
+const SelectedBet = ({ currentSlipBet, oddsFormat, onRemoveBet }: Props) => {
+  const Icon = currentSlipBet?.sportSlug ? SPORTS_ICONS[currentSlipBet.sportSlug].activeIcon : null;
 
   return (
     <div className={styles.selectedBet}>
@@ -33,21 +30,18 @@ const SelectedBet = () => {
             )}
           </div>
           <p>
-            {currentBetSlipGame?.team1} - {currentBetSlipGame?.team2}
+            {currentSlipBet?.team1} - {currentSlipBet?.team2}
           </p>
         </div>
-        <IconButton
-          sx={{ padding: 0, color: '#fff', opacity: '0.7' }}
-          onClick={() => removeBetSlip()(dispatch)}
-        >
+        <IconButton sx={{ padding: 0, color: '#fff', opacity: '0.7' }} onClick={onRemoveBet}>
           <CloseIcon fontSize='small' />
         </IconButton>
       </div>
-      <p>{currentBetSlipGame?.betType ?? ''}</p>
+      <p>{currentSlipBet?.betType ?? ''}</p>
       <div className={styles.odds}>
-        <span className={styles.who}>{currentBetSlipGame?.outcome.selectionName}</span>
+        <span className={styles.who}>{currentSlipBet?.outcome.selectionName}</span>
         <span className={styles.odd}>
-          {getOddsDisplayString(currentBetSlipGame?.outcome.odds || '0', oddsFormat)}
+          {getOddsDisplayString(currentSlipBet?.outcome.odds || '0', oddsFormat)}
         </span>
       </div>
     </div>
