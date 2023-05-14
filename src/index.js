@@ -35,24 +35,24 @@ import { Gnosis } from '@usedapp/core';
 import { ethers } from 'ethers';
 import { Polygon } from '@usedapp/core';
 
-// export const LocalGnosisChain = {
-//   id: 137,
-//   name: 'Polygon',
-//   network: 'Polygon',
-//   nativeCurrency: {
-//     decimals: 8,
-//     name: 'Polygon',
-//     symbol: 'Matic',
-//   },
-//   rpcUrls: {
-//     default: {
-//       http: ['http://127.0.0.1:8545'],
-//     },
-//     public: {
-//       http: ['http://127.0.0.1:8545'],
-//     },
-//   },
-// };
+export const LocalPolygonChain = {
+  id: 137,
+  name: 'Polygon',
+  network: 'Polygon',
+  nativeCurrency: {
+    decimals: 6,
+    name: 'Polygon',
+    symbol: 'Matic',
+  },
+  rpcUrls: {
+    default: {
+      http: ['http://127.0.0.1:8545'],
+    },
+    public: {
+      http: ['http://127.0.0.1:8545'],
+    },
+  },
+};
 export const LocalGnosisChain = {
   id: 100,
   name: 'Gnosis',
@@ -72,7 +72,7 @@ export const LocalGnosisChain = {
   },
 };
 export const { chains, provider, webSocketProvider } = configureChains(
-  [LocalGnosisChain],
+  [LocalGnosisChain, LocalPolygonChain],
   [publicProvider()]
 );
 // const { chains, provider, webSocketProvider } = configureChains(
@@ -113,12 +113,12 @@ const wagmiClient = createClient({
 });
 
 const config = {
-  // readOnlyChainId: Polygon.chainId,
-  // readOnlyUrls: {
-  //   // in this tutorial we use Ankr public RPC. It's free and has it's own limits
-  //   // in the production version with a large number of users, we do not recommend using it
-  //   [Polygon.chainId]: new ethers.providers.StaticJsonRpcProvider('http://127.0.0.1:8545'),
-  // },
+  readOnlyChainId: Polygon.chainId,
+  readOnlyUrls: {
+    // in this tutorial we use Ankr public RPC. It's free and has it's own limits
+    // in the production version with a large number of users, we do not recommend using it
+    [Polygon.chainId]: new ethers.providers.StaticJsonRpcProvider('http://127.0.0.1:8545'),
+  },
 };
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
