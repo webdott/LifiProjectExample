@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router';
 import { gnosis, polygon } from 'wagmi/chains';
 import { useDispatch } from 'react-redux';
@@ -33,6 +33,7 @@ function Sport(): JSX.Element {
     currentLeagueSlug,
     currentCountrySlug,
   } = useTypedSelector((state) => state.games);
+  const initialLoad = useRef(false);
 
   useEffect(() => {
     (async () => {
@@ -41,21 +42,23 @@ function Sport(): JSX.Element {
         chainId,
         hubSlugs: [SportHubSlug.sports],
       })(dispatch);
+      fetchFeaturedGames({ chainId })(dispatch);
+      await fetchGames({
+        chainId,
+      })(dispatch);
+      initialLoad.current = true;
     })();
   }, [location.pathname]);
 
   useEffect(() => {
+    if (!initialLoad.current) return;
     fetchGames({
       chainId,
       sportSlug: currentSportSlug,
       leagueSlug: currentLeagueSlug,
       countrySlug: currentCountrySlug,
     })(dispatch);
-  }, [sportsData, currentLeagueSlug, currentSportSlug]);
-
-  useEffect(() => {
-    fetchFeaturedGames({ chainId })(dispatch);
-  }, [chainId, sportsData]);
+  }, [currentLeagueSlug, currentSportSlug]);
 
   return (
     <Layout>

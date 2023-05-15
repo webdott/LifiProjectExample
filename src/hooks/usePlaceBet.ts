@@ -54,7 +54,6 @@ function usePlaceBet(outcome: Outcome | undefined, chainId: number, onBetPlace: 
   };
 
   const placeBet = useCallback(async () => {
-    console.log('111111111111111111outcome', outcome);
     if (!outcome) return;
 
     const deadline = Math.floor(Date.now() / 1000) + 2000;

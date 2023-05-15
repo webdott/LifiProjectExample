@@ -1,4 +1,4 @@
-import { useCallback, FC, useEffect } from 'react';
+import { useCallback, FC, useEffect, useState, useRef } from 'react';
 import { useLocation } from 'react-router';
 import { HiOutlineChevronLeft } from 'react-icons/hi';
 import { IoMdClose } from 'react-icons/io';
@@ -39,6 +39,7 @@ const MobileSportsESportsLeftSidebarLinks: FC<MobileSportsESportsLeftSidebarLink
   const chainId =
     getSelectedChainFromBase(location.pathname) === 'polygon' ? polygon.id : gnosis.id;
 
+  const initialLoad = useRef(false);
   const {
     list: { data: sportsData },
   } = useTypedSelector((state) => state.sports);
@@ -54,22 +55,23 @@ const MobileSportsESportsLeftSidebarLinks: FC<MobileSportsESportsLeftSidebarLink
         chainId,
         hubSlugs: [pageTitle === 'Sports' ? SportHubSlug.sports : SportHubSlug.esports],
       })(dispatch);
+      fetchFeaturedGames({ chainId })(dispatch);
+      await fetchGames({
+        chainId,
+      })(dispatch);
+      initialLoad.current = true;
     })();
   }, []);
 
   useEffect(() => {
-    console.log('11111111111111side');
+    if (!initialLoad.current) return;
     fetchGames({
       chainId,
       sportSlug: currentSportSlug,
       leagueSlug: currentLeagueSlug,
       countrySlug: currentCountrySlug,
     })(dispatch);
-  }, [chainId, sportsData, currentLeagueSlug, currentSportSlug]);
-
-  useEffect(() => {
-    fetchFeaturedGames({ chainId })(dispatch);
-  }, [chainId, sportsData]);
+  }, [currentLeagueSlug, currentSportSlug]);
 
   const getSportHubSlugs = useCallback(() => {
     if (pageTitle === 'Esports') return [SportHubSlug.esports];

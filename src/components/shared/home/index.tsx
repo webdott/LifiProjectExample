@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { gnosis, polygon } from 'wagmi/chains';
@@ -24,6 +24,7 @@ function Home(): JSX.Element {
   const chainId =
     getSelectedChainFromBase(location.pathname) === 'polygon' ? polygon.id : gnosis.id;
 
+  const initialLoad = useRef(false);
   const {
     list: { data: sportsData, error: sportsError, loading: sportsLoading },
   } = useTypedSelector((state) => state.sports);
@@ -42,21 +43,23 @@ function Home(): JSX.Element {
         chainId,
         hubSlugs: [SportHubSlug.sports, SportHubSlug.esports],
       })(dispatch);
+      fetchFeaturedGames({ chainId })(dispatch);
+      await fetchGames({
+        chainId,
+      })(dispatch);
+      initialLoad.current = true;
     })();
   }, [location.pathname]);
 
   useEffect(() => {
+    if (!initialLoad.current) return;
     fetchGames({
       chainId,
       sportSlug: currentSportSlug,
       leagueSlug: currentLeagueSlug,
       countrySlug: currentCountrySlug,
     })(dispatch);
-  }, [sportsData, currentLeagueSlug, currentSportSlug]);
-
-  useEffect(() => {
-    fetchFeaturedGames({ chainId })(dispatch);
-  }, [chainId, sportsData]);
+  }, [currentLeagueSlug, currentSportSlug]);
 
   return (
     <Layout>
