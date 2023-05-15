@@ -30,12 +30,8 @@ import App from './App';
 
 import './index.css';
 import './styles/global.scss';
-<<<<<<< HEAD
-import { WalletProvider } from './context/LifiWalletProvider';
 import { DAppProvider } from '@usedapp/core';
-=======
 import ErrorBoundary from './components/shared/ErrorBoundary';
->>>>>>> 86c399f253530e4821e6d0ea6fd51fdde8b15441
 
 // LOCAL TESTING
 // export const LocalGnosisChain = {
@@ -99,9 +95,9 @@ root.render(
     <Provider store={store}>
       <DAppProvider config={{}}>
         <WagmiConfig client={wagmiClient}>
-        <ErrorBoundary fallback={'something went wrong'}>
+          <ErrorBoundary fallback={'something went wrong'}>
             <App />
-        </ErrorBoundary>
+          </ErrorBoundary>
         </WagmiConfig>
       </DAppProvider>
     </Provider>
