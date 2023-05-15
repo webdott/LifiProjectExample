@@ -131,17 +131,17 @@
 
         .betInput {
           width: 100%;
-          height: 40px;
 
           label {
             width: 100%;
-            height: 100%;
+            height: 40px;
             padding: 0px 16px;
             display: flex;
             align-items: center;
             border: 1px solid var(--footer_icons_col);
             background: var(--bet_info_bg_col);
             border-radius: 8px;
+            transition: all 0.4s ease-in-out;
 
             .inputContainer {
               flex: auto;
@@ -178,6 +178,69 @@
 
             .currency {
               font-weight: bold;
+            }
+          }
+
+          .getFunds {
+            width: 100%;
+            padding: 8px;
+            background: var(--left_active_col);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 0px 0px 8px 8px;
+            overflow: hidden;
+            max-height: 0;
+            padding: 0;
+            transition: max-height 0.5s cubic-bezier(0, 2, 0, 2);
+
+            .getFundsText {
+              display: flex;
+              flex-direction: column;
+              row-gap: 5px;
+
+              span {
+                &:first-child {
+                  font-size: 13px;
+                  line-height: 16px;
+                  font-weight: bold;
+                }
+
+                &:last-child {
+                  font-size: 11px;
+                  line-height: 14px;
+                }
+              }
+            }
+
+            .getFundsLink {
+              width: 80px;
+              height: 26px;
+              font-size: 13px;
+              border-radius: 6px;
+              background: var(--footer_icons_col);
+              color: var(--white_900);
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              font-weight: bold;
+
+              &:hover {
+                opacity: 0.8;
+              }
+            }
+          }
+
+          &.notEnoughFunds {
+            label {
+              border: 2px solid var(--left_active_col);
+              border-radius: 8px 8px 0px 0px;
+            }
+
+            .getFunds {
+              // display: flex;
+              max-height: 80px;
+              padding: 8px;
             }
           }
         }

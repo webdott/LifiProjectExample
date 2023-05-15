@@ -18,13 +18,12 @@
     width: 100%;
     padding: 18px;
     background-color: var(--bet_info_bg_col);
-    min-height: 307px;
-    max-height: 307px;
+    height: fit-content;
     margin: 0;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 
     &.expand {
-      max-height: 485px;
+      height: fit-content;
     }
 
     .betSection {
