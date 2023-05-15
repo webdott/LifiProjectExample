@@ -15,11 +15,6 @@ export const LIQUIDITY_POOLS: { [key: number]: string } = {
   [gnosis.id]: '0x204e7371ade792c5c006fb52711c50a7efc843ed',
 };
 
-export const CHAIN_IDS: { [key: number]: number } = {
-  [polygon.id]: 137,
-  [gnosis.id]: 100,
-};
-
 export const CURRENCY_SYMBOLS = {
   [polygon.id]: 'USDT',
   [gnosis.id]: 'xDAI',
