@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { gnosis, polygon } from 'wagmi/chains';
@@ -10,7 +10,12 @@ import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import MatchesContainer from './matchesContainer';
 import { getFeaturedGames, getSportsWithGames } from '../../../helpers/redux';
 import { SportHubSlug } from '../../../constants/sports';
-import { fetchGames, fetchSports } from '../../../redux/action-creators';
+import {
+  fetchFeaturedGames,
+  fetchGames,
+  fetchSports,
+  resetCurrentSlugs,
+} from '../../../redux/action-creators';
 import { getSelectedChainFromBase } from '../../../functions';
 
 function Home(): JSX.Element {
@@ -19,6 +24,7 @@ function Home(): JSX.Element {
   const chainId =
     getSelectedChainFromBase(location.pathname) === 'polygon' ? polygon.id : gnosis.id;
 
+  const initialLoad = useRef(false);
   const {
     list: { data: sportsData, error: sportsError, loading: sportsLoading },
   } = useTypedSelector((state) => state.sports);
@@ -32,21 +38,28 @@ function Home(): JSX.Element {
 
   useEffect(() => {
     (async () => {
+      await resetCurrentSlugs()(dispatch);
       await fetchSports({
         chainId,
         hubSlugs: [SportHubSlug.sports, SportHubSlug.esports],
       })(dispatch);
+      fetchFeaturedGames({ chainId })(dispatch);
+      await fetchGames({
+        chainId,
+      })(dispatch);
+      initialLoad.current = true;
     })();
   }, [location.pathname]);
 
   useEffect(() => {
+    if (!initialLoad.current) return;
     fetchGames({
       chainId,
       sportSlug: currentSportSlug,
       leagueSlug: currentLeagueSlug,
       countrySlug: currentCountrySlug,
     })(dispatch);
-  }, [sportsData, currentLeagueSlug, currentSportSlug]);
+  }, [currentLeagueSlug, currentSportSlug]);
 
   return (
     <Layout>
