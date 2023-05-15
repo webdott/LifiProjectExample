@@ -45,8 +45,11 @@ function Esport(): JSX.Element {
       leagueSlug: currentLeagueSlug,
       countrySlug: currentCountrySlug,
     })(dispatch);
-    fetchFeaturedGames({ chainId })(dispatch);
   }, [sportsData, currentLeagueSlug, currentSportSlug]);
+
+  useEffect(() => {
+    fetchFeaturedGames({ chainId })(dispatch);
+  }, [chainId, sportsData]);
 
   return (
     <Layout>

@@ -311,14 +311,7 @@ export const fetchSports = ({
   };
 };
 
-export const fetchFeaturedGames = ({
-  chainId,
-}: {
-  chainId: number;
-  sportSlug?: SportSlug | null;
-  leagueSlug?: string | null;
-  countrySlug?: string | null;
-}) => {
+export const fetchFeaturedGames = ({ chainId }: { chainId: number }) => {
   return async (dispatch: Dispatch<FeaturedGamesAction>) => {
     const sportsData: AzuroSport[] = JSON.parse(JSON.stringify(store.getState().sports.list.data));
     if (sportsData.length === 0) return;

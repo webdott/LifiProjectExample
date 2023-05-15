@@ -46,9 +46,11 @@ function Home(): JSX.Element {
       leagueSlug: currentLeagueSlug,
       countrySlug: currentCountrySlug,
     })(dispatch);
-    fetchFeaturedGames({ chainId })(dispatch);
-    fetchFeaturedGames({ chainId });
   }, [sportsData, currentLeagueSlug, currentSportSlug]);
+
+  useEffect(() => {
+    fetchFeaturedGames({ chainId })(dispatch);
+  }, [chainId, sportsData]);
 
   return (
     <Layout>

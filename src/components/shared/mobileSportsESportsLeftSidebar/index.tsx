@@ -58,8 +58,11 @@ const MobileSportsESportsLeftSidebarLinks: FC<MobileSportsESportsLeftSidebarLink
       leagueSlug: currentLeagueSlug,
       countrySlug: currentCountrySlug,
     })(dispatch);
-    fetchFeaturedGames({ chainId })(dispatch);
   }, [chainId, sportsData, currentLeagueSlug, currentSportSlug]);
+
+  useEffect(() => {
+    fetchFeaturedGames({ chainId })(dispatch);
+  }, [chainId, sportsData]);
 
   const getSportHubSlugs = useCallback(() => {
     if (pageTitle === 'Esports') return [SportHubSlug.esports];
