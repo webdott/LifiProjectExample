@@ -20,9 +20,16 @@ import {
   SetCurrentSportSlugAction,
   SetCurrentLeagueSlugAction,
   SetCurrentCountrySlugAction,
+  FetchFeaturedGamesAction,
+  FetchFeaturedGamesSuccessAction,
+  FetchFeaturedGamesErrorAction,
 } from './interfaces';
 
 export type GamesAction = FetchGamesAction | FetchGamesSuccessAction | FetchGamesErrorAction;
+export type FeaturedGamesAction =
+  | FetchFeaturedGamesAction
+  | FetchFeaturedGamesSuccessAction
+  | FetchFeaturedGamesErrorAction;
 export type SportsAction = FetchSportsAction | FetchSportsSuccessAction | FetchSportsErrorAction;
 
 export type CurrentGameAction =

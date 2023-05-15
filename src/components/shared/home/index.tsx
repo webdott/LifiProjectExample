@@ -10,7 +10,7 @@ import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import MatchesContainer from './matchesContainer';
 import { getFeaturedGames, getSportsWithGames } from '../../../helpers/redux';
 import { SportHubSlug } from '../../../constants/sports';
-import { fetchGames, fetchSports } from '../../../redux/action-creators';
+import { fetchFeaturedGames, fetchGames, fetchSports } from '../../../redux/action-creators';
 import { getSelectedChainFromBase } from '../../../functions';
 
 function Home(): JSX.Element {
@@ -46,6 +46,8 @@ function Home(): JSX.Element {
       leagueSlug: currentLeagueSlug,
       countrySlug: currentCountrySlug,
     })(dispatch);
+    fetchFeaturedGames({ chainId })(dispatch);
+    fetchFeaturedGames({ chainId });
   }, [sportsData, currentLeagueSlug, currentSportSlug]);
 
   return (

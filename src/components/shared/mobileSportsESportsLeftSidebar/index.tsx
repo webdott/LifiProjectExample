@@ -14,7 +14,7 @@ import styles from './mobileleftsidebar.module.scss';
 import { useDispatch } from 'react-redux';
 import { getSelectedChainFromBase } from '../../../functions';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
-import { fetchGames, fetchSports } from '../../../redux/action-creators';
+import { fetchFeaturedGames, fetchGames, fetchSports } from '../../../redux/action-creators';
 
 import { gnosis, polygon } from 'wagmi/chains';
 
@@ -58,6 +58,7 @@ const MobileSportsESportsLeftSidebarLinks: FC<MobileSportsESportsLeftSidebarLink
       leagueSlug: currentLeagueSlug,
       countrySlug: currentCountrySlug,
     })(dispatch);
+    fetchFeaturedGames({ chainId })(dispatch);
   }, [chainId, sportsData, currentLeagueSlug, currentSportSlug]);
 
   const getSportHubSlugs = useCallback(() => {

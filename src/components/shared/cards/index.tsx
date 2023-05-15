@@ -3,17 +3,16 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import Skeleton from '@mui/material/Skeleton';
 
 import Card from './card';
-import { FeaturedGame } from '../../../constants/matches';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import './styles.css';
 import styles from './sidebar.module.scss';
-// import { AzuroGame } from '../../../redux/reducers/games';
+import { Game } from '../../../constants/matches';
 
 export interface Props {
-  games: FeaturedGame[];
+  games: Game[];
 }
 function Cards({ games }: Props): JSX.Element {
   return (

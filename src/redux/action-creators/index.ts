@@ -11,10 +11,11 @@ import {
   AppAction,
   CurrentGameAction,
   SportsAction,
+  FeaturedGamesAction,
 } from '../actions';
 import { CurrentGame } from '../reducers/betSlip';
 import { GRAPHQL_URLS, LIQUIDITY_POOLS } from '../../constants/azuro';
-import { SPORTS_HUB_MAP, SportHubSlug, SportSlug } from '../../constants/sports';
+import { SportHubSlug, SportSlug } from '../../constants/sports';
 import { OddsFormat } from '../reducers/app';
 import { SetCurrentCountrySlugAction, SetCurrentSportSlugAction } from '../actions/interfaces';
 import { SetCurrentLeagueSlugAction } from '../actions/interfaces';
@@ -61,8 +62,8 @@ const SPORTS_QUERY = `
 `;
 
 const GAMES_QUERY = `
-  query Games($first: Int, $gamesFilter: Game_filter) {
-    games(first: $first, where: $gamesFilter, subgraphError: allow) {
+  query Games($first: Int, $gamesFilter: Game_filter, $orderBy: Game_orderBy, $orderDirection: OrderDirection) {
+    games(first: $first, where: $gamesFilter, subgraphError: allow, orderBy: $orderBy, orderByDirection: $orderDirection ) {
       ...Game
       conditions {
         ...GameCondition
@@ -78,6 +79,7 @@ const GAMES_QUERY = `
     slug
     title
     status
+    turnover
     sport {
       sportId
       name
@@ -309,6 +311,56 @@ export const fetchSports = ({
   };
 };
 
+export const fetchFeaturedGames = ({
+  chainId,
+}: {
+  chainId: number;
+  sportSlug?: SportSlug | null;
+  leagueSlug?: string | null;
+  countrySlug?: string | null;
+}) => {
+  return async (dispatch: Dispatch<FeaturedGamesAction>) => {
+    const sportsData: AzuroSport[] = JSON.parse(JSON.stringify(store.getState().sports.list.data));
+    if (sportsData.length === 0) return;
+    dispatch({
+      type: ActionType.FETCH_FEATURED_GAMES_START,
+    });
+
+    try {
+      const gameIds: string[] = [];
+
+      sportsData.forEach((sp) => {
+        sp.leagues.forEach((lg) => {
+          gameIds.push(...(lg.games?.map((g) => g.id) || []));
+        });
+      });
+
+      const operation = 'FeaturedGames';
+      const { data: gamesData } = await axios.post(GRAPHQL_URLS[chainId] + `?op=${operation}`, {
+        operation,
+        query: GAMES_QUERY,
+        variables: {
+          first: 10,
+          orderBy: 'turnover',
+          orderDirection: 'desc',
+          gamesFilter: {
+            id_in: gameIds,
+          },
+        },
+      });
+      dispatch({
+        type: ActionType.FETCH_FEATURED_GAMES_SUCCESS,
+        payload: gamesData.data.games,
+      });
+    } catch (err: any) {
+      dispatch({
+        type: ActionType.FETCH_FEATURED_GAMES_ERROR,
+        payload: err.message,
+      });
+    }
+  };
+};
+
 export const fetchGames = ({
   chainId,
   sportSlug = null,
@@ -350,6 +402,8 @@ export const fetchGames = ({
         query: GAMES_QUERY,
         variables: {
           first: 1000,
+          orderBy: 'startsAt',
+          orderDirection: 'asc',
           gamesFilter: {
             id_in: gameIds,
           },

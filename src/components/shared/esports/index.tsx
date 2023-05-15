@@ -7,7 +7,7 @@ import MatchesContainer from '../home/matchesContainer';
 import { getFeaturedGames, getSportsWithGames } from '../../../helpers/redux';
 import { SportHubSlug } from '../../../constants/sports';
 import { useDispatch } from 'react-redux';
-import { fetchGames, fetchSports } from '../../../redux/action-creators';
+import { fetchFeaturedGames, fetchGames, fetchSports } from '../../../redux/action-creators';
 import { useEffect } from 'react';
 import { gnosis, polygon } from 'wagmi/chains';
 import { getSelectedChainFromBase } from '../../../functions';
@@ -45,6 +45,7 @@ function Esport(): JSX.Element {
       leagueSlug: currentLeagueSlug,
       countrySlug: currentCountrySlug,
     })(dispatch);
+    fetchFeaturedGames({ chainId })(dispatch);
   }, [sportsData, currentLeagueSlug, currentSportSlug]);
 
   return (
