@@ -21,7 +21,6 @@ import {
 
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
 import { WalletConnectLegacyConnector } from '@wagmi/core/connectors/walletConnectLegacy';
-// import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 import { InjectedConnector } from 'wagmi/connectors/injected';
 import { publicProvider } from 'wagmi/providers/public';
 
