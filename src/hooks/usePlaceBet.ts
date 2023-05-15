@@ -1,6 +1,5 @@
-import { gnosis, polygon } from 'wagmi/chains';
+import { gnosis } from 'wagmi/chains';
 import { Outcome } from '../constants/matches';
-import { getSelectedChainFromBase } from '../functions';
 import {
   ABI_PAYLOAD,
   LIQUIDITY_POOLS,
@@ -15,14 +14,10 @@ import { ERC20Interface } from '@usedapp/core';
 import { useTokenAllowance } from '@usedapp/core';
 import { formatUnits } from 'ethers/lib/utils.js';
 import { useCallback, useState } from 'react';
-import { useLocation } from 'react-router';
 
 const usdtContract = new ethers.Contract(USDT_ADDRESS, ERC20Interface);
-function usePlaceBet(outcome: Outcome | undefined, onBetPlace: () => void) {
+function usePlaceBet(outcome: Outcome | undefined, chainId: number, onBetPlace: () => void) {
   const { address } = useAccount();
-  const location = useLocation();
-  const chainId =
-    getSelectedChainFromBase(location.pathname) === 'polygon' ? polygon.id : gnosis.id;
   const [amount, setAmount] = useState('');
 
   // Liquidity pool contract
@@ -59,6 +54,7 @@ function usePlaceBet(outcome: Outcome | undefined, onBetPlace: () => void) {
   };
 
   const placeBet = useCallback(async () => {
+    console.log('111111111111111111outcome', outcome);
     if (!outcome) return;
 
     const deadline = Math.floor(Date.now() / 1000) + 2000;

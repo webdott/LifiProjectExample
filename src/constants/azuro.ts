@@ -20,6 +20,11 @@ export const CHAIN_IDS: { [key: number]: number } = {
   [gnosis.id]: 100,
 };
 
+export const CURRENCY_SYMBOLS = {
+  [polygon.id]: 'USDT',
+  [gnosis.id]: 'xDAI',
+};
+
 export const ABI_PAYLOAD = [
   {
     inputs: [

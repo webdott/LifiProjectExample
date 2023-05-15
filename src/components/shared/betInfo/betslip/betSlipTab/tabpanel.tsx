@@ -1,17 +1,20 @@
 import { useAccount, useBalance } from 'wagmi';
-import { ethers, utils } from 'ethers';
 
 import SelectedBet from './selectedBet';
 import Button from '../../../button';
 import { ButtonType } from '../../../button/type';
 
 import styles from './bestsliptab.module.scss';
-import { BaseSyntheticEvent, useCallback, useState } from 'react';
+import { BaseSyntheticEvent, useCallback } from 'react';
 import { useTypedSelector } from '../../../../../hooks/useTypedSelector';
 import { useDispatch } from 'react-redux';
 import { round } from '../../../../../utils/numbers';
 import { removeBetSlip } from '../../../../../redux/action-creators';
 import usePlaceBet from '../../../../../hooks/usePlaceBet';
+import { getSelectedChainFromBase } from '../../../../../functions';
+import { gnosis, polygon } from 'wagmi/chains';
+import { CURRENCY_SYMBOLS, USDT_ADDRESS } from '../../../../../constants/azuro';
+import { useLocation } from 'react-router';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -22,28 +25,45 @@ interface TabPanelProps {
 const quickBetValues: string[] = ['10%', '50%', '70%', '100%'];
 
 export default function TabPanel(props: TabPanelProps) {
+  const location = useLocation();
+  const chainId =
+    getSelectedChainFromBase(location.pathname) === 'polygon' ? polygon.id : gnosis.id;
+
+  const dispatch = useDispatch();
+  const handleBetRemoval = useCallback(() => {
+    removeBetSlip()(dispatch);
+  }, [dispatch]);
+
+  const { address } = useAccount();
+  const { data: nativeData, isLoading: isLoadingNativeDataBalance } = useBalance({
+    address,
+    chainId: getSelectedChainFromBase(location.pathname) === 'polygon' ? polygon.id : gnosis.id,
+  });
+  const { data: USDTBalanceData, isLoading: isLoadingUSDTBalance } = useBalance({
+    address: getSelectedChainFromBase(location.pathname) === 'polygon' ? address : undefined,
+    chainId: getSelectedChainFromBase(location.pathname) === 'polygon' ? polygon.id : gnosis.id,
+    token: USDT_ADDRESS,
+  });
+
   const { currentGame: currentBetSlipGame } = useTypedSelector((state) => state.betSlip);
 
   const { approve, placeBet, amount, isApproved, setAmount, isApproving } = usePlaceBet(
     currentBetSlipGame?.outcome,
-    () => null
+    chainId,
+    handleBetRemoval
   );
   const oddsFormat = useTypedSelector((state) => state.app.oddsFormat);
-
-  const dispatch = useDispatch();
-  const { address } = useAccount();
-  const { data } = useBalance({
-    address,
-  });
 
   const { children, value, index, ...other } = props;
   const handleAmountChagne = useCallback((event: BaseSyntheticEvent) => {
     setAmount(event.target.value);
   }, []);
 
-  const handleBetRemoval = useCallback(() => {
-    removeBetSlip()(dispatch);
-  }, [dispatch]);
+  const hasEnoughBalance = () => {
+    if (chainId === gnosis.id && nativeData) return +nativeData.formatted >= +amount;
+    else if (USDTBalanceData) return +USDTBalanceData.formatted >= +amount;
+    return false;
+  };
 
   return (
     <div
@@ -68,7 +88,7 @@ export default function TabPanel(props: TabPanelProps) {
                   <input type='text' placeholder='0' value={amount} onChange={handleAmountChagne} />
                   <div className={styles.betAmountPlaceholder}>Bet amount</div>
                 </div>
-                <div className={styles.currency}>{data?.symbol ?? 'XDAI'}</div>
+                <div className={styles.currency}>{CURRENCY_SYMBOLS[chainId]}</div>
               </label>
             </div>
             <div className={styles.quickBet}>
@@ -88,14 +108,14 @@ export default function TabPanel(props: TabPanelProps) {
                 {amount
                   ? round(Number(amount) * (Number(currentBetSlipGame?.outcome.odds) || 0), 2)
                   : 0}{' '}
-                {data?.symbol ?? 'XDAI'}
+                {CURRENCY_SYMBOLS[chainId]}
               </span>
             </div>
             <Button
-              className={`${styles.ctaButton} `}
+              className={`${styles.ctaButton} ${!hasEnoughBalance() && styles.disabled}`}
               btnType={ButtonType.membershipButton}
               text={isApproved ? 'Place bet' : isApproving ? 'Approving...' : 'Approve'}
-              onClick={placeBet}
+              onClick={isApproved ? placeBet : approve}
             />
           </div>
         </>
