@@ -1,7 +1,14 @@
 import { useMemo } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { gnosis, polygon } from 'wagmi/chains';
-import { useAccount, useConnect, useDisconnect, useSigner, useSwitchNetwork } from 'wagmi';
+import {
+  useAccount,
+  useConnect,
+  useDisconnect,
+  useSigner,
+  useSwitchNetwork,
+  useNetwork,
+} from 'wagmi';
 import { HiddenUI, LiFiWidget, WidgetConfig } from '@lifi/widget';
 
 import GetFundsLayout from '../../../layout/GetFundsLayout';
@@ -12,12 +19,32 @@ import styles from './buywithcrypto.module.scss';
 
 export default function BuyWithCryptoPage() {
   const { switchNetworkAsync } = useSwitchNetwork();
+  const chainId = useNetwork()?.chain?.id;
   const { data: wagmiSigner } = useSigner();
-  const { isConnected: walletIsConnected, connector: activeConnector } = useAccount();
+  const { isConnected: walletIsConnected } = useAccount();
   const { connect } = useConnect();
   const { selectedChain } = useParams();
   const { disconnect } = useDisconnect();
   const location = useLocation();
+
+  const switchChain = async (reqChainId: number) => {
+    if (!walletIsConnected || !wagmiSigner) return wagmiSigner!;
+    if (chainId !== reqChainId) {
+      try {
+        await switchNetworkAsync?.(reqChainId);
+        await wagmiSigner.getChainId();
+      } catch {
+        throw new Error("Couldn't switch chain.");
+      }
+      // console.log(chainId);
+      if (chainId !== reqChainId) throw new Error('Chain was not switched here');
+      else return wagmiSigner!;
+    }
+    // console.log('hererere');
+    // const newSigner = await activeConnector?.getSigner();
+    // console.log(newSigner);
+    return wagmiSigner!;
+  };
 
   const widgetConfig: WidgetConfig = useMemo(() => {
     const obj: WidgetConfig = {
@@ -32,26 +59,20 @@ export default function BuyWithCryptoPage() {
         signer: wagmiSigner!,
         connect: async () => {
           connect();
-          const signer = await activeConnector?.getSigner();
-          if (signer) {
-            return signer!;
+          if (wagmiSigner) {
+            return wagmiSigner!;
           } else {
             throw Error('No signer object after login');
           }
         },
         disconnect: async () => {
-          disconnect();
-        },
-        switchChain: async (reqChainId: number) => {
-          await switchNetworkAsync?.(reqChainId);
-          const signer = await activeConnector?.getSigner();
-
-          if (signer) {
-            return signer!;
-          } else {
-            throw Error('No signer object after chain switch');
+          try {
+            disconnect();
+          } catch (err) {
+            console.log('LiFI Disconnect error');
           }
         },
+        switchChain,
       },
       containerStyle: {
         width: '100%',
@@ -71,7 +92,7 @@ export default function BuyWithCryptoPage() {
         },
       },
       appearance: 'dark',
-      hiddenUI: [HiddenUI.Appearance, HiddenUI.Language, HiddenUI.PoweredBy],
+      hiddenUI: [HiddenUI.Appearance, HiddenUI.Language, HiddenUI.ToAddress],
     };
 
     return obj;

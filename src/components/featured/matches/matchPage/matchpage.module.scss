@@ -38,6 +38,7 @@
     align-items: center;
 
     .matchDetailsContent {
+      padding: 0 12px;
       width: 550px;
       display: flex;
       justify-content: space-between;
@@ -58,6 +59,18 @@
           width: 48px;
           height: 48px;
         }
+
+        @media screen and (max-width: 620px) {
+          width: 50px;
+          height: 50px;
+          min-width: 50px;
+          min-height: 50px;
+
+          img {
+            width: 32px;
+            height: 32px;
+          }
+        }
       }
 
       .teamNames {
@@ -71,6 +84,10 @@
         p {
           font-size: 18px;
           font-weight: 500;
+
+          @media screen and (max-width: 620px) {
+            font-size: 14px;
+          }
         }
 
         span {

@@ -10,11 +10,12 @@ import CheckBalance from '../../shared/balanceCheck';
 import GamblrXYZLogo from '../../shared/logo';
 import AccountPage from '../accountPage';
 import ConnetedUser from './../connectedUser';
-import MobileLeftSidebar from '../../mobileLeftSidebar';
+import MobileLeftSidebar from '../../shared/mobileLeftSidebar';
 import { HeaderButtonText, navbar } from '../../../constants/navbar';
 import disableWalletIcon from '../../../assets/images/disableWalletIcon.png';
 import activeWalletIcon from '../../../assets/images/activeWalletIcon.png';
 import { checkIfBase, getSelectedChainFromBase } from '../../../functions';
+import MobileConnectWalletDrawer from '../../shared/mobileConnectWalletDrawer';
 
 import styles from './header.module.scss';
 
@@ -108,16 +109,20 @@ export default function Header({ page }: { page: 'home' | 'gxp' | 'get-funds' })
                   {/* <Transactions /> */}
                 </>
               ) : (
-                <div
-                  onMouseEnter={() => setWalletIcon(activeWalletIcon)}
-                  onMouseLeave={() => setWalletIcon(disableWalletIcon)}
-                  className={styles.connectWalletBtn}
-                  onClick={visible}
-                >
-                  <div className={styles.hoverEffect}></div>
-                  <img alt='walletIcon' src={walletIcon} className={styles.connectWalletIcon} />
-                  <span>{HeaderButtonText.Connect_Wallet}</span>
-                </div>
+                <>
+                  <div
+                    onMouseEnter={() => setWalletIcon(activeWalletIcon)}
+                    onMouseLeave={() => setWalletIcon(disableWalletIcon)}
+                    className={styles.connectWalletBtn}
+                    onClick={visible}
+                  >
+                    <div className={styles.hoverEffect}></div>
+                    <img alt='walletIcon' src={walletIcon} className={styles.connectWalletIcon} />
+                    <span>{HeaderButtonText.Connect_Wallet}</span>
+                  </div>
+
+                  <MobileConnectWalletDrawer />
+                </>
               )}
               {showModal && <WalletModal visible={showModal} close={close} />}
             </div>

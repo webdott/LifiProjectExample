@@ -6,6 +6,7 @@ import { getUSDTLinks, getXDAILinks } from '../constants/getFunds';
 import Header from '../components/featured/header';
 import Footer from '../components/featured/footer';
 import BetInfo from '../components/shared/betInfo';
+import MobileBetInfo from '../components/shared/mobileBetInfo';
 
 import styles from './gxplayout.module.scss';
 
@@ -25,7 +26,7 @@ export default function GetFundsLayout({ token, children }: GetFundLayoutProps):
 
   return (
     <Fragment>
-      <Header page='get-funds'/>
+      <Header page='get-funds' />
       <div className={styles.section}>
         <div className={styles.sidebar}>
           <ul className={styles.sidebarNav}>
@@ -51,6 +52,7 @@ export default function GetFundsLayout({ token, children }: GetFundLayoutProps):
           <Footer />
         </div>
         <BetInfo />
+        <MobileBetInfo />
       </div>
     </Fragment>
   );

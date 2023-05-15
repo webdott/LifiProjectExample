@@ -20,6 +20,7 @@ import { getSelectedChainFromBase } from '../../../functions';
 
 export default function WalletModal({ visible, close }: WalletModalProps): JSX.Element {
   const location = useLocation();
+  
   const metamaskSuccessNotify = (text: string) => {
     toast.success(<span>{text}</span>);
   };
@@ -51,7 +52,7 @@ export default function WalletModal({ visible, close }: WalletModalProps): JSX.E
   };
 
   const connectMetamask = () => {
-    if (!window.ethereum) downloadMetamaskNotify();
+    if (!window?.ethereum) downloadMetamaskNotify();
     close();
     wagmiConnect({
       connector: Connectors.METAMASK,
@@ -66,80 +67,6 @@ export default function WalletModal({ visible, close }: WalletModalProps): JSX.E
       chainId: getSelectedChainFromBase(location.pathname) === 'polygon' ? polygon.id : gnosis.id,
     });
   };
-
-  // async function ConnectWalletconnect(): Promise<void> {
-  // 	close();
-  // 	const connector = new WalletConnect({
-  // 		bridge: 'https://bridge.walletconnect.org',
-  // 		qrcodeModal: QRCodeModal,
-  // 	});
-  // 	if (!connector.connected) {
-  // 		connector.createSession();
-  // 	}
-  // 	connector.on('connect', (error, payload) => {
-  // 		if (error) {
-  // 			throw error;
-  // 		}
-  // 	});
-  // 	connector.on('session_update', (error, payload) => {});
-  // 	connector.on('disconnect', (error, payload) => {
-  // 		if (error) {
-  // 			throw error;
-  // 		}
-  // 	});
-  // }
-
-  // const addMetamaskNetwork = async () => {
-  // 	const gnosisChainNetworkParams = {
-  // 		chainId: '0x64',
-  // 		chainName: 'Gnosis Chain',
-  // 		rpcUrls: ['https://rpc.gnosischain.com/'],
-  // 		nativeCurrency: {
-  // 			name: 'xDAI',
-  // 			symbol: 'xDAI',
-  // 			decimals: 18,
-  // 		},
-  // 		blockExplorerUrls: ['https://blockscout.com/xdai/mainnet/'],
-  // 	};
-  // 	await addChain(gnosisChainNetworkParams);
-  // 	metamaskSuccessNotify('Network successfully added');
-  // 	connect();
-  // };
-
-  // const connectMetamask = async () => {
-  // 	if (status === 'unavailable') {
-  // 		downloadMetamaskNotify();
-  // 	} else if (chainId !== '0x64') {
-  // 		switchNetworkNotify();
-  // 	} else {
-  // 		await connect();
-  // 	}
-  // 	close();
-  // };
-
-  // const changeMetamaskNetwork = async () => {
-  // 	try {
-  // 		await switchChain('0x64');
-  // 		metamaskSuccessNotify('Network successfully switched to Gnosis Chain');
-  // 	} catch (error: any) {
-  // 		if (error.code === 4902) {
-  // 			addMetamaskNetworkNotify();
-  // 		}
-  // 	}
-  // };
-
-  // const switchNetworkNotify = () =>
-  // 	toast.warn(
-  // 		<span>
-  // 			Wrong network,please{' '}
-  // 			<span
-  // 				className={styles.notifySwitchBtn}
-  // 				onClick={changeMetamaskNetwork}>
-  // 				switch
-  // 			</span>{' '}
-  // 			to Gnosis
-  // 		</span>
-  // 	);
 
   return (
     <Modal title='' onCancel={close} isModalVisible={visible} closable={false}>

@@ -15,7 +15,6 @@ interface Props {
   game: Game | null;
 }
 const AllMatchOdds = ({ game }: Props) => {
-  // const containerRef = useRef<HTMLDivElement>(null);
   const [showMasonry, setShowMasonry] = useState<boolean>(false);
   const [halfWidth, setHalfWidth] = useState<number>(900);
   const [searchValue, setSearchValue] = useState<string>('');

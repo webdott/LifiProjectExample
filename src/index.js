@@ -20,7 +20,8 @@ import {
 } from 'wagmi/chains';
 
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
-import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
+import { WalletConnectLegacyConnector } from '@wagmi/core/connectors/walletConnectLegacy';
+// import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 import { InjectedConnector } from 'wagmi/connectors/injected';
 import { publicProvider } from 'wagmi/providers/public';
 
@@ -29,8 +30,12 @@ import App from './App';
 
 import './index.css';
 import './styles/global.scss';
+<<<<<<< HEAD
 import { WalletProvider } from './context/LifiWalletProvider';
 import { DAppProvider } from '@usedapp/core';
+=======
+import ErrorBoundary from './components/shared/ErrorBoundary';
+>>>>>>> 86c399f253530e4821e6d0ea6fd51fdde8b15441
 
 // LOCAL TESTING
 // export const LocalGnosisChain = {
@@ -71,9 +76,11 @@ const { chains, provider, webSocketProvider } = configureChains(
 
 export const Connectors = {
   METAMASK: new MetaMaskConnector({ chains }),
-  WALLET_CONNECT: new WalletConnectConnector({
+  WALLET_CONNECT: new WalletConnectLegacyConnector({
     chains,
-    options: { projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID },
+    options: {
+      qrcode: true,
+    },
   }),
   INJECTED: new InjectedConnector({ chains }),
 };
@@ -92,9 +99,9 @@ root.render(
     <Provider store={store}>
       <DAppProvider config={{}}>
         <WagmiConfig client={wagmiClient}>
-          <WalletProvider>
+        <ErrorBoundary fallback={'something went wrong'}>
             <App />
-          </WalletProvider>
+        </ErrorBoundary>
         </WagmiConfig>
       </DAppProvider>
     </Provider>

@@ -5,7 +5,7 @@ import _ from 'lodash';
 import { GAMES_ORDER } from '../constants/games';
 import { orderBy } from 'lodash';
 import dayjs from 'dayjs';
-import { Game, League, MatchesEnum, Sport } from '../constants/matches';
+import { FeaturedGame, Game, League, MatchesEnum, Sport } from '../constants/matches';
 import {
   SPORTS_HUB_MAP,
   SPORTS_ICONS,
@@ -104,6 +104,30 @@ export const getSportsWithGames = (hubSlugs: SportHubSlug[]): Sport[] => {
   });
 
   return result;
+};
+
+export const getFeaturedGames = (): FeaturedGame[] => {
+  const sports: AzuroSport[] = JSON.parse(JSON.stringify(store.getState().sports.list.data));
+  const games = store.getState().games.list.data;
+
+  let gamesData: FeaturedGame[] = sports.flatMap(
+    (sp) =>
+      sp.leagues?.flatMap(
+        (lg) =>
+          lg.games
+            .slice(0, 3)
+            ?.map((g) =>
+              games[g.id]
+                ? { ...generateGameObj(games[g.id]), sportSlug: sp.slug, sportHubSlug: sp.sporthub.slug }
+                : null
+            )
+            .filter((g) => g) as unknown as FeaturedGame[]
+      ) || []
+  );
+
+  gamesData = orderBy(gamesData, 'startAt');
+
+  return gamesData.slice(0, 6);
 };
 
 export const getCurrentGame = (): Game | null => {

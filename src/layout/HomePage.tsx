@@ -19,6 +19,7 @@ import { SportHubSlug } from '../constants/sports';
 import { checkIfBase, checkIfSPorts } from '../functions';
 
 import styles from './homelayout.module.scss';
+import MobileBetInfo from '../components/shared/mobileBetInfo';
 
 export default function Layout({ children }: LayoutProps) {
   const location = useLocation();
@@ -116,6 +117,7 @@ export default function Layout({ children }: LayoutProps) {
           <Footer />
         </div>
         <BetInfo />
+        <MobileBetInfo />
       </div>
     </Fragment>
   );

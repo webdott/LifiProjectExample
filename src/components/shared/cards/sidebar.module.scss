@@ -14,6 +14,7 @@
       width: 100%;
       height: 311px;
       .card {
+        overflow: hidden;
         max-width: 320px;
         width: 100%;
         border-radius: 20px;
@@ -34,7 +35,7 @@
           padding: 25px;
           row-gap: 12px;
           @media only screen and (max-width: 1024px) {
-            padding: 25px 5px 0px 5px;
+            padding: 25px 15px 0px 15px;
             row-gap: 10px;
           }
           &_league {
@@ -55,11 +56,21 @@
           &_teams {
             display: flex;
             column-gap: 20px;
+            .participantLogo {
+              margin-top: -15px;
+              width: 50px;
+              height: 50px;
+              border-radius: 50%;
+              // background: var(--bet_info_bg_col);
+              opacity: 0.7;
+              display: flex;
+              justify-content: center;
+              align-items: center;
 
-            img {
-              width: 40px;
-              height: 40px;
-              object-fit: contain;
+              img {
+                width: 32px;
+                height: 32px;
+              }
             }
             &_goals {
               display: flex;
@@ -122,12 +133,9 @@
           }
           &_oddboxes {
             display: flex;
-            column-gap: 5px;
-            justify-content: space-between;
+            column-gap: 15px;
             margin-top: 40px;
-            @media only screen and (max-width: 1024px) {
-              column-gap: 2px;
-            }
+
             &_box {
               width: 55px;
               height: 55px;
@@ -163,10 +171,6 @@
                 background: rgba(51, 255, 204, 0.45);
                 border: 2px solid green;
               }
-              @media only screen and (max-width: 1024px) {
-                width: 36px;
-                height: 36px;
-              }
             }
             &_activeBox {
               background: var(--turquoise) !important;
@@ -196,7 +200,8 @@
             color: var(--footer_icons_col);
           }
         }
-        .card_content_oddboxes_box {
+        .card_content_oddboxes_box,
+        .participantLogo {
           background-color: var(--footer_icons_col);
           div {
             color: var(--white_900);
@@ -222,7 +227,8 @@
             color: var(--footer_icons_col);
           }
         }
-        .card_content_oddboxes_box {
+        .card_content_oddboxes_box,
+        .participantLogo {
           background-color: var(--white_900);
           div {
             color: var(--footer_icons_col);
@@ -248,7 +254,8 @@
             color: var(--white_900);
           }
         }
-        .card_content_oddboxes_box {
+        .card_content_oddboxes_box,
+        .participantLogo {
           background-color: var(--white_900);
           div {
             color: var(--footer_icons_col);

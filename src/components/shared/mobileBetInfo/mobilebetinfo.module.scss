@@ -1,0 +1,197 @@
+.mobileBetInfo {
+  display: none;
+  flex-direction: column;
+  row-gap: 20px;
+  justify-content: flex-end;
+  align-items: flex-end;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 350px;
+  z-index: 999;
+
+  .container {
+    border-radius: 10px;
+    display: block;
+    position: relative;
+    max-width: 350px;
+    width: 100%;
+    padding: 18px;
+    background-color: var(--bet_info_bg_col);
+    min-height: 307px;
+    max-height: 307px;
+    margin: 0;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+    &.expand {
+      max-height: 485px;
+    }
+
+    .betSection {
+      display: flex;
+      flex-direction: column;
+      .topSection {
+        display: flex;
+        justify-content: center;
+        column-gap: 15px;
+        align-items: center;
+        .betButton {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border: 1px solid var(--bet_info_border_col);
+          max-width: 315px;
+          width: 100%;
+          border-radius: 10px;
+          background-color: var(--bet_info_bg_col);
+          margin-bottom: 12px;
+          div {
+            span {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              width: 6.5rem;
+            }
+          }
+        }
+      }
+    }
+
+    .playButton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      div {
+        span {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 15.6rem;
+        }
+      }
+    }
+  }
+
+  .triggerButton {
+    outline: none;
+    min-width: 50px;
+    min-height: 50px;
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 50%;
+    border: 1px solid var(--left_active_col);
+    background: var(--left_active_col) !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+    &.open {
+      border: 1px solid var(--footer_icons_col);
+      background: var(--footer_icons_col) !important;
+    }
+
+    .betSelected {
+      position: absolute;
+      background-color: var(--white_900);
+      border-radius: 50%;
+      width: 15px;
+      height: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      right: 0px;
+      top: 0px;
+      color: var(--left_active_col);
+    }
+
+    .ticketIcon {
+      color: var(--white_900);
+    }
+
+    .closeIcon {
+      color: var(--white_900);
+    }
+  }
+
+  @media screen and (max-width: 1200px) {
+    display: flex;
+  }
+
+  @media screen and (max-width: 620px) {
+    right: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+    .triggerButton {
+      margin: 0 auto;
+    }
+
+    .container {
+      display: none;
+    }
+  }
+}
+
+.betInfoDrawerMobile {
+  background-color: var(--bet_info_bg_col);
+
+  .container {
+    border-radius: 10px;
+    display: block;
+    position: relative;
+    width: 100%;
+    padding: 18px;
+    background-color: var(--bet_info_bg_col);
+    min-height: 307px;
+    height: 485px;
+    margin: 0;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+    .betSection {
+      display: flex;
+      flex-direction: column;
+      .topSection {
+        display: flex;
+        justify-content: center;
+        column-gap: 15px;
+        align-items: center;
+        .betButton {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border: 1px solid var(--bet_info_border_col);
+          max-width: 315px;
+          width: 100%;
+          border-radius: 10px;
+          background-color: var(--bet_info_bg_col);
+          margin-bottom: 12px;
+          div {
+            span {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              width: 6.5rem;
+            }
+          }
+        }
+      }
+    }
+
+    .playButton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      div {
+        span {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 15.6rem;
+        }
+      }
+    }
+  }
+}

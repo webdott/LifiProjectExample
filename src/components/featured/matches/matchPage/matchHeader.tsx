@@ -1,11 +1,10 @@
 import React, { Dispatch, FC, SetStateAction } from 'react';
 import { Box, Tab, Tabs, Tooltip } from '@mui/material';
 
-import PremierLeagueFlag from '../../../../public/images/leaguesFlags/england.webp';
+import FlagIcon from '../../../shared/icons/FlagIcon';
+import { Game } from '../../../../constants/matches';
 
 import styles from './matchpage.module.scss';
-import { Game } from '../../../../constants/matches';
-import FlagIcon from '../../../shared/icons/FlagIcon';
 
 function a11yProps(index: number) {
   return {
@@ -69,7 +68,10 @@ const MatchHeader: FC<MatchHeaderProps> = ({ game, value, setValue }) => {
       <div className={styles.matchDetails}>
         <div className={styles.matchDetailsContent}>
           <div className={styles.teamLogo}>
-            <img src={game.participant1.image || ''} alt='team1 icon' />
+            <img
+              src={game.participant1.image || '/assets/images/gamblr-xyz.png'}
+              alt='team1 icon'
+            />
           </div>
           <div className={styles.teamNames}>
             <div>
@@ -82,7 +84,10 @@ const MatchHeader: FC<MatchHeaderProps> = ({ game, value, setValue }) => {
             </p>
           </div>
           <div className={styles.teamLogo}>
-            <img src={game.participant2.image || ''} alt='team2 icon' />
+            <img
+              src={game.participant2.image || '/assets/images/gamblr-xyz.png'}
+              alt='team2 icon'
+            />
           </div>
         </div>
       </div>

@@ -11,10 +11,10 @@ import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 
-import MobileGXPLeftSidebarLinks from '../shared/mobileGXPSidebarLinks';
-import MobileGetFundsLinks from '../shared/mobileGetFundsLinks';
-import MobileSportsESportsLeftSidebarLinks from '../shared/mobileSportsESportsLeftSidebar';
-import { getSelectedChainFromBase } from '../../functions';
+import MobileGXPLeftSidebarLinks from '../mobileGXPSidebarLinks';
+import MobileGetFundsLinks from '../mobileGetFundsLinks';
+import MobileSportsESportsLeftSidebarLinks from '../mobileSportsESportsLeftSidebar';
+import { getSelectedChainFromBase } from '../../../functions';
 
 import styles from './mobileleftsidebar.module.scss';
 

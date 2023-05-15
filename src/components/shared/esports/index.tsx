@@ -4,7 +4,7 @@ import Loader from '../Loader/Loader';
 import { useLocation } from 'react-router';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import MatchesContainer from '../home/matchesContainer';
-import { getSportsWithGames } from '../../../helpers/redux';
+import { getFeaturedGames, getSportsWithGames } from '../../../helpers/redux';
 import { SportHubSlug } from '../../../constants/sports';
 import { useDispatch } from 'react-redux';
 import { fetchGames, fetchSports } from '../../../redux/action-creators';
@@ -49,7 +49,7 @@ function Esport(): JSX.Element {
 
   return (
     <Layout>
-      <Cards games={Object.values(gamesData)} />
+      <Cards games={getFeaturedGames()} />
       {!gamesError && !sportsError && !gamesLoading && !sportsLoading ? (
         <MatchesContainer sports={getSportsWithGames([SportHubSlug.esports])} />
       ) : (

@@ -10,7 +10,7 @@
   max-width: 320px;
   height: 100%;
   text-align: center;
-  background: var(--white_900);
+  background: var(--footer_icons_col);
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;

@@ -33,7 +33,9 @@ const Match: FC<MatchProps> = ({ game, sport, selectedMarketId }) => {
         id: game.id,
         team1: game.participant1.name,
         team2: game.participant2.name,
-        betType: 'Full Time Result',
+        betType:
+          game.markets.filter((m) => m.marketId === selectedMarketId)[0]?.marketName ??
+          'Full Time Result',
         outcome: item,
       })(dispatch);
     }
