@@ -35,8 +35,8 @@ export default function Matches({
 
     const result = _.orderBy(Object.values(options), 'key', 'asc');
     setMarketOptions(result);
-    setSelectedMarket(result[0].key);
-  }, [sport]);
+    if (result.length > 0) setSelectedMarket(result[0].key);
+  }, [league]);
   return (
     <Fragment>
       {matches.length > 0 && selectedMarket ? (
