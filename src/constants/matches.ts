@@ -61,6 +61,8 @@ export interface Game {
   participant1: Participant;
   participant2: Participant;
   league: GameLeague;
+  sportSlug: SportSlug;
+  sportHubSlug: SportHubSlug;
   timeLabel: string;
   markets: any[];
 }

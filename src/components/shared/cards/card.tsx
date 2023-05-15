@@ -5,14 +5,14 @@ import { Link, useLocation } from 'react-router-dom';
 import { RootState } from '../../../redux';
 import { getOddsDisplayString } from '../../../utils/odds';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
-import { FeaturedGame, Outcome } from '../../../constants/matches';
+import { Game, Outcome } from '../../../constants/matches';
 import { addBetSlip, removeBetSlip } from '../../../redux/action-creators';
 import { getSelectedChainFromBase } from '../../../functions';
 
 import styles from './sidebar.module.scss';
 
 interface CardProps {
-  game: FeaturedGame;
+  game: Game;
   slideIndex: number;
 }
 

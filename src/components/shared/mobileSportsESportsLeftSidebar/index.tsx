@@ -1,4 +1,4 @@
-import { useCallback, FC, useEffect } from 'react';
+import { useCallback, FC, useEffect, useState, useRef } from 'react';
 import { useLocation } from 'react-router';
 import { HiOutlineChevronLeft } from 'react-icons/hi';
 import { IoMdClose } from 'react-icons/io';
@@ -14,7 +14,12 @@ import styles from './mobileleftsidebar.module.scss';
 import { useDispatch } from 'react-redux';
 import { getSelectedChainFromBase } from '../../../functions';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
-import { fetchGames, fetchSports } from '../../../redux/action-creators';
+import {
+  fetchFeaturedGames,
+  fetchGames,
+  fetchSports,
+  resetCurrentSlugs,
+} from '../../../redux/action-creators';
 
 import { gnosis, polygon } from 'wagmi/chains';
 
@@ -34,6 +39,7 @@ const MobileSportsESportsLeftSidebarLinks: FC<MobileSportsESportsLeftSidebarLink
   const chainId =
     getSelectedChainFromBase(location.pathname) === 'polygon' ? polygon.id : gnosis.id;
 
+  const initialLoad = useRef(false);
   const {
     list: { data: sportsData },
   } = useTypedSelector((state) => state.sports);
@@ -44,21 +50,28 @@ const MobileSportsESportsLeftSidebarLinks: FC<MobileSportsESportsLeftSidebarLink
 
   useEffect(() => {
     (async () => {
+      await resetCurrentSlugs()(dispatch);
       await fetchSports({
         chainId,
         hubSlugs: [pageTitle === 'Sports' ? SportHubSlug.sports : SportHubSlug.esports],
       })(dispatch);
+      fetchFeaturedGames({ chainId })(dispatch);
+      await fetchGames({
+        chainId,
+      })(dispatch);
+      initialLoad.current = true;
     })();
   }, []);
 
   useEffect(() => {
+    if (!initialLoad.current) return;
     fetchGames({
       chainId,
       sportSlug: currentSportSlug,
       leagueSlug: currentLeagueSlug,
       countrySlug: currentCountrySlug,
     })(dispatch);
-  }, [chainId, sportsData, currentLeagueSlug, currentSportSlug]);
+  }, [currentLeagueSlug, currentSportSlug]);
 
   const getSportHubSlugs = useCallback(() => {
     if (pageTitle === 'Esports') return [SportHubSlug.esports];

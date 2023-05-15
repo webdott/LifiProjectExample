@@ -20,6 +20,20 @@ export interface FetchGamesErrorAction {
   payload: string;
 }
 
+export interface FetchFeaturedGamesAction {
+  type: ActionType.FETCH_FEATURED_GAMES_START;
+}
+
+export interface FetchFeaturedGamesSuccessAction {
+  type: ActionType.FETCH_FEATURED_GAMES_SUCCESS;
+  payload: AzuroGame[];
+}
+
+export interface FetchFeaturedGamesErrorAction {
+  type: ActionType.FETCH_FEATURED_GAMES_ERROR;
+  payload: string;
+}
+
 export interface FetchSportsAction {
   type: ActionType.FETCH_SPORTS_START;
 }
@@ -103,4 +117,8 @@ export interface SetCurrentLeagueSlugAction {
 export interface SetCurrentCountrySlugAction {
   type: ActionType.SET_CURRENT_COUNTRY_SLUG;
   payload: string | null;
+}
+
+export interface ResetCurrentSlugsAction {
+  type: ActionType.RESET_CURRENT_SLUGS;
 }

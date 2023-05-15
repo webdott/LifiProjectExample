@@ -1,7 +1,12 @@
 import { SportHubSlug, SportSlug } from '../../constants/sports';
 import { ActionType } from '../action-types';
-import { CurrentGameAction, GamesAction, SetCurrentSlugAction } from '../actions';
-import { SetCurrentLeagueSlugAction, SetCurrentSportSlugAction } from '../actions/interfaces';
+import {
+  CurrentGameAction,
+  FeaturedGamesAction,
+  GamesAction,
+  SetCurrentSlugAction,
+} from '../actions';
+import { ResetCurrentSlugsAction } from '../actions/interfaces';
 import { AzuroSport } from './sports';
 
 export type AzuroStatus = 'Resolved' | 'Canceled' | 'Created';
@@ -70,6 +75,11 @@ interface GamesState {
     error: string | null;
     data: { [key: string]: AzuroGame };
   };
+  featured: {
+    loading: boolean;
+    error: string | null;
+    data: AzuroGame[];
+  };
   currentGame: {
     loading: boolean;
     error: string | null;
@@ -87,6 +97,11 @@ const initialState = {
     error: null,
     data: {},
   },
+  featured: {
+    loading: false,
+    error: null,
+    data: [],
+  },
   currentGame: {
     loading: false,
     error: null,
@@ -99,7 +114,12 @@ const initialState = {
 
 const reducer = (
   state: GamesState = initialState,
-  action: GamesAction | CurrentGameAction | SetCurrentSlugAction
+  action:
+    | GamesAction
+    | FeaturedGamesAction
+    | CurrentGameAction
+    | SetCurrentSlugAction
+    | ResetCurrentSlugsAction
 ): GamesState => {
   switch (action.type) {
     case ActionType.FETCH_GAMES_START:
@@ -129,6 +149,35 @@ const reducer = (
           loading: false,
           error: action.payload,
           data: {},
+        },
+      };
+    case ActionType.FETCH_FEATURED_GAMES_START:
+      return {
+        ...state,
+        initialLoad: true,
+        featured: {
+          loading: true,
+          error: null,
+          data: [],
+        },
+      };
+    case ActionType.FETCH_FEATURED_GAMES_SUCCESS:
+      return {
+        ...state,
+        featured: {
+          loading: false,
+          error: null,
+          data: action.payload,
+        },
+      };
+
+    case ActionType.FETCH_FEATURED_GAMES_ERROR:
+      return {
+        ...state,
+        featured: {
+          loading: false,
+          error: action.payload,
+          data: [],
         },
       };
     case ActionType.FETCH_CURRENT_GAME_START:
@@ -173,6 +222,13 @@ const reducer = (
       return {
         ...state,
         currentCountrySlug: action.payload,
+      };
+    case ActionType.RESET_CURRENT_SLUGS:
+      return {
+        ...state,
+        currentSportSlug: null,
+        currentLeagueSlug: null,
+        currentCountrySlug: null,
       };
 
     default:
