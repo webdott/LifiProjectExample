@@ -95,7 +95,7 @@ export default function TabPanel(props: TabPanelProps) {
               className={`${styles.ctaButton} `}
               btnType={ButtonType.membershipButton}
               text={isApproved ? 'Place bet' : isApproving ? 'Approving...' : 'Approve'}
-              onClick={isApproved ? placeBet : approve}
+              onClick={placeBet}
             />
           </div>
         </>

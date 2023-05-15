@@ -29,7 +29,6 @@ function usePlaceBet(outcome: Outcome | undefined, onBetPlace: () => void) {
   const lpContract = useContract({
     address: LIQUIDITY_POOLS[chainId],
     abi: ABI_PAYLOAD,
-    signerOrProvider: new ethers.providers.StaticJsonRpcProvider('http://127.0.0.1:8545'),
   });
 
   // Methods on liquidity pool contract to place a bet
@@ -49,6 +48,7 @@ function usePlaceBet(outcome: Outcome | undefined, onBetPlace: () => void) {
   const allowanceFetching = rawAllowance === undefined;
   const allowance = rawAllowance && formatUnits(rawAllowance, USDT_DECIMALS);
   const isApproved = chainId === gnosis.id || +allowance >= +amount;
+  console.log('11111111111111', allowance, rawAllowance);
   const isApproving =
     approveState.status === 'PendingSignature' || approveState.status === 'Mining';
 

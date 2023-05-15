@@ -112,14 +112,7 @@ const wagmiClient = createClient({
   webSocketProvider,
 });
 
-const config = {
-  readOnlyChainId: Polygon.chainId,
-  readOnlyUrls: {
-    // in this tutorial we use Ankr public RPC. It's free and has it's own limits
-    // in the production version with a large number of users, we do not recommend using it
-    [Polygon.chainId]: new ethers.providers.StaticJsonRpcProvider('http://127.0.0.1:8545'),
-  },
-};
+const config = {};
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
