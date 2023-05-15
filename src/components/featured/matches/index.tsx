@@ -26,12 +26,10 @@ export default function Matches({
   useEffect(() => {
     const options: { [key: string]: { key: string; label: string } } = {};
 
-    sport.leagues.forEach((lg) => {
-      lg.games.forEach((g) => {
-        g.markets.forEach((m) => {
-          if (!(m.marketId in options))
-            options[m.marketId] = { key: m.marketId, label: m.marketName };
-        });
+    league.games.forEach((g) => {
+      g.markets.forEach((m) => {
+        if (!(m.marketId in options))
+          options[m.marketId] = { key: m.marketId, label: m.marketName };
       });
     });
 
