@@ -15,6 +15,8 @@ import { getSelectedChainFromBase } from '../../../../../functions';
 import { gnosis, polygon } from 'wagmi/chains';
 import { CURRENCY_SYMBOLS, USDT_ADDRESS } from '../../../../../constants/azuro';
 import { useLocation } from 'react-router';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -34,6 +36,11 @@ export default function TabPanel(props: TabPanelProps) {
     removeBetSlip()(dispatch);
   }, [dispatch]);
 
+  const onPlacingBetSuccess = useCallback(() => {
+    toast.success('Bet placed successfully');
+    handleBetRemoval();
+  }, []);
+
   const { address } = useAccount();
   const { data: nativeData, isLoading: isLoadingNativeDataBalance } = useBalance({
     address,
@@ -50,7 +57,7 @@ export default function TabPanel(props: TabPanelProps) {
   const { approve, placeBet, amount, isApproved, setAmount, isApproving } = usePlaceBet(
     currentBetSlipGame?.outcome,
     chainId,
-    handleBetRemoval
+    onPlacingBetSuccess
   );
   const oddsFormat = useTypedSelector((state) => state.app.oddsFormat);
 
