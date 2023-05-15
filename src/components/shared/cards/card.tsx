@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -21,7 +21,6 @@ const Card: FC<CardProps> = ({ game, slideIndex }) => {
   const dispatch = useDispatch();
   const { currentGame: currentBetSlipGame } = useSelector((root: RootState) => root.betSlip);
   const oddsFormat = useTypedSelector((state) => state.app.oddsFormat);
-  const [boxIndex, setBoxIndex] = useState<number>(-1);
 
   const toggleBetSlip = (item: Outcome) => {
     if (currentBetSlipGame?.id === game.id && currentBetSlipGame?.outcome.id === item.id) {

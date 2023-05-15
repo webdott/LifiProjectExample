@@ -1,22 +1,23 @@
+import { BaseSyntheticEvent, useCallback } from 'react';
+import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
 import { useAccount, useBalance } from 'wagmi';
+import { useLocation } from 'react-router';
+import { gnosis, polygon } from 'wagmi/chains';
 
 import SelectedBet from './selectedBet';
 import Button from '../../../button';
 import { ButtonType } from '../../../button/type';
-
-import styles from './bestsliptab.module.scss';
-import { BaseSyntheticEvent, useCallback } from 'react';
 import { useTypedSelector } from '../../../../../hooks/useTypedSelector';
-import { useDispatch } from 'react-redux';
 import { round } from '../../../../../utils/numbers';
 import { removeBetSlip } from '../../../../../redux/action-creators';
 import usePlaceBet from '../../../../../hooks/usePlaceBet';
 import { getSelectedChainFromBase } from '../../../../../functions';
-import { gnosis, polygon } from 'wagmi/chains';
 import { CURRENCY_SYMBOLS, USDT_ADDRESS } from '../../../../../constants/azuro';
-import { useLocation } from 'react-router';
-import { toast } from 'react-toastify';
+
+import styles from './bestsliptab.module.scss';
 import 'react-toastify/dist/ReactToastify.css';
+import { Link } from 'react-router-dom';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -62,8 +63,8 @@ export default function TabPanel(props: TabPanelProps) {
   const oddsFormat = useTypedSelector((state) => state.app.oddsFormat);
 
   const { children, value, index, ...other } = props;
-  const handleAmountChagne = useCallback((event: BaseSyntheticEvent) => {
-    setAmount(event.target.value);
+  const handleAmountChange = useCallback((event: BaseSyntheticEvent) => {
+    setAmount((v) => (event.target.validity.valid ? event.target.value : v));
   }, []);
 
   const hasEnoughBalance = () => {
@@ -90,14 +91,39 @@ export default function TabPanel(props: TabPanelProps) {
             currentSlipBet={currentBetSlipGame}
           />
           <div className={styles.cta}>
-            <div className={styles.betInput}>
+            <div
+              className={`${styles.betInput} ${
+                +amount && !hasEnoughBalance() && styles.notEnoughFunds
+              }`}
+            >
               <label>
                 <div className={styles.inputContainer}>
-                  <input type='text' placeholder='0' value={amount} onChange={handleAmountChagne} />
+                  <input
+                    type='text'
+                    placeholder='0'
+                    pattern='[0-9]+([\.][0-9]*)?'
+                    step='any'
+                    value={amount}
+                    onChange={handleAmountChange}
+                  />
                   <div className={styles.betAmountPlaceholder}>Bet amount</div>
                 </div>
                 <div className={styles.currency}>{CURRENCY_SYMBOLS[chainId]}</div>
               </label>
+
+              <div className={styles.getFunds}>
+                <div className={styles.getFundsText}>
+                  <span>Not enough funds</span>
+                  <span>Top up your wallet quickly</span>
+                </div>
+
+                <Link
+                  to={`/${getSelectedChainFromBase(location.pathname)}/get-funds`}
+                  className={styles.getFundsLink}
+                >
+                  Get {getSelectedChainFromBase(location.pathname) === 'polygon' ? 'USDT' : 'xDAI'}
+                </Link>
+              </div>
             </div>
             <div className={styles.quickBet}>
               {quickBetValues.map((value) => (
