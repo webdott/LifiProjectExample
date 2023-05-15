@@ -31,70 +31,43 @@ import './index.css';
 import './styles/global.scss';
 import { WalletProvider } from './context/LifiWalletProvider';
 import { DAppProvider } from '@usedapp/core';
-import { Gnosis } from '@usedapp/core';
-import { ethers } from 'ethers';
-import { Polygon } from '@usedapp/core';
 
-export const LocalPolygonChain = {
-  id: 137,
-  name: 'Polygon',
-  network: 'Polygon',
-  nativeCurrency: {
-    decimals: 6,
-    name: 'Polygon',
-    symbol: 'Matic',
-  },
-  rpcUrls: {
-    default: {
-      http: ['http://127.0.0.1:8545'],
-    },
-    public: {
-      http: ['http://127.0.0.1:8545'],
-    },
-  },
-};
-export const LocalGnosisChain = {
-  id: 100,
-  name: 'Gnosis',
-  network: 'Gnosis',
-  nativeCurrency: {
-    decimals: 18,
-    name: 'Gnosis',
-    symbol: 'xDAI',
-  },
-  rpcUrls: {
-    default: {
-      http: ['http://127.0.0.1:8545'],
-    },
-    public: {
-      http: ['http://127.0.0.1:8545'],
-    },
-  },
-};
-export const { chains, provider, webSocketProvider } = configureChains(
-  [LocalGnosisChain, LocalPolygonChain],
-  [publicProvider()]
-);
-// const { chains, provider, webSocketProvider } = configureChains(
-//   [
-//     mainnet,
-//     gnosis,
-//     polygon,
-//     avalanche,
-//     bsc,
-//     arbitrum,
-//     avalanche,
-//     celo,
-//     aurora,
-//     optimism,
-//     fantom,
-//     moonriver,
-//     moonbeam,
-//     cronos,
-//     boba,
-//   ],
+// LOCAL TESTING
+// export const LocalGnosisChain = {
+//   ...gnosis,
+//   rpcUrls: {
+//     default: {
+//       http: ['http://127.0.0.1:8545'],
+//     },
+//     public: {
+//       http: ['http://127.0.0.1:8545'],
+//     },
+//   },
+// };
+// export const { chains, provider, webSocketProvider } = configureChains(
+//   [LocalGnosisChain],
 //   [publicProvider()]
 // );
+const { chains, provider, webSocketProvider } = configureChains(
+  [
+    mainnet,
+    gnosis,
+    polygon,
+    avalanche,
+    bsc,
+    arbitrum,
+    avalanche,
+    celo,
+    aurora,
+    optimism,
+    fantom,
+    moonriver,
+    moonbeam,
+    cronos,
+    boba,
+  ],
+  [publicProvider()]
+);
 
 export const Connectors = {
   METAMASK: new MetaMaskConnector({ chains }),
@@ -112,13 +85,12 @@ const wagmiClient = createClient({
   webSocketProvider,
 });
 
-const config = {};
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <BrowserRouter>
     <Provider store={store}>
-      <DAppProvider config={config}>
+      <DAppProvider config={{}}>
         <WagmiConfig client={wagmiClient}>
           <WalletProvider>
             <App />
