@@ -14,7 +14,12 @@ import styles from './mobileleftsidebar.module.scss';
 import { useDispatch } from 'react-redux';
 import { getSelectedChainFromBase } from '../../../functions';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
-import { fetchFeaturedGames, fetchGames, fetchSports } from '../../../redux/action-creators';
+import {
+  fetchFeaturedGames,
+  fetchGames,
+  fetchSports,
+  resetCurrentSlugs,
+} from '../../../redux/action-creators';
 
 import { gnosis, polygon } from 'wagmi/chains';
 
@@ -44,6 +49,7 @@ const MobileSportsESportsLeftSidebarLinks: FC<MobileSportsESportsLeftSidebarLink
 
   useEffect(() => {
     (async () => {
+      await resetCurrentSlugs()(dispatch);
       await fetchSports({
         chainId,
         hubSlugs: [pageTitle === 'Sports' ? SportHubSlug.sports : SportHubSlug.esports],
@@ -52,6 +58,7 @@ const MobileSportsESportsLeftSidebarLinks: FC<MobileSportsESportsLeftSidebarLink
   }, []);
 
   useEffect(() => {
+    console.log('11111111111111side');
     fetchGames({
       chainId,
       sportSlug: currentSportSlug,

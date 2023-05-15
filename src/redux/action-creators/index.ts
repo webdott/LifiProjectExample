@@ -17,7 +17,11 @@ import { CurrentGame } from '../reducers/betSlip';
 import { GRAPHQL_URLS, LIQUIDITY_POOLS } from '../../constants/azuro';
 import { SportHubSlug, SportSlug } from '../../constants/sports';
 import { OddsFormat } from '../reducers/app';
-import { SetCurrentCountrySlugAction, SetCurrentSportSlugAction } from '../actions/interfaces';
+import {
+  ResetCurrentSlugsAction,
+  SetCurrentCountrySlugAction,
+  SetCurrentSportSlugAction,
+} from '../actions/interfaces';
 import { SetCurrentLeagueSlugAction } from '../actions/interfaces';
 import { store } from '../store';
 import { AzuroSport } from '../reducers/sports';
@@ -561,6 +565,14 @@ export const setCurrentCountrySlug = (slug: string | null) => {
     dispatch({
       type: ActionType.SET_CURRENT_COUNTRY_SLUG,
       payload: slug,
+    });
+  };
+};
+
+export const resetCurrentSlugs = () => {
+  return async (dispatch: Dispatch<ResetCurrentSlugsAction>) => {
+    dispatch({
+      type: ActionType.RESET_CURRENT_SLUGS,
     });
   };
 };

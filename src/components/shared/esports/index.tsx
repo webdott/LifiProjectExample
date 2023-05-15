@@ -7,7 +7,12 @@ import MatchesContainer from '../home/matchesContainer';
 import { getFeaturedGames, getSportsWithGames } from '../../../helpers/redux';
 import { SportHubSlug } from '../../../constants/sports';
 import { useDispatch } from 'react-redux';
-import { fetchFeaturedGames, fetchGames, fetchSports } from '../../../redux/action-creators';
+import {
+  fetchFeaturedGames,
+  fetchGames,
+  fetchSports,
+  resetCurrentSlugs,
+} from '../../../redux/action-creators';
 import { useEffect } from 'react';
 import { gnosis, polygon } from 'wagmi/chains';
 import { getSelectedChainFromBase } from '../../../functions';
@@ -31,6 +36,7 @@ function Esport(): JSX.Element {
 
   useEffect(() => {
     (async () => {
+      await resetCurrentSlugs()(dispatch);
       await fetchSports({
         chainId,
         hubSlugs: [SportHubSlug.esports],

@@ -118,3 +118,7 @@ export interface SetCurrentCountrySlugAction {
   type: ActionType.SET_CURRENT_COUNTRY_SLUG;
   payload: string | null;
 }
+
+export interface ResetCurrentSlugsAction {
+  type: ActionType.RESET_CURRENT_SLUGS;
+}

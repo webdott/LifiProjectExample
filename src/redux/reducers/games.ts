@@ -6,7 +6,7 @@ import {
   GamesAction,
   SetCurrentSlugAction,
 } from '../actions';
-import { SetCurrentLeagueSlugAction, SetCurrentSportSlugAction } from '../actions/interfaces';
+import { ResetCurrentSlugsAction } from '../actions/interfaces';
 import { AzuroSport } from './sports';
 
 export type AzuroStatus = 'Resolved' | 'Canceled' | 'Created';
@@ -114,7 +114,12 @@ const initialState = {
 
 const reducer = (
   state: GamesState = initialState,
-  action: GamesAction | FeaturedGamesAction | CurrentGameAction | SetCurrentSlugAction
+  action:
+    | GamesAction
+    | FeaturedGamesAction
+    | CurrentGameAction
+    | SetCurrentSlugAction
+    | ResetCurrentSlugsAction
 ): GamesState => {
   switch (action.type) {
     case ActionType.FETCH_GAMES_START:
@@ -217,6 +222,13 @@ const reducer = (
       return {
         ...state,
         currentCountrySlug: action.payload,
+      };
+    case ActionType.RESET_CURRENT_SLUGS:
+      return {
+        ...state,
+        currentSportSlug: null,
+        currentLeagueSlug: null,
+        currentCountrySlug: null,
       };
 
     default:

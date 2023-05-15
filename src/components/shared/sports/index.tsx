@@ -10,7 +10,12 @@ import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import MatchesContainer from '../home/matchesContainer';
 import { getFeaturedGames, getSportsWithGames } from '../../../helpers/redux';
 import { SportHubSlug } from '../../../constants/sports';
-import { fetchFeaturedGames, fetchGames, fetchSports } from '../../../redux/action-creators';
+import {
+  fetchFeaturedGames,
+  fetchGames,
+  fetchSports,
+  resetCurrentSlugs,
+} from '../../../redux/action-creators';
 import { getSelectedChainFromBase } from '../../../functions';
 
 function Sport(): JSX.Element {
@@ -31,6 +36,7 @@ function Sport(): JSX.Element {
 
   useEffect(() => {
     (async () => {
+      await resetCurrentSlugs()(dispatch);
       await fetchSports({
         chainId,
         hubSlugs: [SportHubSlug.sports],
