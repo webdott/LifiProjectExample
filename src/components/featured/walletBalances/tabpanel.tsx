@@ -10,10 +10,11 @@ import InfoIcon from '@mui/icons-material/Info';
 import Button from '../../shared/button';
 import { ButtonType } from '../../shared/button/type';
 import { formatBalanceString, getSelectedChainFromBase } from '../../../functions';
-import { CHAIN_IDS } from '../../../constants/wallet';
 
 import 'react-loading-skeleton/dist/skeleton.css';
 import styles from './walletbalance.module.scss';
+import { USDT_ADDRESS } from '../../../constants/azuro';
+import { gnosis, polygon } from 'wagmi/chains';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -52,18 +53,12 @@ export default function TabPanel(props: TabPanelProps) {
   const { disconnect } = useDisconnect();
   const { data: nativeData, isLoading: isLoadingNativeDataBalance } = useBalance({
     address,
-    chainId:
-      getSelectedChainFromBase(location.pathname) === 'polygon'
-        ? CHAIN_IDS.POLYGON
-        : CHAIN_IDS.GNOSIS,
+    chainId: getSelectedChainFromBase(location.pathname) === 'polygon' ? polygon.id : gnosis.id,
   });
   const { data: USDTBalanceData, isLoading: isLoadingUSDTBalance } = useBalance({
     address: getSelectedChainFromBase(location.pathname) === 'polygon' ? address : undefined,
-    chainId:
-      getSelectedChainFromBase(location.pathname) === 'polygon'
-        ? CHAIN_IDS.POLYGON
-        : CHAIN_IDS.GNOSIS,
-    token: '0xc2132d05d31c914a87c6611c10748aeb04b58e8f',
+    chainId: getSelectedChainFromBase(location.pathname) === 'polygon' ? polygon.id : gnosis.id,
+    token: USDT_ADDRESS,
   });
   const { children, value, index, ...other } = props;
   const balanceDetail: 'poly' | 'gnosis' = value === 0 ? 'poly' : 'gnosis';

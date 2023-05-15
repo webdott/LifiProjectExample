@@ -21,7 +21,6 @@ import {
 
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
 import { WalletConnectLegacyConnector } from '@wagmi/core/connectors/walletConnectLegacy';
-// import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 import { InjectedConnector } from 'wagmi/connectors/injected';
 import { publicProvider } from 'wagmi/providers/public';
 
@@ -30,8 +29,25 @@ import App from './App';
 
 import './index.css';
 import './styles/global.scss';
+import { DAppProvider } from '@usedapp/core';
 import ErrorBoundary from './components/shared/ErrorBoundary';
 
+// LOCAL TESTING
+// export const LocalGnosisChain = {
+//   ...gnosis,
+//   rpcUrls: {
+//     default: {
+//       http: ['http://127.0.0.1:8545'],
+//     },
+//     public: {
+//       http: ['http://127.0.0.1:8545'],
+//     },
+//   },
+// };
+// export const { chains, provider, webSocketProvider } = configureChains(
+//   [LocalGnosisChain],
+//   [publicProvider()]
+// );
 const { chains, provider, webSocketProvider } = configureChains(
   [
     mainnet,
@@ -76,11 +92,13 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Provider store={store}>
-      <WagmiConfig client={wagmiClient}>
-        <ErrorBoundary fallback={'something went wrong'}>
-          <App />
-        </ErrorBoundary>
-      </WagmiConfig>
+      <DAppProvider config={{}}>
+        <WagmiConfig client={wagmiClient}>
+          <ErrorBoundary fallback={'something went wrong'}>
+            <App />
+          </ErrorBoundary>
+        </WagmiConfig>
+      </DAppProvider>
     </Provider>
   </BrowserRouter>
 );

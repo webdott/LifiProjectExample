@@ -114,7 +114,6 @@ export default function WalletBalance({ closeWalletBalance }: WalletBalanceProps
               label='Polygon Mainnet'
               {...a11yProps(0)}
               sx={tabStyles.tab}
-              // disabled={!switchNetwork || chain?.id === CHAIN_IDS.POLYGON}
               onClick={() => navigate(getResultingChainUrl('polygon', location.pathname))}
             />
             <Tab
@@ -123,19 +122,12 @@ export default function WalletBalance({ closeWalletBalance }: WalletBalanceProps
               label='Gnosis'
               {...a11yProps(1)}
               sx={tabStyles.tab}
-              // disabled={!switchNetwork || chain?.id === CHAIN_IDS.GNOSIS}
               onClick={() => navigate(getResultingChainUrl('gnosis', location.pathname))}
             />
           </Tabs>
         </Box>
-        <TabPanel
-          value={value}
-          index={0}
-        />
-        <TabPanel
-          value={value}
-          index={1}
-        />
+        <TabPanel value={value} index={0} />
+        <TabPanel value={value} index={1} />
       </Box>
     </div>
   );
