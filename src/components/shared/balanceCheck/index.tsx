@@ -9,6 +9,7 @@ import styles from './balancecheck.module.scss';
 import { formatBalanceString, getSelectedChainFromBase } from '../../../functions';
 import { useAccount, useBalance } from 'wagmi';
 import { CHAIN_IDS } from '../../../constants/wallet';
+import { USDT_ADDRESS } from '../../../constants/azuro';
 
 const BalanceCheck: React.FC = () => {
   const location = useLocation();
@@ -27,7 +28,7 @@ const BalanceCheck: React.FC = () => {
   const { data: USDTBalanceData, isLoading: isLoadingUSDTBalance } = useBalance({
     address: getSelectedChainFromBase(location.pathname) === 'polygon' ? address : undefined,
     chainId,
-    token: '0xc2132d05d31c914a87c6611c10748aeb04b58e8f',
+    token: USDT_ADDRESS,
   });
 
   const balance = chainId === CHAIN_IDS.GNOSIS ? nativeData : USDTBalanceData;

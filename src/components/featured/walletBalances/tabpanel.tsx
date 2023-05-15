@@ -14,6 +14,7 @@ import { CHAIN_IDS } from '../../../constants/wallet';
 
 import 'react-loading-skeleton/dist/skeleton.css';
 import styles from './walletbalance.module.scss';
+import { USDT_ADDRESS } from '../../../constants/azuro';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -63,7 +64,7 @@ export default function TabPanel(props: TabPanelProps) {
       getSelectedChainFromBase(location.pathname) === 'polygon'
         ? CHAIN_IDS.POLYGON
         : CHAIN_IDS.GNOSIS,
-    token: '0xc2132d05d31c914a87c6611c10748aeb04b58e8f',
+    token: USDT_ADDRESS
   });
   const { children, value, index, ...other } = props;
   const balanceDetail: 'poly' | 'gnosis' = value === 0 ? 'poly' : 'gnosis';

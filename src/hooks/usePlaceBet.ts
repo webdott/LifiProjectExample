@@ -48,7 +48,6 @@ function usePlaceBet(outcome: Outcome | undefined, onBetPlace: () => void) {
   const allowanceFetching = rawAllowance === undefined;
   const allowance = rawAllowance && formatUnits(rawAllowance, USDT_DECIMALS);
   const isApproved = chainId === gnosis.id || +allowance >= +amount;
-  console.log('11111111111111', allowance, rawAllowance);
   const isApproving =
     approveState.status === 'PendingSignature' || approveState.status === 'Mining';
 
@@ -77,8 +76,6 @@ function usePlaceBet(outcome: Outcome | undefined, onBetPlace: () => void) {
     );
 
     // if chain is Gnosis then place bets in xDAI native token
-    let a;
-
     if (chainId === gnosis.id) {
       const rawAmount = ethers.utils.parseUnits(amount, XDAI_DECIMALS);
       await _betNative(
