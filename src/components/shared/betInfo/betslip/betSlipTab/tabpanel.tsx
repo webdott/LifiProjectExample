@@ -67,6 +67,7 @@ export default function TabPanel(props: TabPanelProps) {
   }, []);
 
   const hasEnoughBalance = () => {
+    if (!+amount) return false;
     if (chainId === gnosis.id && nativeData) return +nativeData.formatted >= +amount;
     else if (USDTBalanceData) return +USDTBalanceData.formatted >= +amount;
     return false;
