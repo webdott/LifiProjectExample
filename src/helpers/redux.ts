@@ -13,7 +13,7 @@ import {
   SPORT_HUB_NAMES,
   SportHubSlug,
 } from '../constants/sports';
-import { getMarketDescription, getMarketKey } from '@azuro-org/dictionaries';
+import { getMarketDescription, getMarketKey, getSelectionName } from '@azuro-org/dictionaries';
 import { AzuroSport } from '../redux/reducers/sports';
 
 const generateGameObj = (game: AzuroGame): Game => {
@@ -26,6 +26,12 @@ const generateGameObj = (game: AzuroGame): Game => {
     const marketId = getMarketKey(m.outcomes[0][0].outcomeId);
     return {
       ...m,
+      outcomes: m.outcomes.map((ou) =>
+        ou.map((odds) => ({
+          ...odds,
+          selectionName: getSelectionName({ outcomeId: odds.outcomeId, withPoint: true }),
+        }))
+      ),
       marketId: marketId,
       marketDescription: getMarketDescription({
         marketKey: marketId,
