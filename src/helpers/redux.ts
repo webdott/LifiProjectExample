@@ -26,12 +26,6 @@ const generateGameObj = (game: AzuroGame): Game => {
     const marketId = getMarketKey(m.outcomes[0][0].outcomeId);
     return {
       ...m,
-      outcomes: m.outcomes.map((ou) =>
-        ou.map((odds) => ({
-          ...odds,
-          selectionName: getSelectionName({ outcomeId: odds.outcomeId, withPoint: true }),
-        }))
-      ),
       marketId: marketId,
       marketDescription: getMarketDescription({
         marketKey: marketId,
