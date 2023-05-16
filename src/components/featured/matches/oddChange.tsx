@@ -2,14 +2,22 @@ import { useState, MouseEvent } from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import {BsFillCaretUpFill, BsFillCaretDownFill} from 'react-icons/bs';
+import { BsFillCaretUpFill, BsFillCaretDownFill } from 'react-icons/bs';
 
 import styles from './matches.module.scss';
 
-const oddValues: number[] = [-1.5, 1.5];
+type record = {
+  label: string;
+  value: number;
+};
 
-const OddChangeListItem = () => {
-  const [currentValue, setCurrentValue] = useState<number>(-1.5);
+interface Props {
+  options: number[];
+  onSelect: (value: number) => void;
+  selected: number;
+}
+
+const OddChangeListItem = ({ options, onSelect, selected }: Props) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -17,7 +25,7 @@ const OddChangeListItem = () => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = (newValue?: number) => {
-    if (newValue) setCurrentValue(newValue);
+    if (newValue) onSelect(newValue);
     setAnchorEl(null);
   };
 
@@ -32,7 +40,7 @@ const OddChangeListItem = () => {
         className={styles.selectButton}
       >
         <BsFillCaretUpFill size={12} />
-        <span>{currentValue}</span>
+        <span>{selected}</span>
         <BsFillCaretDownFill size={12} />
       </Button>
       <Menu
@@ -51,11 +59,11 @@ const OddChangeListItem = () => {
           },
         }}
       >
-        {oddValues.map((value) => (
+        {options.map((item) => (
           <MenuItem
-            key={value}
+            key={item}
             sx={() =>
-              currentValue === value
+              selected === item
                 ? {
                     background: '#3a3a3d',
                     borderRadius: '4px',
@@ -65,9 +73,9 @@ const OddChangeListItem = () => {
                   }
                 : { opacity: 0.7 }
             }
-            onClick={() => handleClose(value)}
+            onClick={() => handleClose(item)}
           >
-            {value}
+            {item.toFixed(1)}
           </MenuItem>
         ))}
       </Menu>
