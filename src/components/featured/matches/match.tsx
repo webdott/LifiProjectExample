@@ -1,4 +1,5 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
+import _ from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -11,6 +12,7 @@ import OddChangeListItem from './oddChange';
 import styles from './matches.module.scss';
 import { getOddsDisplayString } from '../../../utils/odds';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
+import { getOddsPointString } from '../../../helpers/conditions/odds';
 
 interface MatchProps {
   game: Game;
@@ -22,6 +24,8 @@ const Match: FC<MatchProps> = ({ game, sport, selectedMarketId }) => {
   const location = useLocation();
   const { currentGame: currentBetSlipGame } = useSelector((root: RootState) => root.betSlip);
   const oddsFormat = useTypedSelector((state) => state.app.oddsFormat);
+  const [pointOptions, setPointOptions] = useState<number[]>([]);
+  const [selectedPoint, setSelectedPoint] = useState<number | null>(null);
   const dispatch = useDispatch();
 
   const toggleBetSlip = (item: Outcome) => {
@@ -40,6 +44,31 @@ const Match: FC<MatchProps> = ({ game, sport, selectedMarketId }) => {
       })(dispatch);
     }
   };
+  const outcomes = game.markets.filter((m) => m.marketId === selectedMarketId)[0]?.outcomes;
+
+  useEffect(() => {
+    const result: number[] = _.orderBy(
+      Array.from(
+        new Set(
+          outcomes
+            ?.map((ou: any) =>
+              ou.map((odds: any) =>
+                Math.abs(+getOddsPointString({ outcomeId: odds.outcomeId as string }))
+              )
+            )
+            .flat()
+            .filter((item: any) => item) || []
+        )
+      )
+    );
+    setPointOptions(result);
+    setSelectedPoint(result[0] || null);
+  }, [outcomes]);
+
+  let outcomesIndex = outcomes?.findIndex(
+    (item: any) => Math.abs(+getOddsPointString({ outcomeId: item[0].outcomeId })) === selectedPoint
+  );
+  outcomesIndex = outcomesIndex && outcomesIndex > -1 ? outcomesIndex : 0;
 
   return (
     <div className={styles.match}>
@@ -64,10 +93,16 @@ const Match: FC<MatchProps> = ({ game, sport, selectedMarketId }) => {
         <p>{game.startsAtString}</p>
       </div>
       <ul className={styles.matchRightSection}>
-        {game.markets
-          .filter((m) => m.marketId === selectedMarketId)[0]
-          ?.outcomes[0].map((item: any, index: number) => {
-            return (
+        {outcomes?.[outcomesIndex].map((item: any, index: number) => {
+          return (
+            <>
+              {index === 1 && selectedPoint && (
+                <OddChangeListItem
+                  selected={selectedPoint}
+                  onSelect={setSelectedPoint}
+                  options={pointOptions}
+                />
+              )}
               <li
                 key={index}
                 className={
@@ -80,9 +115,9 @@ const Match: FC<MatchProps> = ({ game, sport, selectedMarketId }) => {
                 <span>{item.selectionName}</span>
                 <span>{getOddsDisplayString(item.odds, oddsFormat)}</span>
               </li>
-            );
-          })}
-        {/* <OddChangeListItem /> */}
+            </>
+          );
+        })}
         <li className={styles.allMarkets}>
           <Link
             to={`/${getSelectedChainFromBase(location.pathname)}/${sport.sporthub.slug}/${

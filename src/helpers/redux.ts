@@ -13,7 +13,7 @@ import {
   SPORT_HUB_NAMES,
   SportHubSlug,
 } from '../constants/sports';
-import { getMarketDescription, getMarketKey } from '@azuro-org/dictionaries';
+import { getMarketDescription, getMarketKey, getSelectionName } from '@azuro-org/dictionaries';
 import { AzuroSport } from '../redux/reducers/sports';
 
 const generateGameObj = (game: AzuroGame): Game => {

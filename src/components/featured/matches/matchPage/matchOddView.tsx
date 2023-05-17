@@ -7,10 +7,13 @@ import IconButton from '@mui/material/IconButton';
 import styles from './matchpage.module.scss';
 import { getOddsDisplayString } from '../../../../utils/odds';
 import { useTypedSelector } from '../../../../hooks/useTypedSelector';
+import { getSelectionName } from '@azuro-org/dictionaries';
+import { getOddsPointString } from '../../../../helpers/conditions/odds';
 
 interface MatchOddViewProps {
   oddTitle: string;
   outcomes: {
+    outcomeId: string;
     selectionName: string;
     odds: string;
     id: number;
@@ -66,7 +69,12 @@ const MatchOddView: FC<MatchOddViewProps> = ({
           <div className={`${styles.odds} ${odds.length === 4 ? styles.four : ''}`} key={idx}>
             {odds.map((item) => (
               <button key={item.id}>
-                <span>{item.selectionName}</span>
+                <span>
+                  {getSelectionName({
+                    outcomeId: item.outcomeId,
+                    withPoint: getOddsPointString({ outcomeId: item.outcomeId }) ? true : false,
+                  })}
+                </span>
                 <span>{getOddsDisplayString(item.odds, oddsFormat)}</span>
               </button>
             ))}

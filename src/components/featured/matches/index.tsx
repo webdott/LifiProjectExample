@@ -26,19 +26,17 @@ export default function Matches({
   useEffect(() => {
     const options: { [key: string]: { key: string; label: string } } = {};
 
-    sport.leagues.forEach((lg) => {
-      lg.games.forEach((g) => {
-        g.markets.forEach((m) => {
-          if (!(m.marketId in options))
-            options[m.marketId] = { key: m.marketId, label: m.marketName };
-        });
+    league.games.forEach((g) => {
+      g.markets.forEach((m) => {
+        if (!(m.marketId in options))
+          options[m.marketId] = { key: m.marketId, label: m.marketName };
       });
     });
 
     const result = _.orderBy(Object.values(options), 'key', 'asc');
     setMarketOptions(result);
-    setSelectedMarket(result[0].key);
-  }, [sport]);
+    if (result.length > 0) setSelectedMarket(result[0].key);
+  }, [league]);
   return (
     <Fragment>
       {matches.length > 0 && selectedMarket ? (
