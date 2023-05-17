@@ -18,19 +18,18 @@ import {
   optimism,
   polygon,
 } from 'wagmi/chains';
-
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
-import { WalletConnectLegacyConnector } from '@wagmi/core/connectors/walletConnectLegacy';
+import { WalletConnectLegacyConnector } from 'wagmi/connectors/walletConnectLegacy';
 import { InjectedConnector } from 'wagmi/connectors/injected';
 import { publicProvider } from 'wagmi/providers/public';
+import { DAppProvider } from '@usedapp/core';
 
 import { store } from './redux';
+import ErrorBoundary from './components/shared/ErrorBoundary';
 import App from './App';
 
 import './index.css';
 import './styles/global.scss';
-import { DAppProvider } from '@usedapp/core';
-import ErrorBoundary from './components/shared/ErrorBoundary';
 
 // LOCAL TESTING
 // export const LocalGnosisChain = {
