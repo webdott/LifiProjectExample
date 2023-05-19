@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import { GxpTokenType } from '../../../constants/upgradeGxp';
 import { SidebarButtonsText } from '../../../constants/sidebar';
@@ -12,11 +12,17 @@ interface TokenProps {
 }
 
 const Token: FC<TokenProps> = ({ token }) => {
+  const [playVideo, setPlayVideo] = useState<boolean>(false);
+
+  useEffect(() => {
+    setPlayVideo(!!(window.innerWidth > 800));
+  }, []);
+
   return (
     <div className={styles.gxpToken}>
       <div className={styles.tokenId}>{token.id}</div>
       <div className={styles.upgradeImg}>
-        <video src={token.urlSrc} autoPlay={true} />
+        <video src={token.urlSrc} autoPlay={playVideo} />
       </div>
       <div className={styles.pointsSection}>
         <span className={styles.level}>
