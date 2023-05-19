@@ -32,6 +32,8 @@ export default function Footer(): JSX.Element {
                   onMouseEnter={() => setActiveIcon(index)}
                   onMouseLeave={() => setActiveIcon(null)}
                   href={e.isMail ? `mailto:${e.link}` : e.link}
+                  target='_blank'
+                  rel='noreferrer'
                 >
                   <img
                     src={activeIcon === index ? e.activeIcon : e.icon}

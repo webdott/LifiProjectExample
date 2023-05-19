@@ -38,5 +38,5 @@ export const socialMedia: SocialProps[] = [
     activeIcon: mailActiveIcon,
     isMail: true,
   },
-  { link: '#', icon: discordIcon, activeIcon: discordActiveIcon },
+  { link: 'https://discord.gg/EyjM7VA4u6s', icon: discordIcon, activeIcon: discordActiveIcon },
 ];
