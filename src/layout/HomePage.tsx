@@ -16,10 +16,10 @@ import LeftSideBar from './sideBarButtonList';
 import liveActiveIcon from '../assets/images/activeLiveIcon.png';
 import liveDisableIcon from '../assets/images/disableLiveIcon.png';
 import { SportHubSlug } from '../constants/sports';
+import MobileBetInfo from '../components/shared/mobileBetInfo';
 // import { checkIfBase, checkIfSPorts } from '../functions';
 
 import styles from './homelayout.module.scss';
-import MobileBetInfo from '../components/shared/mobileBetInfo';
 
 export default function Layout({ children }: LayoutProps) {
   const location = useLocation();
