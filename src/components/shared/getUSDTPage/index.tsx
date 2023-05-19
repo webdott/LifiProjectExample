@@ -16,8 +16,8 @@ export default function GetUSDTPage() {
             <p className={styles.title}>Buy with Crypto</p>
 
             <p className={styles.subText}>
-              Fantastic! Just exchange your tokens for USDT/MATIC and/or transfer them to the
-              Polygon Mainnet.
+              Fantastic! Just exchange your tokens for USDT/MATIC or bridge them to the Polygon
+              mainnet
             </p>
             <Button
               onClick={() => navigate('/polygon/get-funds/buy-with-crypto')}
@@ -29,7 +29,9 @@ export default function GetUSDTPage() {
 
           <div className={styles.option}>
             <p className={styles.title}>Buy with Card</p>
-            <p className={styles.subText}>Use your debit or credit card to get crypto.</p>
+            <p className={styles.subText}>
+              No problem! You can easily get crypto by using your credit or debit card
+            </p>
             <Button
               onClick={() => navigate('/polygon/get-funds/buy-with-card')}
               className={styles.buyButton}
