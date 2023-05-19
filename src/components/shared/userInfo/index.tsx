@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useAccount } from 'wagmi';
 import Tooltip from '@mui/material/Tooltip';
 
-import Upload from '../uploadPhoto/Upload';
+// import Upload from '../uploadPhoto/Upload';
 import { WalletProps } from './../../../constants/wallet';
 import walletIcon from '../../../assets/images/buttonWalletIcon.png';
 import copyIcon from '../../../assets/images/copyIcon.png';
@@ -22,7 +22,7 @@ export default function UserInfo(props: WalletProps): JSX.Element {
   return (
     <div className={styles.container}>
       <div className={styles.userSection}>
-        <Upload />
+        {/* <Upload /> */}
         <div className={styles.user}>
           <div className={styles.username}>Username</div>
           <div className={styles.bottomSection}>
