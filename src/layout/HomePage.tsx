@@ -7,7 +7,7 @@ import ListItemText from '@mui/material/ListItemText';
 
 import Header from '../components/featured/header';
 import Footer from '../components/featured/footer';
-import SearchBar from '../components/shared/searchBar';
+// import SearchBar from '../components/shared/searchBar';
 import BetInfo from '../components/shared/betInfo';
 // import { navData } from '../constants/leftSidebar';
 import { LayoutProps } from '../constants/layout';
@@ -16,7 +16,7 @@ import LeftSideBar from './sideBarButtonList';
 import liveActiveIcon from '../assets/images/activeLiveIcon.png';
 import liveDisableIcon from '../assets/images/disableLiveIcon.png';
 import { SportHubSlug } from '../constants/sports';
-import { checkIfBase, checkIfSPorts } from '../functions';
+// import { checkIfBase, checkIfSPorts } from '../functions';
 
 import styles from './homelayout.module.scss';
 import MobileBetInfo from '../components/shared/mobileBetInfo';
@@ -60,7 +60,7 @@ export default function Layout({ children }: LayoutProps) {
       <div className={styles.section}>
         <div className={styles.leftSidebar}>
           <div className={styles.container}>
-            {checkIfBase(location.pathname) && <SearchBar />}
+            {/* {checkIfBase(location.pathname) && <SearchBar />} */}
             <div className={styles.nav}>
               <ListItemButton
                 className={
