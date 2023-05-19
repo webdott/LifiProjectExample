@@ -9,17 +9,14 @@ import { getOddsDisplayString } from '../../../../utils/odds';
 import { useTypedSelector } from '../../../../hooks/useTypedSelector';
 import { getSelectionName } from '@azuro-org/dictionaries';
 import { getOddsPointString } from '../../../../helpers/conditions/odds';
+import { Outcome } from '../../../../constants/matches';
 
 interface MatchOddViewProps {
   oddTitle: string;
-  outcomes: {
-    outcomeId: string;
-    selectionName: string;
-    odds: string;
-    id: number;
-  }[][];
+  outcomes: Outcome[][];
   allCollapsed: boolean;
   marketDescription: string;
+  onClick: (outcome: Outcome, oddTitle: string) => void;
 }
 
 const MatchOddView: FC<MatchOddViewProps> = ({
@@ -27,6 +24,7 @@ const MatchOddView: FC<MatchOddViewProps> = ({
   outcomes,
   allCollapsed,
   marketDescription,
+  onClick,
 }) => {
   const [isCollapsed, setIsCollapsed] = useState<boolean>(allCollapsed);
   const oddsFormat = useTypedSelector((state) => state.app.oddsFormat);
@@ -68,7 +66,7 @@ const MatchOddView: FC<MatchOddViewProps> = ({
         outcomes.map((odds, idx: number) => (
           <div className={`${styles.odds} ${odds.length === 4 ? styles.four : ''}`} key={idx}>
             {odds.map((item) => (
-              <button key={item.id}>
+              <button key={item.id} onClick={() => onClick(item, oddTitle)}>
                 <span>
                   {getSelectionName({
                     outcomeId: item.outcomeId,
