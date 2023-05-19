@@ -63,9 +63,9 @@ export default function SportButton({
       <ListItemText primary={sport.name} />
       {/* <span className={styles.gameNumber}>{sport.sportsGames}</span> */}
       {selected ? <ExpandLess /> : <ArrowForwardIosIcon sx={{ fontSize: 16 }} />}
-      {sport.name === 'MMA' || sport.name === 'Basketball' ? (
+      {/* {sport.name === 'MMA' || sport.name === 'Basketball' ? (
         <div className={styles.soonIcon}>Soon</div>
-      ) : null}
+      ) : null} */}
     </ListItemButton>
   );
 }
