@@ -9,7 +9,7 @@ import Header from '../components/featured/header';
 import Footer from '../components/featured/footer';
 import SearchBar from '../components/shared/searchBar';
 import BetInfo from '../components/shared/betInfo';
-import { navData } from '../constants/leftSidebar';
+// import { navData } from '../constants/leftSidebar';
 import { LayoutProps } from '../constants/layout';
 import { useLocation } from 'react-router-dom';
 import LeftSideBar from './sideBarButtonList';
@@ -79,7 +79,8 @@ export default function Layout({ children }: LayoutProps) {
                 </ListItemIcon>
                 <ListItemText primary='Top Events' />
               </ListItemButton>
-              <ListItemButton
+              {/* Remove Live button */}
+              {/* <ListItemButton
                 onMouseOver={() => {
                   setLiveIcon(liveActiveIcon);
                   setLiveHoverEffect(true);
@@ -107,7 +108,7 @@ export default function Layout({ children }: LayoutProps) {
                   {liveHoverEffect && <div className={styles.hoverEffect}></div>}
                 </ListItemIcon>
                 <ListItemText primary='Live' />
-              </ListItemButton>
+              </ListItemButton> */}
             </div>
             <LeftSideBar sportHubSlugs={getSportHubSlugs()} />
           </div>
