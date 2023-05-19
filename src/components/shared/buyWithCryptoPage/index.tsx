@@ -32,17 +32,11 @@ export default function BuyWithCryptoPage() {
     if (chainId !== reqChainId) {
       try {
         await switchNetworkAsync?.(reqChainId);
-        await wagmiSigner.getChainId();
       } catch {
         throw new Error("Couldn't switch chain.");
       }
-      // console.log(chainId);
-      if (chainId !== reqChainId) throw new Error('Chain was not switched here');
-      else return wagmiSigner!;
+      return wagmiSigner!;
     }
-    // console.log('hererere');
-    // const newSigner = await activeConnector?.getSigner();
-    // console.log(newSigner);
     return wagmiSigner!;
   };
 
@@ -72,6 +66,13 @@ export default function BuyWithCryptoPage() {
             console.log('LiFI Disconnect error');
           }
         },
+        addChain: async (chainId: number) => {
+          if (switchNetworkAsync) {
+            await switchNetworkAsync(chainId);
+            return true;
+          }
+          return false;
+        },
         switchChain,
       },
       containerStyle: {
@@ -92,7 +93,7 @@ export default function BuyWithCryptoPage() {
         },
       },
       appearance: 'dark',
-      hiddenUI: [HiddenUI.Appearance, HiddenUI.Language, HiddenUI.ToAddress],
+      hiddenUI: [HiddenUI.Appearance, HiddenUI.Language, HiddenUI.ToAddress, HiddenUI.PoweredBy],
     };
 
     return obj;
