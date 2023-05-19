@@ -68,7 +68,11 @@ export default function Header({ page }: { page: 'home' | 'gxp' | 'get-funds' })
                 <NavLink
                   key={index}
                   className={({ isActive }) =>
-                    isActive ? `${styles.navLink} ${styles.activeNavLink}` : `${styles.navLink} `
+                    isActive
+                      ? `${styles.navLink} ${styles.activeNavLink}`
+                      : navItem.name === 'Membership'
+                      ? `${styles.navLink} ${styles.disabled}`
+                      : `${styles.navLink}`
                   }
                   to={
                     checkIfBase(location.pathname)
