@@ -7,9 +7,12 @@ import { XMasonry, XBlock } from 'react-xmasonry';
 import MatchOddView from './matchOddView';
 import SearchMarkets from './searchMarkets';
 import Odds from '../odds';
-import { Game } from '../../../../constants/matches';
+import { Game, Outcome } from '../../../../constants/matches';
 
 import styles from './matchpage.module.scss';
+import { useTypedSelector } from '../../../../hooks/useTypedSelector';
+import { useDispatch } from 'react-redux';
+import { addBetSlip, removeBetSlip } from '../../../../redux/action-creators';
 
 interface Props {
   game: Game | null;
@@ -21,7 +24,24 @@ const AllMatchOdds = ({ game }: Props) => {
   const [showSearch, setShowSearch] = useState<boolean>(false);
   const [gridClass, setGridClass] = useState<'fullGrid' | 'halfGrid'>('fullGrid');
   const [allCollapsed, setAllCollapsed] = useState<boolean>(false);
+  const { currentGame: currentBetSlipGame } = useTypedSelector((state) => state.betSlip);
+  const dispatch = useDispatch();
 
+  const toggleBetSlip = (item: Outcome, betType: string) => {
+    if (!game) return;
+    if (currentBetSlipGame?.id === game.id && currentBetSlipGame?.outcome.id === item.id) {
+      removeBetSlip()(dispatch);
+    } else {
+      addBetSlip({
+        sportSlug: game.sportSlug,
+        id: game.id,
+        team1: game.participant1.name,
+        team2: game.participant2.name,
+        betType,
+        outcome: item,
+      })(dispatch);
+    }
+  };
   const containerRef = useCallback((node: HTMLDivElement) => {
     if (node !== null) {
       setHalfWidth((node?.offsetWidth ?? 1800) / 2);
@@ -93,6 +113,7 @@ const AllMatchOdds = ({ game }: Props) => {
                   oddTitle={market.marketName}
                   outcomes={market.outcomes}
                   allCollapsed={allCollapsed}
+                  onClick={toggleBetSlip}
                 />
               </XBlock>
             ))}
