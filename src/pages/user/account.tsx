@@ -22,7 +22,7 @@ const UserAccount = () => {
         <div className={styles.userAccount}>
           <UserInfo />
           <OverviewTab />
-          {query.get('name') === 'my_bets' ? <MyBetsPage /> : ''}
+          {query.get('name') === 'my_bets' || query.get('name') === null ? <MyBetsPage /> : ''}
         </div>
       </Layout>
     </Fragment>

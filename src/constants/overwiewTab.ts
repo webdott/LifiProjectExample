@@ -25,7 +25,7 @@ export enum OverViewTabEnum {
   OVERVIEW = 'Overview',
   MY_BETS = 'My Bets',
   MY_NFTS = 'My NFTs',
-  TRANSACTION = 'Transaction',
+  TRANSACTIONS = 'Transactions',
   SETTINGS = 'Settings',
 }
 
@@ -34,7 +34,7 @@ export enum UserMenuPath {
   Overview = 'overview',
   My_Bets = 'my_bets',
   My_NFT = 'my_NFTs',
-  Transaction = 'transaction',
+  Transactions = 'transactions',
   Settings = 'settings',
 }
 
@@ -58,8 +58,8 @@ export const overview: OverViewProps[] = [
   { icon: myNftIcon, path: UserMenuPath.My_NFT, name: OverViewTabEnum.MY_NFTS },
   {
     icon: transactionIcon,
-    path: UserMenuPath.Transaction,
-    name: OverViewTabEnum.TRANSACTION,
+    path: UserMenuPath.Transactions,
+    name: OverViewTabEnum.TRANSACTIONS,
   },
   {
     icon: settingIcon,

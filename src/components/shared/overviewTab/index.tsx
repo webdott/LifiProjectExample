@@ -8,7 +8,7 @@ import styles from './overviewTab.module.scss';
 
 export default function OverviewTab(): JSX.Element {
   const location = useLocation();
-  const [toggleState, setToggleState] = useState<number>(0);
+  const [toggleState, setToggleState] = useState<number>(1);
 
   return (
     <div className={styles.container}>
@@ -16,13 +16,16 @@ export default function OverviewTab(): JSX.Element {
         {overview.map((el, index) => (
           <Link
             className={
-              toggleState === index
+              toggleState === index && el.name === 'My Bets'
                 ? `${styles.tabSection_tab} ${styles.tabSection_activeTab}`
+                : el.name !== 'My Bets'
+                ? `${styles.tabSection_tab} ${styles.disabled}`
                 : `${styles.tabSection_tab}`
             }
             key={el.name}
             to={`/${getSelectedChainFromBase(location.pathname)}/account?name=${el.path}`}
-            onClick={() => setToggleState(index)}
+            aria-disabled={el.name !== 'My Bets'}
+            onClick={() => (el.name === 'My Bets' ? setToggleState(index) : null)}
           >
             <div className={styles.hoverEffect}></div>
             <img className={styles.overviewNavIcon} src={el.icon} />
