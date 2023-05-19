@@ -3,17 +3,35 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 40px;
+  gap: 8px;
   height: 40px;
-  border-radius: 50%;
+  padding: 0px 12px;
+  border-radius: 20px;
   background-color: var(--footer_icons_col);
   cursor: pointer;
   position: relative;
+  span {
+    font-weight: bold;
+
+    @media screen and (max-width: 750px) {
+      white-space: nowrap;
+      overflow: hidden;
+      width: 110px;
+      text-overflow: ellipsis;
+    }
+  }
   &:hover {
     color: var(--medium_green);
     .hoverEffect {
       background: var(--hover_effect);
       filter: blur(10px);
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    width: 40px;
+    span {
+      display: none;
     }
   }
 }

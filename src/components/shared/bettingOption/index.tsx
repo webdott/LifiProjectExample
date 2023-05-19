@@ -30,6 +30,7 @@ const BettingOption = ({ options, selected, onChange }: Props) => {
       arrow={{ pointAtCenter: true }}
     >
       <a className='optionBtn' onClick={(e) => e.preventDefault()}>
+        <span>{(options.find((option) => option.key === selected) ?? options[0]).label}</span>
         <AiOutlinePlus size={20} />
         <div className='hoverEffect'></div>
       </a>
