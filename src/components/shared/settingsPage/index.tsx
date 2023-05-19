@@ -80,11 +80,13 @@ const SettingsPage: FC<SettingPageProps> = ({ closePage }) => {
 
       <div className={styles.quickBet}>
         <div className={styles.top}>
-          <p>Odds Slippage Tolerance</p>
+          <p>Quick bet</p>
           <Tooltip
             title={
               <p className={styles.infoPrompt}>
-                The percentage of maximum slippage or change in odds when placing a bet.
+                You can set up the value of bets you generally place to make the betting experience
+                quicker and smoother. The betting slip will pre-offer y these values for your future
+                bets.
               </p>
             }
             arrow={true}
