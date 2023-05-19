@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
-import { NavLink, useLocation, useParams } from 'react-router-dom';
+import { Link, NavLink, useLocation, useParams } from 'react-router-dom';
 import { useAccount } from 'wagmi';
 
 import Button from '../../shared/button';
@@ -59,9 +59,9 @@ export default function Header({ page }: { page: 'home' | 'gxp' | 'get-funds' })
           <div className={styles.headerLeftSection}>
             <MobileLeftSidebar />
             <div className={styles.headerLogo}>
-              <span>
+              <Link to={`/${getSelectedChainFromBase(location.pathname)}`}>
                 <GamblrXYZLogo />
-              </span>
+              </Link>
             </div>
             <ul className={styles.headerNav}>
               {navbar.map((navItem, index) => (
