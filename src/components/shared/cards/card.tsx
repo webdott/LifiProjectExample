@@ -60,6 +60,7 @@ const Card: FC<CardProps> = ({ game, slideIndex }) => {
             <img
               src={game.participant1.image ?? '/assets/images/gamblr-xyz.png'}
               alt='Participant 1 logo'
+              className={!game.participant1.image ? styles.defaultImage : ''}
             />
           </div>
           <div className={styles.card_content_teams_goals}>
@@ -69,6 +70,7 @@ const Card: FC<CardProps> = ({ game, slideIndex }) => {
             <img
               src={game.participant2.image ?? '/assets/images/gamblr-xyz.png'}
               alt='Participant 1 logo'
+              className={!game.participant2.image ? styles.defaultImage : ''}
             />
           </div>
         </div>

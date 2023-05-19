@@ -12,9 +12,9 @@
   position: relative;
   span {
     font-weight: bold;
+    white-space: nowrap;
 
     @media screen and (max-width: 750px) {
-      white-space: nowrap;
       overflow: hidden;
       width: 110px;
       text-overflow: ellipsis;

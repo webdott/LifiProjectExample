@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, Fragment, useEffect, useState } from 'react';
 import _ from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
@@ -95,7 +95,7 @@ const Match: FC<MatchProps> = ({ game, sport, selectedMarketId }) => {
       <ul className={styles.matchRightSection}>
         {outcomes?.[outcomesIndex].map((item: any, index: number) => {
           return (
-            <>
+            <Fragment key={index}>
               {index === 1 && selectedPoint && (
                 <OddChangeListItem
                   selected={selectedPoint}
@@ -104,7 +104,6 @@ const Match: FC<MatchProps> = ({ game, sport, selectedMarketId }) => {
                 />
               )}
               <li
-                key={index}
                 className={
                   currentBetSlipGame?.id === game.id && currentBetSlipGame?.outcome.id === item.id
                     ? styles.activeTab
@@ -115,7 +114,7 @@ const Match: FC<MatchProps> = ({ game, sport, selectedMarketId }) => {
                 <span>{item.selectionName}</span>
                 <span>{getOddsDisplayString(item.odds, oddsFormat)}</span>
               </li>
-            </>
+            </Fragment>
           );
         })}
         <li className={styles.allMarkets}>

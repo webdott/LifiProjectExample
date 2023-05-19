@@ -70,6 +70,13 @@
               img {
                 width: 32px;
                 height: 32px;
+
+                &.defaultImage {
+                  width: 50px;
+                  height: 38px;
+                  object-position: 0px;
+                  scale: 0.8;
+                }
               }
             }
             &_goals {
