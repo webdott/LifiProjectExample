@@ -77,6 +77,11 @@
           color: var(--white_900);
           padding-bottom: 3px;
           position: relative;
+          &.disabled {
+            pointer-events: none;
+            opacity: 0.7;
+            cursor: not-allowed;
+          }
           .soonIcon {
             padding: 2px 8px;
             background: linear-gradient(90.03deg, #0bf1ac -41.61%, #058465 105.53%);

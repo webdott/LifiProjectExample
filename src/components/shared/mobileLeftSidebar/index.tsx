@@ -91,7 +91,9 @@ export default function MobileLeftSidebar() {
                   className={
                     el.pathCheck?.find((path) => location.pathname.includes(path))
                       ? `${styles.navLink} ${styles.activeNavLink}`
-                      : `${styles.navLink} `
+                      : el.name === 'Membership'
+                      ? `${styles.navLink} ${styles.disabled}`
+                      : `${styles.navLink}`
                   }
                   onClick={() => setOpenDetails(el.name)}
                 >

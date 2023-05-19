@@ -8,9 +8,9 @@
   min-height: calc(100vh - 90px);
 
   .leftSidebar {
-    width: 320px;
+    min-width: 320px;
     height: calc(100vh - 90px);
-    padding: 30px;
+    padding: 30px 10px;
     overflow-y: auto;
     overflow-x: hidden;
     font-size: 10px !important;
@@ -29,7 +29,7 @@
         flex-direction: column;
         row-gap: 20px;
         .homeLiveButton {
-          width: 210px;
+          width: 250px;
           background-color: transparent;
           border-radius: 10px;
           border: 1.5px solid var(--white_900);
