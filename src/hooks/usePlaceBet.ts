@@ -8,16 +8,10 @@ import {
   XDAI_DECIMALS,
 } from '../constants/azuro';
 import { ethers } from 'ethers';
-import {
-  Address,
-  useAccount,
-  useContractRead,
-  useContractWrite,
-  usePrepareContractWrite,
-} from 'wagmi';
+import { Address, useAccount, useContractRead, useContractWrite } from 'wagmi';
 import { erc20ABI } from 'wagmi';
 import { formatUnits } from 'ethers/lib/utils.js';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 const SLIPPAGE = 5;
 
@@ -47,7 +41,7 @@ function usePlaceBet(outcome: Outcome | undefined, chainId: number, onBetPlaced:
   });
 
   // Bet native token
-  const { writeAsync: _betNative, status: betNativeStatus } = useContractWrite({
+  const { writeAsync: _betNative } = useContractWrite({
     address: LIQUIDITY_POOLS[chainId] as Address,
     abi: ABI_PAYLOAD,
     functionName: 'betNative',
@@ -55,7 +49,7 @@ function usePlaceBet(outcome: Outcome | undefined, chainId: number, onBetPlaced:
   });
 
   // // Bet non native token
-  const { writeAsync: _bet, status: betStatus } = useContractWrite({
+  const { writeAsync: _bet } = useContractWrite({
     address: LIQUIDITY_POOLS[chainId] as Address,
     abi: ABI_PAYLOAD,
     functionName: 'bet',
@@ -75,7 +69,7 @@ function usePlaceBet(outcome: Outcome | undefined, chainId: number, onBetPlaced:
       await refetch();
     } catch {}
     setIsApproving(false);
-  }, [_approve, setIsApproving]);
+  }, [_approve, setIsApproving, refetch, chainId]);
 
   const placeBet = useCallback(async () => {
     if (!outcome) return;
@@ -127,7 +121,7 @@ function usePlaceBet(outcome: Outcome | undefined, chainId: number, onBetPlaced:
     }
     setIsPlacingBet(false);
     onBetPlaced();
-  }, [outcome, amount, _bet]);
+  }, [outcome, amount, _bet, _betNative, address, onBetPlaced, chainId]);
 
   return {
     placeBet,

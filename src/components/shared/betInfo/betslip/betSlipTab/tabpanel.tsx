@@ -40,14 +40,14 @@ export default function TabPanel(props: TabPanelProps) {
   const onPlacingBetSuccess = useCallback(() => {
     toast.success('Bet placed successfully');
     handleBetRemoval();
-  }, []);
+  }, [handleBetRemoval]);
 
   const { address } = useAccount();
-  const { data: nativeData, isLoading: isLoadingNativeDataBalance } = useBalance({
+  const { data: nativeData } = useBalance({
     address,
     chainId: getSelectedChainFromBase(location.pathname) === 'polygon' ? polygon.id : gnosis.id,
   });
-  const { data: USDTBalanceData, isLoading: isLoadingUSDTBalance } = useBalance({
+  const { data: USDTBalanceData } = useBalance({
     address: getSelectedChainFromBase(location.pathname) === 'polygon' ? address : undefined,
     chainId: getSelectedChainFromBase(location.pathname) === 'polygon' ? polygon.id : gnosis.id,
     token: USDT_ADDRESS,
@@ -60,9 +60,12 @@ export default function TabPanel(props: TabPanelProps) {
   const oddsFormat = useTypedSelector((state) => state.app.oddsFormat);
 
   const { children, value, index, ...other } = props;
-  const handleAmountChange = useCallback((event: BaseSyntheticEvent) => {
-    setAmount((v) => (event.target.validity.valid ? event.target.value : v));
-  }, []);
+  const handleAmountChange = useCallback(
+    (event: BaseSyntheticEvent) => {
+      setAmount((v) => (event.target.validity.valid ? event.target.value : v));
+    },
+    [setAmount]
+  );
 
   const hasEnoughBalance = () => {
     if (!+amount) return false;
@@ -151,7 +154,7 @@ export default function TabPanel(props: TabPanelProps) {
                 isApproved
                   ? isPlacingBet
                     ? 'Placing Bet...'
-                    : 'Place bet'
+                    : 'Place Bet'
                   : isApproving
                   ? 'Approving...'
                   : 'Approve'
