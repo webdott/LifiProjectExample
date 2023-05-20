@@ -55,7 +55,7 @@ export default function TabPanel(props: TabPanelProps) {
 
   const { currentGame: currentBetSlipGame } = useTypedSelector((state) => state.betSlip);
 
-  const { approve, placeBet, amount, isApproved, setAmount, isApproving, isBetInProgress } =
+  const { approve, placeBet, amount, isApproved, setAmount, isApproving, isPlacingBet } =
     usePlaceBet(currentBetSlipGame?.outcome, chainId, onPlacingBetSuccess);
   const oddsFormat = useTypedSelector((state) => state.app.oddsFormat);
 
@@ -144,12 +144,12 @@ export default function TabPanel(props: TabPanelProps) {
             </div>
             <Button
               className={`${styles.ctaButton} ${
-                (!hasEnoughBalance() || isBetInProgress) && styles.disabled
+                (!hasEnoughBalance() || isPlacingBet || isApproving) && styles.disabled
               }`}
               btnType={ButtonType.membershipButton}
               text={
                 isApproved
-                  ? isBetInProgress
+                  ? isPlacingBet
                     ? 'Placing Bet...'
                     : 'Place bet'
                   : isApproving
