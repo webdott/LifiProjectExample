@@ -22,7 +22,7 @@ function usePlaceBet(outcome: Outcome | undefined, chainId: number, onBetPlaced:
   const [amount, setAmount] = useState('');
 
   // Read allowance
-  const { data: rawAllowance, refetch } = useContractRead({
+  const { data: rawAllowance, refetch: refetchAllowance } = useContractRead({
     address: USDT_ADDRESS,
     abi: erc20ABI,
     functionName: 'allowance',
@@ -66,10 +66,10 @@ function usePlaceBet(outcome: Outcome | undefined, chainId: number, onBetPlaced:
         ],
       });
       await wait();
-      await refetch();
+      await refetchAllowance();
     } catch {}
     setIsApproving(false);
-  }, [_approve, setIsApproving, refetch, chainId]);
+  }, [_approve, setIsApproving, refetchAllowance, chainId]);
 
   const placeBet = useCallback(async () => {
     if (!outcome) return;
