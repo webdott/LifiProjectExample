@@ -1,4 +1,4 @@
-import { gnosis } from 'wagmi/chains';
+import { gnosis, polygon } from 'wagmi/chains';
 import { Outcome } from '../constants/matches';
 import {
   ABI_PAYLOAD,
@@ -8,98 +8,129 @@ import {
   XDAI_DECIMALS,
 } from '../constants/azuro';
 import { ethers } from 'ethers';
-import { useAccount, useContract } from 'wagmi';
-import { useContractFunction } from '@usedapp/core';
-import { ERC20Interface } from '@usedapp/core';
-import { useTokenAllowance } from '@usedapp/core';
+import { Address, useAccount, useContractRead, useContractWrite } from 'wagmi';
+import { erc20ABI } from 'wagmi';
 import { formatUnits } from 'ethers/lib/utils.js';
 import { useCallback, useState } from 'react';
 
-const usdtContract = new ethers.Contract(USDT_ADDRESS, ERC20Interface);
-function usePlaceBet(outcome: Outcome | undefined, chainId: number, onBetPlace: () => void) {
+const SLIPPAGE = 5;
+
+function usePlaceBet(outcome: Outcome | undefined, chainId: number, onBetPlaced: () => void) {
   const { address } = useAccount();
+  const [isApproving, setIsApproving] = useState(false);
+  const [isPlacingBet, setIsPlacingBet] = useState(false);
   const [amount, setAmount] = useState('');
 
-  // Liquidity pool contract
-  const lpContract = useContract({
-    address: LIQUIDITY_POOLS[chainId],
-    abi: ABI_PAYLOAD,
+  // Read allowance
+  const { data: rawAllowance, refetch } = useContractRead({
+    address: USDT_ADDRESS,
+    abi: erc20ABI,
+    functionName: 'allowance',
+    args: [address as Address, LIQUIDITY_POOLS[chainId] as Address],
+    enabled: !!address && chainId === polygon.id,
   });
-
-  // Methods on liquidity pool contract to place a bet
-  const { send: _bet } = useContractFunction(lpContract, 'bet', { transactionName: 'Bet' });
-  const { send: _betNative } = useContractFunction(lpContract, 'betNative', {
-    transactionName: 'BetNative',
-  });
-
-  // Method to approve non native token (i.e. USDT)
-  const { state: approveState, send: _approve } = useContractFunction(usdtContract, 'approve', {
-    transactionName: 'Approve',
-  });
-
-  const rawAllowance = useTokenAllowance(USDT_ADDRESS, address, LIQUIDITY_POOLS[chainId], {
-    refresh: 'everyBlock',
-  });
-  const allowanceFetching = rawAllowance === undefined;
-  const allowance = rawAllowance && formatUnits(rawAllowance, USDT_DECIMALS);
+  const allowance = rawAllowance ? formatUnits(rawAllowance, USDT_DECIMALS) : 0;
   const isApproved = chainId === gnosis.id || +allowance >= +amount;
-  const isApproving =
-    approveState.status === 'PendingSignature' || approveState.status === 'Mining';
 
-  const approve = () => {
-    // to prevent the need to ask for approval before each bet, the user will be asked to approve a "maximum" amount
-    const amount = ethers.constants.MaxUint256;
+  // Approve allowance
+  const { writeAsync: _approve } = useContractWrite({
+    address: USDT_ADDRESS,
+    abi: erc20ABI,
+    functionName: 'approve',
+    mode: 'recklesslyUnprepared',
+  });
 
-    _approve(LIQUIDITY_POOLS[chainId], amount);
-  };
+  // Bet native token
+  const { writeAsync: _betNative } = useContractWrite({
+    address: LIQUIDITY_POOLS[chainId] as Address,
+    abi: ABI_PAYLOAD,
+    functionName: 'betNative',
+    mode: 'recklesslyUnprepared',
+  });
+
+  // // Bet non native token
+  const { writeAsync: _bet } = useContractWrite({
+    address: LIQUIDITY_POOLS[chainId] as Address,
+    abi: ABI_PAYLOAD,
+    functionName: 'bet',
+    mode: 'recklesslyUnprepared',
+  });
+
+  const approve = useCallback(async () => {
+    setIsApproving(true);
+    try {
+      const { wait } = await _approve?.({
+        recklesslySetUnpreparedArgs: [
+          LIQUIDITY_POOLS[chainId] as Address,
+          ethers.constants.MaxInt256,
+        ],
+      });
+      await wait();
+      await refetch();
+    } catch {}
+    setIsApproving(false);
+  }, [_approve, setIsApproving, refetch, chainId]);
 
   const placeBet = useCallback(async () => {
     if (!outcome) return;
 
-    const deadline = Math.floor(Date.now() / 1000) + 2000;
-    const affiliate = address; // your affiliate wallet address
-
-    const { conditionId, outcomeId, odds, coreAddress } = outcome;
-    const slippage = 5;
-    const minOdds = 1 + ((Number(odds) - 1) * (100 - slippage)) / 100;
+    setIsPlacingBet(true);
+    const { conditionId, outcomeId, odds, coreAddress } = outcome || {};
+    const minOdds = 1 + ((Number(odds) - 1) * (100 - SLIPPAGE)) / 100;
     const oddsDecimals = 12;
     const rawMinOdds = ethers.utils.parseUnits(minOdds.toFixed(oddsDecimals), oddsDecimals);
-
     const data = ethers.utils.defaultAbiCoder.encode(
       ['uint256', 'uint64', 'uint64'],
       [conditionId, outcomeId, rawMinOdds]
     );
 
-    // if chain is Gnosis then place bets in xDAI native token
-    if (chainId === gnosis.id) {
-      const rawAmount = ethers.utils.parseUnits(amount, XDAI_DECIMALS);
-      await _betNative(
-        coreAddress,
-        deadline,
-        {
-          affiliate,
-          data,
-        },
-        { value: rawAmount }
-      );
-    } else {
-      const rawAmount = ethers.utils.parseUnits(amount, USDT_DECIMALS);
-      await _bet(coreAddress, rawAmount, deadline, {
-        affiliate,
-        data,
-      });
+    try {
+      // if chain is Gnosis then place bets in xDAI native token
+      if (chainId === gnosis.id) {
+        const { wait } = await _betNative?.({
+          recklesslySetUnpreparedArgs: [
+            coreAddress,
+            Math.floor(Date.now() / 1000) + 2000,
+            {
+              affiliate: address,
+              data,
+            },
+          ],
+          recklesslySetUnpreparedOverrides: {
+            value: ethers.utils.parseUnits(amount, XDAI_DECIMALS),
+          },
+        });
+        await wait();
+      } else {
+        const { wait } = await _bet?.({
+          recklesslySetUnpreparedArgs: [
+            coreAddress,
+            ethers.utils.parseUnits(amount, USDT_DECIMALS),
+            Math.floor(Date.now() / 1000) + 2000,
+            {
+              affiliate: address,
+              data,
+            },
+          ],
+        });
+        await wait();
+      }
+    } catch {
+      setIsPlacingBet(false);
+      return;
     }
-    onBetPlace();
-  }, [outcome, amount, _betNative, _bet]);
+    setIsPlacingBet(false);
+    onBetPlaced();
+  }, [outcome, amount, _bet, _betNative, address, onBetPlaced, chainId]);
 
   return {
     placeBet,
     approve,
     isApproved,
     isApproving,
+    isPlacingBet,
     amount,
     setAmount,
-    allowanceFetching,
   };
 }
 export default usePlaceBet;

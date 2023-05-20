@@ -40,14 +40,14 @@ export default function TabPanel(props: TabPanelProps) {
   const onPlacingBetSuccess = useCallback(() => {
     toast.success('Bet placed successfully');
     handleBetRemoval();
-  }, []);
+  }, [handleBetRemoval]);
 
   const { address } = useAccount();
-  const { data: nativeData, isLoading: isLoadingNativeDataBalance } = useBalance({
+  const { data: nativeData } = useBalance({
     address,
     chainId: getSelectedChainFromBase(location.pathname) === 'polygon' ? polygon.id : gnosis.id,
   });
-  const { data: USDTBalanceData, isLoading: isLoadingUSDTBalance } = useBalance({
+  const { data: USDTBalanceData } = useBalance({
     address: getSelectedChainFromBase(location.pathname) === 'polygon' ? address : undefined,
     chainId: getSelectedChainFromBase(location.pathname) === 'polygon' ? polygon.id : gnosis.id,
     token: USDT_ADDRESS,
@@ -55,17 +55,17 @@ export default function TabPanel(props: TabPanelProps) {
 
   const { currentGame: currentBetSlipGame } = useTypedSelector((state) => state.betSlip);
 
-  const { approve, placeBet, amount, isApproved, setAmount, isApproving } = usePlaceBet(
-    currentBetSlipGame?.outcome,
-    chainId,
-    onPlacingBetSuccess
-  );
+  const { approve, placeBet, amount, isApproved, setAmount, isApproving, isPlacingBet } =
+    usePlaceBet(currentBetSlipGame?.outcome, chainId, onPlacingBetSuccess);
   const oddsFormat = useTypedSelector((state) => state.app.oddsFormat);
 
   const { children, value, index, ...other } = props;
-  const handleAmountChange = useCallback((event: BaseSyntheticEvent) => {
-    setAmount((v) => (event.target.validity.valid ? event.target.value : v));
-  }, []);
+  const handleAmountChange = useCallback(
+    (event: BaseSyntheticEvent) => {
+      setAmount((v) => (event.target.validity.valid ? event.target.value : v));
+    },
+    [setAmount]
+  );
 
   const hasEnoughBalance = () => {
     if (!+amount) return false;
@@ -146,9 +146,19 @@ export default function TabPanel(props: TabPanelProps) {
               </span>
             </div>
             <Button
-              className={`${styles.ctaButton} ${!hasEnoughBalance() && styles.disabled}`}
+              className={`${styles.ctaButton} ${
+                (!hasEnoughBalance() || isPlacingBet || isApproving) && styles.disabled
+              }`}
               btnType={ButtonType.membershipButton}
-              text={isApproved ? 'Place bet' : isApproving ? 'Approving...' : 'Approve'}
+              text={
+                isApproved
+                  ? isPlacingBet
+                    ? 'Placing Bet...'
+                    : 'Place Bet'
+                  : isApproving
+                  ? 'Approving...'
+                  : 'Approve'
+              }
               onClick={isApproved ? placeBet : approve}
             />
           </div>

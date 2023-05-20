@@ -22,7 +22,6 @@ import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
 import { WalletConnectLegacyConnector } from 'wagmi/connectors/walletConnectLegacy';
 import { InjectedConnector } from 'wagmi/connectors/injected';
 import { publicProvider } from 'wagmi/providers/public';
-import { DAppProvider } from '@usedapp/core';
 
 import { store } from './redux';
 import ErrorBoundary from './components/shared/ErrorBoundary';
@@ -91,13 +90,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Provider store={store}>
-      <DAppProvider config={{}}>
-        <WagmiConfig client={wagmiClient}>
-          <ErrorBoundary fallback={'something went wrong'}>
-            <App />
-          </ErrorBoundary>
-        </WagmiConfig>
-      </DAppProvider>
+      <WagmiConfig client={wagmiClient}>
+        <ErrorBoundary fallback={'something went wrong'}>
+          <App />
+        </ErrorBoundary>
+      </WagmiConfig>
     </Provider>
   </BrowserRouter>
 );

@@ -22,7 +22,6 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/lodash": "^4.14.192",
     "@types/react-redux": "^7.1.24",
-    "@usedapp/core": "^1.2.9",
     "@walletconnect/jsonrpc-types": "^1.0.1",
     "@walletconnect/types": "^2.1.0",
     "@walletconnect/utils": "^2.7.2",
