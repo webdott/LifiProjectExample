@@ -67,10 +67,16 @@ export default function TabPanel(props: TabPanelProps) {
     [setAmount]
   );
 
+  const getBalance = useCallback(() => {
+    if (chainId === gnosis.id && nativeData) return +nativeData.formatted;
+    else if (USDTBalanceData) return +USDTBalanceData.formatted;
+    return;
+  }, [nativeData, USDTBalanceData]);
+
   const hasEnoughBalance = () => {
     if (!+amount) return false;
-    if (chainId === gnosis.id && nativeData) return +nativeData.formatted >= +amount;
-    else if (USDTBalanceData) return +USDTBalanceData.formatted >= +amount;
+    const balance = getBalance();
+    if (balance) return balance >= +amount;
     return false;
   };
 
@@ -126,15 +132,20 @@ export default function TabPanel(props: TabPanelProps) {
               </div>
             </div>
             <div className={styles.quickBet}>
-              {quickBetValues.map((value) => (
-                <Button
-                  key={value}
-                  className={`${styles.quickBetButton} ${styles.disabled}`}
-                  btnType={ButtonType.membershipButton}
-                  text={value}
-                  onClick={() => null}
-                />
-              ))}
+              {quickBetValues.map((value) => {
+                const resultAmount = Math.floor(+(getBalance() || 0) * (+value.slice(0, -1) / 100));
+                return (
+                  <Button
+                    key={value}
+                    className={`${styles.quickBetButton} ${
+                      resultAmount == 0 ? styles.disabled : ''
+                    }`}
+                    btnType={ButtonType.membershipButton}
+                    text={value}
+                    onClick={() => setAmount(resultAmount.toString())}
+                  />
+                );
+              })}
             </div>
             <div className={styles.possibleWin}>
               <p className={styles.title}>Possible Win</p>
