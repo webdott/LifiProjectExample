@@ -19,17 +19,17 @@ const BalanceCheck: React.FC = () => {
   const chainId =
     getSelectedChainFromBase(location.pathname) === 'polygon' ? polygon.id : gnosis.id;
 
-  const { data: nativeData, isLoading: isLoadingNativeDataBalance } = useBalance({
+  const { data: nativeData } = useBalance({
     address,
     chainId,
   });
-  const { data: USDTBalanceData, isLoading: isLoadingUSDTBalance } = useBalance({
+  const { data: USDTBalanceData } = useBalance({
     address: getSelectedChainFromBase(location.pathname) === 'polygon' ? address : undefined,
     chainId,
     token: USDT_ADDRESS,
   });
 
-  const balance = chainId === gnosis.id ? nativeData : USDTBalanceData;
+  const balance = chainId === gnosis.id ? nativeData?.formatted : USDTBalanceData?.formatted;
 
   return (
     <div className={styles.balanceCheckContainer}>
@@ -44,7 +44,7 @@ const BalanceCheck: React.FC = () => {
         onClick={() => setShowWalletBalance((showWalletBalance) => !showWalletBalance)}
         className={styles.balanceCheckBtn}
       >
-        <span>{formatBalanceString(nativeData?.formatted ?? '')}</span>
+        <span>{formatBalanceString(balance ?? '')}</span>
         <img src={headerWalletIcon} alt='wallet' />
         {showWalletBalance ? <AiFillCaretUp size={18} /> : <AiFillCaretDown size={18} />}
         <div className={styles.hoverEffect}></div>
