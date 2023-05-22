@@ -12,10 +12,10 @@ import { Address, useAccount, useContractRead, useContractWrite } from 'wagmi';
 import { erc20ABI } from 'wagmi';
 import { formatUnits } from 'ethers/lib/utils.js';
 import { useCallback, useState } from 'react';
-
-const SLIPPAGE = 5;
+import { useTypedSelector } from './useTypedSelector';
 
 function usePlaceBet(outcome: Outcome | undefined, chainId: number, onBetPlaced: () => void) {
+  const { slippageTolerance } = useTypedSelector((state) => state.app);
   const { address } = useAccount();
   const [isApproving, setIsApproving] = useState(false);
   const [isPlacingBet, setIsPlacingBet] = useState(false);
@@ -76,7 +76,7 @@ function usePlaceBet(outcome: Outcome | undefined, chainId: number, onBetPlaced:
 
     setIsPlacingBet(true);
     const { conditionId, outcomeId, odds, coreAddress } = outcome || {};
-    const minOdds = 1 + ((Number(odds) - 1) * (100 - SLIPPAGE)) / 100;
+    const minOdds = 1 + ((Number(odds) - 1) * (100 - slippageTolerance)) / 100;
     const oddsDecimals = 12;
     const rawMinOdds = ethers.utils.parseUnits(minOdds.toFixed(oddsDecimals), oddsDecimals);
     const data = ethers.utils.defaultAbiCoder.encode(
@@ -121,7 +121,7 @@ function usePlaceBet(outcome: Outcome | undefined, chainId: number, onBetPlaced:
     }
     setIsPlacingBet(false);
     onBetPlaced();
-  }, [outcome, amount, _bet, _betNative, address, onBetPlaced, chainId]);
+  }, [outcome, amount, _bet, _betNative, address, onBetPlaced, chainId, slippageTolerance]);
 
   return {
     placeBet,

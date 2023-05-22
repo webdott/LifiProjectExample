@@ -104,6 +104,14 @@ export interface UpdateOddsFormatAction {
   type: ActionType.UPDATE_ODDS_FORMAT;
   payload?: OddsFormat;
 }
+export interface UpdateSlippageToleranceAction {
+  type: ActionType.UPDATE_SLIPPAGE_TOLERANCE;
+  payload: number;
+}
+export interface UpdateQuickBetOptionsAction {
+  type: ActionType.UPDATE_QUICK_BET_OPTIONS;
+  payload: number[];
+}
 
 export interface SetCurrentSportSlugAction {
   type: ActionType.SET_CURRENT_SPORT_SLUG;

@@ -23,6 +23,8 @@ import {
   FetchFeaturedGamesAction,
   FetchFeaturedGamesSuccessAction,
   FetchFeaturedGamesErrorAction,
+  UpdateSlippageToleranceAction,
+  UpdateQuickBetOptionsAction,
 } from './interfaces';
 
 export type GamesAction = FetchGamesAction | FetchGamesSuccessAction | FetchGamesErrorAction;
@@ -47,7 +49,10 @@ export type SetCurrentSlugAction =
   | SetCurrentLeagueSlugAction
   | SetCurrentCountrySlugAction;
 
-export type AppAction = UpdateOddsFormatAction;
+export type AppAction =
+  | UpdateOddsFormatAction
+  | UpdateSlippageToleranceAction
+  | UpdateQuickBetOptionsAction;
 
 export type BetSlipAction = AddBetSlippAction | RemoveBetSlippAction;
 

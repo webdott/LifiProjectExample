@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { BaseSyntheticEvent, FC, useCallback, useEffect, useState } from 'react';
 import IconButton from '@mui/material/IconButton';
 import { Tooltip } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
@@ -8,21 +8,51 @@ import Button from '../button';
 import { ButtonType } from '../button/type';
 
 import styles from './settings.module.scss';
+import { useDispatch } from 'react-redux';
+import { useTypedSelector } from '../../../hooks/useTypedSelector';
+import { updateQuickBetOptions, updateSlippageTolerance } from '../../../redux/action-creators';
+import { debounce } from 'lodash';
 
-const oddSlippageValues: string[] = ['2%', '3%', '10%', 'Custom'];
+const slippageOptions: number[] = [2, 3, 10];
 
 interface SettingPageProps {
   closePage: () => void;
 }
 
 const SettingsPage: FC<SettingPageProps> = ({ closePage }) => {
-  const [selectedOddSlippage, setSelectedOddSlippage] = useState<string>('2%');
-  const [oddSlippageInputValue, setOddSlippageInputValue] = useState<string>('');
-  const [quickBetValues, setQuickBetValues] = useState<Record<number, string>>({
-    1: '10',
-    2: '30',
-    3: '50',
-  });
+  const dispatch = useDispatch();
+  const { slippageTolerance, quickBetOptions } = useTypedSelector((state) => state.app);
+  const [customSlippage, setCustomSlippage] = useState<number>(0);
+
+  useEffect(() => {
+    if (!slippageOptions.includes(slippageTolerance)) setCustomSlippage(slippageTolerance);
+  }, [slippageTolerance]);
+
+  const debouncedUpdateSlippage = debounce((value: number) => {
+    updateSlippageTolerance(value)(dispatch);
+  }, 1000);
+
+  const handleCustomSlippageChange = useCallback((newVal: number | string) => {
+    const value = +newVal;
+    if (value > 100) return;
+
+    setCustomSlippage(value);
+    debouncedUpdateSlippage(value);
+  }, []);
+
+  const handleSlippageChange = useCallback((newValue: number) => {
+    updateSlippageTolerance(newValue)(dispatch);
+  }, []);
+
+  const handleQuickBetChange = useCallback(
+    (newValue: number, index: number) => {
+      if (newValue > 100) return;
+      const newOptions = [...quickBetOptions];
+      newOptions[index] = newValue;
+      updateQuickBetOptions(newOptions)(dispatch);
+    },
+    [quickBetOptions]
+  );
 
   return (
     <div className={styles.container}>
@@ -50,26 +80,40 @@ const SettingsPage: FC<SettingPageProps> = ({ closePage }) => {
           </Tooltip>
         </div>
         <div className={styles.oddSlippageButtons}>
-          {oddSlippageValues.map((value) => (
+          <>
+            {slippageOptions.map((value) => (
+              <Button
+                key={value}
+                className={`${styles.oddSlippageButton} ${
+                  slippageTolerance === value ? styles.active : ''
+                }`}
+                btnType={ButtonType.membershipButton}
+                text={`${value} %`}
+                onClick={() => handleSlippageChange(value)}
+              />
+            ))}
             <Button
-              key={value}
+              key={'Custom'}
               className={`${styles.oddSlippageButton} ${
-                selectedOddSlippage === value ? styles.active : ''
+                !slippageOptions.includes(slippageTolerance) ? styles.active : ''
               }`}
               btnType={ButtonType.membershipButton}
-              text={value}
-              onClick={() => setSelectedOddSlippage(value)}
+              text={'Custom'}
+              onClick={() => handleSlippageChange(15)}
             />
-          ))}
+          </>
         </div>
-        {selectedOddSlippage === 'Custom' && (
+        {!slippageOptions.includes(slippageTolerance) && (
           <div className={styles.oddSlippageInput}>
             <label>
               <div className={styles.inputContainer}>
                 <input
                   type='text'
-                  value={oddSlippageInputValue}
-                  onChange={({ target }) => setOddSlippageInputValue(target.value)}
+                  value={customSlippage}
+                  onChange={(event: BaseSyntheticEvent) =>
+                    handleCustomSlippageChange(event.target.value)
+                  }
+                  max={100}
                 />
               </div>
               <div className={styles.percent}>%</div>
@@ -99,16 +143,14 @@ const SettingsPage: FC<SettingPageProps> = ({ closePage }) => {
         </div>
 
         <div className={styles.quickBets}>
-          {Object.entries(quickBetValues).map((val) => (
-            <div key={val[0]} className={styles.quickBetInput}>
+          {quickBetOptions.map((val, index) => (
+            <div key={`quick-bet-${index}`} className={styles.quickBetInput}>
               <label>
                 <div className={styles.inputContainer}>
                   <input
                     type='text'
-                    value={val[1]}
-                    onChange={({ target }) =>
-                      setQuickBetValues({ ...quickBetValues, [val[0]]: target.value })
-                    }
+                    value={`${val}`}
+                    onChange={({ target }) => handleQuickBetChange(+target.value, index)}
                   />
                 </div>
                 <div className={styles.percent}>%</div>

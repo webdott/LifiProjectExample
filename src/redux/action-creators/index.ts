@@ -576,3 +576,20 @@ export const resetCurrentSlugs = () => {
     });
   };
 };
+
+export const updateSlippageTolerance = (slippage: number) => {
+  return (dispatch: Dispatch<AppAction>) => {
+    dispatch({
+      type: ActionType.UPDATE_SLIPPAGE_TOLERANCE,
+      payload: slippage,
+    });
+  };
+};
+export const updateQuickBetOptions = (options: number[]) => {
+  return (dispatch: Dispatch<AppAction>) => {
+    dispatch({
+      type: ActionType.UPDATE_QUICK_BET_OPTIONS,
+      payload: options,
+    });
+  };
+};

@@ -32,6 +32,8 @@ export default function TabPanel(props: TabPanelProps) {
   const chainId =
     getSelectedChainFromBase(location.pathname) === 'polygon' ? polygon.id : gnosis.id;
 
+  const { quickBetOptions } = useTypedSelector((state) => state.app);
+
   const dispatch = useDispatch();
   const handleBetRemoval = useCallback(() => {
     removeBetSlip()(dispatch);
@@ -132,8 +134,8 @@ export default function TabPanel(props: TabPanelProps) {
               </div>
             </div>
             <div className={styles.quickBet}>
-              {quickBetValues.map((value) => {
-                const resultAmount = Math.floor(+(getBalance() || 0) * (+value.slice(0, -1) / 100));
+              {[...quickBetOptions, 100].map((value) => {
+                const resultAmount = Math.floor(+(getBalance() || 0) * (+value / 100));
                 return (
                   <Button
                     key={value}
@@ -141,7 +143,7 @@ export default function TabPanel(props: TabPanelProps) {
                       resultAmount == 0 ? styles.disabled : ''
                     }`}
                     btnType={ButtonType.membershipButton}
-                    text={value}
+                    text={`${value} %`}
                     onClick={() => setAmount(resultAmount.toString())}
                   />
                 );
