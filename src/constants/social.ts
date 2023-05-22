@@ -18,25 +18,25 @@ export interface SocialProps {
 
 export const socialMedia: SocialProps[] = [
   {
-    link: 'https://medium.com/@gamblrxyz',
+    link: '#',
     icon: mediumIcon,
     activeIcon: mediumActiveIcon,
   },
   {
-    link: 'https://gamblr-xyz.gitbook.io/gamblr.xyz/',
+    link: '#',
     icon: gitHubIcon,
     activeIcon: githubActiveIcon,
   },
   {
-    link: 'https://twitter.com/gamblrxyz',
+    link: '#',
     icon: twitterIcon,
     activeIcon: twitterActiveIcon,
   },
   {
-    link: 'Contact@gamblr.xyz',
+    link: '#',
     icon: mailIcon,
     activeIcon: mailActiveIcon,
     isMail: true,
   },
-  { link: 'https://discord.gg/EyjM7VA4u6s', icon: discordIcon, activeIcon: discordActiveIcon },
+  { link: '#', icon: discordIcon, activeIcon: discordActiveIcon },
 ];

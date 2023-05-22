@@ -1,5 +1,4 @@
 import RouterComp from './route/public';
-import './@azuroConfig/@azuro.config';
 
 import './App.css';
 import 'antd/dist/antd.min.css';

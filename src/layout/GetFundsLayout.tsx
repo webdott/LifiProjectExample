@@ -1,12 +1,9 @@
 import { Fragment, ReactNode } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 
 import { getUSDTLinks, getXDAILinks } from '../constants/getFunds';
 import Header from '../components/featured/header';
 import Footer from '../components/featured/footer';
-import BetInfo from '../components/shared/betInfo';
-import MobileBetInfo from '../components/shared/mobileBetInfo';
 
 import styles from './gxplayout.module.scss';
 
@@ -18,11 +15,6 @@ interface GetFundLayoutProps {
 export default function GetFundsLayout({ token, children }: GetFundLayoutProps): JSX.Element {
   const location = useLocation();
   const { selectedChain } = useParams();
-  const navigate = useNavigate();
-
-  const handleNavigation = (path: string) => {
-    navigate(`/${selectedChain}${path}`);
-  };
 
   return (
     <Fragment>
@@ -39,7 +31,7 @@ export default function GetFundsLayout({ token, children }: GetFundLayoutProps):
                       ? `${styles.sidebarButton} ${styles.activeTab}`
                       : `${styles.sidebarButton}`
                   }
-                  onClick={() => handleNavigation(el.path)}
+                  onClick={() => null}
                 >
                   {el.text}
                 </button>
@@ -51,8 +43,6 @@ export default function GetFundsLayout({ token, children }: GetFundLayoutProps):
           {children}
           <Footer />
         </div>
-        <BetInfo />
-        <MobileBetInfo />
       </div>
     </Fragment>
   );

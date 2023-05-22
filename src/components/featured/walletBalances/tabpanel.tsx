@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { useAccount, useBalance, useDisconnect } from 'wagmi';
+import { gnosis, polygon } from 'wagmi/chains';
 import Skeleton from 'react-loading-skeleton';
 import Tooltip from '@mui/material/Tooltip';
 import Box from '@mui/material/Box';
@@ -10,11 +11,10 @@ import InfoIcon from '@mui/icons-material/Info';
 import Button from '../../shared/button';
 import { ButtonType } from '../../shared/button/type';
 import { formatBalanceString, getSelectedChainFromBase } from '../../../functions';
+import { USDT_ADDRESS } from '../../../constants/azuro';
 
 import 'react-loading-skeleton/dist/skeleton.css';
 import styles from './walletbalance.module.scss';
-import { USDT_ADDRESS } from '../../../constants/azuro';
-import { gnosis, polygon } from 'wagmi/chains';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -163,7 +163,7 @@ export default function TabPanel(props: TabPanelProps) {
             </div>
 
             <Button
-              className={styles.ctaButton}
+              className={`${styles.ctaButton} ${styles.disabled}`}
               btnType={ButtonType.membershipButton}
               text={'See All'}
               onClick={() =>

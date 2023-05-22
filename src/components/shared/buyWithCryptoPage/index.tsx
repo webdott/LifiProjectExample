@@ -1,5 +1,6 @@
-import { useMemo } from 'react';
+import { useMemo, useCallback } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
+import { fetchSigner } from '@wagmi/core';
 import { gnosis, polygon } from 'wagmi/chains';
 import {
   useAccount,
@@ -10,6 +11,7 @@ import {
   useNetwork,
 } from 'wagmi';
 import { HiddenUI, LiFiWidget, WidgetConfig } from '@lifi/widget';
+import { Signer } from 'ethers';
 
 import GetFundsLayout from '../../../layout/GetFundsLayout';
 import ConnectWallet from './connectWallet';
@@ -27,18 +29,25 @@ export default function BuyWithCryptoPage() {
   const { disconnect } = useDisconnect();
   const location = useLocation();
 
-  const switchChain = async (reqChainId: number) => {
-    if (!walletIsConnected || !wagmiSigner) return wagmiSigner!;
-    if (chainId !== reqChainId) {
-      try {
-        await switchNetworkAsync?.(reqChainId);
-      } catch {
-        throw new Error("Couldn't switch chain.");
+  const switchChain = useCallback(
+    async (reqChainId: number) => {
+      if (!walletIsConnected || !wagmiSigner) {
+        return wagmiSigner!;
+      }
+      if (chainId !== reqChainId) {
+        try {
+          await switchNetworkAsync?.(reqChainId);
+        } catch {
+          throw new Error("Couldn't switch chain.");
+        }
+        console.log(chainId, reqChainId); // logs the previous chainId and required chain id
+        const signer = await fetchSigner({ chainId: reqChainId });
+        return signer as Signer;
       }
       return wagmiSigner!;
-    }
-    return wagmiSigner!;
-  };
+    },
+    [chainId, switchNetworkAsync, wagmiSigner, walletIsConnected]
+  );
 
   const widgetConfig: WidgetConfig = useMemo(() => {
     const obj: WidgetConfig = {
@@ -65,13 +74,6 @@ export default function BuyWithCryptoPage() {
           } catch (err) {
             console.log('LiFI Disconnect error');
           }
-        },
-        addChain: async (chainId: number) => {
-          if (switchNetworkAsync) {
-            await switchNetworkAsync(chainId);
-            return true;
-          }
-          return false;
         },
         switchChain,
       },

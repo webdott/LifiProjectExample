@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
 
 import headerWalletIcon from '../../../assets/images/headerWalletIcon.png';
@@ -33,13 +33,6 @@ const BalanceCheck: React.FC = () => {
 
   return (
     <div className={styles.balanceCheckContainer}>
-      <Link
-        to={`/${getSelectedChainFromBase(location.pathname)}/get-funds`}
-        className={styles.getFunds}
-      >
-        <div className={styles.hoverEffect}></div>
-        <span>Get Funds</span>
-      </Link>
       <div
         onClick={() => setShowWalletBalance((showWalletBalance) => !showWalletBalance)}
         className={styles.balanceCheckBtn}
@@ -53,20 +46,6 @@ const BalanceCheck: React.FC = () => {
       {showWalletBalance && (
         <WalletBalance closeWalletBalance={() => setShowWalletBalance(false)} />
       )}
-      {/* <Modal
-        footer={null}
-        title="Balance"
-        open={isModalOpen}
-        onCancel={handleCancel}
-      >
-        <div className={styles.balanceCheckContainer}>
-          <span className={styles.containerText}>GXP:000</span>
-          <span className={styles.containerText}>Total GXP earned:000</span>
-          <span className={styles.containerText}>Available GXP:000</span>
-          <span className={styles.containerText}>GXP multiplier:000</span>
-          <Button btnType={ButtonType.claim} text={SidebarButtonsText.GXP} />
-        </div>
-      </Modal> */}
     </div>
   );
 };

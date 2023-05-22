@@ -1,6 +1,5 @@
 import { BrowserRouter } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
-import { Provider } from 'react-redux';
 import { WagmiConfig, createClient, configureChains } from 'wagmi';
 import {
   arbitrum,
@@ -23,7 +22,6 @@ import { WalletConnectLegacyConnector } from 'wagmi/connectors/walletConnectLega
 import { InjectedConnector } from 'wagmi/connectors/injected';
 import { publicProvider } from 'wagmi/providers/public';
 
-import { store } from './redux';
 import ErrorBoundary from './components/shared/ErrorBoundary';
 import App from './App';
 
@@ -89,12 +87,10 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <BrowserRouter>
-    <Provider store={store}>
-      <WagmiConfig client={wagmiClient}>
-        <ErrorBoundary fallback={'something went wrong'}>
-          <App />
-        </ErrorBoundary>
-      </WagmiConfig>
-    </Provider>
+    <WagmiConfig client={wagmiClient}>
+      <ErrorBoundary fallback={'something went wrong'}>
+        <App />
+      </ErrorBoundary>
+    </WagmiConfig>
   </BrowserRouter>
 );

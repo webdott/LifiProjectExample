@@ -1,5 +1,4 @@
 import { COUNTRY_CODE_MAP } from '../../../constants/countries';
-import '/node_modules/flag-icons/css/flag-icons.min.css';
 
 interface Props {
   countryCode: string;
