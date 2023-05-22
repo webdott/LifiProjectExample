@@ -51,11 +51,9 @@ const Card: FC<CardProps> = ({ game, slideIndex }) => {
       }`}
     >
       <div className={styles.sportIcon}>
-        {typeof Icon === 'object' ? (
-          Icon
-        ) : (
-          <img alt='' src={Icon as string} width={22} height={22} />
-        )}
+        {typeof Icon === 'object'
+          ? Icon
+          : Icon && <img alt='' src={Icon as string} width={22} height={22} />}
       </div>
       <div className={styles.card_content}>
         <div className={styles.card_content_league}>
