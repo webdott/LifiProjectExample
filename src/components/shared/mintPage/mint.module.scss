@@ -44,6 +44,11 @@
       width: 100%;
       max-width: 350px;
       height: fit-content;
+      object-fit: cover;
+
+      &[cover] {
+        object-fit: cover;
+      }
     }
 
     img {
