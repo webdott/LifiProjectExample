@@ -22,7 +22,11 @@ const Token: FC<TokenProps> = ({ token }) => {
     <div className={styles.gxpToken}>
       <div className={styles.tokenId}>{token.id}</div>
       <div className={styles.upgradeImg}>
-        <video src={token.urlSrc} autoPlay={playVideo} />
+        <video
+          src={token.urlSrc}
+          autoPlay={playVideo}
+          poster='/assets/images/nft-video-poster.png'
+        />
       </div>
       <div className={styles.pointsSection}>
         <span className={styles.level}>

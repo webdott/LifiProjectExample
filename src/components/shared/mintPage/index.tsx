@@ -38,7 +38,11 @@ export default function Mint() {
           </span>
         </div>
         <div className={styles.mintImg}>
-          <video src={MintVideo} autoPlay={playVideo} />
+          <video
+            src={MintVideo}
+            autoPlay={playVideo}
+            poster='/assets/images/nft-video-poster.png'
+          />
         </div>
         <Button btnType={ButtonType.membershipButton} text={SidebarButtonsText.MINT} />
       </div>
