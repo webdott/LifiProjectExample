@@ -25,6 +25,24 @@
           object-fit: cover;
           border-radius: inherit;
         }
+        .sportIcon {
+          position: absolute;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          right: 15px;
+          top: 15px;
+
+          svg {
+            width: 22px;
+            height: 22px;
+          }
+
+          img {
+            width: 20px;
+            height: 20px;
+          }
+        }
         &_content {
           height: 100%;
           border-radius: inherit;
@@ -146,10 +164,16 @@
               color: orangered;
             }
           }
+          &_marketDescription {
+            margin: 0;
+            margin-top: 15px;
+            text-align: left;
+            font-weight: bold;
+          }
           &_oddboxes {
             display: flex;
             column-gap: 15px;
-            margin-top: 40px;
+            margin-top: -10px;
 
             &_box {
               width: 55px;
@@ -163,18 +187,21 @@
               align-items: center;
               font-size: var(--text_s);
               cursor: pointer;
+              &.allMarkets {
+                width: 62px;
+                div {
+                  font-weight: bold;
+                }
+              }
               &:nth-child(1) div:not(:last-child) {
                 color: grey;
               }
-              cursor: pointer;
               &:nth-child(2) div:not(:last-child) {
                 color: grey;
               }
-              cursor: pointer;
               &:nth-child(3) div:not(:last-child) {
                 color: grey;
               }
-
               &:nth-child(4) {
                 background: rgba(161, 161, 161, 0.267);
               }
@@ -196,6 +223,13 @@
       }
       .lightCard {
         background-color: var(--gray_100);
+        .sportIcon {
+          color: var(--footer_icons_col);
+
+          img {
+            mix-blend-mode: difference;
+          }
+        }
         .card_content_teams_goals {
           span {
             color: var(--footer_icons_col);
@@ -215,6 +249,9 @@
             color: var(--footer_icons_col);
           }
         }
+        .card_content_marketDescription {
+          color: var(--footer_icons_col);
+        }
         .card_content_oddboxes_box,
         .participantLogo {
           background-color: var(--footer_icons_col);
@@ -225,6 +262,9 @@
       }
       .greenCard {
         background-color: var(--green_card_color);
+        .sportIcon {
+          color: var(--white_900);
+        }
         span {
           color: var(--footer_icons_col);
         }
@@ -242,6 +282,9 @@
             color: var(--footer_icons_col);
           }
         }
+        .card_content_marketDescription {
+          color: var(--white_900);
+        }
         .card_content_oddboxes_box,
         .participantLogo {
           background-color: var(--white_900);
@@ -252,6 +295,9 @@
       }
       .darkCard {
         background-color: var(--footer_icons_col);
+        .sportIcon {
+          color: var(--white_900);
+        }
         span {
           color: var(--white_900);
         }
@@ -268,6 +314,9 @@
             line-height: 24px;
             color: var(--white_900);
           }
+        }
+        .card_content_marketDescription {
+          color: var(--white_900);
         }
         .card_content_oddboxes_box,
         .participantLogo {

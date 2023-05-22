@@ -1,11 +1,13 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
+import { IconType } from 'react-icons/lib';
 
 import { RootState } from '../../../redux';
 import { getOddsDisplayString } from '../../../utils/odds';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import { Game, Outcome } from '../../../constants/matches';
+import { SPORTS_ICONS } from '../../../constants/sports';
 import { addBetSlip, removeBetSlip } from '../../../redux/action-creators';
 import { getSelectedChainFromBase } from '../../../functions';
 
@@ -21,6 +23,7 @@ const Card: FC<CardProps> = ({ game, slideIndex }) => {
   const dispatch = useDispatch();
   const { currentGame: currentBetSlipGame } = useSelector((root: RootState) => root.betSlip);
   const oddsFormat = useTypedSelector((state) => state.app.oddsFormat);
+  const [Icon, setIcon] = useState<string | IconType>(SPORTS_ICONS[game.sportSlug]?.disableIcon);
 
   const toggleBetSlip = (item: Outcome) => {
     if (currentBetSlipGame?.id === game.id && currentBetSlipGame?.outcome.id === item.id) {
@@ -47,6 +50,13 @@ const Card: FC<CardProps> = ({ game, slideIndex }) => {
           : styles.darkCard
       }`}
     >
+      <div className={styles.sportIcon}>
+        {typeof Icon === 'object' ? (
+          Icon
+        ) : (
+          <img alt='' src={Icon as string} width={22} height={22} />
+        )}
+      </div>
       <div className={styles.card_content}>
         <div className={styles.card_content_league}>
           {/* <img
@@ -86,6 +96,8 @@ const Card: FC<CardProps> = ({ game, slideIndex }) => {
           {/* <span>{slide.team2Percent}</span> */}
         </div>
 
+        <p className={styles.card_content_marketDescription}>{game.markets[0].marketName}</p>
+
         <div className={styles.card_content_oddboxes}>
           {game.markets[0]?.outcomes[0].map((item: any, index: number) => {
             return (
@@ -107,10 +119,9 @@ const Card: FC<CardProps> = ({ game, slideIndex }) => {
             to={`/${getSelectedChainFromBase(location.pathname)}/${game.sportHubSlug}/${
               game.sportSlug
             }/${game.gameId}`}
-            className={`${styles.card_content_oddboxes_box}`}
+            className={`${styles.card_content_oddboxes_box} ${styles.allMarkets}`}
           >
-            <div>+{game.markets.length - 1}</div>
-            <div>bets</div>
+            <div>All Markets</div>
           </Link>
         </div>
       </div>
