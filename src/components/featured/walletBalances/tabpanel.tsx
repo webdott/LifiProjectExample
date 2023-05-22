@@ -27,22 +27,26 @@ const walletbalanceDetails: {
     balance: string;
     inBets: string;
     toPayouts: string;
+    availableGXP: string;
   };
   gnosis: {
     balance: string;
     inBets: string;
     toPayouts: string;
+    availableGXP: string;
   };
 } = {
   poly: {
     balance: '0 USDT',
     inBets: '0 USDT',
     toPayouts: '0 USDT',
+    availableGXP: '0 GXP',
   },
   gnosis: {
     balance: '0 XDAI',
     inBets: '0 XDAI',
     toPayouts: '0 XDAI',
+    availableGXP: '0 GXP',
   },
 };
 
@@ -138,17 +142,34 @@ export default function TabPanel(props: TabPanelProps) {
 
           <div className={styles.payoutsBlock}>
             <div className={styles.payouts}>
-              <p className={styles.title}>Available GXP</p>
+              <p className={styles.title}>To payout</p>
               <p className={styles.value}>{walletbalanceDetails[balanceDetail].toPayouts}</p>
             </div>
 
-            {value === 0 && (
-              <Button
-                className={styles.ctaButton}
-                btnType={ButtonType.membershipButton}
-                text={'See All'}
-              />
-            )}
+            <Button
+              className={styles.ctaButton}
+              btnType={ButtonType.membershipButton}
+              text={'See All'}
+              onClick={() =>
+                index === 0 ? navigate('/polygon/account') : navigate('/gnosis/account')
+              }
+            />
+          </div>
+
+          <div className={styles.payoutsBlock}>
+            <div className={styles.payouts}>
+              <p className={styles.title}>Available GXP</p>
+              <p className={styles.value}>{walletbalanceDetails[balanceDetail].availableGXP}</p>
+            </div>
+
+            <Button
+              className={styles.ctaButton}
+              btnType={ButtonType.membershipButton}
+              text={'See All'}
+              onClick={() =>
+                index === 0 ? navigate('/polygon/membership') : navigate('/gnosis/membership')
+              }
+            />
           </div>
 
           <div className={styles.cta}>
